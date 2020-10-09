@@ -1,0 +1,24 @@
+plugins {
+    `maven-publish` apply false
+}
+
+subprojects {
+    apply(plugin = "maven-publish")
+    configure {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/dimaslanjaka/gradle-plugin")
+                credentials {
+                    username = "dimaslanjaka"
+                    password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+                }
+            }
+        }
+        publications {
+            register("gpr") {
+                from(components["java"])
+            }
+        }
+    }
+}

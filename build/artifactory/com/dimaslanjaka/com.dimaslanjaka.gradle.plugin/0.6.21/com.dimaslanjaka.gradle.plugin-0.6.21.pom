@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.dimaslanjaka</groupId>
+  <artifactId>com.dimaslanjaka.gradle.plugin</artifactId>
+  <version>0.6.21</version>
+  <packaging>pom</packaging>
+  <name>Automated Gradle Plugin</name>
+  <description> Store project dependencies alongside your code for reproducible offline builds. Auto Generate Version Code Based On Current Date. </description>
+  <dependencies>
+    <dependency>
+      <groupId>com.dimaslanjaka</groupId>
+      <artifactId>gradle-plugin</artifactId>
+      <version>0.6.21</version>
+    </dependency>
+  </dependencies>
+</project>

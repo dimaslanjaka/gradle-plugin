@@ -1,0 +1,44 @@
+def properties = new Properties()
+file("gradle.properties").withInputStream { properties.load(it) }
+
+// Define methods as usual
+def versiTetap = { ->
+    return generatedConsentVersionCode
+}
+def versiAuto = { ->
+    return generatedVersionCode
+}
+def getDescription = { ->
+    return properties['POM_DESCRIPTION']
+}
+def getGroupId = { ->
+    return properties['GROUP']
+}
+def getVersionName = { ->
+    return "${properties['VERSION_NAME']}.${versiTetap()}"
+}
+def getArtificatId = { ->
+    return properties['POM_ARTIFACT_ID']
+}
+
+//println(getVersionName())
+
+// Export methods by turning them into closures
+ext {
+    VersionName = getVersionName()
+    ArtifactID = getArtificatId()
+    GroupID = getGroupId()
+    Desc = getDescription()
+    jarname = "gradle-plugin-${VersionName}.jar"
+    thirdpartyLibsDir = "$project.rootDir/build/libs/".replace("\\", "/")
+    jarlocation = "$thirdpartyLibsDir${ext.jarname}".replace("\\", "/")
+    props = properties
+    pom_title = properties['POM_NAME']
+    pom_desc = properties['POM_DESCRIPTION']
+    pom_url = properties['POM_URL']
+    pom_developer_id = properties['POM_DEVELOPER_ID']
+    pom_developer_name = properties['POM_DEVELOPER_NAME']
+    pom_developer_email = properties['POM_DEVELOPER_EMAIL']
+    pom_scm_connection = properties['POM_SCM_CONNECTION']
+    pom_scm_dev_connection = properties['POM_SCM_DEV_CONNECTION']
+}

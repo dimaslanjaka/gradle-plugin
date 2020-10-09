@@ -1,0 +1,19 @@
+language: java
+
+jdk:
+  - openjdk9
+
+install:
+  - mvn install -Dgpg.skip=true
+
+script:
+  - mvn test
+
+branches:
+  only:
+    - main
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always

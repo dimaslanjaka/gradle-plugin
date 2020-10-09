@@ -1,0 +1,176 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.11.0"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+        classpath "com.android.tools.build:gradle:4.0.1"
+    }
+}
+
+apply from: "$rootDir/properties.gradle"
+apply plugin: "com.gradle.plugin-publish"
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.dimaslanjaka.gradle.offline_dependencies'
+version = VersionName
+description = Desc
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+}
+
+ext {
+    mavenVersion = '3.6.0'
+    jarjarVersion = '1.2.1'
+
+    thirdpartyLibsDir = "$project.rootDir/libs/"
+}
+
+configurations {
+    thirdparty
+    jarjar
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+    implementation fileTree(thirdpartyLibsDir)
+
+    // thirdparty dependencies and repackaging
+    jarjar "org.gradle.jarjar:jarjar:$jarjarVersion"
+    thirdparty "org.apache.maven:maven-model-builder:$mavenVersion"
+}
+
+task repackageDependencies(type: Jar) {
+    archivesBaseName = 'gradle-plugin-repackaged'
+    version = project.version
+    destinationDirectory = new File(thirdpartyLibsDir)
+
+    doLast {
+        project.ant {
+            taskdef name: "jarjar", classname: "com.tonicsystems.jarjar.JarJarTask", classpath: configurations.jarjar.asPath
+            jarjar(destfile: archivePath) {
+                configurations.thirdparty.each { originalJar ->
+                    zipfileset(src: originalJar)
+                }
+                rule(pattern: 'org.**', result: 'com.dimaslanjaka.gradle.repackaged.org.@1')
+                rule(pattern: 'com.**', result: 'com.dimaslanjaka.gradle.repackaged.com.@1')
+                rule(pattern: 'licenses.**', result: 'com.dimaslanjaka.gradle.repackaged.licenses.@1')
+            }
+        }
+    }
+}
+
+compileJava.dependsOn 'repackageDependencies'
+if (tasks.findByName("clean") != null) tasks.findByName("clean").finalizedBy("assemble")
+
+jar {
+    from(zipTree(repackageDependencies.archivePath)) {
+        include '**'
+    }
+
+    baseName = 'gradle-plugin'
+
+    manifest {
+        attributes(
+                'Created-By': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString(),
+                'Implementation-Title': project.description,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Marc Dietrichstein'
+        )
+    }
+}
+
+pluginBundle {
+    website = pom_url
+    vcsUrl = pom_url
+    description = project.description
+    tags = ['offline', 'buildscript-dependency', 'buildscript-configurations', 'jar', 'pom', 'reproducible', 'offline-dependencies']
+
+    plugins {
+        offlineDependenciesPlugin {
+            id = project.group
+            displayName = 'Gradle Offline Dependencies Plugin'
+        }
+    }
+}
+
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId getGroupId()
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact(getJarLocation())
+            from(components.java)
+        }
+
+        maven(MavenPublication) {
+            groupId = getGroupId()
+            artifactId = getName()
+            version = getVersion()
+
+            from components.java
+            artifact file(jarlocation)
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = props['POM_NAME']
+                description = props['POM_DESCRIPTION']
+                url = props['POM_URL']
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = props['POM_DEVELOPER_ID']
+                        name = props['POM_DEVELOPER_NAME']
+                        email = props['POM_DEVELOPER_EMAIL']
+                    }
+                }
+                scm {
+                    connection = props['POM_SCM_CONNECTION']
+                    developerConnection = props['POM_SCM_DEV_CONNECTION']
+                    url = props['POM_URL']
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri(githubProperties['gpr.url'])
+
+            credentials {
+                username = githubProperties['gpr.usr']
+                password = githubProperties['gpr.key']
+            }
+        }
+    }
+}
+
+tasks.findByName("buildNeeded").finalizedBy("publish")
+

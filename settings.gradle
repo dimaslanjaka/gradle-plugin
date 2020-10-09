@@ -1,0 +1,5 @@
+rootProject.name = 'gradle-plugin'
+//include ':TestProjectAndroidLibrary'
+//include ':TestProjectClasspath'
+//include ':TestProjectVersioning'
+//include ':TestProjectAndroidBenchmark'

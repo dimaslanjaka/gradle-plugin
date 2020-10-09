@@ -1,0 +1,88 @@
+buildscript  {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://maven.mozilla.org/maven2/' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'http://maven.springframework.org/release' }
+        maven { url 'http://maven.restlet.org' }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+        maven {
+            url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+            credentials {
+                username = "dimaslanjaka"
+                password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+            }
+        }
+        maven { url 'https://repo1.maven.org/maven2' }
+        flatDir {
+            dirs "$rootProject.projectDir/../build/libs"
+        }
+    }
+    dependencies {
+        classpath fileTree(include: ['*.jar'], dir: '../build/libs')
+    }
+}
+
+plugins {
+    id 'com.android.library'
+}
+apply plugin: "com.dimaslanjaka.gradle-plugin"
+
+android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        pickFirst '**/*.so'
+        exclude '**/*.html' // <-- inline javadoc of plugin will be excluded
+        exclude 'META-INF/services/org.codehaus.groovy.transform.ASTTransformation'
+        exclude 'META-INF/services/org.codehaus.groovy.runtime.ExtensionModule'
+        exclude 'META-INF/groovy-release-info.properties'
+        exclude 'README.md'
+        exclude "META-INF/DEPENDENCIES"
+        exclude "META-INF/LICENSE"
+        exclude "META-INF/INDEX.LIST"
+        exclude "META-INF/LICENSE.txt"
+        exclude "META-INF/license.txt"
+        exclude "META-INF/NOTICE"
+        exclude "META-INF/NOTICE.txt"
+        exclude "META-INF/notice.txt"
+        exclude "META-INF/ASL2.0"
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "../build/libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    testImplementation 'junit:junit:4.13'
+    annotationProcessor 'com.google.auto.value:auto-value:1.5.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

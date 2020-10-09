@@ -1,0 +1,32 @@
+package com.dimaslanjaka.gradle.core
+
+task printSolvedDepsTreeInJson {
+    doLast {
+        def jsonOutput = "["
+        configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
+            def addToJson
+            addToJson = { resolvedDep ->
+                jsonOutput += "\n{"
+                jsonOutput += "\"groupId\":\"${resolvedDep.module.id.group}\",\"artifactId\":\"${resolvedDep.module.id.name}\",\"version\":\"${resolvedDep.module.id.version}\",\"file\":\"${resolvedDep.getModuleArtifacts()[0].file}\""
+                jsonOutput += ",\"dependencies\":["
+                if (resolvedDep.children.size() != 0) {
+                    resolvedDep.children.each { childResolvedDep ->
+                        if (resolvedDep in childResolvedDep.getParents() && childResolvedDep.getConfiguration() == 'compile') {
+                            addToJson(childResolvedDep)
+                        }
+                    }
+                    if (jsonOutput[-1] == ',') {
+                        jsonOutput = jsonOutput[0..-2]
+                    }
+                }
+                jsonOutput += "]},"
+            }
+            addToJson(dep)
+        }
+        if (jsonOutput[-1] == ',') {
+            jsonOutput = jsonOutput[0..-2]
+        }
+        jsonOutput += "]"
+        println jsonOutput
+    }
+}
