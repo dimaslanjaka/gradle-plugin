@@ -1,0 +1,20 @@
+{
+  "gradle.disableConfirmations": true,
+  "gradle.debug": true,
+  "gradle.javaDebug": {
+    "clean": true,
+    "tasks": [
+      "run",
+      "runBoot",
+      "test",
+      "intTest",
+      "integration"
+    ]
+  },
+  "gradle.nestedProjects": false,
+  "gradle.autoDetect": "on",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 3000,
+  "npm.packageManager": "yarn",
+  "prettier.packageManager": "yarn"
+}

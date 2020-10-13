@@ -1,0 +1,59 @@
+
+def credentials = new Properties()
+credentials.load(new FileInputStream(rootProject.file("credentials.properties")))
+archivesBaseName = 'gradle-plugin'
+/*
+project.setProperty('nexusUsername', credentials['nexusUsername'])
+project.setProperty('nexusPassword', credentials['nexusPassword'])
+project.setProperty('signing.keyId', credentials['signing.keyId'])
+project.setProperty('signing.password', credentials['signing.password'])
+project.setProperty('signing.secretKeyRingFile', file(credentials['signing.secretKeyRingFile']))
+ */
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name getdisplayName()
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description getdescription()
+                url 'https://github.com/dimaslanjaka/gradle-plugin'
+
+                scm {
+                    connection 'scm:git:git://github.com/dimaslanjaka/gradle-plugin.git'
+                    developerConnection 'scm:git:git://github.com/dimaslanjaka/gradle-plugin.git'
+                    url 'https://github.com/dimaslanjaka/gradle-plugin'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'dimaslanjaka'
+                        name 'Dimas Lanjaka'
+                        email 'dimaslanjaka@sonatype.com'
+                    }
+                }
+            }
+        }
+    }
+}

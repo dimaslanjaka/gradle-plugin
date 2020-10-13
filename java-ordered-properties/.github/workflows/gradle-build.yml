@@ -1,0 +1,24 @@
+name: "Build Gradle project"
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+     runs-on: ubuntu-latest
+     strategy:
+        matrix:
+          java: [ 8, 9, 10, 11, 12, 13, 14, 15-ea ]
+     name: Building on Java ${{ matrix.java }}
+     steps:
+       - name: Check out project
+         uses: actions/checkout@v2
+       - name: Set up JDK ${{ matrix.java }}
+         uses: actions/setup-java@v1
+         with:
+           java-version: ${{ matrix.java }}
+       - name: Build with Gradle
+         uses: eskatos/gradle-command-action@v1
+         with:
+           arguments: build -Pjava-ordered-properties.acceptGradleTOS=true
+           wrapper-cache-enabled: true
+           dependencies-cache-enabled: true
+           configuration-cache-enabled: false

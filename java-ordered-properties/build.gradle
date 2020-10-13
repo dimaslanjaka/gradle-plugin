@@ -1,0 +1,106 @@
+plugins {
+    id 'nu.studer.credentials' version '2.1'
+    id 'com.jfrog.bintray'
+    id 'org.nosphere.gradle.github.actions' version '1.2.0'
+    id 'maven-publish'
+    id 'groovy'
+}
+
+group = 'nu.studer'
+version = '1.0.5-DEV'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testImplementation('org.spockframework:spock-core:2.0-M3-groovy-3.0') {
+        exclude module: 'groovy-all'
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+test {
+    useJUnitPlatform()
+}
+
+javadoc {
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+task sourcesJar(type: Jar) {
+    description = 'Assembles a jar archive containing the main source code.'
+    group = 'build'
+    from sourceSets.main.allSource
+}
+
+task docsJar(type: Jar) {
+    description = 'Assembles a jar archive containing the documentation for the main source code.'
+    group = 'build'
+    from javadoc
+}
+
+publishing {
+    publications {
+        java(MavenPublication) {
+            from components.java
+            artifact sourcesJar {
+                classifier 'sources'
+            }
+            artifact docsJar {
+                classifier 'javadoc'
+            }
+            pom {
+                name = 'java-ordered-properties'
+                description = 'Alternative to the JDK class java.util.Properties'
+                url = 'https://github.com/etiennestuder/java-ordered-properties'
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'etiennestuder'
+                        name = 'Etienne Studer'
+                        email = 'etienne@studer.nu'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/etiennestuder/java-ordered-properties.git'
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    user = credentials.BINTRAY_USER
+    key = credentials.BINTRAY_API_KEY
+
+    publications = ['java']
+
+    publish = true
+    dryRun = false
+
+    pkg {
+        repo = 'java-utilities'
+        name = 'java-ordered-properties'
+        desc = 'Alternative to the JDK class java.util.Properties.'
+        websiteUrl = 'https://github.com/etiennestuder/java-ordered-properties'
+        issueTrackerUrl = 'https://github.com/etiennestuder/java-ordered-properties/issues'
+        vcsUrl = 'https://github.com/etiennestuder/java-ordered-properties.git'
+        licenses = ['Apache-2.0']
+        labels = ['java', 'utilities']
+        publicDownloadNumbers = false
+
+        version {
+            vcsTag = publishing.publications.java.version
+        }
+    }
+}

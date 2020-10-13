@@ -1,0 +1,253 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://maven.mozilla.org/maven2/' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'http://maven.springframework.org/release' }
+        maven { url 'http://maven.restlet.org' }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+        maven {
+            url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+            credentials {
+                username = "dimaslanjaka"
+                password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+            }
+        }
+        maven { url 'https://repo1.maven.org/maven2' }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.11.0"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+        classpath "com.android.tools.build:gradle:4.0.1"
+    }
+}
+
+plugins {
+    id 'groovy'
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.10.1'
+}
+
+// define some configurations
+def userHome = new File(System.properties['user.home'].toString())
+def mavenDir = new File(userHome, '.m2/repository')
+if (!mavenDir.exists()) mavenDir.mkdirs()
+
+ext {
+    offlineRepositoryRoot = mavenDir.absolutePath
+    projectDisplayName = 'Dimas Lanjaka Gradle Plugin'
+    mavenVersion = '3.6.3'
+    jarjarVersion = '1.2.1'
+    jarname = "gradle-plugin-${getVersion()}.jar"
+    thirdpartyLibsDir = "$project.rootDir/build/libs/".replace("\\", "/")
+    repackagedLibsDir = "$project.rootDir/build/repackaged/".replace("\\", "/")
+    localArtifactory = "$project.rootDir/build/artifactory/".replace("\\", "/")
+    projectBuildDir = "$project.rootDir/build/".replace("\\", "/")
+}
+
+configurations {
+    thirdparty
+    jarjar
+    providedRuntime
+    providedRuntimeOnly
+}
+
+repositories {
+    jcenter()
+    google()
+    mavenCentral()
+    mavenLocal()
+    gradlePluginPortal()
+    maven { url 'https://maven.google.com' }
+    maven { url 'https://maven.mozilla.org/maven2/' }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://plugins.gradle.org/m2/' }
+    maven { url 'http://maven.springframework.org/release' }
+    maven { url 'http://maven.restlet.org' }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+    maven {
+        url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+        credentials {
+            username = "dimaslanjaka"
+            password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+        }
+    }
+    maven { url 'https://repo1.maven.org/maven2' }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+    //implementation fileTree(thirdpartyLibsDir)
+    //implementation fileTree(repackagedLibsDir)
+    //implementation fileTree(localArtifactory)
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: localArtifactory, include: ['*.jar'])
+
+    jarjar "org.gradle.jarjar:jarjar:$jarjarVersion"
+    thirdparty "org.apache.maven:maven-model-builder:$mavenVersion"
+    implementation 'nu.studer:java-ordered-properties:1.0.2'
+
+    thirdparty('org.codehaus.groovy:groovy-json:2.4.3') {
+        exclude group: 'org.codehaus.groovy'
+    }
+    thirdparty('org.codehaus.groovy:groovy-xml:2.4.3') {
+        exclude group: 'org.codehaus.groovy'
+    }
+
+    thirdparty "org.apache.httpcomponents:httpclient:4.5.12"
+    //thirdparty "com.dimaslanjaka:gradle-plugin:0.6.8"
+
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-lang3:3.11'
+    implementation 'org.apache.commons:commons-compress:1.19'
+    implementation 'org.apache.commons:commons-exec:1.3'
+    implementation 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'commons-codec:commons-codec:1.13'
+    implementation 'commons-net:commons-net:3.6'
+    implementation 'commons-validator:commons-validator:1.6'
+    implementation 'commons-io:commons-io:2.7'
+    implementation 'org.jsoup:jsoup:1.13.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
+
+    testImplementation gradleTestKit()
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+// repackage jar
+task repackageDependencies(type: Jar) {
+    baseName = 'repack'
+    archivesBaseName = 'repack'
+    version = project.version
+    destinationDirectory = new File(localArtifactory as String)
+
+    doLast {
+        project.ant {
+            taskdef name: "jarjar", classname: "com.tonicsystems.jarjar.JarJarTask", classpath: configurations.jarjar.asPath
+            jarjar(destfile: archivePath) {
+                configurations.thirdparty.each { originalJar ->
+                    zipfileset(src: originalJar)
+                }
+
+                rule(pattern: 'org.**', result: "com.dimaslanjaka.gradle.repackaged.org.@1")
+                rule(pattern: 'com.**', result: "com.dimaslanjaka.gradle.repackaged.com.@1")
+                rule(pattern: 'licenses.**', result: "com.dimaslanjaka.gradle.repackaged.licenses.@1")
+            }
+        }
+    }
+}
+
+compileJava.dependsOn 'repackageDependencies'
+
+// jar builder
+jar {
+    from(zipTree(repackageDependencies.archivePath)) {
+        include '**'
+    }
+    from sourceSets.main.allJava
+
+    enabled = true
+    baseName = 'gradle-plugin'
+    archivesBaseName = 'gradle-plugin'
+    destinationDirectory = new File(thirdpartyLibsDir as String)
+
+    manifest {
+        attributes(
+                'Created-By': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})".toString(),
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': project['developer']
+        )
+    }
+}
+
+jar.finalizedBy('publishToMavenLocal')
+
+// plugin information publish
+
+pluginBundle {
+    website = 'https://github.com/dimaslanjaka/gradle-plugin/'
+    vcsUrl = 'https://github.com/dimaslanjaka/gradle-plugin/'
+    tags = ['offline', 'gradle', 'jar', 'auto']
+}
+
+gradlePlugin {
+    plugins {
+        offlineDependenciesPlugin {
+            id = 'com.dimaslanjaka.offline' //getGroupId()
+            displayName = 'Offline Gradle Plugin'
+            description = 'Save dependencies offline'
+            implementationClass = 'com.dimaslanjaka.gradle.offline.OfflineDependenciesPlugin'
+        }
+        grabverPlugin {
+            id = 'com.dimaslanjaka.versioning' //getGroupId()
+            displayName = 'Auto Versioning Build'
+            description = 'Auto increase version build and code based on gradle tasks'
+            implementationClass = 'com.dimaslanjaka.gradle.versioning.GrabVer'
+        }
+        Plugin {
+            id = 'com.dimaslanjaka.gradle'
+            displayName = 'core'
+            description = 'core plugin'
+            implementationClass = 'com.dimaslanjaka.gradle.core.Plugin'
+        }
+    }
+}
+
+// github packager
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+
+publishing {
+    publications {
+        Plugin(MavenPublication){
+            groupId 'com.dimaslanjaka'
+            artifactId 'gradle'
+            version getVersion()
+            artifact jar
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHub Packages".replace(" ", "-")
+            url = uri(githubProperties['gpr.url'])
+
+            credentials {
+                username = githubProperties['gpr.usr']
+                password = githubProperties['gpr.key']
+            }
+        }
+        maven {
+            name = "Local Project".replace(" ", "-")
+            url = "file://${localArtifactory}"
+        }
+        maven {
+            name = "Local Machine".replace(" ", "-")
+            url = "file://${offlineRepositoryRoot}"
+        }
+    }
+}
+
+if (tasks.findByName('clean') != null) {
+    tasks.findByName('clean').finalizedBy('assemble')
+}
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

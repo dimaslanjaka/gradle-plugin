@@ -1,0 +1,13 @@
+{
+    "name": "dimaslanjaka/ngrok-receiver",
+    "description": "Ngrok And Localtunnel cloud receiver",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dimas Lanjaka",
+            "email": "dimaslanjaka@gmail.com"
+        }
+    ],
+    "require": {}
+}

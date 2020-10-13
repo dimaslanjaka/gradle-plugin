@@ -1,0 +1,10 @@
+task killJava(type: Exec) {
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine 'cmd', '/k', '"taskkill /f /im java.exe"'
+        commandLine 'cmd', '/k', '"taskkill /f /im javaw.exe"'
+        commandLine 'cmd', '/k', '"taskkill /f /im jqs.exe"'
+        commandLine 'wmic', 'process', 'where', '"name like \'%java%\'"', 'delete'
+    } else {
+        commandLine 'bash', '-c', 'kill', '-9 $(ps -ef | pgrep -f "java")'
+    }
+}

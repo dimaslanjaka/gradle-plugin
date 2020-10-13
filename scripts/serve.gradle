@@ -1,0 +1,47 @@
+HttpFileServer server = null
+int port = 8500
+File userHome = new File(System.properties["user.home"].toString())
+File mavenDir = new File(userHome, ".m2/repository")
+
+task prepareHttpServerContext(type: Sync) {
+    from mavenDir.absolutePath
+    into "${buildDir}/server/"
+}
+
+task httpServerStart() {
+    finalizedBy { httpServerStop }
+    dependsOn prepareHttpServerContext
+    if (server != null) {
+        server.stop()
+    }
+    //server = null
+    doLast {
+        SimpleHttpFileServerFactory factory = new SimpleHttpFileServerFactory()
+        server = factory.start(prepareHttpServerContext.destinationDir, 0)
+        logger.info("HTTP file server listening on port ${server.getPort()}")
+    }
+}
+
+/*
+task serve() {
+    SimpleHttpFileServerFactory factory = new SimpleHttpFileServerFactory()
+    server = factory.start(new File("."), port)
+    println("Server Started on $port ctrc+c to kill it")
+    Thread.sleep(Long.MAX_VALUE);
+}
+ */
+
+task serve() {
+    dependsOn httpServerStart
+    def url = project.provider { "localhost:${httpServerStart.server.getPort()}" }
+}
+
+task httpServerStop() {
+    mustRunAfter serve
+    doLast {
+        if (httpServerStart.server) {
+            httpServerStart.server.stop()
+        }
+    }
+}
+

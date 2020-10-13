@@ -1,0 +1,692 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url "https://maven.google.com" }
+        maven { url "https://maven.mozilla.org/maven2/" }
+        maven { url "https://jitpack.io" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "http://maven.springframework.org/release" }
+        maven { url "http://maven.restlet.org" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.gradle.org/gradle/libs-releases" }
+        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven {
+            url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+            credentials {
+                username = "dimaslanjaka"
+                password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+            }
+        }
+        maven { url "https://repo1.maven.org/maven2" }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.12.0"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.3.4.RELEASE"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+        classpath "com.android.tools.build:gradle:${gradle_version}"
+        classpath "org.shipkit:shipkit:2.3.5"
+        classpath "commons-net:commons-net:3.3"
+        classpath "com.bmuschko:gradle-nexus-plugin:2.3.1"
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.5.3"
+        classpath "com.google.code.gson:gson:2.8.6"
+        classpath "net.sf.proguard:proguard-gradle:5.2.1"
+        classpath "androidx.benchmark:benchmark-gradle-plugin:1.0.0"
+        //classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
+    }
+}
+
+plugins {
+    id "application"
+    id "groovy"
+    id "idea"
+    id "java"
+    id "eclipse"
+    id "maven"
+    id "signing"
+    id "maven-publish"
+    id "java-gradle-plugin"
+    id("com.gradle.plugin-publish") version "0.10.1"
+    id("io.codearte.nexus-staging") version "0.11.0"
+    id("com.squareup.anvil") version "2.0.6"
+    id("org.jetbrains.kotlin.jvm") version "1.4.10"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
+}
+
+sourceSets {
+    // TODO: Disable Java Source Because Merged In Groovy
+    main.java { srcDirs = [] }
+    // TODO: Add subfolder as source
+    main.java.srcDirs += "$projectDir/java-ordered-properties/src/main/java"
+    main.groovy.srcDirs += "$projectDir/java-ordered-properties/src/main/java"
+    main.kotlin.srcDirs += "$projectDir/java-ordered-properties/src/main/java"
+    main.groovy.srcDirs += "$projectDir/NanoHTTPd/src/main/java"
+    main.java.srcDirs += "$projectDir/NanoHTTPd/src/main/java"
+    //main.groovy.srcDirs += "$projectDir/javafxwebview/src/main/java"
+    //main.java.srcDirs += "$projectDir/javafxwebview/src/main/java"
+}
+
+allprojects {
+    ext {
+        plugin_version = getVersion().toString()
+    }
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url "https://maven.google.com" }
+        maven { url "https://maven.mozilla.org/maven2/" }
+        maven { url "https://jitpack.io" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "http://maven.springframework.org/release" }
+        maven { url "http://maven.restlet.org" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.gradle.org/gradle/libs-releases" }
+        maven {
+            url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+            credentials {
+                username = "dimaslanjaka"
+                password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+            }
+        }
+        maven { url "https://repo1.maven.org/maven2" }
+    }
+}
+
+// define some configurations
+def userHome = new File(System.properties["user.home"].toString())
+def mavenDir = new File(userHome, ".m2/repository")
+if (!mavenDir.exists()) mavenDir.mkdirs()
+
+def getdescription = { ->
+    return """
+Store project dependencies alongside your code for reproducible offline builds.
+Auto Generate Version Code Based On Current Date.
+"""
+}
+description = getdescription().replace("\n", " ")
+def getdisplayName = { ->
+    return "Automated Gradle Plugin"
+}
+ext {
+    offlineRepositoryRoot = mavenDir.absolutePath
+    projectDisplayName = "Dimas Lanjaka Gradle Plugin"
+    jarname = "gradle-plugin-${getVersion()}.jar"
+    thirdpartyLibsDir = "$project.buildDir.absolutePath/libs/".replaceAll("\\{1,9}", "/")
+    repackagedLibsDir = "$project.buildDir.absolutePath/repackaged/".replaceAll("\\{1,9}", "/")
+    localArtifactory = "$project.buildDir.absolutePath/artifactory/".replaceAll("\\{1,9}", "/")
+    projectBuildDir = "$project.buildDir.absolutePath/".replaceAll("\\{1,9}", "/")
+}
+
+configurations {
+    thirdparty
+    jarjar
+    providedRuntime
+    providedRuntimeOnly
+}
+
+repositories {
+    jcenter()
+    google()
+    mavenCentral()
+    mavenLocal()
+    gradlePluginPortal()
+    maven { url "https://maven.google.com" }
+    maven { url "https://maven.mozilla.org/maven2/" }
+    maven { url "https://jitpack.io" }
+    maven { url "https://plugins.gradle.org/m2/" }
+    maven { url "http://maven.springframework.org/release" }
+    maven { url "http://maven.restlet.org" }
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+    maven { url "https://repo.gradle.org/gradle/libs-releases" }
+    maven {
+        url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+        credentials {
+            username = "dimaslanjaka"
+            password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+        }
+    }
+    maven { url "https://repo1.maven.org/maven2" }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    jarjar "org.gradle.jarjar:jarjar:$jarjar_version"
+    thirdparty "org.apache.maven:maven-model-builder:$maven_version"
+
+    implementation "args4j:args4j:2.33"
+    implementation "com.tonyodev.fetch2okhttp:fetch2okhttp:3.0.11"
+    implementation "androidx.tonyodev.fetch2okhttp:xfetch2okhttp:3.1.5"
+    implementation "com.squareup:javapoet:1.10.0"
+    implementation "com.squareup:kotlinpoet:1.6.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compileOnly("com.android.tools.build:gradle:$gradle_version")
+
+    compile("com.googlecode.json-simple:json-simple:1.1.1")
+    compile group: "org.codehaus.groovy", name: "groovy-all", version: "$groovy_version"
+    compileOnly "org.codehaus.groovy:groovy-all:$groovy_version"
+
+    // HTTP Server
+    compile "io.soluble.pjb:php-java-bridge:7.1.3"
+    // https://mvnrepository.com/artifact/org.mortbay.jetty.npn/npn-boot
+    compile group: "org.mortbay.jetty.npn", name: "npn-boot", version: "8.1.2.v20120308"
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+    compile group: "org.eclipse.jetty", name: "jetty-server", version: "11.0.0.beta2"
+    // https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-all-server
+    testCompile group: "org.eclipse.jetty.aggregate", name: "jetty-all-server", version: "8.2.0.v20160908"
+    // https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-all
+    testCompile group: "org.eclipse.jetty.aggregate", name: "jetty-all", version: "11.0.0.beta1", ext: "pom"
+    // https://mvnrepository.com/artifact/org.eclipse.jetty.aggregate/jetty-server
+    testCompile group: "org.eclipse.jetty.aggregate", name: "jetty-server", version: "8.2.0.v20160908"
+
+    implementation("com.squareup.okio:okio:2.9.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
+    implementation "com.squareup.wire:wire-runtime:3.4.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+
+    implementation("com.github.kittinunf.fuel:fuel:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-gson:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-rxjava:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-coroutines:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-android:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-stetho:2.3.0")
+
+    //implementation fileTree(thirdpartyLibsDir)
+    //implementation fileTree(repackagedLibsDir)
+    //implementation fileTree(localArtifactory)
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: localArtifactory, include: ["*.jar"])
+    implementation "org.jetbrains:annotations:19.0.0"
+    implementation "com.github.infotech-group:CanvasView:1.0.0"
+    implementation group: "org.fusesource.jansi", name: "jansi", version: "1.8"
+    implementation "org.apache.httpcomponents:httpclient:4.5.12"
+    implementation group: "com.diogonunes", name: "JColor", version: "5.0.1"
+    implementation group: "com.diogonunes", name: "JCDP", version: "4.0.2"
+    implementation "org.codehaus.mojo:exec-maven-plugin:1.2.1"
+    implementation "org.slf4j:slf4j-api:1.7.5"
+    implementation "log4j:log4j:1.2.12"
+    implementation "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+    implementation "com.google.code.gson:gson:2.8.6"
+    implementation "org.javassist:javassist:3.13.0-GA"
+    implementation "org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1"
+    implementation "org.hibernate:hibernate-core:5.1.0.Final"
+    implementation "org.springframework:spring-web:4.2.5.RELEASE"
+    implementation group: "org.dom4j", name: "com.springsource.org.dom4j", version: "1.6.1"
+    implementation platform("org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE")
+    implementation "org.apache.commons:commons-collections4:4.4"
+    implementation "org.apache.commons:commons-lang3:3.11"
+    implementation "org.apache.commons:commons-compress:1.19"
+    implementation "org.apache.commons:commons-exec:1.3"
+    implementation "org.apache.commons:commons-math3:3.6.1"
+    implementation "commons-codec:commons-codec:1.13"
+    implementation "commons-net:commons-net:3.6"
+    implementation "commons-validator:commons-validator:1.6"
+    implementation "commons-io:commons-io:2.7"
+    implementation "commons-cli:commons-cli:1.4"
+    implementation "org.jsoup:jsoup:1.13.1"
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.11.3"
+    implementation "androidx.appcompat:appcompat:$android_version"
+    implementation "androidx.legacy:legacy-support-v4:$android_version"
+    implementation "org.mockito:mockito-core:2.7.21"
+    implementation "com.google.guava:guava:$guava_version"
+    implementation "joda-time:joda-time:2.10.6"
+    implementation "info.picocli:picocli:4.5.1"
+    annotationProcessor "info.picocli:picocli-codegen:4.5.1"
+
+    // kotlin
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.jetbrains.kotlin:kotlin-reflect"
+
+    // test
+    testImplementation("org.spekframework.spek2:spek-dsl-jvm:2.0.0-rc.1") {
+        exclude group: "org.jetbrains.kotlin"
+    }
+    testRuntimeOnly("org.spekframework.spek2:spek-runner-junit5:2.0.0-rc.1") {
+        exclude group: "org.junit.platform"
+        exclude group: "org.jetbrains.kotlin"
+    }
+    testRuntime gradleTestKit()
+    testImplementation gradleTestKit()
+    testImplementation "junit:junit:4.13"
+    testRuntime "junit:junit:4.13"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.4.2"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:5.4.2"
+    testRuntime "org.junit.vintage:junit-vintage-engine:5.4.2"
+    testCompile "org.junit.jupiter:junit-jupiter-api:5.4.2"
+    testCompile "org.junit.jupiter:junit-jupiter-params:5.4.2"
+    runtime "org.junit.jupiter:junit-jupiter-engine:5.4.2"
+    testImplementation("org.spockframework:spock-core:1.3-groovy-2.4") {
+        exclude module: "groovy-all"
+    }
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testCompile "io.kotlintest:kotlintest-runner-junit5:3.1.9"
+    testCompile "org.mockito:mockito-core:2.23.0"
+    // spek requires kotlin-reflect, can be omitted if already in the classpath
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    // groovy
+    testImplementation "org.codehaus.groovy:groovy-all:$groovy_version"
+}
+
+// TODO: Benchmark Test
+test {
+    // enable TestNG support (default is JUnit)
+    useTestNG()
+    // enable JUnit Platform (a.k.a. JUnit 5) support
+    useJUnitPlatform()
+
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
+
+    jvmArgs "-DGRADLE_OPTS=-Xmx1076m-XX:-UseGCOverheadLimit"
+
+    forkEvery = 1
+    maxParallelForks = 2
+
+    // set a system property for the test JVM(s)
+    systemProperty "some.prop", "value"
+
+    // explicitly include or exclude tests
+    include "com/dimaslanjaka/**"
+    exclude "**/**"
+
+    // show standard out and standard error of the test JVM(s) on the console
+    testLogging.showStandardStreams = true
+
+    // set heap size for the test JVM(s)
+    minHeapSize = "128m"
+    maxHeapSize = "512m"
+
+    // listen to events in the test execution lifecycle
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+
+    // Fail the "test" task on the first test failure
+    failFast = true
+
+    // listen to standard out and standard error of the test JVM(s)
+    onOutput { descriptor, event ->
+        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message)
+    }
+}
+
+// repackage jar
+task repackageDependencies(type: Jar) {
+    baseName = "repack"
+    archivesBaseName = "repack"
+    version = project.version
+    destinationDirectory = new File(localArtifactory as String)
+
+    doLast {
+        project.ant {
+            taskdef name: "jarjar", classname: "com.tonicsystems.jarjar.JarJarTask", classpath: configurations.jarjar.asPath
+            jarjar(destfile: archivePath) {
+                configurations.thirdparty.each { originalJar ->
+                    zipfileset(src: originalJar)
+                }
+
+                rule(pattern: "nu.**", result: "com.dimaslanjaka.gradle.repackaged.nu.@1")
+                rule(pattern: "org.**", result: "com.dimaslanjaka.gradle.repackaged.org.@1")
+                rule(pattern: "com.**", result: "com.dimaslanjaka.gradle.repackaged.com.@1")
+                rule(pattern: "licenses.**", result: "com.dimaslanjaka.gradle.repackaged.licenses.@1")
+            }
+        }
+    }
+}
+
+// TODO: Fix repackage dependencies from java && Fix calling groovy class from java
+compileJava {
+    options.encoding = "UTF-8"
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+    dependsOn "repackageDependencies"
+    classpath += files(compileGroovy.destinationDir)
+    classpath += files(compileKotlin.destinationDir)
+}
+
+/**
+ * @TODO: Set jvm target bytecodes
+ */
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+/**
+ * @TODO: Fix repackage dependencies from kotlin
+ */
+compileKotlin {
+    dependsOn "repackageDependencies"
+    kotlinOptions.jvmTarget = "1.8"
+}
+/**
+ * @TODO: Fix calling kotlin class from groovy
+ */
+compileGroovy {
+    options.encoding = "UTF-8"
+    dependsOn tasks.getByPath("compileKotlin")
+    classpath += files(compileKotlin.destinationDir)
+    classpath += files(compileJava.destinationDir)
+}
+
+// jar builder
+jar {
+    from(zipTree(repackageDependencies.archivePath)) {
+        include "**"
+    }
+    from sourceSets.main.allJava
+    from sourceSets.main.output
+    dependsOn repackageDependencies
+
+    enabled = true
+    baseName = "gradle-plugin"
+    archivesBaseName = "gradle-plugin"
+    destinationDirectory = new File(thirdpartyLibsDir as String)
+
+    manifest {
+        attributes(
+                "Created-By": "${System.properties["java.version"]} (${System.properties["java.vendor"]} ${System.properties["java.vm.version"]})".toString(),
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor": project["developer"]
+        )
+    }
+}
+
+// plugin information publish
+
+pluginBundle {
+    website = "https://github.com/dimaslanjaka/gradle-plugin/"
+    vcsUrl = "https://github.com/dimaslanjaka/gradle-plugin/"
+    tags = ["offline", "gradle", "jar", "auto"]
+}
+
+gradlePlugin {
+    plugins {
+        Plugin {
+            id = "com.dimaslanjaka"
+            displayName = getdisplayName()
+            description = project.description
+            implementationClass = "com.dimaslanjaka.gradle.core.Plugin"
+        }
+    }
+}
+
+// clean orphan directory
+clean.doFirst {
+    delete "${rootDir}/tmp/"
+    delete "${rootDir}/temp/"
+    delete "${rootDir}/userHome/"
+}
+
+// github packager
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+// credentials manager
+def projectCredentials = new Properties()
+projectCredentials.load(new FileInputStream(rootProject.file("credentials.properties")))
+def ObjectName = { String str ->
+    return str.replace(" ", "-")
+}
+
+publishing {
+    publications {
+        Plugin(MavenPublication) {
+            groupId "com.dimaslanjaka"
+            artifactId "gradle-plugin"
+            version getVersion()
+            artifact jar
+            description = project.description
+
+            // Manually add dependencies to pom until maven-publish knows how to do it
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode("dependencies")
+
+                //Iterate over the compile dependencies (we don"t want the test ones), adding a <dependency> node for each
+                configurations.compile.allDependencies.each {
+                    def dependencyNode = dependenciesNode.appendNode("dependency")
+                    dependencyNode.appendNode("groupId", it.group)
+                    dependencyNode.appendNode("artifactId", it.name)
+                    dependencyNode.appendNode("version", it.version)
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = ObjectName("GitHub Packages")
+            url = uri(githubProperties["gpr.url"])
+
+            credentials {
+                username = githubProperties["gpr.usr"]
+                password = githubProperties["gpr.key"]
+            }
+        }
+        maven {
+            name = ObjectName("Local Project")
+            url = "file://${localArtifactory}"
+        }
+        maven {
+            name = ObjectName("Local Machine")
+            url = "file://${offlineRepositoryRoot}"
+        }
+        /*
+        maven {
+            name = ObjectName("FTP Server")
+            url = "sftp://ftps4.us.freehostia.com/backend.webmanajemen.com/artifact"
+            credentials {
+                username = projectCredentials["ftpuser"]
+                password = projectCredentials["ftppass"]
+            }
+        }
+         */
+    }
+}
+
+if (tasks.findByName("clean") != null) {
+    tasks.findByName("clean").finalizedBy("publishToMavenLocal")
+}
+
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.apache.commons.net.ftp.FTP
+import org.apache.commons.net.ftp.FTPClient
+import org.apache.commons.net.ftp.FTPClientConfig
+import org.apache.commons.net.ftp.FTPReply
+
+task("uploadJars") {
+    // TODO: Upload Generated Artifact To FTP
+    doLast {
+        println("Start Uploading Artifact To FTP Server")
+        FTPClient ftp = new FTPClient()
+        FTPClientConfig config = new FTPClientConfig()
+        config.setServerTimeZoneId("Asia/Jakarta")
+        ftp.configure(config)
+        boolean error = false
+        try {
+            int reply
+            String server = "ftps4.us.freehostia.com" //
+            ftp.connect(server)
+            ftp.login(projectCredentials["ftpuser"] as String, projectCredentials["ftppass"] as String)
+
+            System.out.println("Connected to " + server + ".")
+            System.out.print(ftp.getReplyString())
+
+            // After connection attempt, you should check the reply code to verify
+            // success.
+            reply = ftp.getReplyCode()
+
+            if (!FTPReply.isPositiveCompletion(reply)) { // disconnect
+                ftp.disconnect()
+                System.err.println("FTP server refused connection.")
+                System.exit(1)
+            }
+
+            if (ftp.isConnected() && ftp.isAvailable()) {
+                if (FTPReply.isPositiveCompletion(reply)) {
+                    String group2path = project.getGroup().toString().replace(".", "/")
+                    String projectFTPVersion = project["version"]
+                    String remoteDir = "/backend.webmanajemen.com/artifact/$group2path/gradle-plugin/$projectFTPVersion"
+                    ftp.makeDirectory(remoteDir)
+                    ftp.changeWorkingDirectory(remoteDir)
+                    println("Current Dir " + ftp.printWorkingDirectory())
+
+                    ftp.setControlKeepAliveTimeout(300) // set timeout to 5 minutes
+                    ftp.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE)
+                    ftp.setFileTransferMode(FTP.BINARY_FILE_TYPE)
+                    new File("${project.buildDir.absolutePath}/libs").eachFile {
+                        if (it.name.contains(projectFTPVersion)) {
+                            boolean upload = false
+                            try {
+                                FileInputStream fis = new FileInputStream(it.absolutePath)
+                                ftp.setFileType(FTP.BINARY_FILE_TYPE)
+                                ftp.enterLocalPassiveMode() //Switch to passive mode
+                                upload = ftp.storeFile(it.name, fis)
+                                fis.close()
+                            }
+                            catch (Exception e) {
+                                println(e.message)
+                            } finally {
+                                reply = ftp.getReplyCode()
+                                if (FTPReply.isPositiveCompletion(reply) && upload) {
+                                    println("${it.name} uploaded sucessfully")
+                                } else {
+                                    println("${it.name} upload failed")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // transfer files
+            ftp.logout()
+        } catch (IOException e) {
+            error = true
+            println(e.message)
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect()
+                } catch (IOException ioe) {
+                    println(ioe.getMessage())
+                }
+            }
+        }
+    }
+}
+tasks.findByName("publishPlugins").finalizedBy("uploadJars")
+
+static void showServerReply(FTPClient ftpClient) {
+    String[] replies = ftpClient.getReplyStrings()
+    if (replies != null && replies.length > 0) {
+        for (String aReply : replies) {
+            System.out.println("SERVER: " + aReply)
+        }
+    }
+}
+
+/*
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            enabled false
+            name = "local"
+            pom.groupId = "com.dimaslanjaka"
+            pom.artifactId = "gradle-plugin"
+            pom.version = project.version
+            repository(url: "file://${localArtifactory}/FTP")
+        }
+
+        mavenDeployer {
+            enabled true
+            name = "Ftp"
+            // allow uploading through FTP protocol with the following command:
+            // gradle uploadArchives -PSNAPSHOT_REPOSITORY_URL=ftp://host/repo/path -PUSERNAME=uname -PPASSWORD=passwd
+            configuration = configurations.create("deployerJars")
+            configuration.dependencies.add dependencies.create("org.apache.maven.wagon:wagon-ftp:2.2")
+
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            pom.groupId = "com.dimaslanjaka"
+            pom.artifactId = "gradle-plugin"
+            pom.version = project.version
+
+            repository(url: "ftp://ftps4.us.freehostia.com/backend.webmanajemen.com/artifact") {
+                authentication(userName: projectCredentials["ftpuser"], password: projectCredentials["ftppass"])
+            }
+
+            pom.whenConfigured { pom ->
+                pom.packaging = "aar"
+            }
+
+            pom.project {
+                name = POM_NAME
+                description = POM_DESCRIPTION
+                url = POM_URL
+
+                scm {
+                    url POM_SCM_URL
+                    connection POM_SCM_CONNECTION
+                    developerConnection POM_SCM_DEV_CONNECTION
+                }
+
+                licenses {
+                    license {
+                        name = "Simplified BSD License"
+                        url = "http://www.opensource.org/licenses/bsd-license"
+                        distribution = "repo"
+                    }
+                    license {
+                        name = "The Apache Software License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution = "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = POM_DEVELOPER_ID
+                        name = POM_DEVELOPER_NAME
+                        email = POM_DEVELOPER_EMAIL
+                    }
+                }
+            }
+        }
+    }
+}
+ */
+
+//uploadArchives.dependsOn("publishToMavenLocal")
+//publishPlugins.dependsOn("publish")
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// Application
+application {
+    mainClassName = "es.uvigo.ei.sing.webviewdemo.Main"
+    description = "Simple Webview"
+    //applicationDefaultJvmArgs = ["-Dgreeting.language=en"]
+    //icon = "${projectDir}/src/main/resources/icon.png"
+}
+
+shadowJar {
+    zip64 true
+    archiveBaseName.set("gradle-plugin")
+    destinationDirectory = new File("${buildDir.absolutePath}/shadowJar")
+    mergeServiceFiles()
+    exclude "META-INF/*.SF"
+    exclude "META-INF/*.DSA"
+    exclude "META-INF/*.RSA"
+    exclude "LICENSE*"
+}

@@ -1,0 +1,21 @@
+{
+  "verbose": true,
+  "ignore": [
+    "*.test.js",
+    "test/*",
+    "serve-index/*",
+    "node_modules/*",
+    "info/*",
+    "*.txt",
+    "*.properties"
+  ],
+  "watch": [
+    "server.js",
+    "src/"
+  ],
+  "ext": "js, css",
+  "execMap": {
+    "rb": "ruby",
+    "pde": "processing --sketch={{pwd}} --run"
+  }
+}
