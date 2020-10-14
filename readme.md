@@ -31,9 +31,9 @@ allprojects {
 }
 ```
 
-### On Android Project Set Below
+### On Android Project Set Below (optional)
 ```
-android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+//android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
 android {
     // other configurations
     packagingOptions {
@@ -57,7 +57,7 @@ android {
 }
 ```
 
-### If you want automated in all of your project, put these codes in `~/.gradle/init.d/offline.gradle`
+### If you want automated in all of your project, put these codes in `~/.gradle/init.d/offline.gradle` (Not recommended)
  ```gradle
  // init.d script for all project initializer
  initscript {
