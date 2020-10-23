@@ -17,18 +17,18 @@ dependencies {
 }
 
 // apply the plugin (build.gradle)
-apply plugin: "com.dimaslanjaka.gradle-plugin"
+apply plugin: "com.dimaslanjaka"
 // or (build.gradle.kts)
-apply(plugin = "com.dimaslanjaka.gradle-plugin")
+apply(plugin = "com.dimaslanjaka")
 
 // apply for subproject
 subprojects {
-    apply(plugin = "com.dimaslanjaka.gradle-plugin") // Version should be inherited from parent
+    apply(plugin = "com.dimaslanjaka") // Version should be inherited from parent
 }
 
 // apply for all project
 allprojects {
-    apply(plugin = "com.dimaslanjaka.gradle-plugin") // Version should be inherited from parent
+    apply(plugin = "com.dimaslanjaka") // Version should be inherited from parent
 }
 ```
 ### Full build.gradle example
@@ -47,14 +47,12 @@ buildscript {
     }
 }
 apply plugin: "com.dimaslanjaka"
-// this also work
-//apply plugin: "com.dimaslanjaka.gradle-plugin"
 ```
 
 ### Auto version code
 ```groovy
 // apply the plugin
-apply plugin: "com.dimaslanjaka.gradle-plugin"
+apply plugin: "com.dimaslanjaka"
 
 // print generated version
 println("Current Version ${AutoVersionCode}") 
