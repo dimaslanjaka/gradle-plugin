@@ -1,0 +1,101 @@
+buildscript  {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://maven.mozilla.org/maven2/' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'http://maven.springframework.org/release' }
+        maven { url 'http://maven.restlet.org' }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+        maven {
+            url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+            credentials {
+                username = "dimaslanjaka"
+                password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+            }
+        }
+        maven { url 'https://repo1.maven.org/maven2' }
+        flatDir {
+            dirs "$rootProject.projectDir/../../build/libs"
+        }
+    }
+    dependencies {
+        classpath fileTree(include: ['*.jar'], dir: '../../build/libs')
+    }
+}
+apply plugin: 'com.android.library'
+apply plugin: 'androidx.benchmark'
+apply plugin: "com.dimaslanjaka.gradle-plugin"
+
+android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner 'androidx.benchmark.junit4.AndroidBenchmarkRunner'
+    }
+
+    testBuildType = "release"
+    buildTypes {
+        debug {
+            // Since debuggable can"t be modified by gradle for library modules,
+            // it must be done in a manifest - see src/androidTest/AndroidManifest.xml
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "benchmark-proguard-rules.pro"
+        }
+        release {
+            isDefault = true
+        }
+    }
+
+    packagingOptions {
+        pickFirst '**/*.so'
+        exclude '**/*.html' // <-- inline javadoc of plugin will be excluded
+        exclude 'META-INF/services/org.codehaus.groovy.transform.ASTTransformation'
+        exclude 'META-INF/services/org.codehaus.groovy.runtime.ExtensionModule'
+        exclude 'META-INF/groovy-release-info.properties'
+        exclude 'README.md'
+        exclude "META-INF/DEPENDENCIES"
+        exclude "META-INF/LICENSE"
+        exclude "META-INF/INDEX.LIST"
+        exclude "META-INF/LICENSE.txt"
+        exclude "META-INF/license.txt"
+        exclude "META-INF/NOTICE"
+        exclude "META-INF/NOTICE.txt"
+        exclude "META-INF/notice.txt"
+        exclude "META-INF/ASL2.0"
+        exclude("META-INF/*.kotlin_module")
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.benchmark:benchmark-junit4:1.0.0'
+
+    // Add your dependencies here. Note that you cannot benchmark code
+    // in an app module this way - you will need to move any code you
+    // want to benchmark to a library module:
+    // https://developer.android.com/studio/projects/android-library#Convert
+
+}

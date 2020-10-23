@@ -1,0 +1,57 @@
+buildscript  {
+    repositories {
+        jcenter()
+        google()
+        mavenCentral()
+        mavenLocal()
+        gradlePluginPortal()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://maven.mozilla.org/maven2/' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'http://maven.springframework.org/release' }
+        maven { url 'http://maven.restlet.org' }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+        maven {
+            url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
+            credentials {
+                username = "dimaslanjaka"
+                password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
+            }
+        }
+        maven { url 'https://repo1.maven.org/maven2' }
+        flatDir {
+            dirs "$rootProject.projectDir/../../build/libs"
+        }
+    }
+    dependencies {
+        classpath fileTree(include: ['*.jar'], dir: '../../build/libs')
+    }
+}
+
+plugins {
+    id 'java-library'
+}
+
+apply plugin: "com.dimaslanjaka.gradle-plugin"
+
+versioning {
+    major 1
+    patch 0
+    minor 0
+    preRelease "BETA"
+    incrementOn "build"
+    saveOn "build"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    api 'org.apache.commons:commons-math3:3.6.1'
+    implementation 'com.google.guava:guava:28.0-jre'
+    testImplementation 'junit:junit:4.12'
+}

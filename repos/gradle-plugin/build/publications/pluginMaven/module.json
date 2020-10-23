@@ -1,0 +1,42 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.dimaslanjaka",
+    "module": "gradle-plugin",
+    "version": "0.6.26",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.5",
+      "buildId": "akfpnwe6mzg6logaiudbfj4b7m"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 13,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.codehaus.groovy",
+          "module": "groovy-all",
+          "version": {
+            "requires": "latest.release"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "gradle-plugin-0.6.26.jar",
+          "url": "gradle-plugin-0.6.26.jar",
+          "size": 0

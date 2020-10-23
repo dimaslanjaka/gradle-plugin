@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: 13.0.1 (Oracle Corporation 13.0.1+9)
+Implementation-Title: gradle-plugin
+Implementation-Version: 0.6.26
+Implementation-Vendor: Dimas Lanjaka
+Built-By: dimas
+Built-Date: Mon Oct 19 22:50:38 WIB 2020
+Built-JDK: 13.0.1
+

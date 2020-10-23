@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.dimaslanjaka.gradle.json","l":"CollectionDeserializer"},{"p":"com.dimaslanjaka.gradle","l":"Index"}]

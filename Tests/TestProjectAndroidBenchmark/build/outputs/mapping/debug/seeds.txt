@@ -1,0 +1,2 @@
+com.dimaslanjaka.testprojectbenchmark.R: R()
+com.dimaslanjaka.testprojectbenchmark.R

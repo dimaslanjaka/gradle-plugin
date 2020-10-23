@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.dimaslanjaka.gradle"},{"l":"com.dimaslanjaka.gradle.json"}]

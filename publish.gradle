@@ -1,0 +1,318 @@
+import eu.davidea.gradle.ConsoleColors
+
+import static eu.davidea.gradle.ConsoleColors.GREEN
+import static eu.davidea.gradle.ConsoleColors.RED
+import static eu.davidea.gradle.ConsoleColors.YELLOW
+import static eu.davidea.gradle.ConsoleColors.bold
+import static eu.davidea.gradle.ConsoleColors.styler
+import static eu.davidea.gradle.ConsoleColors.styler
+import static eu.davidea.gradle.ConsoleColors.styler
+
+apply plugin: 'maven-publish'
+apply plugin: 'com.gradle.plugin-publish'
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'java-library'
+apply plugin: 'signing'
+
+group = "com.dimaslanjaka"
+ext.artifact = "gradle-plugin"
+
+artifacts { ArtifactHandler handler ->
+    setArchivesBaseName("gradle-plugin")
+    setVersion(getVersion())
+    setGroup("com.dimaslanjaka")
+    setDescription(project['description'].toString())
+}
+
+// plugin gradle publish
+gradlePlugin {
+    plugins {
+        gradlePlugin {
+            id = "com.dimaslanjaka"
+            implementationClass = "com.dimaslanjaka.gradle.core.Plugin"
+            displayName = 'Automated Gradle Plugin'
+            description = 'Auto Caching Artifact for offline use And Clean Gradle Cache'
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/dimaslanjaka/gradle-plugin/"
+    vcsUrl = "https://github.com/dimaslanjaka/gradle-plugin/"
+    tags = ["offline", "gradle", "jar", "auto"]
+
+    mavenCoordinates {
+        groupId = "com.dimaslanjaka"
+        artifactId = "gradle-plugin"
+        version = project.getVersion()
+    }
+}
+
+// maven publish
+// github packager
+def githubProperties = new Properties()
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+// credentials manager
+def projectCredentials = new Properties()
+projectCredentials.load(new FileInputStream(rootProject.file("credentials.properties")))
+def ObjectName = { String str ->
+    return str.replace(" ", "-")
+}
+
+// TODO: Create short version code based on current date and time
+static int versionCodeDate() {
+    int day = new Date().format("ddMMyyyy").toInteger()
+    int time = new Date().format("HHmmss").toInteger()
+    int mill = new Date().format("SSS").toInteger()
+    return day - time
+}
+
+def userHome = new File(System.properties['user.home'].toString())
+def reposDir = new File(userHome, '.m2/repository')
+def artifactLoc = new File(reposDir, "com/dimaslanjaka/gradle-plugin")
+def gradleprop = file('gradle.properties')
+Properties versionProps = new Properties()
+versionProps.load(new FileInputStream(gradleprop))
+def ver = new semver(versionProps['version'] as String)
+int versionMajor = ver.major + 1
+int versionMinor = ver.minor + 1
+int versionCode = ver.patch + 1
+if (versionCode > 100) {
+    ver.minor = versionMinor
+    ver.patch = 0
+}
+if (versionMinor > 100) {
+    ver.minor = 0
+    ver.major = versionMajor
+}
+
+// Evaluate success state on monitored tasks
+String[] ignoreTask = ["PublishToMavenLocal"]
+String[] includeTask = ["publishPlugins", "publish"]
+Set<Task> succeededTasks = new HashSet<>()
+project.gradle.taskGraph.afterTask { Task task ->
+    if (!ignoreTask.contains(task.name) && includeTask.contains(task.name)){
+        if (task.state.failure) {
+            println("ERROR - ${project.name}:${task.name} ${styler(RED, 'FAILED')}")
+        } else if (!succeededTasks.contains(task)) {
+            succeededTasks.add(task)
+        }
+    }
+}
+
+// Gradle build complete
+project.gradle.buildFinished() { BuildResult result ->
+    println("") // Print empty line
+    if (!succeededTasks.isEmpty()) {
+        println(bold("> Module: ${project.name}          ")) // Fix for dirty print
+        for (Task task in succeededTasks) {
+            String state = task.state.skipMessage != null
+                    ? styler(YELLOW, task.state.skipMessage)
+                    : styler(GREEN, 'EXECUTED')
+            println("Task: ${task.name} ${state}")
+        }
+        // increment and Save new versioning
+        ver.patch = versionCode
+        versionProps['version'] = ver.toString()
+        project.setVersion(ver.toString())
+        versionProps.store(gradleprop.newWriter(), null)
+    } else if (result.failure != null) {
+        println(styler(RED, project.name.toUpperCase() + ' - ' + result.failure.getLocalizedMessage()))
+    }
+}
+
+java {
+    //sourceCompatibility(JavaVersion.VERSION_14)
+    //targetCompatibility(JavaVersion.VERSION_14)
+    withJavadocJar()
+    withSourcesJar()
+}
+
+//uploadTask.repositories.mavenDeployer.pom.artifactId = "gradle-plugin"
+publishing {
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+            groupId = 'com.dimaslanjaka'
+            artifactId = 'gradle-plugin'
+            version = "${project.version}"
+        }
+    }
+    repositories {
+        maven {
+            name = "Github"
+            url = uri(githubProperties["gpr.url"])
+            credentials {
+                username = githubProperties["gpr.usr"]
+                password = githubProperties["gpr.key"]
+            }
+        }
+    }
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+class semver {
+    int major = 0
+    int minor = 0
+    int patch = 0
+    def pre
+
+    semver(String version) {
+        String[] parse = version.split("\\.")
+        if (parse.length > 0) {
+            major = parse[0] as int
+            minor = parse[1] as int
+            if (arrayIndexExist(parse, 2)) {
+                if (parse[2].contains("-")) {
+                    def parse2 = parse[2].split("-")
+                    patch = parse2[0] as int
+                    pre = parse2[1]
+                } else {
+                    patch = parse[2] as int
+                }
+            }
+        }
+    }
+
+    public static boolean arrayIndexExist(String[] data, int index) {
+        return data != null && index >= 0 && index < data.length;
+    }
+
+    @Override
+    String toString() {
+        if (pre == null) return "$major.$minor.$patch"
+        return "$major.$minor.$patch-$pre".replaceAll("-{2,5}", "-")
+    }
+}
+
+/*
+
+task killJ(type: Exec, group: "gradle-plugin") {
+    def stdout = new ByteArrayOutputStream()
+    try {
+        workingDir "build"
+        commandLine 'cmd', '/k', 'taskkill /f /im java.exe'
+        commandLine 'cmd', '/k', 'taskkill /f /im javac.exe'
+        commandLine 'cmd', '/k', 'taskkill /f /im javaw.exe'
+        commandLine 'cmd', '/k', 'taskkill /f /im jqs.exe'
+
+        standardOutput = stdout;
+        println "Output: $stdout"
+    } catch (Exception e) {
+        println e.message
+    }
+}
+ */
+/*
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                //repository(url: "file://localhost/tmp/myRepo/")
+                mavenLocal()
+            }
+        }
+    }
+ */
+/*
+import org.apache.commons.net.ftp.FTP
+import org.apache.commons.net.ftp.FTPClient
+import org.apache.commons.net.ftp.FTPClientConfig
+import org.apache.commons.net.ftp.FTPReply
+
+task("uploadJars") {
+    // TODO: Upload Generated Artifact To FTP
+    doLast {
+        println("Start Uploading Artifact To FTP Server")
+        FTPClient ftp = new FTPClient()
+        FTPClientConfig config = new FTPClientConfig()
+        config.setServerTimeZoneId("Asia/Jakarta")
+        ftp.configure(config)
+        boolean error = false
+        try {
+            int reply
+            String server = "ftps4.us.freehostia.com" //
+            ftp.connect(server)
+            ftp.login(projectCredentials["ftpuser"] as String, projectCredentials["ftppass"] as String)
+
+            System.out.println("Connected to " + server + ".")
+            System.out.print(ftp.getReplyString())
+
+            // After connection attempt, you should check the reply code to verify
+            // success.
+            reply = ftp.getReplyCode()
+
+            if (!FTPReply.isPositiveCompletion(reply)) { // disconnect
+                ftp.disconnect()
+                System.err.println("FTP server refused connection.")
+                System.exit(1)
+            }
+
+            if (ftp.isConnected() && ftp.isAvailable()) {
+                if (FTPReply.isPositiveCompletion(reply)) {
+                    String group2path = project.getGroup().toString().replace(".", "/")
+                    String projectFTPVersion = project["version"]
+                    String remoteDir = "/backend.webmanajemen.com/artifact/$group2path/gradle-plugin/$projectFTPVersion"
+                    ftp.makeDirectory(remoteDir)
+                    ftp.changeWorkingDirectory(remoteDir)
+                    println("Current Dir " + ftp.printWorkingDirectory())
+
+                    ftp.setControlKeepAliveTimeout(300) // set timeout to 5 minutes
+                    ftp.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE)
+                    ftp.setFileTransferMode(FTP.BINARY_FILE_TYPE)
+                    new File("${project.buildDir.absolutePath}/libs").eachFile {
+                        if (it.name.contains(projectFTPVersion)) {
+                            boolean upload = false
+                            try {
+                                FileInputStream fis = new FileInputStream(it.absolutePath)
+                                ftp.setFileType(FTP.BINARY_FILE_TYPE)
+                                ftp.enterLocalPassiveMode() //Switch to passive mode
+                                upload = ftp.storeFile(it.name, fis)
+                                fis.close()
+                            }
+                            catch (Exception e) {
+                                println(e.message)
+                            } finally {
+                                reply = ftp.getReplyCode()
+                                if (FTPReply.isPositiveCompletion(reply) && upload) {
+                                    println("${it.name} uploaded sucessfully")
+                                } else {
+                                    println("${it.name} upload failed")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // transfer files
+            ftp.logout()
+        } catch (IOException e) {
+            error = true
+            println(e.message)
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect()
+                } catch (IOException ioe) {
+                    println(ioe.getMessage())
+                }
+            }
+        }
+    }
+}
+tasks.findByName("publishPlugins").finalizedBy("uploadJars")
+
+static void showServerReply(FTPClient ftpClient) {
+    String[] replies = ftpClient.getReplyStrings()
+    if (replies != null && replies.length > 0) {
+        for (String aReply : replies) {
+            System.out.println("SERVER: " + aReply)
+        }
+    }
+}
+ */

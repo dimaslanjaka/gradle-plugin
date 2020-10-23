@@ -1,0 +1,630 @@
+import java.text.SimpleDateFormat
+
+apply plugin: "java-gradle-plugin"
+apply plugin: 'kotlin'
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: "org.jetbrains.dokka"
+
+group = "com.dimaslanjaka"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    jcenter()
+    google()
+    gradlePluginPortal()
+    maven { url "http://esd4j.org/jabylon/repository/" }
+    maven { url "http://nexus.openolat.org/nexus/content/repositories/public/" }
+    maven { url "https://jitpack.io" }
+    maven {
+        url "https://oss.sonatype.org/content/repositories/releases/"
+    }
+    maven {
+        url "https://jetbrains.bintray.com/intellij-plugin-service"
+    }
+    maven { url "http://esd4j.org/jabylon/repository/" }
+}
+
+// define some configurations
+def userHome = new File(System.properties["user.home"].toString())
+def mavenDir = new File(userHome, ".m2/repository")
+if (!mavenDir.exists()) mavenDir.mkdirs()
+ext {
+    ghToken = System.getenv("GH_TOKEN")
+    offlineRepositoryRoot = mavenDir.absolutePath
+    projectDisplayName = "Dimas Lanjaka Gradle Plugin"
+    jarname = "gradle-plugin-${getVersion()}.jar"
+    thirdpartyLibsDir = "$project.buildDir.absolutePath/libs/".replaceAll("\\{1,9}", "/")
+    repackagedLibsDir = "$project.buildDir.absolutePath/repackaged/".replaceAll("\\{1,9}", "/")
+    localArtifactory = "$project.buildDir.absolutePath/artifactory/".replaceAll("\\{1,9}", "/")
+    projectBuildDir = "$project.buildDir.absolutePath/".replaceAll("\\{1,9}", "/")
+}
+
+sourceSets {
+    test.compileClasspath += configurations.compileOnly
+    test.runtimeClasspath += configurations.compileOnly
+}
+
+configurations {
+    thirdparty
+    jarjar
+    providedRuntime
+    providedRuntimeOnly
+    testImplementation.extendsFrom compileOnly
+
+    all {
+        resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                ModuleVersionSelector requested = details.requested
+                if (requested.group == "org.jetbrains.kotlin") {
+                    // TODO: force kotlin use same version
+                    details.useVersion(kotlin_version as String)
+                } else if (requested.group == "org.slf4j") {
+                    details.useVersion("1.7.20")
+                } else if (requested.group == "com.github.kittinunf.fuel") {
+                    details.useVersion("2.3.0")
+                } else {
+                    // TODO: Force Dependencies to latest version
+                    //details.useVersion("latest.release")
+                }
+                //println("${requested.name} use version ${details.getRequested().version}")
+            }
+            preferProjectModules()
+        }
+    }
+}
+
+/*
+allprojects {
+    apply plugin: "groovy"
+    afterEvaluate { Project subproject ->
+        configurations.forEach { config ->
+            config.resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+                ModuleVersionSelector requested = details.requested
+                if (requested.group == "org.jetbrains.kotlin" || requested.name.startsWith("kotlin-")) {
+                    //println("${subproject.name} forcing ${requested.name} to $kotlin_version")
+                    details.useVersion kotlin_version
+                }
+            }
+        }
+    }
+}
+ */
+
+dependencies {
+    implementation fileTree("libs")
+    implementation fileTree(localArtifactory)
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation gradleTestKit()
+    jarjar "org.gradle.jarjar:jarjar:$jarjar_version"
+    thirdparty "org.apache.maven:maven-model-builder:$maven_version"
+
+    // Mail
+    implementation "javax.mail:mail:1.4.1"
+
+    // CSV
+    implementation "au.com.bytecode:opencsv:2.4"
+
+    // Time Unit
+    implementation "joda-time:joda-time:2.10.6"
+
+    // Git
+    implementation "org.eclipse.jgit:org.eclipse.jgit:latest.release"
+
+    // Android provider source
+    implementation "com.squareup:javapoet:1.10.0"
+    implementation "com.squareup:kotlinpoet:1.6.0"
+    implementation("com.squareup.okio:okio:2.9.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.11.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
+    implementation "com.squareup.wire:wire-runtime:3.4.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    compileOnly("com.android.tools.build:gradle:$gradle_version")
+
+    // kotlin
+    //implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    //implementation "org.jetbrains.kotlin:kotlin-kapt"
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
+    //implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+    //implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+
+    // kotlin doc
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:$kotlin_version")
+    dokkaGfmPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:${kotlin_version}")
+
+    // Apache
+    implementation "org.apache.commons:commons-collections4:latest.release"
+    implementation "org.apache.commons:commons-lang3:latest.release"
+    implementation "org.apache.commons:commons-compress:latest.release"
+    implementation "org.apache.commons:commons-exec:latest.release"
+    implementation "org.apache.commons:commons-math3:latest.release"
+    implementation "commons-codec:commons-codec:latest.release"
+    implementation "commons-net:commons-net:latest.release"
+    implementation "commons-validator:commons-validator:latest.release"
+    implementation "commons-io:commons-io:latest.release"
+    implementation "commons-cli:commons-cli:latest.release"
+    implementation "org.apache.httpcomponents:httpclient:latest.release"
+    implementation "xerces:xercesImpl:latest.release"
+
+    // Fuel Http
+    implementation("com.github.kittinunf.fuel:fuel:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-gson:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-rxjava:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-coroutines:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-android:2.3.0")
+    implementation("com.github.kittinunf.fuel:fuel-stetho:2.3.0")
+
+    // XML
+    implementation 'org.jdom:jdom:latest.release'
+
+    // JSON
+    implementation "com.fasterxml.jackson.core:jackson-databind:latest.release"
+    implementation("com.googlecode.json-simple:json-simple:latest.release")
+    implementation "com.google.code.gson:gson:latest.release"
+
+    // html parser
+    implementation "org.jsoup:jsoup:latest.release"
+
+    // groovy
+    implementation "org.codehaus.groovy:groovy-all:latest.release"
+    testImplementation "org.codehaus.groovy:groovy-all:latest.release"
+
+    // JUnit 5
+    testImplementation(platform("org.junit:junit-bom:5.7.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    // other
+    testImplementation gradleTestKit()
+    testImplementation("org.spockframework:spock-core:1.3-groovy-2.5") {
+        exclude module: "groovy-all"
+    }
+    testImplementation "net.bytebuddy:byte-buddy:1.10.1"
+    testImplementation "org.objenesis:objenesis:3.1"
+    testImplementation "commons-io:commons-io:2.6"
+    testImplementation "org.robolectric:robolectric:4.4"
+}
+
+// clean orphan directory
+clean.doFirst {
+    delete "${rootDir}/tmp/"
+    delete "${rootDir}/temp/"
+    delete "${rootDir}/userHome/"
+}
+clean.finalizedBy("assemble")
+
+// repackage jar
+task repackageDependencies(type: Jar) {
+    baseName 'repack'
+    version 'fixed'
+    destinationDirectory = new File(localArtifactory as String)
+
+    doLast {
+        project.ant {
+            taskdef name: "jarjar", classname: "com.tonicsystems.jarjar.JarJarTask", classpath: configurations.jarjar.asPath
+            jarjar(destfile: archivePath) {
+                configurations.thirdparty.each { originalJar ->
+                    zipfileset(src: originalJar)
+                }
+
+                rule(pattern: "nu.**", result: "com.dimaslanjaka.gradle.repackaged.nu.@1")
+                rule(pattern: "org.**", result: "com.dimaslanjaka.gradle.repackaged.org.@1")
+                rule(pattern: "com.**", result: "com.dimaslanjaka.gradle.repackaged.com.@1")
+                rule(pattern: "licenses.**", result: "com.dimaslanjaka.gradle.repackaged.licenses.@1")
+            }
+        }
+    }
+}
+
+// create jar with all dependecies (fatjar)
+task compileWithDependencies(type: Jar) {
+    baseName 'app-jar'
+    version 'fixed'
+    from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
+}
+
+// Create a list of subprojects that you wish to include in the jar.
+def mainProjects = [':NanoHTTPd', ':java-helper-library', ':java-ordered-properties', ':gradle-plugin']
+task oneJar(type: Jar, dependsOn: mainProjects.collect { it + ":compileJava" }) {
+    baseName 'all'
+    version 'fixed'
+    destinationDirectory = file("$buildDir/libs")
+    from files(mainProjects.collect {
+        project(it).sourceSets.main.output
+    }) {
+        exclude 'META-INF', 'META-INF/**'
+    }
+}
+
+// jar builder
+jar {
+    //reset actions
+    //actions = []
+
+    dependsOn oneJar
+    dependsOn repackageDependencies
+
+    from(zipTree(repackageDependencies.archivePath)) {
+        include "**"
+        exclude 'META-INF', 'META-INF/**'
+    }
+    from(zipTree(oneJar.archivePath)) {
+        include "**"
+        exclude 'META-INF', 'META-INF/**'
+    }
+    //from sourceSets.main.allJava
+    from sourceSets.main.output
+    //from sourceSets.main.allSource
+
+    enabled = true
+    baseName "gradle-plugin"
+    destinationDirectory = file("$buildDir/libs")
+
+    manifest {
+        attributes(
+                "Created-By": "${System.properties["java.version"]} (${System.properties["java.vendor"]} ${System.properties["java.vm.version"]})".toString(),
+                "Implementation-Title": project["name"],
+                "Implementation-Version": project.version,
+                "Implementation-Vendor": project["developer"],
+                'Built-By': System.getProperty('user.name'),
+                'Built-Date': new Date(),
+                'Built-JDK': System.getProperty('java.version'),
+        )
+    }
+}
+jar.dependsOn(subprojects.tasks['classes'])
+
+compileJava {
+    dependsOn "repackageDependencies"
+    classpath += files(compileGroovy.destinationDir)
+    classpath += files(compileKotlin.destinationDir)
+}
+compileKotlin {
+    classpath += files(compileGroovy.destinationDir)
+    classpath += files(compileJava.destinationDir)
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileGroovy {
+    options.encoding = "UTF-8"
+    dependsOn tasks.getByPath("compileKotlin")
+    classpath += files(compileKotlin.destinationDir)
+    classpath += files(compileJava.destinationDir)
+}
+compileTestGroovy {
+    dependsOn tasks.getByPath("compileTestKotlin")
+    classpath += files(compileTestKotlin.destinationDir)
+}
+
+classes.dependsOn compileKotlin
+
+// Documentation
+def exportedProjects = [':NanoHTTPd', ':java-helper-library', ':java-ordered-properties', ':gradle-plugin']
+
+javadoc {
+    destinationDir = file("${rootDir}/docs/java")
+    title = "$project.name $version API"
+    options.author true
+    //options.links 'https://docs.spring.io/spring/docs/4.3.x/javadoc-api/', 'https://docs.oracle.com/javase/8/docs/api/', 'https://docs.spring.io/spring-ws/docs/2.3.0.RELEASE/api/', 'https://docs.spring.io/spring-security/site/docs/4.0.4.RELEASE/apidocs/'
+    options.addBooleanOption('html5', true)
+    // disable the crazy super-strict doclint tool in Java 8
+    options.addStringOption 'Xdoclint:none', '-quiet'
+    options.encoding = 'utf-8'
+    options.docEncoding = 'utf-8'
+    options.charSet = 'utf-8'
+    options.links 'https://docs.spring.io/spring-framework/docs/current/javadoc-api/'
+    options.links 'https://fasterxml.github.io/jackson-databind/javadoc/2.8/'
+
+    def fileCollection = exportedProjects.collect { project(it).sourceSets.main.allJava }
+    source exportedProjects.collect { project(it).sourceSets.main.allJava }
+    classpath = files(exportedProjects.collect { project(it).sourceSets.main.compileClasspath })
+    options.memberLevel = JavadocMemberLevel.PRIVATE
+    source = sourceSets.main.java.srcDirs
+    classpath = configurations.runtime + configurations.runtimeClasspath + sourceSets.main.runtimeClasspath
+    subprojects.each { proj ->
+        proj.tasks.withType(Javadoc).each { javadocTask ->
+            source += javadocTask.source
+            classpath += javadocTask.classpath
+            excludes += javadocTask.excludes
+            includes += javadocTask.includes
+        }
+    }
+}
+
+def d = new Date()
+def time = new SimpleDateFormat("HH:mm '(GMT'Z')'").format(d)
+def date = new SimpleDateFormat('MMMM dd, yyyy').format(d)
+def groovyProjects = subprojects.findAll {
+    plugins.hasPlugin('groovy')(it)
+}
+def groovydocClasspath = files(groovyProjects.configurations.compile)
+groovydoc {
+    destinationDir = file("${rootDir}/docs/groovy")
+    docTitle = "Gradle API $version"
+    windowTitle = "Gradle API $version"
+    header = "<a href=\"https://github.com/dimaslanjaka\" target=\"_blank\">Gradle API $version</a>"
+    footer = "<a href=\"https://github.com/dimaslanjaka\" target=\"_blank\">Gradle API $version</a> API documentation was generated at ' + $time on $date."
+    classpath = groovydocClasspath
+    groovyClasspath = groovydocClasspath
+    source = groovyProjects.sourceSets.main.groovy.srcDirs
+    classpath += javadoc.classpath
+
+    link 'http://www.gradle.org/docs/current/groovydoc/', 'groovy.', 'org.codehaus.groovy.'
+    link 'http://download.oracle.com/javase/7/docs/api/', 'java.'
+    link 'http://docs.oracle.com/javase/1.6.0/docs/api/', 'java.'
+    link 'http://docs.groovy-lang.org/latest/html/gapi/', 'groovy.', 'org.codehaus.groovy.'
+    link 'https://docs.oracle.com/javaee/7/api/', 'javax.servlet.', 'javax.management.'
+    link 'https://docs.oracle.com/javase/8/docs/api/', 'java.', 'org.xml.', 'javax.', 'org.w3c.'
+    link 'https://docs.groovy-lang.org/docs/ant/api/', 'org.apache.ant.', 'org.apache.tools.ant.'
+    link 'https://junit.org/junit4/javadoc/latest/', 'org.junit.', 'junit.'
+    link 'https://junit.org/junit5/docs/current/api/', 'org.junit.jupiter.', 'org.junit.platform.'
+    link 'https://www.antlr2.org/javadoc/', 'antlr.'
+    link 'https://www.antlr.org/api/Java/', 'org.antlr.v4.'
+    link 'https://commons.apache.org/proper/commons-cli/javadocs/api-release/', 'org.apache.commons.cli.'
+    link 'https://picocli.info/apidocs/', 'picocli.'
+    link 'https://fusesource.github.io/jansi/documentation/api/', 'org.fusesource.'
+    link "http://java.sun.com/j2ee/1.4/docs/api", "javax.servlet.", "javax.management."
+    link "http://java.sun.com/javase/6/docs/api", "java.", "org.xml.", "javax.", "org.xml."
+    link "http://www.dpml.net/api/ant/1.7.0", "org.apache.ant.", "org.apache.tools.ant."
+    link "http://junit.sourceforge.net/junit3.8.1/javadoc", "org.junit.", "junit."
+    link "http://www.antlr2.org/javadoc", "antlr."
+    link "http://commons.apache.org/cli/api-release", "org.apache.commons.cli."
+}
+
+/*
+
+
+dokkaHtml {
+    moduleName = "$version"
+    outputDirectory.set(file("${buildDir}/docs/kotlin"))
+    cacheRoot.set(file("$buildDir/tmp"))
+    dokkaSourceSets {
+        configureEach {
+            // Do not output deprecated members
+            skipDeprecated = true
+
+            // Emit warnings about not documented members.
+            reportUndocumented = true
+
+            // Do not create index pages for empty packages
+            skipEmptyPackages = true
+
+            sourceRoot.from(file("${rootDir}/src/main/kotlin"))
+            subprojects.collect { p ->
+                def path = "${p.name}/src/main/kotlin"
+                sourceRoot.from(file(path))
+                linkMapping {
+                    dir = path
+                    url = "https://github.com/dimaslanjaka/gradle-plugin/blob/master/$path"
+                    suffix = "#L"
+                }
+            }
+            sourceLink {
+                localDirectory.set(file("${rootDir}/src/main/kotlin"))
+                remoteUrl.set(URL("https://github.com/Kotlin/kotlin-examples/tree/master/" +
+                        "gradle/dokka/dokka-gradle-example/src/main/kotlin"
+                ))
+                remoteLineSuffix.set("#L")
+            }
+        }
+    }
+}
+ */
+/*
+
+// TODO: Fix repackage dependencies from java && Fix calling groovy class from java
+compileJava {
+    options.encoding = "UTF-8"
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+    dependsOn "repackageDependencies"
+    //classpath += files(compileGroovy.destinationDir)
+    //classpath += files(compileKotlin.destinationDir)
+}
+
+// TODO: Set jvm target bytecodes
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+// TODO: Fix repackage dependencies from kotlin
+compileKotlin {
+    //dependsOn tasks.getByPath("compileGroovy")
+    kotlinOptions {
+        jvmTarget = "1.8"
+        //classpath += files(compileGroovy.destinationDir)
+    }
+}
+
+//TODO: Fix calling kotlin class from groovy
+compileGroovy {
+    options.encoding = "UTF-8"
+    //dependsOn tasks.getByPath("compileKotlin")
+    //classpath += files(compileKotlin.destinationDir)
+    classpath += files(compileJava.destinationDir)
+}
+
+compileTestGroovy {
+    dependsOn tasks.getByPath("compileTestKotlin")
+    //classpath += files(compileTestKotlin.destinationDir)
+}
+ */
+
+// JAVADOC
+// exclude test projects
+
+/*
+groovydoc {
+    destinationDir = new File("javadoc")
+    source = sourceSets.main.allSource
+}
+ */
+
+/*
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = "javadoc"
+    outputDirectory = javadoc.destinationDir
+    inputs.dir "src/main/kotlin"
+}
+ */
+
+/*
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
+    description project["description"]
+
+    destinationDirectory = new File(localArtifactory as String)
+    classifier "javadoc"
+
+    from javadoc.destinationDir
+    from groovydoc
+    from(zipTree(repackageDependencies.archivePath)) {
+        include "**"
+    }
+    from sourceSets.main.allJava
+    from sourceSets.main.output
+    //dependsOn repackageDependencies
+}
+ */
+
+/*
+tasks.named("dokkaHtml") {
+    def output = "build/dokka" as File
+    if (!output.exists()) output.mkdirs()
+    def cache = "build/tmp/dokka" as File
+    if (!cache.exists()) cache.mkdirs()
+    def classSource = "build/libs/${project.name}-${project.version}.jar" as File
+    if (!classSource.exists()) classSource.createNewFile()
+
+    outputDirectory.set(output)
+
+    // Set module name displayed in the final output
+    moduleName.set("moduleName")
+
+    // Use default or set to custom path to cache directory
+    // to enable package-list caching
+    // When this is set to default, caches are stored in $USER_HOME/.cache/dokka
+    cacheRoot.set(cache)
+
+    dokkaSourceSets {
+        configureEach { // Or source set name, for single-platform the default source sets are `main` and `test`
+
+            // Used when configuring source sets manually for declaring which source sets this one depends on
+            //dependsOn("repackageDependencies")
+
+            // Used to remove a source set from documentation, test source sets are suppressed by default
+            suppress.set(false)
+
+            // Use to include or exclude non public members
+            includeNonPublic.set(false)
+
+            // Do not output deprecated members. Applies globally, can be overridden by packageOptions
+            skipDeprecated.set(false)
+
+            // Emit warnings about not documented members. Applies globally, also can be overridden by packageOptions
+            reportUndocumented.set(true)
+
+            // Do not create index pages for empty packages
+            skipEmptyPackages.set(true)
+
+            // This name will be shown in the final output
+            displayName.set("JVM")
+
+            // Platform used for code analysis. See the "Platforms" section of this readme
+            platform.set(org.jetbrains.dokka.Platform.jvm)
+
+            // Property used for manual addition of files to the classpath
+            // This property does not override the classpath collected automatically but appends to it
+            classpath.from(classSource)
+
+            // List of files with module and package documentation
+            // https://kotlinlang.org/docs/reference/kotlin-doc.html#module-and-package-documentation
+            includes.from("packages.md", "extra.md")
+
+            // List of files or directories containing sample code (referenced with @sample tags)
+            // samples.from("samples/basic.kt", "samples/advanced.kt")
+
+            // By default, sourceRoots are taken from Kotlin Plugin and kotlinTasks, following roots will be appended to them
+            // Repeat for multiple sourceRoots
+            sourceRoot.from(file("src"))
+
+            // Specifies the location of the project source code on the Web.
+            // If provided, Dokka generates "source" links for each declaration.
+            // Repeat for multiple mappings
+            sourceLink {
+                // Unix based directory relative path to the root of the project (where you execute gradle respectively).
+                localDirectory.set(file("src/main/kotlin"))
+
+                // URL showing where the source code can be accessed through the web browser
+                remoteUrl.set(java.net.URL(
+                        "https://github.com/cy6erGn0m/vertx3-lang-kotlin/blob/master/src/main/kotlin"))
+                // Suffix which is used to append the line number to the URL. Use #L for GitHub
+                remoteLineSuffix.set("#L")
+            }
+
+            // Used for linking to JDK documentation
+            jdkVersion.set(8)
+
+            // Disable linking to online kotlin-stdlib documentation
+            noStdlibLink.set(false)
+
+            // Disable linking to online JDK documentation
+            noJdkLink.set(false)
+
+            // Disable linking to online Android documentation (only applicable for Android projects)
+            noAndroidSdkLink.set(false)
+
+            // Allows linking to documentation of the project"s dependencies (generated with Javadoc or Dokka)
+            // Repeat for multiple links
+            externalDocumentationLink {
+                // Root URL of the generated documentation to link with. The trailing slash is required!
+                url = URL("https://example.com/docs/")
+
+                // If package-list file is located in non-standard location
+                // packageListUrl = URL("file:///home/user/localdocs/package-list")
+            }
+
+            // Allows to customize documentation generation options on a per-package basis
+            // Repeat for multiple packageOptions
+            perPackageOption {
+                prefix.set("kotlin") // will match kotlin and all sub-packages of it
+                // All options are optional, default values are below:
+                skipDeprecated.set(false)
+                reportUndocumented.set(true) // Emit warnings about not documented members
+                includeNonPublic.set(false)
+            }
+            // Suppress a package
+            perPackageOption {
+                prefix.set("kotlin.internal") // will match kotlin.internal and all sub-packages of it
+                suppress.set(true)
+            }
+        }
+    }
+}
+ */
+
+// plugin gradle publish
+gradlePlugin {
+    plugins {
+        gradlePlugin {
+            id = "com.dimaslanjaka"
+            implementationClass = "com.dimaslanjaka.gradle.core.Plugin"
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/dimaslanjaka/gradle-plugin/"
+    vcsUrl = "https://github.com/dimaslanjaka/gradle-plugin/"
+    tags = ["offline", "gradle", "jar", "auto"]
+}

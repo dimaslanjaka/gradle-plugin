@@ -1,0 +1,7 @@
+// clean orphan directory
+clean.doFirst {
+    delete "${rootDir}/tmp/"
+    delete "${rootDir}/temp/"
+    delete "${rootDir}/userHome/"
+}
+clean.finalizedBy("assemble")

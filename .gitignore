@@ -1,0 +1,37 @@
+# Gradle
+.gradle/
+build/*
+!build/libs
+!build/artifactory
+
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+/.settings/
+.DS_Store
+credentials.properties
+github.properties
+Thumbs.db
+ftp.xml
+
+# Ant
+ant/
+
+
+# Maven
+target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# IDEA
+.idea/
+*.iml
+*.eml
+*.ipr
+*.iws
+out/

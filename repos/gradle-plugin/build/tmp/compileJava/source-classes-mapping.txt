@@ -1,0 +1,4 @@
+com/dimaslanjaka/gradle/Index.java
+ com.dimaslanjaka.gradle.Index
+com/dimaslanjaka/gradle/json/CollectionDeserializer.java
+ com.dimaslanjaka.gradle.json.CollectionDeserializer

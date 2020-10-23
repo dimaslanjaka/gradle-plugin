@@ -1,0 +1,61 @@
+plugins {
+    id 'java-library'
+    //id 'maven-publish'
+}
+
+group = 'com.dimaslanjaka'
+//group = "com.dimaslanjaka.httpserver"
+
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation gradleTestKit()
+
+    // Apache
+    implementation "org.apache.commons:commons-collections4:latest.release"
+    implementation "org.apache.commons:commons-lang3:latest.release"
+    implementation "org.apache.commons:commons-compress:latest.release"
+    implementation "org.apache.commons:commons-exec:latest.release"
+    implementation "org.apache.commons:commons-math3:latest.release"
+    implementation "commons-codec:commons-codec:latest.release"
+    implementation "commons-net:commons-net:latest.release"
+    implementation "commons-validator:commons-validator:latest.release"
+    implementation "commons-io:commons-io:latest.release"
+    implementation "commons-cli:commons-cli:latest.release"
+    implementation "org.apache.httpcomponents:httpclient:latest.release"
+
+    implementation "args4j:args4j:latest.release"
+    implementation 'org.jetbrains:annotations:latest.release'
+    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+    implementation 'com.google.guava:guava:latest.release'
+
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+}
+
+/*
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.dimaslanjaka'
+            artifactId = 'NanoHTTPd'
+            version = rootProject.version
+            from components.java
+        }
+    }
+}
+ */
