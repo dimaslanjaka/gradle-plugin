@@ -46,7 +46,7 @@ class OfflineDependenciesPlugin {
 
         def extension = project.extensions.create(EXTENSION_NAME, OfflineDependenciesExtension, repositoryHandler)
 
-        println("Offline dependencies root configured at '${styler(CYAN_BOLD_BRIGHT, project.ext.offlineRepositoryRoot as String)}'")
+        println("Offline dependencies root configured at ${styler(CYAN_BOLD_BRIGHT, project.ext.offlineRepositoryRoot as String)}")
 
         project.task('updateOfflineRepository', type: UpdateOfflineRepositoryTask) {
             conventionMapping.root = { "${project.offlineRepositoryRoot}" }

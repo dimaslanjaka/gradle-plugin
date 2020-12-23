@@ -1,5 +1,7 @@
 <!--- [![No Maintenance Intended](unmaintained.svg)](unmaintained.svg) --->
 
+#### Gradle plugin website [https://plugins.gradle.org/plugin/com.dimaslanjaka](https://plugins.gradle.org/plugin/com.dimaslanjaka)
+
 - auto clear big log of gradle
 - auto create version code based on current date
 - auto cached offline dependencies without redownload them

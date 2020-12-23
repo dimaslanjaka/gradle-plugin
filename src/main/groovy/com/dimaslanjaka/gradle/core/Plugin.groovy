@@ -129,13 +129,13 @@ class Plugin implements org.gradle.api.Plugin<Project> {
             version.apply(project)
             printTaskList()
 
-            if (!dependenciesList.toString().contains("com.google.inject")) {
+            /*if (!dependenciesList.toString().contains("com.google.inject")) {
                 if (configurationList.hasProperty('implementation')) {
                     project.dependencies.add("implementation", "com.google.inject:guice:4.0-beta5")
                 } else if (configurationList.hasProperty('compile')) {
                     project.dependencies.add("compile", "com.google.inject:guice:4.0-beta5")
                 }
-            }
+            }*/
 
             project.offlineDependencies {
                 repositories {

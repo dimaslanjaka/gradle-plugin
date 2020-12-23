@@ -26,13 +26,13 @@ class Resolver {
             add(project.repositories.jcenter())
             add(project.repositories.mavenLocal())
             add(project.repositories.mavenCentral())
-            add(project.repositories.maven {
+            /*add(project.repositories.maven {
                 it.url = uri("https://maven.pkg.github.com/dimaslanjaka/gradle-plugin")
                 it.credentials { c ->
                     c.username = "dimaslanjaka"
                     c.password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
                 }
-            })
+            })*/
 
             add("http://backend.webmanajemen.com/artifact/")
             add("http://devrepo.kakao.com:8088/nexus/content/repositories/central/")
