@@ -138,7 +138,8 @@ class OfflineDependenciesPlugin {
         boolean isAndroidProject = project.plugins.hasPlugin('com.android.application') || project.plugins.hasPlugin('com.android.library')
         boolean isKotlinMultiplatformProject = project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")
         File propertiesFile = new File("${project.rootDir.absolutePath}/gradle.properties")
-        if (!propertiesFile.exists()) return
+        File checkFile = new File("${project.rootDir.absolutePath}/build/gradle-properties.txt")
+        if (!propertiesFile.exists() || checkFile.exists()) return
         Properties gradleprop = new Properties(propertiesFile, true)
 
         if (isAndroidProject) {
@@ -164,7 +165,7 @@ class OfflineDependenciesPlugin {
         gradleprop.hasOrSet("org.gradle.jvmargs", "-Xms512m -Xmx512m -Xss512m -XX:MaxPermSize=512m -XX:ReservedCodeCacheSize=512m -XX:+UseCompressedOops -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8")
         gradleprop.hasOrSet("systemProp.file.encoding", "utf-8")
         gradleprop.hasOrSet("org.gradle.parallel", "false")
-        gradleprop.hasOrSet("org.gradle.configureondemand", "true")
+        gradleprop.hasOrSet("org.gradle.configureondemand", "false")
         gradleprop.hasOrSet("org.gradle.cache.cleanup", "true")
         String javaHome = System.getProperty("java.home")
         if (!gradleprop.has("org.gradle.java.temp")) {
@@ -189,6 +190,9 @@ class OfflineDependenciesPlugin {
             if (!rootp.exists()) rootp.mkdirs()
             gradleprop.set("systemProp.gradle.user.home", "${rootp}")
         }
+
+        checkFile.createNewFile()
+        checkFile.text = "gradle.properties already edited"
         //gradleprop.hasOrSet("org.gradle.unsafe.configuration-cache", "ON");
         // Use this flag sparingly, in case some of the plugins are not fully compatible
         //gradleprop.hasOrSet("org.gradle.unsafe.configuration-cache-problems", "warn");

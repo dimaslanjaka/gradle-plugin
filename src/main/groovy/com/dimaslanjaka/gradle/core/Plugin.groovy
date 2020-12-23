@@ -17,7 +17,6 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.*
 import org.gradle.api.tasks.TaskState
-import org.json.JSONArray
 import org.json.JSONObject
 
 import static com.dimaslanjaka.gradle.utils.ConsoleColors.*
@@ -83,12 +82,15 @@ class Plugin implements org.gradle.api.Plugin<Project> {
         project.repositories.add(project.repositories.jcenter())
         project.repositories.add(project.repositories.mavenCentral())
         project.repositories.add(project.repositories.mavenLocal())
-        project.repositories.add(project.repositories.maven {
+        /*project.repositories.add(project.repositories.maven {
             url "https://maven.pkg.github.com/dimaslanjaka/gradle-plugin"
             credentials {
                 username = "dimaslanjaka"
                 password = "d98acb59134fabab05145ddeb7abe4441db18b4a"
             }
+        })*/
+        project.repositories.add(project.repositories.maven {
+            url "https://plugins.gradle.org/m2/"
         })
         project.repositories.add(project.repositories.maven { url offlineRepositoryRoot })
         //project.dependencies.add('compile', 'io.realm:realm-android:0.80.3')
