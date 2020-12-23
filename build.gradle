@@ -228,6 +228,11 @@ dependencies {
     testImplementation "org.robolectric:robolectric:4.4"
 }
 
+// compatibility
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+compileJava.options.fork = true
+
 // repackage jar
 task repackageDependencies(type: Jar) {
     enabled = true
@@ -269,7 +274,7 @@ task oneJar(type: Jar, dependsOn: mainProjects.collect { it + ":compileJava" }) 
     }
 }
 
-// jar builder
+// single jar builder
 jar {
     //reset actions
     //actions = []
