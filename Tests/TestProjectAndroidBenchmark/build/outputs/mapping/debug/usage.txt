@@ -1,2 +1,0 @@
-com.dimaslanjaka.testprojectbenchmark.ResourceProvider
-com.dimaslanjaka.testprojectbenchmark.BuildConfig

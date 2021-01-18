@@ -1,3 +1,0 @@
-public final class com.dimaslanjaka.testprojectbenchmark.R {
-  private com.dimaslanjaka.testprojectbenchmark.R();
-}
