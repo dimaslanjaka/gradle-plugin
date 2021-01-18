@@ -24,26 +24,26 @@ buildscript {
             url "https://jetbrains.bintray.com/intellij-plugin-service"
         }
         maven { url "http://esd4j.org/jabylon/repository/" }
-        maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+        maven { url "https://repo.gradle.org/gradle/libs-releases" }
     }
     dependencies {
         //classpath "eu.davidea:grabver:latest.release"
         classpath "com.android.tools.build:gradle:4.0.2"
         classpath "com.gradle.publish:plugin-publish-plugin:latest.release"
         classpath "org.grails:grails-gradle-plugin:latest.release"
-        //classpath 'commons-net:commons-net:3.7.2'
+        //classpath "commons-net:commons-net:3.7.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //classpath "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
         //classpath("org.jetbrains.dokka:dokka-gradle-plugin:${kotlin_version}")
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: 'kotlin'
-apply from: 'clean.gradle'
-apply from: 'ide.gradle'
-apply from: 'publish.gradle'
+apply plugin: "java"
+apply plugin: "groovy"
+apply plugin: "kotlin"
+apply from: "clean.gradle"
+apply from: "ide.gradle"
+apply from: "publish.gradle"
 
 repositories {
     mavenCentral()
@@ -108,13 +108,13 @@ test {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13'
-    compile 'io.swagger:swagger-annotations:1.5.15'
-    compile 'com.squareup.okhttp:okhttp:2.7.5'
-    compile 'com.squareup.okhttp:logging-interceptor:2.7.5'
-    compile 'com.google.code.gson:gson:2.8.1'
-    compile 'joda-time:joda-time:2.9.9'
-    compile group: 'commons-net', name: 'commons-net', version: '3.7.2'
+    testImplementation "junit:junit:4.13"
+    compile "io.swagger:swagger-annotations:1.5.15"
+    compile "com.squareup.okhttp:okhttp:2.7.5"
+    compile "com.squareup.okhttp:logging-interceptor:2.7.5"
+    compile "com.google.code.gson:gson:2.8.1"
+    compile "joda-time:joda-time:2.9.9"
+    compile group: "commons-net", name: "commons-net", version: "3.7.2"
 
     testCompile "org.hamcrest:hamcrest-core:2.2"   // only necessary if Hamcrest matchers are used
     testRuntime "net.bytebuddy:byte-buddy:1.10.10" // allows mocking of classes (in addition to interfaces)
@@ -186,13 +186,13 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel-stetho:2.3.0")
 
     // XML
-    implementation 'org.jdom:jdom:latest.release'
+    implementation "org.jdom:jdom:latest.release"
 
     // JSON
     implementation "com.fasterxml.jackson.core:jackson-databind:latest.release"
     thirdparty "com.googlecode.json-simple:json-simple:latest.release"
     implementation "com.google.code.gson:gson:latest.release"
-    compile 'org.json:json:latest.release'
+    compile "org.json:json:latest.release"
 
     // html parser
     implementation "org.jsoup:jsoup:latest.release"
@@ -202,19 +202,20 @@ dependencies {
     testImplementation "org.codehaus.groovy:groovy-all:latest.release"
 
     implementation "args4j:args4j:latest.release"
-    implementation 'org.jetbrains:annotations:latest.release'
+    implementation "org.jetbrains:annotations:latest.release"
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:latest.release'
+    implementation "com.google.guava:guava:latest.release"
+    testImplementation "com.google.guava:guava:latest.release"
 
     // JUnit 5
     testImplementation(platform("org.junit:junit-bom:5.7.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     // Use JUnit Jupiter API for testing.
-    testImplementation('org.junit.jupiter:junit-jupiter-api')
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
 
     // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine')
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     // other
     testImplementation gradleTestKit()
     // using spock framework this version to avoid complcation of groovy
@@ -222,10 +223,10 @@ dependencies {
         exclude module: "groovy-all"
         exclude group: "org.codehaus.groovy"
     }
-    testImplementation "net.bytebuddy:byte-buddy:1.10.1"
-    testImplementation "org.objenesis:objenesis:3.1"
-    testImplementation "commons-io:commons-io:2.6"
-    testImplementation "org.robolectric:robolectric:4.4"
+    testImplementation("net.bytebuddy:byte-buddy:1.10.1")
+    testImplementation("org.objenesis:objenesis:3.1")
+    testImplementation("commons-io:commons-io:2.6")
+    testImplementation("org.robolectric:robolectric:4.4")
 }
 
 // compatibility
@@ -236,8 +237,8 @@ compileJava.options.fork = true
 // repackage jar
 task repackageDependencies(type: Jar) {
     enabled = true
-    baseName 'repack'
-    version 'fixed'
+    baseName "repack"
+    version "fixed"
     destinationDirectory = file("build/artifactory")
 
     doLast {
@@ -264,13 +265,13 @@ subprojects.collect {
 }
 task oneJar(type: Jar, dependsOn: mainProjects.collect { it + ":compileJava" }) {
     enabled = true
-    baseName 'all'
-    version 'fixed'
+    baseName "all"
+    version "fixed"
     destinationDirectory = file("$buildDir/jar")
     from files(mainProjects.collect {
         project(it).sourceSets.main.output
     }) {
-        exclude 'META-INF', 'META-INF/**'
+        exclude "META-INF", "META-INF/**"
     }
 }
 
@@ -284,11 +285,11 @@ jar {
 
     from(zipTree(repackageDependencies.archivePath)) {
         include "**"
-        exclude 'META-INF', 'META-INF/**'
+        exclude "META-INF", "META-INF/**"
     }
     from(zipTree(oneJar.archivePath)) {
         include "**"
-        exclude 'META-INF', 'META-INF/**'
+        exclude "META-INF", "META-INF/**"
     }
     //from sourceSets.main.allJava
     from sourceSets.main.output
@@ -305,20 +306,20 @@ jar {
                 "Implementation-Title": "Automatic Gradle Plugin",
                 "Implementation-Version": project.version,
                 "Implementation-Vendor": "Dimas Lanjaka",
-                'Built-By': System.getProperty('user.name'),
-                'Built-Date': new Date(),
-                'Built-JDK': System.getProperty('java.version'),
+                "Built-By": System.getProperty("user.name"),
+                "Built-Date": new Date(),
+                "Built-JDK": System.getProperty("java.version"),
         )
     }
 }
-jar.dependsOn(subprojects.tasks['classes'])
+jar.dependsOn(subprojects.tasks["classes"])
 
 // create jar with all dependecies (fatjar)
 task compileWithDependencies(type: Jar) {
     enabled = true
     dependsOn jar
-    baseName 'fat-jar'
-    version 'fixed'
+    baseName "fat-jar"
+    version "fixed"
     from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
         exclude "META-INF/*.SF"
         exclude "META-INF/*.DSA"
@@ -326,7 +327,7 @@ task compileWithDependencies(type: Jar) {
     }
     from(zipTree(jar.archivePath)) {
         include "**"
-        exclude 'META-INF', 'META-INF/**'
+        exclude "META-INF", "META-INF/**"
     }
     destinationDirectory = file("$buildDir/libs")
 }
