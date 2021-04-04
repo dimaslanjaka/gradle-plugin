@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import static com.dimaslanjaka.gradle.plugin.Utils.println;
 
 public class Threading {
 	public static final Object singleThreadLock = new Object();
@@ -73,17 +76,27 @@ public class Threading {
 		}
 	}
 
-	public void initialize(Callable<Object> func) {
+	public void initlialize(Callable<Object> func){
+		initialize(func, "unamed", null);
+	}
+
+	public void initialize(Callable<Object> func, String threadName, String newLockFileName) {
+		if (newLockFileName != null){
+			lockFilename = newLockFileName;
+		}
+		println("initialize thread " + threadName);
 		synchronized (singleThreadLock) {
+			println("start single thread lock");
 			if (project != null) {
 				File buildDir = new File(project.getRootProject().getBuildDir(), "thread");
-				if (!buildDir.exists()) if (!buildDir.mkdirs()) System.out.println("");
+				if (!buildDir.exists()) if (!buildDir.mkdirs()) println("");
 				lockFilePath = new File(buildDir, lockFilename);
+				lockFilePath.deleteOnExit();
 				if (!lockFilePath.exists()) {
 					try {
 						if (!lockFilePath.getParentFile().exists()) {
 							if (!lockFilePath.getParentFile().mkdirs()) {
-								System.out.println("");
+								println("cannot create parent directory thread lock");
 							}
 						}
 						if (lockFilePath.createNewFile()) {
@@ -92,7 +105,7 @@ public class Threading {
 								public Object call() throws Exception {
 									func.call();
 									if (lockFilePath.delete()) {
-										System.out.println("Lock file deleted " + new Date());
+										println("Lock file deleted " + new Date());
 									}
 									return null;
 								}
@@ -100,10 +113,24 @@ public class Threading {
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
-						System.out.println(lockFilePath);
+						println(lockFilePath);
 					}
+				} else {
+					println("lock file exist: " + lockFilePath);
 				}
 			}
 		}
 	}
+
+	public static class Once {
+		private final AtomicBoolean done = new AtomicBoolean();
+
+		public void run(Runnable task) {
+			if (done.get()) return;
+			if (done.compareAndSet(false, true)) {
+				task.run();
+			}
+		}
+	}
 }
+

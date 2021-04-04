@@ -1,3 +1,5 @@
+//import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -13,8 +15,12 @@ plugins {
     //id("org.jetbrains.kotlin.jvm").version("1.3.72")
     //"java"
     //kotlin("multiplatform") version "1.3.21"
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.21"
+    //id("com.github.johnrengelman.shadow") version "6.1.0"
 }
+
+group = "com.dimaslanjaka"
+version = "1.0.0"
 
 repositories {
     mavenLocal()
@@ -78,12 +84,37 @@ sourceSets {
     }
 }
 
+// cache
+configurations.all {
+    resolutionStrategy {
+        cacheDynamicVersionsFor(4, "hours")
+        cacheChangingModulesFor(4, "hours")
+    }
+}
+
+// needed to prevent inclusion of gradle-api into shadow JAR
+configurations.compile.dependencies.remove(dependencies.gradleApi())
+configurations.compile.dependencies.remove(dependencies.localGroovy())
+configurations.compile.dependencies.remove(dependencies.gradleTestKit())
+
+// compile jarjar in kotlin dsl
+val jarjar by configurations.creating
+val thirdparty by configurations.creating
+
 dependencies {
     implementation(gradleApi());
     implementation(localGroovy());
-    implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
-    implementation(kotlin("gradle-plugin"))
+    testImplementation(gradleTestKit())
+    implementation(project(":repo:components"))
     implementation(project(":repo:apron"))
+    implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
+
+    //kotlin deps
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21")
+
     compileOnly("org.jetbrains:annotations:20.1.0")
     compileOnly("com.android.tools.build:gradle:7.0.0-alpha03")
     implementation("org.springframework:spring-beans:5.3.3")
@@ -91,16 +122,30 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("com.squareup:javapoet:1.10.0")
     implementation("com.squareup:kotlinpoet:1.0.0-RC1")
-    //implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    //testImplementation("org.jetbrains.kotlin:kotlin-test")
-    //testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     implementation("commons-io:commons-io:2.7")
     implementation("org.apache.commons:commons-lang3:3.11")
-    testImplementation(gradleTestKit())
     implementation("joda-time:joda-time:2.10.9")
-    implementation(kotlin("stdlib-jdk8"))
     implementation("org.reflections:reflections:0.9.12")
     implementation("org.jboss:jdk-misc:2.Final")
+
+    // package relocator
+    implementation("com.googlecode.jarjar:jarjar:1.3")
+    implementation("org.apache.maven:maven-model-builder:3.6.3")
+
+    // Apache
+    implementation("org.apache.httpcomponents:httpclient:4.5.13")
+    implementation("org.apache.commons:commons-collections4:4.3")
+    implementation("org.apache.commons:commons-lang3:3.11")
+    implementation("org.apache.commons:commons-compress:1.20")
+    implementation("org.apache.commons:commons-exec:1.3")
+    implementation("org.apache.commons:commons-math3:3.6.1")
+    implementation("commons-codec:commons-codec:1.9")
+    implementation("commons-net:commons-net:3.6")
+    implementation("commons-validator:commons-validator:1.7")
+    implementation("commons-io:commons-io:2.8.0")
+    implementation("commons-cli:commons-cli:1.4")
+    implementation("xerces:xercesImpl:2.12.0")
+    implementation("org.apache.cxf:cxf-common-utilities:2.5.11")
 }
 
 /*
@@ -190,3 +235,48 @@ val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
     jvmTarget = "1.8"
 }
+val jar: Jar by tasks
+jar.doLast {
+    copy {
+        from(jar.archivePath)
+        into("${project.rootProject.rootDir}/../lib/")
+    }
+}
+
+tasks {
+    val fatJar by creating(Jar::class) {
+        val jarname: String = "gradle-plugin-with-dependencies.jar"
+        description = "create jar with dependencies"
+        isZip64 = true
+        group = "build"
+
+        // set output file
+        archiveFileName.set(jarname)
+        //destinationDirectory.set(File(project.rootDir, "../javafx/libs").absoluteFile)
+
+        // set manifest jar
+        manifest.attributes.apply {
+            put("Main-Class", "com.dimaslanjaka.gradle.plugin.Core")
+            put("Implementation-Title", "Gradle Kotlin DSL (${project.name})")
+            put("Implementation-Version", archiveVersion.get())
+        }
+        excludes.add("META-INF/**")
+
+        from(configurations.compileClasspath.map { config ->
+            config.map {
+                //println(it)
+                if (it.isDirectory) {
+                    it
+                } else {
+                    zipTree(it)
+                }
+            }
+        }) {
+            exclude("META-INF", "META-INF/**")
+        }
+        with(jar.get())
+    }
+    //findByName("compileJava")?.dependsOn(fatJar)
+    fatJar.mustRunAfter("clean", "sync")
+}
+

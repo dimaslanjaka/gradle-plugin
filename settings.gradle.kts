@@ -1,4 +1,3 @@
-//include(":android")
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -17,4 +16,8 @@ pluginManagement {
 }
 
 rootProject.name = "gradle-plugin"
-include(":repo:apron")
+
+//include(":android")
+//include(":idea")
+//includeBuild("repo/components")
+include(":repo:components", ":repo:versions", ":repo:apron")

@@ -1,6 +1,7 @@
 package com.dimaslanjaka.gradle.plugin;
 
 import com.dimaslanjaka.gradle.plugin.date.SimpleDateFormat;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
@@ -26,73 +27,17 @@ public class File extends java.io.File implements Serializable {
     private java.io.File file = null;
     private boolean isFirstCreated = false;
 
-    /**
-     * Creates a new <code>File</code> instance by converting the given
-     * pathname string into an abstract pathname.  If the given string is
-     * the empty string, then the result is the empty abstract pathname.
-     *
-     * @param pathname A pathname string
-     * @throws NullPointerException If the <code>pathname</code> argument is <code>null</code>
-     */
     public File(@NotNull String pathname) {
         super(pathname);
         resolve(pathname);
         this.file = new java.io.File(pathname);
     }
 
-    /**
-     * Creates a new <code>File</code> instance from a parent pathname string
-     * and a child pathname string.
-     *
-     * <p> If <code>parent</code> is <code>null</code> then the new
-     * <code>File</code> instance is created as if by invoking the
-     * single-argument <code>File</code> constructor on the given
-     * <code>child</code> pathname string.
-     *
-     * <p> Otherwise the <code>parent</code> pathname string is taken to denote
-     * a directory, and the <code>child</code> pathname string is taken to
-     * denote either a directory or a file.  If the <code>child</code> pathname
-     * string is absolute then it is converted into a relative pathname in a
-     * system-dependent way.  If <code>parent</code> is the empty string then
-     * the new <code>File</code> instance is created by converting
-     * <code>child</code> into an abstract pathname and resolving the result
-     * against a system-dependent default directory.  Otherwise each pathname
-     * string is converted into an abstract pathname and the child abstract
-     * pathname is resolved against the parent.
-     *
-     * @param parent The parent pathname string
-     * @param child  The child pathname string
-     * @throws NullPointerException If <code>child</code> is <code>null</code>
-     */
     public File(String parent, @NotNull String child) {
         super(parent, child);
         this.file = new java.io.File(parent, child);
     }
 
-    /**
-     * Creates a new <code>File</code> instance from a parent abstract
-     * pathname and a child pathname string.
-     *
-     * <p> If <code>parent</code> is <code>null</code> then the new
-     * <code>File</code> instance is created as if by invoking the
-     * single-argument <code>File</code> constructor on the given
-     * <code>child</code> pathname string.
-     *
-     * <p> Otherwise the <code>parent</code> abstract pathname is taken to
-     * denote a directory, and the <code>child</code> pathname string is taken
-     * to denote either a directory or a file.  If the <code>child</code>
-     * pathname string is absolute then it is converted into a relative
-     * pathname in a system-dependent way.  If <code>parent</code> is the empty
-     * abstract pathname then the new <code>File</code> instance is created by
-     * converting <code>child</code> into an abstract pathname and resolving
-     * the result against a system-dependent default directory.  Otherwise each
-     * pathname string is converted into an abstract pathname and the child
-     * abstract pathname is resolved against the parent.
-     *
-     * @param parent The parent abstract pathname
-     * @param child  The child pathname string
-     * @throws NullPointerException If <code>child</code> is <code>null</code>
-     */
     public File(java.io.File parent, @NotNull String child) {
         super(parent, child);
         resolveDir(parent.getAbsolutePath());
@@ -100,37 +45,6 @@ public class File extends java.io.File implements Serializable {
         this.file = new java.io.File(parent, child);
     }
 
-    /**
-     * Creates a new {@code File} instance by converting the given
-     * {@code file:} URI into an abstract pathname.
-     *
-     * <p> The exact form of a {@code file:} URI is system-dependent, hence
-     * the transformation performed by this constructor is also
-     * system-dependent.
-     *
-     * <p> For a given abstract pathname <i>f</i> it is guaranteed that
-     *
-     * <blockquote><code>
-     * new File(</code><i>&nbsp;f</i><code>.{@link #toURI()
-     * toURI}()).equals(</code><i>&nbsp;f</i><code>.{@link #getAbsoluteFile() getAbsoluteFile}())
-     * </code></blockquote>
-     * <p>
-     * so long as the original abstract pathname, the URI, and the new abstract
-     * pathname are all created in (possibly different invocations of) the same
-     * Java virtual machine.  This relationship typically does not hold,
-     * however, when a {@code file:} URI that is created in a virtual machine
-     * on one operating system is converted into an abstract pathname in a
-     * virtual machine on a different operating system.
-     *
-     * @param uri An absolute, hierarchical URI with a scheme equal to
-     *            {@code "file"}, a non-empty path component, and undefined
-     *            authority, query, and fragment components
-     * @throws NullPointerException     If {@code uri} is {@code null}
-     * @throws IllegalArgumentException If the preconditions on the parameter do not hold
-     * @see #toURI()
-     * @see URI
-     * @since 1.4
-     */
     public File(@NotNull URI uri) {
         super(uri);
     }
@@ -140,8 +54,15 @@ public class File extends java.io.File implements Serializable {
         this.file = file;
     }
 
+    public File(@NotNull String temp, @NotNull File value) {
+        super(temp, value.toString());
+        this.file = new java.io.File(temp, value.toString());
+        resolveDir(this.file.getParent());
+    }
+
     /**
      * Is file first creation
+     *
      * @return true for firstly created
      */
     public boolean isFirst() {
@@ -170,12 +91,14 @@ public class File extends java.io.File implements Serializable {
         }
     }
 
-    public void resolve(String name) {
+    public void resolve(@NotNull String name) {
         java.io.File file = new java.io.File(name);
         if (!file.exists()) {
             isFirstCreated = true;
             try {
-                resolveDir(file.getParentFile().getAbsolutePath());
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
                 if (file.createNewFile()) {
                     println("created new file " + file.getAbsoluteFile());
                 }
