@@ -32,7 +32,7 @@ plugins {
     //id("org.jetbrains.kotlin.jvm").version("1.3.72")
     //"java"
     //kotlin("multiplatform") version "1.3.21"
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.4.32"
     //id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
@@ -111,10 +111,10 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
 
     //kotlin deps
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.21")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
 
     compileOnly("org.jetbrains:annotations:20.1.0")
     compileOnly("com.android.tools.build:gradle:7.0.0-alpha03")
