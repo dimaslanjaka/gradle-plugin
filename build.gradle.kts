@@ -2,6 +2,23 @@
 //import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+repositories {
+    mavenLocal()
+    mavenCentral()
+    google()
+    jcenter()
+    maven {
+        url = uri("https://plugins.gradle.org/m2/")
+    }
+    maven {
+        url = uri("https://maven.springframework.org/release")
+    }
+    maven {
+        url = uri("https://maven.restlet.com")
+    }
+    maven("https://dl.bintray.com/kotlin/kotlin-eap")
+}
+
 plugins {
     groovy
     //`kotlin-dsl`
@@ -22,22 +39,6 @@ plugins {
 group = "com.dimaslanjaka"
 version = "1.0.0"
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-    google()
-    jcenter()
-    maven {
-        url = uri("https://plugins.gradle.org/m2/")
-    }
-    maven {
-        url = uri("https://maven.springframework.org/release")
-    }
-    maven {
-        url = uri("https://maven.restlet.com")
-    }
-    maven("https://dl.bintray.com/kotlin/kotlin-eap")
-}
 
 allprojects {
     tasks.withType<JavaCompile> {
