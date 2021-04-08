@@ -1,0 +1,11 @@
+import java.nio.file.Files
+import java.util.stream.Stream
+
+String temp = System.getProperty("java.io.tmpdir");
+listFiles(temp).forEach(System.out::println);
+
+Stream<Files> listFiles(String path) {
+    return Files.walk(Paths.get(path))
+            .filter(Files::isRegularFile);
+            //.forEach(System.out::println);
+}

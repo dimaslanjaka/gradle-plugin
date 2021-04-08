@@ -1,0 +1,52 @@
+plugins {
+    id 'org.jetbrains.intellij' version '0.4.8'
+    id 'org.jetbrains.kotlin.jvm' //version '1.3.31'
+}
+
+group 'cn.renyuzhuo.plugin.easygradle'
+version '1.0.2'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    google()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+publishPlugin {
+    token intellijPublishToken
+}
+
+intellij {
+    version '2019.1.3'
+    updateSinceUntilBuild true
+    alternativeIdePath '/Users/renyuzhuo/Documents/JetBrains/apps/AndroidStudio/ch-0/191.6010548/Android Studio.app'
+}
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+patchPluginXml {
+    changeNotes """
+      V1.0.2<br>
+      Update Logo<br>
+      Have Fun!<br><br>
+
+      V1.0.1<br>
+      Add Check Gradle Version To Update<br>
+      Have Fun!<br><br>
+
+      V1.0.0<br>
+      Release The First Version: EasyGradle<br>
+      Have Fun!
+      """
+
+    sinceBuild "173"
+    untilBuild "193"
+}
