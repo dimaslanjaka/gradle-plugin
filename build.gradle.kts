@@ -204,7 +204,7 @@ pluginBundle {
             description =
                 "Transform gradle artifacts to maven local repository, for available offline with `mavenLocal()`"
             tags = listOf("offline", "auto", "optimize", "performance")
-            version = "1.0.0"
+            version = project.version as String
         }
     }
 
@@ -224,7 +224,7 @@ pluginBundle {
     mavenCoordinates {
         groupId = "com.dimaslanjaka"
         artifactId = "gradle-plugin"
-        version = "1.0.0"
+        version = project.version as String
     }
 }
 
@@ -237,10 +237,17 @@ compileTestKotlin.kotlinOptions {
     jvmTarget = "1.8"
 }
 val jar: Jar by tasks
+val rootLibs = File("${project.rootProject.rootDir}/../lib/").absolutePath
 jar.doLast {
     copy {
-        from(jar.archivePath)
-        into("${project.rootProject.rootDir}/../lib/")
+        val dari = jar.archivePath;
+
+        from(dari)
+        into(rootLibs)
+        rename { fileName ->
+            fileName.replace("gradle-plugin-${project.version}", "gradle-plugin")
+        }
+        println("Copy $dari \n-> $rootLibs")
     }
 }
 
@@ -278,6 +285,7 @@ tasks {
         with(jar.get())
     }
     //findByName("compileJava")?.dependsOn(fatJar)
-    fatJar.mustRunAfter("clean", "sync")
+    //fatJar.mustRunAfter("jar")
 }
+jar.dependsOn("fatJar")
 

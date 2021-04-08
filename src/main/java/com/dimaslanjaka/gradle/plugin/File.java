@@ -41,7 +41,7 @@ public class File extends java.io.File implements Serializable {
     public File(java.io.File parent, @NotNull String child) {
         super(parent, child);
         resolveDir(parent.getAbsolutePath());
-        resolve(new java.io.File(parent, child).getAbsolutePath());
+        //resolve(new java.io.File(parent, child).getAbsolutePath());
         this.file = new java.io.File(parent, child);
     }
 

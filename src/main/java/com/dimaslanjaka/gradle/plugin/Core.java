@@ -52,8 +52,8 @@ public class Core implements Plugin<Project> {
 
     public void startCache() {
         String identifier = MD5.get("OfflineMethods");
-        File tmp = new Temp().getTempFile(identifier);
-        if (tmp != null && tmp.isModifiedMoreThanHour(1) || tmp.isFirst()) {
+        File tmp = (File) new Temp().getTempFile(identifier);
+        if (tmp.isModifiedMoreThanHour(1) || tmp.isFirst()) {
             println("starting cache transformer");
             tmp.write(new Date());
             Runnable r = new Runnable() {
