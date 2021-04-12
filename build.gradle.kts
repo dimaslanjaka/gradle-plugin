@@ -1,6 +1,7 @@
 //import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 //import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.prefs.Preferences
 
 repositories {
     mavenLocal()
@@ -36,9 +37,15 @@ plugins {
     //id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
-group = "com.dimaslanjaka"
-version = "1.0.0"
+val preferences = Preferences.userRoot().node("build/gradle-plugin")
+if (preferences.get("version", "").isEmpty()) {
+    println("Set first version: 1.0.0")
+    preferences.put("version", "1.0.0")
+}
 
+
+group = "com.dimaslanjaka"
+version = preferences.get("version", "1.0.0")
 
 allprojects {
     tasks.withType<JavaCompile> {
@@ -251,9 +258,37 @@ jar.doLast {
     }
 }
 
+tasks.findByName("publishPlugins")?.doLast {
+    // TODO: auto update version
+    val v = preferences.get("version", "1.0.0").toString()
+    val token = v.split(".").map { it.toInt() } as MutableList
+    // increase minor
+    token[2] = token[2] + 1
+    // if minor has max value, increase major
+    if (token[2] >= Int.MAX_VALUE) {
+        token[1] = token[1] + 1
+        token[2] = 0
+    }
+    // if major has max value, increase main
+    if (token[1] >= Int.MAX_VALUE) {
+        token[0] = token[0] + 1
+        token[1] = 0
+    }
+    // apply version
+    preferences.put("version", token.joinToString("."))
+    project.version = preferences.get("version", project.version.toString())
+
+    val map = mutableMapOf<String, Any>()
+    map["main"] = token[0]
+    map["major"] = token[1]
+    map["minor"] = token[2]
+    map["version"] = token
+    println(map)
+}
+
 tasks {
     val fatJar by creating(Jar::class) {
-        val jarname: String = "gradle-plugin-with-dependencies.jar"
+        val jarname = "gradle-plugin-with-dependencies.jar"
         description = "create jar with dependencies"
         isZip64 = true
         group = "build"
