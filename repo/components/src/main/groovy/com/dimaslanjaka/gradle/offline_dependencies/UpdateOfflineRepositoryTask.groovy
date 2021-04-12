@@ -1,6 +1,6 @@
-package io.pry.gradle.offline_dependencies
+package com.dimaslanjaka.gradle.offline_dependencies
 
-import io.pry.gradle.offline_dependencies.maven.PomDependencyModelResolver
+import com.dimaslanjaka.gradle.offline_dependencies.maven.PomDependencyModelResolver
 import dimas.org.apache.maven.model.Model
 import dimas.org.apache.maven.model.building.*
 import dimas.org.apache.maven.model.interpolation.StringSearchModelInterpolator
@@ -28,7 +28,7 @@ import org.gradle.maven.MavenModule
 import org.gradle.maven.MavenPomArtifact
 import org.gradle.util.GFileUtils
 
-import static io.pry.gradle.offline_dependencies.Utils.addToMultimap
+import static com.dimaslanjaka.gradle.offline_dependencies.Utils.addToMultimap
 
 class UpdateOfflineRepositoryTask extends DefaultTask {
 

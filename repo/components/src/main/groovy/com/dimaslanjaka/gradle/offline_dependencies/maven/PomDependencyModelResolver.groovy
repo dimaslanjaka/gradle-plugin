@@ -1,4 +1,4 @@
-package io.pry.gradle.offline_dependencies.maven
+package com.dimaslanjaka.gradle.offline_dependencies.maven
 
 import dimas.org.apache.maven.model.Dependency
 import dimas.org.apache.maven.model.Parent

@@ -31,7 +31,7 @@ Preparing pull request to solve issues is also highly welcome, of course.
 === Writing code
 
 When writing some code please follow our
-https://hupfdule.github.io/styleguide/javaguide.html[code conventions].
+https://hupfdule.github.com/styleguide/javaguide.html[code conventions].
 
 Please structure your commits logically and respect the original
 formatting.  Do not change formattings unrelated to any functional changes,

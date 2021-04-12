@@ -1,4 +1,4 @@
-package io.pry.gradle.offline_dependencies
+package com.dimaslanjaka.gradle.offline_dependencies
 
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 

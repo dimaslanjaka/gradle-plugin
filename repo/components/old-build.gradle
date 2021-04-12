@@ -13,7 +13,7 @@ buildscript {
 apply plugin: "com.gradle.plugin-publish"
 apply plugin: 'groovy'
 
-group = 'io.pry.gradle.offline_dependencies'
+group = 'com.dimaslanjaka.gradle.offline_dependencies'
 version = '0.6.0-SNAPSHOT'
 description = 'Store project dependencies alongside your code for reproducible offline builds'
 
@@ -59,9 +59,9 @@ task repackageDependencies(type: Jar) {
 				configurations.thirdparty.each { originalJar ->
 					zipfileset(src: originalJar)
 				}
-				rule(pattern: 'org.**', result: 'io.pry.gradle.offline_dependencies.repackaged.org.@1')
-				rule(pattern: 'com.**', result: 'io.pry.gradle.offline_dependencies.repackaged.com.@1')
-				rule(pattern: 'licenses.**', result: 'io.pry.gradle.offline_dependencies.repackaged.licenses.@1')
+				rule(pattern: 'org.**', result: 'com.dimaslanjaka.gradle.offline_dependencies.repackaged.org.@1')
+				rule(pattern: 'com.**', result: 'com.dimaslanjaka.gradle.offline_dependencies.repackaged.com.@1')
+				rule(pattern: 'licenses.**', result: 'com.dimaslanjaka.gradle.offline_dependencies.repackaged.licenses.@1')
 			}
 		}
 	}

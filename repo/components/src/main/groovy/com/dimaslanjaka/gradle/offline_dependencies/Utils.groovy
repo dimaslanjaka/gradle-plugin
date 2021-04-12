@@ -1,4 +1,4 @@
-package io.pry.gradle.offline_dependencies
+package com.dimaslanjaka.gradle.offline_dependencies
 
 public final class Utils {
     public static <K, V> void addToMultimap(Map<K, Set<V>> map, K key, V value) {

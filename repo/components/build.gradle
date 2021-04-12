@@ -13,7 +13,7 @@ buildscript {
 apply plugin: "com.gradle.plugin-publish"
 apply plugin: 'groovy'
 
-group = 'io.pry.gradle.offline_dependencies'
+group = 'com.dimaslanjaka.gradle.offline_dependencies'
 version = '0.6.0-SNAPSHOT'
 description = 'Store project dependencies alongside your code for reproducible offline builds'
 
