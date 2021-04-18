@@ -13,6 +13,8 @@ repositories {
     google()
 }
 
+println("${project.name} using kotlin : $kotlin_version")
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }

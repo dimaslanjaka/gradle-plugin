@@ -1,7 +1,10 @@
-//import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
-//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.prefs.Preferences
+import org.jetbrains.kotlin.konan.properties.hasProperty
+import java.io.FileReader
+import java.io.FileWriter
+import java.util.*
 
 repositories {
     mavenLocal()
@@ -37,15 +40,13 @@ plugins {
     //id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
-val preferences = Preferences.userRoot().node("build/gradle-plugin")
-if (preferences.get("version", "").isEmpty()) {
-    println("Set first version: 1.0.0")
-    preferences.put("version", "1.0.0")
+apply {
+    plugin(org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin::class)
+    from("build.test.gradle")
 }
 
-
 group = "com.dimaslanjaka"
-version = preferences.get("version", "1.0.0")
+version = getVersionPref(project)["version"]!!
 
 allprojects {
     tasks.withType<JavaCompile> {
@@ -101,21 +102,29 @@ configurations.all {
 }
 
 // needed to prevent inclusion of gradle-api into shadow JAR
-configurations.compile.dependencies.remove(dependencies.gradleApi())
-configurations.compile.dependencies.remove(dependencies.localGroovy())
-configurations.compile.dependencies.remove(dependencies.gradleTestKit())
+//configurations.compile.dependencies.remove(dependencies.gradleApi())
+//configurations.compile.dependencies.remove(dependencies.localGroovy())
+//configurations.compile.dependencies.remove(dependencies.gradleTestKit())
 
 // compile jarjar in kotlin dsl
 val jarjar by configurations.creating
 val thirdparty by configurations.creating
 
 dependencies {
-    implementation(gradleApi());
-    implementation(localGroovy());
-    testImplementation(gradleTestKit())
+    implementation(gradleApi())
+    implementation(localGroovy())
     implementation(project(":repo:components"))
     implementation(project(":repo:apron"))
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
+
+    //Test
+    testImplementation(gradleTestKit())
+    testImplementation("junit:junit:4.13")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.7.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.1")
+    //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
     //kotlin deps
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
@@ -154,6 +163,10 @@ dependencies {
     implementation("commons-cli:commons-cli:1.4")
     implementation("xerces:xercesImpl:2.12.0")
     implementation("org.apache.cxf:cxf-common-utilities:2.5.11")
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }
 
 /*
@@ -245,45 +258,25 @@ compileTestKotlin.kotlinOptions {
 }
 val jar: Jar by tasks
 val rootLibs = File("${project.rootProject.rootDir}/../lib/").absolutePath
+val libtarget = File(rootLibs, "gradle-plugin.jar")
 jar.doLast {
     copy {
-        val dari = jar.archivePath;
-
-        from(dari)
-        into(rootLibs)
-        rename { fileName ->
-            fileName.replace("gradle-plugin-${project.version}", "gradle-plugin")
+        val dari = jar.archivePath
+        // copy if source size is different from target
+        val compares = libtarget.exists() && dari.length().compareTo(libtarget.length()) != 0
+        if (compares || !libtarget.exists()) {
+            from(dari)
+            into(rootLibs)
+            rename { fileName ->
+                fileName.replace("gradle-plugin-${project.version}", "gradle-plugin")
+            }
+            println("Copy\n\tf: $dari \n\tt: $rootLibs")
         }
-        println("Copy $dari \n-> $rootLibs")
     }
 }
 
 tasks.findByName("publishPlugins")?.doLast {
-    // TODO: auto update version
-    val v = preferences.get("version", "1.0.0").toString()
-    val token = v.split(".").map { it.toInt() } as MutableList
-    // increase minor
-    token[2] = token[2] + 1
-    // if minor has max value, increase major
-    if (token[2] >= Int.MAX_VALUE) {
-        token[1] = token[1] + 1
-        token[2] = 0
-    }
-    // if major has max value, increase main
-    if (token[1] >= Int.MAX_VALUE) {
-        token[0] = token[0] + 1
-        token[1] = 0
-    }
-    // apply version
-    preferences.put("version", token.joinToString("."))
-    project.version = preferences.get("version", project.version.toString())
-
-    val map = mutableMapOf<String, Any>()
-    map["main"] = token[0]
-    map["major"] = token[1]
-    map["minor"] = token[2]
-    map["version"] = token
-    println(map)
+    updateVersionPref(project)
 }
 
 tasks {
@@ -306,12 +299,11 @@ tasks {
         excludes.add("META-INF/**")
 
         from(configurations.compileClasspath.map { config ->
-            config.map {
-                //println(it)
-                if (it.isDirectory) {
-                    it
+            config.map { mapit ->
+                if (mapit.isDirectory) {
+                    mapit
                 } else {
-                    zipTree(it)
+                    zipTree(mapit)
                 }
             }
         }) {
@@ -319,8 +311,78 @@ tasks {
         }
         with(jar.get())
     }
-    //findByName("compileJava")?.dependsOn(fatJar)
-    //fatJar.mustRunAfter("jar")
+    val updateVersion by creating {
+        group = "build"
+        description = "Increase Version Manual"
+        doLast {
+            updateVersionPref(project)
+        }
+    }
 }
+
 jar.dependsOn("fatJar")
 
+fun updateVersionPref(project: Project) {
+    println("Updating version")
+
+    // TODO: auto update version after publish plugin
+    val v = getVersionPref(project)["version"].toString()
+    val token = v.split(".").map { it.toInt() } as MutableList
+    // increase minor
+    token[2] = token[2] + 1
+    // if minor has max value, increase major
+    if (token[2] >= Int.MAX_VALUE) {
+        token[1] = token[1] + 1
+        token[2] = 0
+    }
+    // if major has max value, increase main
+    if (token[1] >= Int.MAX_VALUE) {
+        token[0] = token[0] + 1
+        token[1] = 0
+    }
+    // apply version
+    getVersionPref(project)["version"] = token.joinToString(".")
+    project.version = getVersionPref(project)["version"]!!
+
+    // save new version
+    getVersionPref(project, project.version.toString())
+
+    val map = mutableMapOf<String, Any>()
+    map["main"] = token[0]
+    map["major"] = token[1]
+    map["minor"] = token[2]
+    map["version"] = token
+    //println(map)
+
+    println("Updated version to ${map["version"]}")
+}
+
+fun getVersionPref(project: Project, newVersion: String? = null): Properties {
+    // TODO: Set result properties
+    val fileVersion = File(project.projectDir, "version.properties")
+    if (!fileVersion.exists()) fileVersion.createNewFile()
+    val reader = FileReader(fileVersion)
+    val properties = Properties()
+    properties.load(reader)
+    if (!properties.hasProperty("version") || (newVersion != null && newVersion.isNotEmpty())) {
+        // TODO: if newVersion is not null or properties not have version property, set and save them
+        properties["version"] = newVersion ?: "1.0.0"
+        VersionPrefResult.version = newVersion ?: "1.0.0"
+        properties.store(FileWriter(fileVersion), "Gradle Plugin Version")
+    }
+    VersionPrefResult.properties = properties
+    return properties
+}
+
+object VersionPrefResult {
+    @JvmStatic
+    var version: String? = null
+
+    @JvmStatic
+    var properties: Properties? = null
+
+    override fun toString(): String {
+        val gson: Gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
+        return gson.toJson(this)
+    }
+}

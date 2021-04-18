@@ -21,7 +21,7 @@ object Date {
 
     @JvmStatic
     @SuppressWarnings("all")
-    fun isLessThanMinutesAgo(comparisonDate: Date, mins: Int): Boolean {
+    fun isLessThanMinuteAgo(comparisonDate: Date, mins: Int): Boolean {
         val calc: Long = mins * ONE_MINUTE
         val sub = now.time - comparisonDate.time
         //println(sub, calc)
@@ -30,7 +30,7 @@ object Date {
 
     @JvmStatic
     @SuppressWarnings("all")
-    fun isMoreThanMinutesAgo(comparisonDate: Date, mins: Int): Boolean {
+    fun isMoreThanMinuteAgo(comparisonDate: Date, mins: Int): Boolean {
         val calc: Long = mins * ONE_MINUTE
         return (now.time - comparisonDate.time) > calc
     }
@@ -104,8 +104,8 @@ object Date {
             println(
                 isLessThanHourAgo(it, 1),
                 isMoreThanHourAgo(it, 1),
-                isLessThanMinutesAgo(it, 10),
-                isMoreThanMinutesAgo(it, 10)
+                isLessThanMinuteAgo(it, 10),
+                isMoreThanMinuteAgo(it, 10)
             )
         }
     }

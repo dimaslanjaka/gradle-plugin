@@ -25,17 +25,6 @@ public class Repository {
         initialize(p);
     }
 
-    private void initialize(Project p){
-        p.beforeEvaluate(project1 -> {
-            for (String repo : listRepos) {
-                if (Utils.isURL(repo, true)) {
-                    addRepo(p, repo);
-                }
-            }
-            addDefault(p);
-        });
-    }
-
     public static void addRepositories(Project project, LinkedHashMap<String, String> repositories) {
         project
                 .getRepositories()
@@ -68,6 +57,17 @@ public class Repository {
                 mavenArtifactRepository.setName(MD5.get(url));
                 mavenArtifactRepository.setUrl(url);
             }
+        });
+    }
+
+    private void initialize(Project p) {
+        p.beforeEvaluate(project1 -> {
+            for (String repo : listRepos) {
+                if (Utils.isURL(repo, true)) {
+                    addRepo(p, repo);
+                }
+            }
+            addDefault(p);
         });
     }
 

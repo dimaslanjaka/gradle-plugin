@@ -1,8 +1,11 @@
 package com.dimaslanjaka.gradle.plugin;
 
 import org.gradle.api.Project;
+import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Document;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,18 +13,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 public class Offline {
     static String[] extensions = {".module", ".jar", ".pom", ".aar", ".sha1", ".xml"};
     static String customLocalRepository = null; //fill your custom local repository directory path, retain null for default local maven repository
+    static int limit = 5;
+    private static Project project = null;
 
     public static void main(String[] args) {
         OfflineMethods(null);
     }
 
-    static void copy(File from, File to) {
+    public static void copy(File from, File to) {
+        copy(from, to, false);
+    }
+
+    public static String copy(File from, File to, boolean debug) {
         Path xfrom = from.toPath(); //convert from File to Path
         Path xto; //convert from String to Path
         if (!to.isDirectory()) {
@@ -31,12 +37,19 @@ public class Offline {
         }
         try {
             Files.copy(xfrom, xto, StandardCopyOption.REPLACE_EXISTING);
+            String formatted = String.format("Cached\n\tf: %s\n\tt: %s", xfrom, xto);
+            if (debug) {
+                System.out.println(formatted);
+            } else {
+                return formatted;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    private static String fixPath(StringBuilder sb) {
+    public static String fixPath(StringBuilder sb) {
         return fixPath(sb.toString());
     }
 
@@ -98,6 +111,12 @@ public class Offline {
                 .replaceAll("/{2,99}", "/");
     }
 
+    /**
+     * If path length < 40 is valid
+     *
+     * @param path
+     * @return
+     */
     @SuppressWarnings("unused")
     static boolean isValidArtifactPath(Object path) {
         return path.toString().length() < 40;
@@ -122,6 +141,7 @@ public class Offline {
         return false;
     }
 
+    @SuppressWarnings("unused")
     static void testGetFileName() {
         print(getFileName("/cdd/eee/sds/s/ds/assas.jar"));
         print(getFileName("C:\\Users\\dimas\\.m2\\repository\\kk.jar.sha1"));
@@ -134,16 +154,40 @@ public class Offline {
         OfflineMethods(p, null);
     }
 
-    static void OfflineMethods(Project p, java.util.concurrent.Callable<Object> callback) {
+    static void info(String str) {
+        if (project != null) {
+            project.getLogger().info(str);
+        } else {
+            println(str);
+        }
+    }
+
+    static void error(String str) {
+        if (project != null) {
+            project.getLogger().error(str);
+        } else {
+            println(str);
+        }
+    }
+
+    static void println(String str) {
+        System.out.println(str);
+    }
+
+    @SuppressWarnings("DefaultLocale")
+    static void OfflineMethods(@Nullable Project p, @Nullable java.util.concurrent.Callable<Object> callback) {
+        project = p;
         int resultCount = 0;
-        String home = System.getProperty("user.home");
+        int limitCount = 0;
+        String home = CoreExtension.Companion.getHome();
         File from = new File(new File(home), ".gradle/caches/modules-2/files-2.1");
-        File to = new File(new File(home), ".m2/repository");
+        File to = CoreExtension.Companion.getLocalRepository();
         if (!to.exists()) if (!to.mkdirs()) print("fail create local repository");
         StringBuilder localMaven = new StringBuilder(fixPath(to.getAbsolutePath()));
         if (from.exists()) {
             File[] directoryListing = from.listFiles();
             if (directoryListing != null) {
+                outerloop:
                 for (File child : directoryListing) {
                     String id2path = getFileName(child).replace(".", "/");
                     StringBuilder mavenPath = new StringBuilder(localMaven.toString().trim() + "/" + id2path);
@@ -166,7 +210,7 @@ public class Offline {
                                             File versionPath = new File(fixPath(jVersion));
                                             if (!versionPath.exists()) {
                                                 if (!versionPath.mkdirs()) {
-                                                    p.getLogger().error("fail create " + id2path + " v" + getFileName(jarVersions));
+                                                    error("fail create " + id2path + " v" + getFileName(jarVersions));
                                                 }
                                             }
 
@@ -182,7 +226,7 @@ public class Offline {
                                                                         File targetMavenArtifact = new File(versionPath, getFileName(artifact));
                                                                         if (isEmptyFile(targetMavenArtifact)) {
                                                                             boolean copyConfirm = false;
-                                                                            // TODO: delete if target pom malvor
+                                                                            // TODO: delete if target malformed pom
                                                                             if (targetMavenArtifact.exists() && (targetMavenArtifact.getName().endsWith(".xml") || targetMavenArtifact.getName().endsWith(".pom"))) {
                                                                                 if (!validateXML(targetMavenArtifact.toPath())) {
                                                                                     targetMavenArtifact.delete();
@@ -198,9 +242,19 @@ public class Offline {
                                                                                 copyConfirm = true;
                                                                             }
                                                                             if (copyConfirm) {
+                                                                                if (limitCount >= limit) {
+                                                                                    error(String.format("Limit cache reached (%d >= %d)", limitCount, limit));
+                                                                                    break outerloop;
+                                                                                } else {
+                                                                                    info("Limit counter " + limitCount);
+                                                                                    limitCount++;
+                                                                                }
                                                                                 copy(artifact, targetMavenArtifact);
                                                                                 resultCount++;
-                                                                                System.out.println(resultCount + " Successful cached " + artifact);
+
+                                                                                String successlog = String.format("%d. Cached\n\tf: %s\n\tt: %s", resultCount, artifact, targetMavenArtifact);
+                                                                                //System.out.println(successlog);
+                                                                                info(successlog);
                                                                             }
                                                                         }
                                                                     }
@@ -225,6 +279,7 @@ public class Offline {
             }
         }
         try {
+            assert callback != null;
             callback.call();
         } catch (Exception ignored) {
             //e.printStackTrace();

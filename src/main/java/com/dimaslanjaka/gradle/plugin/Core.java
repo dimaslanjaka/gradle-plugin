@@ -1,27 +1,29 @@
 package com.dimaslanjaka.gradle.plugin;
 
-import com.dimaslanjaka.kotlin.Temp;
-
+import jar.Repack;
+import org.codehaus.groovy.runtime.MethodClosure;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.invocation.Gradle;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Date;
-
-import jar.Repack;
 
 import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
 import static com.dimaslanjaka.gradle.plugin.Utils.println;
 
 public class Core implements Plugin<Project> {
     private final Threading thread = new Threading();
+    @Nullable
     private Project project = null;
 
     @Override
     public void apply(final @NotNull Project target) {
         thread.project = target;
+        this.project = target;
         @SuppressWarnings({"unused"})
         Repository repository = new Repository(target);
         Repack jar = new Repack(target);
@@ -29,16 +31,28 @@ public class Core implements Plugin<Project> {
         // TODO: clear gradle big log files
         Gradle gradle = target.getGradle();
         java.io.File[] cacheFiles = new File(gradle.getGradleUserHomeDir().getAbsolutePath(), "/daemon/" + gradle.getGradleVersion()).listFiles();
-        for (java.io.File cf : cacheFiles) {
-            if (cf.getName().endsWith(".out.log")) {
-                // println("Deleting gradle log file: $it") // Optional debug output
-                if (cf.delete()) println(cf + " deleted");
+        if (cacheFiles != null) {
+            for (java.io.File cf : cacheFiles) {
+                if (cf.getName().endsWith(".out.log")) {
+                    // println("Deleting gradle log file: $it") // Optional debug output
+                    if (cf.delete()) {
+                        println(cf + " deleted");
+                    }
+                }
             }
         }
 
+        // TODO: Configuring Rules
+        CoreExtension extension = project.getExtensions().create("offlineConfig", CoreExtension.class);
+
+        CoreExtension finalExtension = extension;
         target.afterEvaluate(new Action<Project>() {
             @Override
             public void execute(@NotNull Project project) {
+                new Offline2(project, CoreExtension.getLimit());
+                //OfflineMethods(project);
+                //startCache(project);
+                /*
                 Threading.Once once = new Threading.Once();
                 once.run(new Runnable() {
                     @Override
@@ -46,19 +60,47 @@ public class Core implements Plugin<Project> {
                         startCache();
                     }
                 });
+                */
             }
         });
     }
 
-    public void startCache() {
-        String identifier = MD5.get("OfflineMethods");
-        File tmp = (File) new Temp().getTempFile(identifier);
-        if (tmp.isModifiedMoreThanHour(1) || tmp.isFirst()) {
-            println("starting cache transformer");
+    /**
+     * Resolve file, prevent not found exception
+     *
+     * @param tmp file target
+     */
+    private void resolveFile(File tmp) {
+        if (!tmp.getParentFile().exists()) {
+            if (!tmp.getParentFile().mkdirs()) {
+                println("Cannot create folder " + tmp.getParentFile().getAbsolutePath());
+            }
+        }
+        if (!tmp.exists()) {
+            try {
+                if (!tmp.createNewFile()) {
+                    println("Cannot create file " + tmp.getAbsolutePath());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Start cache gradle jar to local maven repository
+     *
+     * @param targetProject project
+     */
+    public void startCache(Project targetProject) {
+        File tmp = new File(targetProject.getBuildDir().getAbsolutePath(), "com.dimaslanjaka/offline");
+        resolveFile(tmp);
+        //println(tmp.getDate());
+        if (tmp.isModifiedMoreThanHour(1)) {
             tmp.write(new Date());
             Runnable r = new Runnable() {
                 public void run() {
-                    OfflineMethods(project != null ? project : null);
+                    OfflineMethods(targetProject);
                 }
             };
 

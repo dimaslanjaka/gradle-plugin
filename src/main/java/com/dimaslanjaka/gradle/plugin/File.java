@@ -1,7 +1,7 @@
 package com.dimaslanjaka.gradle.plugin;
 
-import com.dimaslanjaka.gradle.plugin.date.SimpleDateFormat;
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
@@ -14,8 +14,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
-import java.text.DateFormat;
 import java.util.*;
 
 import static com.dimaslanjaka.gradle.plugin.Utils.println;
@@ -26,6 +24,7 @@ public class File extends java.io.File implements Serializable {
     private final int serialVersionUID = 1; // Noncompliant; not static & int rather than long
     private java.io.File file = null;
     private boolean isFirstCreated = false;
+    private BasicFileAttributes attr;
 
     public File(@NotNull String pathname) {
         super(pathname);
@@ -200,8 +199,8 @@ public class File extends java.io.File implements Serializable {
     }
 
     public Date getLastModified() {
+        /*
         FileTime fileTime;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         try {
             fileTime = Files.getLastModifiedTime(this.file.toPath());
             //return dateFormat.format(fileTime.toMillis());
@@ -210,18 +209,50 @@ public class File extends java.io.File implements Serializable {
             System.err.println("Cannot get the last modified time - " + e);
             return null;
         }
+         */
+        return getDate().modifiedDate;
+    }
+
+    public Date getCreateDate() {
+        return getDate().creationDate;
+    }
+
+    /**
+     * Get java.io.File instance
+     *
+     * @return java.io.File instance
+     */
+    public java.io.File JavaIO() {
+        return new java.io.File(this.file.getAbsolutePath());
+    }
+
+    public FileDate getDate() {
+        // DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        // dateFormat.format(fileTime.toMillis());
+        FileDate results = new FileDate(JavaIO());
+        try {
+            attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+            results.creationDate = new Date(attr.creationTime().toMillis());
+            results.accessDate = new Date(attr.lastAccessTime().toMillis());
+            results.modifiedDate = new Date(attr.lastModifiedTime().toMillis());
+            results.isOneHour = com.dimaslanjaka.kotlin.Date.isMoreThanHourAgo(results.modifiedDate, 1);
+            results.isOneMinute = com.dimaslanjaka.kotlin.Date.isMoreThanMinuteAgo(results.modifiedDate, 1);
+        } catch (IOException e) {
+            System.err.println("Cannot get the create date - " + e);
+        }
+        return results;
     }
 
     @SuppressWarnings({"unused"})
     public boolean isModifiedMoreThanMinute(int i) {
         Date lastModified = getLastModified();
-        return isMoreThanMinutesAgo(lastModified, i);
+        return isMoreThanMinuteAgo(lastModified, i);
     }
 
     @SuppressWarnings({"unused"})
     public boolean isModifiedLessThanMinute(int i) {
         Date lastModified = getLastModified();
-        return isLessThanMinutesAgo(lastModified, i);
+        return isLessThanMinuteAgo(lastModified, i);
     }
 
     @SuppressWarnings({"unused"})
@@ -238,5 +269,34 @@ public class File extends java.io.File implements Serializable {
 
     public void write(Object any) {
         write(String.valueOf(any));
+    }
+
+    static class FileDate {
+        Date creationDate;
+        Date modifiedDate;
+        Date accessDate;
+        java.io.File file;
+        /**
+         * Is file modified more than one hour ago
+         */
+        boolean isOneHour = false;
+        /**
+         * Is file modified more than one minute ago
+         */
+        boolean isOneMinute = false;
+
+        public FileDate(java.io.File targetFile) {
+            this.file = targetFile;
+        }
+
+        public FileDate() {
+
+        }
+
+        @Override
+        public String toString() {
+            Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+            return gson.toJson(this);
+        }
     }
 }
