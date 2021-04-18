@@ -13,4 +13,9 @@ includeBuild("plugin") //name folder of this project
 plugins {
 id("com.dimaslanjaka")
 }
+
+// configurations
+offlineConfig {
+limit = 100
+}
 ```
