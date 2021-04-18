@@ -1,4 +1,7 @@
-# add this project as composite build on your root project
+# How to import
+- copy this project inside your project
+- then import like bellow
+
 ## settings.gradle
 ```gradle
 includeBuild("plugin") //name folder of this project

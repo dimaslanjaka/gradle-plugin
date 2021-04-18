@@ -4,6 +4,5 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/repo/gradle-trust-all" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/repo/resource-provider" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/repo/versions" vcs="" />
   </component>
 </project>
