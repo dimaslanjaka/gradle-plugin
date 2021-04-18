@@ -1,0 +1,3 @@
+rootProject.name = 'Test DSL Method'
+String plugin = new File(rootProject.projectDir, "/../../").getAbsolutePath()
+includeBuild(plugin)
