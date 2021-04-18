@@ -11,11 +11,12 @@ includeBuild("plugin") //name folder of this project
 ## build.gradle root project
 ```gradle
 plugins {
-id("com.dimaslanjaka")
+    id("com.dimaslanjaka")
 }
 
 // configurations
 offlineConfig {
-limit = 100
+    // pick random 100 artifacts to cached
+    limit = 100
 }
 ```
