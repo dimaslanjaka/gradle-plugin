@@ -1,7 +1,5 @@
 package com.dimaslanjaka.gradle.plugin;
 
-import jar.Repack;
-import org.codehaus.groovy.runtime.MethodClosure;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -26,7 +24,7 @@ public class Core implements Plugin<Project> {
         this.project = target;
         @SuppressWarnings({"unused"})
         Repository repository = new Repository(target);
-        Repack jar = new Repack(target);
+        //Repack jar = new Repack(target);
 
         // TODO: clear gradle big log files
         Gradle gradle = target.getGradle();

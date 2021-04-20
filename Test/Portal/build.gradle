@@ -1,0 +1,14 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.dimaslanjaka:gradle-plugin:1.0.6"
+    }
+}
+
+apply plugin: "java"
+apply plugin: "com.dimaslanjaka"

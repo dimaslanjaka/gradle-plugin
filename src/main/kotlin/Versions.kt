@@ -1,5 +1,5 @@
 object Versions {
-    const val kotlin = "1.4.32"
+    const val kotlin = "1.4.32-release-371"
     const val kotlinxHtml = "0.6.12"
     const val kotlinReact = "16.9.0-pre.82-kotlin-1.3.41"
     const val nodeJs = "12.9.0"

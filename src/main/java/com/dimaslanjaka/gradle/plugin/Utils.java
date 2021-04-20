@@ -2,7 +2,8 @@ package com.dimaslanjaka.gradle.plugin;
 
 import org.apache.commons.validator.routines.UrlValidator;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class Utils {
@@ -67,48 +68,19 @@ public class Utils {
         return getMethodName(0);
     }
 
+    static Map<String, Boolean> isURLs = new HashMap<>();
+
     @SuppressWarnings("unused")
     public static boolean isURL(String url, boolean cached) {
         if (cached) {
-            String name = MD5.get(getMethodName());
-            com.dimaslanjaka.gradle.plugin.File tmp = new com.dimaslanjaka.gradle.plugin.File(getTempDir(name, true), "url-cached.properties");
-            if (!tmp.getParentFile().exists()) {
-                if (!tmp.getParentFile().mkdirs()) {
-                    println("cannot create parent file of " + tmp);
-                }
-            } else if (tmp.getParentFile().isFile()) {
-                if (tmp.getParentFile().delete()) {
-                    if (!tmp.getParentFile().mkdirs()) {
-                        println("cannot create parent file of " + tmp);
-                    }
-                }
+            if (isURLs.containsKey(url)) {
+                return isURLs.get(url);
             }
-            if (!tmp.exists()) {
-                try {
-                    if (!tmp.createNewFile()) {
-                        println("cannot create file " + tmp);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            final de.poiu.apron.PropertyFile propertyFile = de.poiu.apron.PropertyFile.from(tmp);
-            final String cachedUrl = propertyFile.get(url);
-            if (cachedUrl != null) {
-                if (cachedUrl.equals("true")) {
-                    return true;
-                }
-            }
-            boolean verify = verifyUrl(url);
-            if (verify) {
-                propertyFile.set(url, "true");
-            } else {
-                propertyFile.set(url, "false");
-            }
-            propertyFile.update(tmp);
-            return verify;
         }
-        return verifyUrl(url);
+
+        boolean isURL = verifyUrl(url);
+        isURLs.put(url, isURL);
+        return isURL;
     }
 
     /**

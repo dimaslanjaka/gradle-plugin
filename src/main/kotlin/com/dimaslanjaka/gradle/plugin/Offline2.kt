@@ -1,16 +1,24 @@
 package com.dimaslanjaka.gradle.plugin
 
+import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.gradle.api.Project
 import java.io.File
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
+import javax.xml.parsers.DocumentBuilderFactory
 
 class Offline2 {
     var home = System.getProperty("user.home")
     var from = File(File(home), ".gradle/caches/modules-2/files-2.1")
     var to = File(File(home), ".m2/repository")
-    val localMaven = StringBuilder(Offline.fixPath(to.absolutePath))
+    val localMaven = StringBuilder(fixPath(to.absolutePath))
     lateinit var project: Project
+    var extensions = arrayOf(".module", ".jar", ".pom", ".aar", ".sha1", ".xml")
 
     init {
         if (!to.exists()) if (!to.mkdirs()) println("fail create local repository")
@@ -45,9 +53,10 @@ class Offline2 {
         val res = result2.values.toMutableList()
         res.shuffle()
         res.forEachIndexed { index, resultOffline2 ->
-            if (index <= limit) {
-                val log = Offline.copy(resultOffline2.from, resultOffline2.to, false)
-                println("$index. $log")
+            if (index <= limit - 1) {
+                val indexLog = index + 1
+                val log = copy(resultOffline2.from, resultOffline2.to, false)
+                println("$indexLog. $log")
             }
         }
     }
@@ -58,31 +67,31 @@ class Offline2 {
             list1.files.forEach { jarModules ->
                 // copy maven path to module directory builder variable
                 val modulePath: java.lang.StringBuilder = java.lang.StringBuilder(list1.mavenPath.toString())
-                modulePath.append("/").append(Offline.getFileName(jarModules)).append("/")
+                modulePath.append("/").append(getFileName(jarModules)).append("/")
 
                 jarModules.listFiles()?.forEach { jarVersions ->
                     if (jarVersions.isDirectory) {
                         // copy jar directory for versioning variable
                         val jVersion = java.lang.StringBuilder(modulePath.toString())
-                        jVersion.append("/").append(Offline.getFileName(jarVersions)).append("/")
+                        jVersion.append("/").append(getFileName(jarVersions)).append("/")
                         val versionPath = File(jVersion.toString())
                         if (!versionPath.exists()) {
                             if (!versionPath.mkdirs()) {
-                                Offline.error("fail create " + list1.id2path + " v" + Offline.getFileName(jarVersions))
+                                error("fail create " + list1.id2path + " v" + getFileName(jarVersions))
                             }
                         }
 
                         jarVersions.listFiles()?.forEach { jarHases ->
-                            if (!Offline.isValidArtifactPath(Offline.getFileName(jarHases))) {
+                            if (!isValidArtifactPath(getFileName(jarHases))) {
                                 jarHases.listFiles()?.forEach { artifact ->
                                     if (artifact != null) {
-                                        if (Offline.validExtension(artifact.absolutePath)) {
+                                        if (isValidArtifact(artifact)) {
                                             val targetMavenArtifact =
-                                                File(versionPath, Offline.getFileName(artifact))
-                                            if (Offline.isEmptyFile(targetMavenArtifact)) {
+                                                File(versionPath, getFileName(artifact))
+                                            if (isEmptyFile(targetMavenArtifact)) {
                                                 var copyConfirm = false
                                                 if (isValidArtifact(artifact)) {
-                                                    if (Offline.validateXML(artifact.toPath())) {
+                                                    if (validateXML(artifact.toPath())) {
                                                         copyConfirm = true
                                                     } else {
                                                         // TODO: delete if target malformed pom
@@ -105,7 +114,6 @@ class Offline2 {
                                                         targetMavenArtifact,
                                                         resultCount
                                                     )
-                                                    //Offline.copy(artifact, targetMavenArtifact)
                                                     resultCount++
                                                 }
                                             }
@@ -118,6 +126,131 @@ class Offline2 {
                 }
             }
         }
+    }
+
+    fun error(str: String?) {
+        if (this::project.isInitialized) {
+            project.logger.error(str)
+        } else {
+            println(str)
+        }
+    }
+
+    fun validateXML(pathXML: Path): Boolean {
+        return if (validExtension(pathXML.toString(), arrayOf(".pom", "xml"))) {
+            try {
+                val fXmlFile = File(pathXML.toString())
+                val dbFactory = DocumentBuilderFactory.newInstance()
+                val dBuilder = dbFactory.newDocumentBuilder()
+                dBuilder.parse(fXmlFile)
+                true
+            } catch (e: Exception) {
+                false
+            }
+        } else {
+            false
+        }
+    }
+
+    fun fixPath(path: String): String? {
+        return path
+            .replace("\\", "/")
+            .replace("/{2,99}".toRegex(), "/")
+    }
+
+    fun isEmptyFile(file: File): Boolean {
+        return !file.exists() || file.length() == 0L
+    }
+
+    fun getFileName(file: File): String {
+        val pathObject = Paths.get(file.absolutePath)
+        return pathObject.fileName.toString()
+    }
+
+    fun getFileName(file: String): String? {
+        return getFileName(file, false)
+    }
+
+    fun getFileName(file: String, stripExtensions: Boolean): String? {
+        val pathObject = Paths.get(file)
+        return if (!stripExtensions) {
+            pathObject.fileName.toString()
+        } else {
+            stripExtension(pathObject.fileName.toString())
+        }
+    }
+
+    fun stripExtension(str: String): String {
+        // Get position of last '.'.
+        val pos: Int = str.lastIndexOf(".")
+
+        // If there wasn't any '.' just return the string as is.
+        if (pos == -1) return str
+
+        // Otherwise return the string, up to the dot.
+        val rem: String = str.substring(0, pos)
+        return if (validExtension(rem, arrayOf(".jar", ".aar"))) {
+            stripExtension(rem)
+        } else rem
+    }
+
+    fun validExtension(s: String): Boolean {
+        for (entry in extensions) {
+            if (s.endsWith(entry)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun validExtension(s: String, extensions: Array<String>): Boolean {
+        for (entry in extensions) {
+            if (s.endsWith(entry)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * If path length < 40 is valid
+     *
+     * @param path
+     * @return
+     */
+    fun isValidArtifactPath(path: Any): Boolean {
+        return path.toString().length < 40
+    }
+
+    /**
+     * Copy file
+     */
+    fun copy(from: File, to: File) {
+        copy(from, to, false)
+    }
+
+    /**
+     * Copy file
+     */
+    fun copy(from: File, to: File, debug: Boolean): String? {
+        val xfrom = from.toPath() //convert from File to Path
+        val xto: Path = if (!to.isDirectory) {
+            Paths.get(to.toString()) //convert from String to Path
+        } else {
+            Paths.get(File(to, getFileName(from)).toString())
+        } //convert from String to Path
+        try {
+            Files.copy(xfrom, xto, StandardCopyOption.REPLACE_EXISTING)
+            val formatted: String = String.format("Cached\n\tf: %s\n\tt: %s", xfrom, xto)
+            if (debug) {
+                println(formatted)
+            } else {
+                return formatted
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     @Suppress("unused")
@@ -135,8 +268,7 @@ class Offline2 {
     }
 
     private fun isValidArtifact(artifact: File): Boolean {
-        val validExtension =
-            artifact.name.endsWith(".xml") || artifact.name.endsWith(".pom") || artifact.name.endsWith(".aar")
+        val validExtension = validExtension(artifact.absolutePath)
         return artifact.exists() && validExtension
     }
 
@@ -146,7 +278,7 @@ class Offline2 {
         listGradleCaches()?.forEachIndexed { index, file ->
             val list = List1()
             list.index = index
-            list.id2path = Offline.getFileName(file).replace(".", "/")
+            list.id2path = getFileName(file).replace(".", "/")
             list.mavenPath = StringBuilder(localMaven.toString().trim { it <= ' ' } + "/" + list.id2path)
             file.listFiles()?.let { arr ->
                 arr.forEach { file ->

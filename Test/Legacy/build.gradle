@@ -1,7 +1,7 @@
 //******* TEST USING LEGACY MODE *******//
 
 buildscript {
-    ext.kotlin_version = '1.4.32'
+    ext.kotlin_version = '1.4.32-release-371'
     repositories {
         mavenLocal()
         flatDir {

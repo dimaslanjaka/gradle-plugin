@@ -15,8 +15,8 @@ pluginManagement {
     }
 }
 
-rootProject.name = "gradle-plugin"
+rootProject.name = "Gradle To Maven Plugin"
 
 //include(":idea")
 //includeBuild("repo/components")
-include(":repo:components", ":repo:versions", ":repo:apron")
+//include(":repo:components", ":repo:versions", ":repo:apron")
