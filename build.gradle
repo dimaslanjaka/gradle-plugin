@@ -1,11 +1,5 @@
 buildscript {
     repositories {
-        maven {
-            url "http://maven2.javacpp.googlecode.com/git/"
-        }
-        maven {
-            url "http://maven2.javacv.googlecode.com/git/"
-        }
         mavenCentral()
         mavenLocal()
         jcenter()
@@ -13,6 +7,12 @@ buildscript {
         gradlePluginPortal()
         maven {
             url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://maven2.javacpp.googlecode.com/git/"
+        }
+        maven {
+            url "http://maven2.javacv.googlecode.com/git/"
         }
         maven { url "http://esd4j.org/jabylon/repository/" }
         maven { url "http://nexus.openolat.org/nexus/content/repositories/public/" }
@@ -29,8 +29,8 @@ buildscript {
     dependencies {
         //classpath "eu.davidea:grabver:latest.release"
         classpath "com.android.tools.build:gradle:4.0.2"
-        classpath "com.gradle.publish:plugin-publish-plugin:latest.release"
-        classpath "org.grails:grails-gradle-plugin:latest.release"
+        classpath "com.gradle.publish:plugin-publish-plugin:0.14.0"
+        //classpath "org.grails:grails-gradle-plugin:latest.release"
         //classpath "commons-net:commons-net:3.7.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //classpath "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -53,8 +53,8 @@ repositories {
     gradlePluginPortal()
 
     // External Repo
-    maven { url "http://esd4j.org/jabylon/repository/" }
-    maven { url "http://nexus.openolat.org/nexus/content/repositories/public/" }
+    maven { url "https://esd4j.org/jabylon/repository/" }
+    maven { url "https://nexus.openolat.org/nexus/content/repositories/public/" }
     maven { url "https://jitpack.io" }
     maven {
         url "https://oss.sonatype.org/content/repositories/releases/"
@@ -62,7 +62,7 @@ repositories {
     maven {
         url "https://jetbrains.bintray.com/intellij-plugin-service"
     }
-    maven { url "http://esd4j.org/jabylon/repository/" }
+    maven { url "https://esd4j.org/jabylon/repository/" }
 }
 
 configurations {
