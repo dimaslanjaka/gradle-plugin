@@ -4,18 +4,263 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="">
+    <list default="true" id="300c26e5-1b25-4c10-b6d1-4f63847f864e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7/fileChanges/last-build.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/6.7/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/configuration-cache/gc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/gradle-plugin.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/plugin.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.6.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.6.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/resource-provider/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/resource-provider/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/resource-provider/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/resource-provider/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/resource-provider/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/repo/resource-provider/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/resource-provider/src/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/resource-provider/src/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/resource-provider/src/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/resource-provider/src/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/version.properties" beforeDir="false" afterPath="$PROJECT_DIR$/version.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/DSL/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/libraries-with-intellij-classes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Portal/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.test.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/idea.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/resources/META-INF/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/kotlin/cn/renyuzhuo/easygradle/killer/KillGradleAction.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/kotlin/cn/renyuzhuo/easygradle/updater/GradleItem.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/kotlin/cn/renyuzhuo/easygradle/updater/UpdateGradleAction.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/META-INF/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/META-INF/pluginIcon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/META-INF/pluginIcon_dark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/icons/killer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/icons/update.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/repackaged-all-0.6.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/src/nativeMain/kotlin/hello.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/.github/workflows/maven.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/CONTRIBUTING.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/README.adoc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/TODO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/apron-icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/changelog" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/ApronOptions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/MissingKeyAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/PropertyFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/UnicodeHandling.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/entry/BasicEntry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/entry/Entry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/entry/PropertyEntry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/escaping/EscapeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/escaping/InvalidUnicodeCharacterException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/io/PropertyFileReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/io/PropertyFileWriter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/java/util/Helper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/java/util/Properties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/reformatting/AttachCommentsTo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/reformatting/InvalidFormatException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/reformatting/OrderableEntry.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/reformatting/OrderableEntryList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/reformatting/PropertyFormat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/reformatting/ReformatOptions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/de/poiu/apron/reformatting/Reformatter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/java/de/poiu/apron/PropertyFileTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/java/de/poiu/apron/escaping/EscapeUtilsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/java/de/poiu/apron/io/PropertyFileReaderTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/java/de/poiu/apron/io/PropertyFileWriterTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/java/de/poiu/apron/java/util/PropertiesTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/java/de/poiu/apron/reformatting/ReformatterPatternTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/java/de/poiu/apron/reformatting/ReformatterTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/apron/src/test/resources/log4j2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-0.6.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/old-build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/jar/Repack.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/resources/META-INF/gradle-plugins/com.dimaslanjaka.gradle.offline_dependencies.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/gradle-trust-all" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/.github/dependabot.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/.github/workflows/build.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/.github/workflows/deploy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/.github/workflows/update-gradle-wrapper.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/config/codenarc/rules.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/config/codenarc/testrules.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/examples/groovy/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/examples/groovy/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/examples/html-report.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/examples/kotlin/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/examples/kotlin/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/VersionsPlugin.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/AbstractReporter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/HtmlReporter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/JsonReporter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/PlainTextReporter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/Reporter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/XmlReporter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/result/DependenciesGroup.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/result/Dependency.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/result/DependencyLatest.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/result/DependencyOutdated.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/result/DependencyUnresolved.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/result/Result.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/reporter/result/VersionAvailable.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/Coordinate.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/DependencyStatus.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/DependencyUpdates.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/DependencyUpdatesReporter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/DependencyUpdatesTask.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/Resolver.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/VersionMapping.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/gradle/GradleReleaseChannel.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/gradle/GradleUpdateChecker.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/gradle/GradleUpdateResult.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/gradle/GradleUpdateResults.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/resolutionstrategy/ComponentFilter.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/resolutionstrategy/ComponentSelectionRulesWithCurrent.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/resolutionstrategy/ComponentSelectionWithCurrent.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/groovy/com/github/benmanes/gradle/versions/updates/resolutionstrategy/ResolutionStrategyWithCurrent.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/main/resources/META-INF/gradle-plugins/com.github.ben-manes.versions.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/groovy/com/github/benmanes/gradle/versions/ComponentSelectionRuleSourceSpec.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/groovy/com/github/benmanes/gradle/versions/ConstraintsSpec.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/groovy/com/github/benmanes/gradle/versions/DependencyUpdatesSpec.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/groovy/com/github/benmanes/gradle/versions/DifferentGradleVersionsSpec.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/groovy/com/github/benmanes/gradle/versions/JavaLibrarySpec.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/groovy/com/github/benmanes/gradle/versions/KotlinDslUsageSpec.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/groovy/com/github/benmanes/gradle/versions/OutputFormatterSpec.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/libs/guice-4.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/backport-util-concurrent/backport-util-concurrent-java12/3.1/backport-util-concurrent-java12-3.1.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/backport-util-concurrent/backport-util-concurrent-java12/maven-metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/backport-util-concurrent/backport-util-concurrent/maven-metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/google/5/google-5.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/guava/guava-parent/15.0/guava-parent-15.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/guava/guava-parent/16.0-rc1/guava-parent-16.0-rc1.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/guava/guava-tests/16.0-rc1/guava-tests-16.0-rc1.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/guava/guava-tests/maven-metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/guava/guava/15.0/guava-15.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/guava/guava/16.0-rc1/guava-16.0-rc1.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/guava/guava/maven-metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/extensions/extensions-parent/3.0/extensions-parent-3.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/extensions/guice-multibindings/3.0/guice-multibindings-3.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/extensions/guice-multibindings/maven-metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/guice-parent/2.0/guice-parent-2.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/guice-parent/3.0/guice-parent-3.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/guice/2.0/guice-2.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/guice/2.2/guice-2.2.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/guice/3.0/guice-3.0.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/guice/3.1/guice-3.1.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/com/google/inject/guice/maven-metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/versions/src/test/resources/maven/org/sonatype/oss/oss-parent/7/oss-parent-7.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-provider/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/resource-provider/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-provider/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/resource-provider/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-provider/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resource-provider/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-provider/src/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-provider/src/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-provider/src/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource-provider/src/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/local-artifacts-fix.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/repositories.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/File.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/FileResourcesUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/FileResourcesUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Offline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Offline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Repository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Threading.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Threading.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/date/SimpleDateFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/date/SimpleDateFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/interfaces/SmartReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/interfaces/SmartReturn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/test/TimeElapsed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/test/TimeElapsed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/windows/WindowsSetSystemTime.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Versions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Versions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/CoreExtension.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline2.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/Date.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/Date.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/gradle-plugin.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/BuildLogicFunctionalTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/version.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,28 +275,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <task path="$PROJECT_DIR$">
-          <activation />
-        </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="gradle-plugin" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="gradle-plugin" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="gradle-plugin" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="plugin portal" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -61,61 +287,27 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
+  <component name="ProjectId" id="1rQuAU9Tsn1AWhxXIdbjLEC6rcO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectId" id="1rLBUb7Cogje3g7jz22vgDr9gMl" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Android/gradle-plugin" />
-  </component>
-  <component name="RunManager">
-    <configuration name="plugin [publishPlugins]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="publishPlugins" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.plugin [publishPlugins]" />
-      </list>
-    </recent_temporary>
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="" />
-      <created>1618745513074</created>
+      <changelist id="300c26e5-1b25-4c10-b6d1-4f63847f864e" name="Default Changelist" comment="" />
+      <created>1618920492893</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1618745513074</updated>
+      <updated>1618920492893</updated>
     </task>
     <servers />
   </component>
@@ -129,5 +321,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

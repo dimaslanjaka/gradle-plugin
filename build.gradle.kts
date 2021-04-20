@@ -1,10 +1,5 @@
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.konan.properties.hasProperty
-import java.io.FileReader
-import java.io.FileWriter
-import java.util.*
+import java.util.prefs.Preferences
 
 repositories {
     mavenLocal()
@@ -24,29 +19,21 @@ repositories {
 }
 
 plugins {
-    groovy
-    //`kotlin-dsl`
-    `java-gradle-plugin`
-    //`cpp-library`
-    //`cpp-unit-test`
-    //id("dev.nokee.jni-library") version "0.4.0"
-    //id("dev.nokee.cpp-language") version "0.4.0"
+    id("groovy")
+    id("maven-publish")
+    id("java-gradle-plugin")
     id("com.gradle.plugin-publish") version "0.12.0"
-    //id("com.android.library") apply false
-    //id("org.jetbrains.kotlin.jvm").version("1.3.72")
-    //"java"
-    //kotlin("multiplatform") version "1.3.21"
-    kotlin("jvm") version "1.4.32"
-    //id("com.github.johnrengelman.shadow") version "6.1.0"
+    kotlin("jvm") version "1.4.10"
 }
 
-apply {
-    plugin(org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin::class)
-    from("build.test.gradle")
+val preferences = Preferences.userRoot().node("build/android-plugin")
+if (preferences.get("version", "").isEmpty()) {
+    println("Set first version: 1.0.0")
+    preferences.put("version", "1.0.0")
 }
 
 group = "com.dimaslanjaka"
-version = getVersionPref(project)["version"]!!
+version = preferences.get("version", "1.0.0")
 
 allprojects {
     tasks.withType<JavaCompile> {
@@ -74,14 +61,6 @@ tasks.withType<KotlinCompile>().all {
     }
 }
 
-kotlin {
-    /*
-    kotlinDslPluginOptions {
-        experimentalWarning.set(false)
-    }
-     */
-}
-
 sourceSets {
     getByName("main") {
         java.srcDir("src/main/java")
@@ -101,53 +80,29 @@ configurations.all {
     }
 }
 
-// needed to prevent inclusion of gradle-api into shadow JAR
-//configurations.compile.dependencies.remove(dependencies.gradleApi())
-//configurations.compile.dependencies.remove(dependencies.localGroovy())
-//configurations.compile.dependencies.remove(dependencies.gradleTestKit())
-
 // compile jarjar in kotlin dsl
 val jarjar by configurations.creating
 val thirdparty by configurations.creating
 
 dependencies {
-    implementation(gradleApi())
-    implementation(localGroovy())
-    implementation(project(":repo:components"))
-    implementation(project(":repo:apron"))
+    implementation(gradleApi());
+    testImplementation(gradleTestKit())
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
 
-    //Test
-    testImplementation(gradleTestKit())
-    testImplementation("junit:junit:4.13")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.7.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.1")
-    //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-
     //kotlin deps
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10")
 
     compileOnly("org.jetbrains:annotations:20.1.0")
     compileOnly("com.android.tools.build:gradle:7.0.0-alpha03")
-    implementation("org.springframework:spring-beans:5.3.3")
-    implementation("org.springframework:spring-context:5.3.3")
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("com.squareup:javapoet:1.10.0")
     implementation("com.squareup:kotlinpoet:1.0.0-RC1")
-    implementation("commons-io:commons-io:2.7")
-    implementation("org.apache.commons:commons-lang3:3.11")
     implementation("joda-time:joda-time:2.10.9")
     implementation("org.reflections:reflections:0.9.12")
     implementation("org.jboss:jdk-misc:2.Final")
-
-    // package relocator
-    implementation("com.googlecode.jarjar:jarjar:1.3")
-    implementation("org.apache.maven:maven-model-builder:3.6.3")
 
     // Apache
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
@@ -165,15 +120,6 @@ dependencies {
     implementation("org.apache.cxf:cxf-common-utilities:2.5.11")
 }
 
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
-}
-
-/*
-configure<KotlinDslPluginOptions> {
-    experimentalWarning.set(false)
-}
- */
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -185,8 +131,8 @@ java {
 
 gradlePlugin {
     plugins {
-        register("gradle-plugin") {
-            id = "com.dimaslanjaka"
+        register("android-plugin") {
+            id = "com.dimaslanjaka.android"
             implementationClass = "com.dimaslanjaka.gradle.plugin.Core"
         }
     }
@@ -196,7 +142,7 @@ gradlePlugin {
 pluginBundle {
     // These settings are set for the whole plugin bundle
     website = "https://webmanajemen.com/"
-    vcsUrl = "https://github.com/dimaslanjaka/gradle-plugin"
+    vcsUrl = "https://github.com/dimaslanjaka/android-plugin"
 
     // tags and description can be set for the whole bundle here, but can also
     // be set / overridden in the config for specific plugins
@@ -218,12 +164,12 @@ pluginBundle {
     // two places.
 
     (plugins) {
-        "gradle-plugin" {
-            // id is captured from java-gradle-plugin configuration
-            displayName = "Gradle2Maven plugin"
+        "android-plugin" {
+            // id is captured from java-android-plugin configuration
+            displayName = "Gradle Android Plugin"
             description =
-                "Transform gradle artifacts to maven local repository, for available offline with `mavenLocal()`"
-            tags = listOf("offline", "auto", "optimize", "performance")
+                "Tools and helpers for android projects"
+            tags = listOf("android", "contentprovider", "string", "tools", "helper", "auto")
             version = project.version as String
         }
     }
@@ -243,7 +189,7 @@ pluginBundle {
 
     mavenCoordinates {
         groupId = "com.dimaslanjaka"
-        artifactId = "gradle-plugin"
+        artifactId = "android-plugin"
         version = project.version as String
     }
 }
@@ -257,76 +203,10 @@ compileTestKotlin.kotlinOptions {
     jvmTarget = "1.8"
 }
 val jar: Jar by tasks
-val rootLibs = File("${project.rootProject.rootDir}/../lib/").absolutePath
-val libtarget = File(rootLibs, "gradle-plugin.jar")
-jar.doLast {
-    copy {
-        val dari = jar.archivePath
-        // copy if source size is different from target
-        val compares = libtarget.exists() && dari.length().compareTo(libtarget.length()) != 0
-        if (compares || !libtarget.exists()) {
-            from(dari)
-            into(rootLibs)
-            rename { fileName ->
-                fileName.replace("gradle-plugin-${project.version}", "gradle-plugin")
-            }
-            println("Copy\n\tf: $dari \n\tt: $rootLibs")
-        }
-    }
-}
 
 tasks.findByName("publishPlugins")?.doLast {
-    updateVersionPref(project)
-}
-
-tasks {
-    val fatJar by creating(Jar::class) {
-        val jarname = "gradle-plugin-with-dependencies.jar"
-        description = "create jar with dependencies"
-        isZip64 = true
-        group = "build"
-
-        // set output file
-        archiveFileName.set(jarname)
-        //destinationDirectory.set(File(project.rootDir, "../javafx/libs").absoluteFile)
-
-        // set manifest jar
-        manifest.attributes.apply {
-            put("Main-Class", "com.dimaslanjaka.gradle.plugin.Core")
-            put("Implementation-Title", "Gradle Kotlin DSL (${project.name})")
-            put("Implementation-Version", archiveVersion.get())
-        }
-        excludes.add("META-INF/**")
-
-        from(configurations.compileClasspath.map { config ->
-            config.map { mapit ->
-                if (mapit.isDirectory) {
-                    mapit
-                } else {
-                    zipTree(mapit)
-                }
-            }
-        }) {
-            exclude("META-INF", "META-INF/**")
-        }
-        with(jar.get())
-    }
-    val updateVersion by creating {
-        group = "build"
-        description = "Increase Version Manual"
-        doLast {
-            updateVersionPref(project)
-        }
-    }
-}
-
-jar.dependsOn("fatJar")
-
-fun updateVersionPref(project: Project) {
-    println("Updating version")
-
-    // TODO: auto update version after publish plugin
-    val v = getVersionPref(project)["version"].toString()
+    // TODO: auto update version
+    val v = preferences.get("version", "1.0.0").toString()
     val token = v.split(".").map { it.toInt() } as MutableList
     // increase minor
     token[2] = token[2] + 1
@@ -341,48 +221,13 @@ fun updateVersionPref(project: Project) {
         token[1] = 0
     }
     // apply version
-    getVersionPref(project)["version"] = token.joinToString(".")
-    project.version = getVersionPref(project)["version"]!!
-
-    // save new version
-    getVersionPref(project, project.version.toString())
+    preferences.put("version", token.joinToString("."))
+    project.version = preferences.get("version", project.version.toString())
 
     val map = mutableMapOf<String, Any>()
     map["main"] = token[0]
     map["major"] = token[1]
     map["minor"] = token[2]
     map["version"] = token
-    //println(map)
-
-    println("Updated version to ${map["version"]}")
-}
-
-fun getVersionPref(project: Project, newVersion: String? = null): Properties {
-    // TODO: Set result properties
-    val fileVersion = File(project.projectDir, "version.properties")
-    if (!fileVersion.exists()) fileVersion.createNewFile()
-    val reader = FileReader(fileVersion)
-    val properties = Properties()
-    properties.load(reader)
-    if (!properties.hasProperty("version") || (newVersion != null && newVersion.isNotEmpty())) {
-        // TODO: if newVersion is not null or properties not have version property, set and save them
-        properties["version"] = newVersion ?: "1.0.0"
-        VersionPrefResult.version = newVersion ?: "1.0.0"
-        properties.store(FileWriter(fileVersion), "Gradle Plugin Version")
-    }
-    VersionPrefResult.properties = properties
-    return properties
-}
-
-object VersionPrefResult {
-    @JvmStatic
-    var version: String? = null
-
-    @JvmStatic
-    var properties: Properties? = null
-
-    override fun toString(): String {
-        val gson: Gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
-        return gson.toJson(this)
-    }
+    println(map)
 }

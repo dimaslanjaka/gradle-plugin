@@ -1,3 +1,0 @@
-rootProject.name = 'Test Portal Method'
-String plugin = new File(rootProject.projectDir, "/../../").getAbsolutePath()
-includeBuild(plugin)

@@ -12,11 +12,8 @@ pluginManagement {
         maven("https://repo.gradle.org/gradle/enterprise-libs-release-candidates-local")
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
         maven("https://plugins.gradle.org/m2/")
+maven("https://jitpack.io")
     }
 }
 
-rootProject.name = "gradle-plugin"
-
-//include(":idea")
-//includeBuild("repo/components")
-include(":repo:components", ":repo:versions", ":repo:apron")
+rootProject.name = "gradle-android-plugin"
