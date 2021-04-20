@@ -1,0 +1,3 @@
+D:\Workspaces\Kotlin\Test\plugin-android\src\main\kotlin\com\xfinity\resourceprovider\ResourceProviderPlugin.kt
+D:\Workspaces\Kotlin\Test\plugin-android\src\main\kotlin\com\xfinity\resourceprovider\RpKtCodeGenerator.kt
+D:\Workspaces\Kotlin\Test\plugin-android\src\main\kotlin\com\xfinity\resourceprovider\RpCodeGenerator.kt

@@ -5,42 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="300c26e5-1b25-4c10-b6d1-4f63847f864e" name="Default Changelist" comment="First commit">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/plugin-android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/publish.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.7/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/File.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/FileResourcesUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/MD5.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Offline.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Repository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Threading.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/date/SimpleDateFormat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/interfaces/SmartReturn.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/test/TimeElapsed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/windows/WindowsSetSystemTime.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Versions.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/ConsoleColors.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/Date.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/FixMavenLocal.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/Helper.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/Reflection.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/Temp.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/TimeAgo.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/android-plugin.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/repo.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
