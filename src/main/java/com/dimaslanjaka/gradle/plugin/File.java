@@ -245,24 +245,28 @@ public class File extends java.io.File implements Serializable {
 
     @SuppressWarnings({"unused"})
     public boolean isModifiedMoreThanMinute(int i) {
+        if (!this.file.exists()) return false;
         Date lastModified = getLastModified();
         return isMoreThanMinuteAgo(lastModified, i);
     }
 
     @SuppressWarnings({"unused"})
     public boolean isModifiedLessThanMinute(int i) {
+        if (!this.file.exists()) return false;
         Date lastModified = getLastModified();
         return isLessThanMinuteAgo(lastModified, i);
     }
 
     @SuppressWarnings({"unused"})
     public boolean isModifiedMoreThanHour(int i) {
+        if (!this.file.exists()) return false;
         Date lastModified = getLastModified();
         return isMoreThanHourAgo(lastModified, i);
     }
 
     @SuppressWarnings({"unused"})
     public boolean isModifiedLessThanHour(int i) {
+        if (!this.file.exists()) return false;
         Date lastModified = getLastModified();
         return isLessThanHourAgo(lastModified, i);
     }

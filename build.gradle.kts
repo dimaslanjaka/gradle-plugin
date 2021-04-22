@@ -70,14 +70,6 @@ allprojects {
     }
 }
 
-kotlin {
-    /*
-    kotlinDslPluginOptions {
-        experimentalWarning.set(false)
-    }
-     */
-}
-
 sourceSets {
     getByName("main") {
         java.srcDir("src/main/groovy")
@@ -103,7 +95,9 @@ configurations.all {
     implementation(localGroovy())
     //implementation(project(":repo:components"))
     //implementation(project(":repo:apron"))
+    val offlineLib = File(projectDir, "repo/components/build/libs")
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
+    implementation(fileTree(mapOf("dir" to offlineLib, "include" to listOf("*.jar"))))
 
     //Test
     testImplementation(gradleTestKit())

@@ -14,6 +14,7 @@ import static com.dimaslanjaka.gradle.plugin.Utils.println;
 
 public class Core implements Plugin<Project> {
     private final Threading thread = new Threading();
+    CoreExtension extension;
     @Nullable
     private Project project = null;
 
@@ -40,22 +41,19 @@ public class Core implements Plugin<Project> {
         }
 
         // TODO: Configuring Rules
-        CoreExtension extension = project.getExtensions().create("offlineConfig", CoreExtension.class);
+        extension = project.getExtensions().create("offlineConfig", CoreExtension.class);
 
-        CoreExtension finalExtension = extension;
         target.afterEvaluate(new Action<Project>() {
             @Override
             public void execute(@NotNull Project project) {
-                startCache(project);
-                /*
+                //startCache(project);
                 Threading.Once once = new Threading.Once();
                 once.run(new Runnable() {
                     @Override
                     public void run() {
-                        startCache();
+                        startCache(project);
                     }
                 });
-                */
             }
         });
     }
@@ -89,9 +87,8 @@ public class Core implements Plugin<Project> {
      */
     public void startCache(Project targetProject) {
         File tmp = new File(targetProject.getBuildDir().getAbsolutePath(), "/plugin/com.dimaslanjaka/offline");
-        resolveFile(tmp);
-        //println(tmp.getDate());
-        if (tmp.isModifiedMoreThanHour(1)) {
+        if (!tmp.exists() || tmp.isModifiedMoreThanHour(1)) {
+            resolveFile(tmp);
             tmp.write(new Date());
             Runnable r = new Runnable() {
                 public void run() {

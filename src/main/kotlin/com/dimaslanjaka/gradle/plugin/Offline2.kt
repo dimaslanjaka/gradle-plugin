@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken
 import org.gradle.api.Project
 import java.io.File
 import java.io.IOException
+import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -52,12 +53,30 @@ class Offline2 {
         fetchCaches()
         val res = result2.values.toMutableList()
         res.shuffle()
+        var logfile: File? = null
+        if (this::project.isInitialized) {
+            logfile = File(
+                project.buildDir.absolutePath,
+                "plugin/com.dimaslanjaka/offline-${project.name}"
+            )
+            if (!logfile.parentFile.exists()) logfile.parentFile.mkdirs()
+            logfile.writeText("Cache Start On ${project.name} With Limit $limit")
+        }
         res.forEachIndexed { index, resultOffline2 ->
-            if (index <= limit - 1) {
+            if (limit != Integer.MAX_VALUE) {
+                if (index <= limit - 1) {
+                    val indexLog = index + 1
+                    val log = copy(resultOffline2.from, resultOffline2.to, false)
+                    logfile?.appendText("$indexLog. $log\n", Charset.defaultCharset())
+                }
+            } else {
                 val indexLog = index + 1
                 val log = copy(resultOffline2.from, resultOffline2.to, false)
-                println("$indexLog. $log")
+                logfile?.appendText("$indexLog. $log\n", Charset.defaultCharset())
             }
+        }
+        logfile?.let {
+            println("Cache Result Saved To ${it.absolutePath}")
         }
     }
 
@@ -66,7 +85,8 @@ class Offline2 {
         listJarModules().forEach { list1 ->
             list1.files.forEach { jarModules ->
                 // copy maven path to module directory builder variable
-                val modulePath: java.lang.StringBuilder = java.lang.StringBuilder(list1.mavenPath.toString())
+                val modulePath: java.lang.StringBuilder =
+                    java.lang.StringBuilder(list1.mavenPath.toString())
                 modulePath.append("/").append(getFileName(jarModules)).append("/")
 
                 jarModules.listFiles()?.forEach { jarVersions ->
@@ -77,7 +97,11 @@ class Offline2 {
                         val versionPath = File(jVersion.toString())
                         if (!versionPath.exists()) {
                             if (!versionPath.mkdirs()) {
-                                error("fail create " + list1.id2path + " v" + getFileName(jarVersions))
+                                error(
+                                    "fail create " + list1.id2path + " v" + getFileName(
+                                        jarVersions
+                                    )
+                                )
                             }
                         }
 
@@ -152,7 +176,7 @@ class Offline2 {
         }
     }
 
-    fun fixPath(path: String): String? {
+    fun fixPath(path: String): String {
         return path
             .replace("\\", "/")
             .replace("/{2,99}".toRegex(), "/")
@@ -279,7 +303,8 @@ class Offline2 {
             val list = List1()
             list.index = index
             list.id2path = getFileName(file).replace(".", "/")
-            list.mavenPath = StringBuilder(localMaven.toString().trim { it <= ' ' } + "/" + list.id2path)
+            list.mavenPath =
+                StringBuilder(localMaven.toString().trim { it <= ' ' } + "/" + list.id2path)
             file.listFiles()?.let { arr ->
                 arr.forEach { file ->
                     if (file != null) {
@@ -366,7 +391,10 @@ class Offline2 {
             var gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
             val listArtifact = File("build/artifact-list.json")
             listArtifact.writeText(gson.toJson(off.getResult(), MutableList::class.java))
-            result = gson.fromJson(listArtifact.readText(), object : TypeToken<MutableList<ResultOffline2?>?>() {}.type)
+            result = gson.fromJson(
+                listArtifact.readText(),
+                object : TypeToken<MutableList<ResultOffline2?>?>() {}.type
+            )
 
             gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
             val mapArtifact = File("build/artifact-map.json")

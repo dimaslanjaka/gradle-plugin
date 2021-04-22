@@ -1,4 +1,5 @@
-# How to import
+# Plugin Portal [https://plugins.gradle.org/plugin/com.dimaslanjaka](https://plugins.gradle.org/plugin/com.dimaslanjaka)
+## How to manual import
 - copy this project inside your project
 - then import like bellow
 
@@ -16,7 +17,7 @@ plugins {
 
 // configurations
 offlineConfig {
-    // pick random 100 artifacts to cached
-    limit = 100
+    // Unlimited Cached Artifacts
+    limit = Integer.MAX_VALUE
 }
 ```
