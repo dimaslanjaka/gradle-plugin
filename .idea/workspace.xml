@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="Optimize">
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinScripting.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Legacy/.idea/Legacy.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Legacy/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/offline.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.9.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/File.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Legacy/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/repackaged-all-1.0.8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/groovy/jar/Repack.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/version.properties" beforeDir="false" afterPath="$PROJECT_DIR$/version.properties" afterDir="false" />
-    </list>
+    <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="Optimize" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -271,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619076081022</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Optimize">
+      <created>1619082684191</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619082684191</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
