@@ -54,6 +54,7 @@ dependencies {
 task repackageDependencies(type: Jar) {
     archivesBaseName = "repackaged-all"
     version = project.version
+    group = "build"
     destinationDirectory = new File(thirdpartyLibsDir as String)
 
     doLast {

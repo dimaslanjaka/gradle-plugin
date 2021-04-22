@@ -4,14 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="Optimize">
+      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.10.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.10.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.10.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.18.1-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.18.1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.18.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/jna-5.6.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/jna-5.6.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/jna-5.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/jna-platform-5.6.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/jna-platform-5.6.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backup/jna-platform-5.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/repackaged-all-1.0.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/jar/Repack.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/File.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/jar/Repack.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/jar/Repack.groovy" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,23 +63,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="plugin portal" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -79,6 +90,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -96,7 +108,7 @@
       <command value="gradle clean jar" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.plugin [clean jar]">
+  <component name="RunManager" selected="Gradle.plugin [jar]">
     <configuration name="plugin [clean jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -197,11 +209,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.plugin [jar]" />
         <item itemvalue="Gradle.plugin [clean jar]" />
         <item itemvalue="Gradle.plugin [updateVersion]" />
         <item itemvalue="Gradle.plugin [publishPlugins]" />
         <item itemvalue="Application.Offline2" />
-        <item itemvalue="Gradle.plugin [jar]" />
       </list>
     </recent_temporary>
   </component>
@@ -214,6 +226,14 @@
       <option name="presentableId" value="Default" />
       <updated>1618745513074</updated>
     </task>
+    <task id="LOCAL-00001" summary="Optimize">
+      <created>1619074258330</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619074258330</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,5 +247,21 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Optimize" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimize" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

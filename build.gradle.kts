@@ -32,7 +32,7 @@ plugins {
 }
 
 apply {
-     from("build.test.gradle")
+    from("build.test.gradle")
 }
 
 group = "com.dimaslanjaka"
@@ -93,11 +93,9 @@ configurations.all {
 @Suppress("GradleDependency") dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
-    //implementation(project(":repo:components"))
-    //implementation(project(":repo:apron"))
     val offlineLib = File(projectDir, "repo/components/build/libs")
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
-    implementation(fileTree(mapOf("dir" to offlineLib, "include" to listOf("*.jar"))))
+    //implementation(fileTree(mapOf("dir" to offlineLib, "include" to listOf("*.jar"))))
 
     //Test
     testImplementation(gradleTestKit())
@@ -111,17 +109,17 @@ configurations.all {
     //kotlin deps
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
+    //implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
+    //implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
 
     compileOnly("org.jetbrains:annotations:16.0.2")
     compileOnly("com.android.tools.build:gradle:7.0.0-alpha03")
     implementation("com.google.code.gson:gson:2.8.5")
-    implementation("com.squareup:javapoet:1.10.0")
-    implementation("com.squareup:kotlinpoet:1.0.0-RC1")
+    //implementation("com.squareup:javapoet:1.10.0")
+    //implementation("com.squareup:kotlinpoet:1.0.0-RC1")
     implementation("joda-time:joda-time:2.10.9")
-    implementation("org.reflections:reflections:0.9.12")
-    implementation("org.jboss:jdk-misc:2.Final")
+    //implementation("org.reflections:reflections:0.9.12")
+    //implementation("org.jboss:jdk-misc:2.Final")
 
     // package relocator
     //implementation("com.googlecode.jarjar:jarjar:1.3")
@@ -150,9 +148,8 @@ tasks.withType<Test>().configureEach {
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
-
-    //val files: Set<File> = sourceSets["main"].java.srcDirs
-    //println(files)
+    withJavadocJar()
+    withSourcesJar()
 }
 
 gradlePlugin {
@@ -194,6 +191,10 @@ compileTestKotlin.kotlinOptions {
     jvmTarget = "1.8"
 }
 val jar: Jar by tasks
+// compile jar with dependencies
+jar.from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+jar.isZip64 = true
+
 val rootLibs = File("${project.rootProject.rootDir}/../lib/").absolutePath
 val libtarget = File(rootLibs, "gradle-plugin.jar")
 jar.doLast {
