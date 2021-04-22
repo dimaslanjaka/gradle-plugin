@@ -1,11 +1,14 @@
 //******* TEST USING LEGACY MODE *******//
 
 buildscript {
-    ext.kotlin_version = '1.4.32-release-371'
+    ext.kotlin_version = "1.4.32"
     repositories {
         mavenLocal()
         flatDir {
-            dirs '/../build/libs'
+            dirs "../build/libs"
+        }
+        flatDir {
+            dirs "../../build/libs"
         }
         mavenCentral()
         google()
@@ -23,7 +26,7 @@ buildscript {
 }
 
 apply plugin: "java"
-apply plugin: 'kotlin'
+apply plugin: "kotlin"
 apply plugin: "com.dimaslanjaka"
 
 offlineConfig {

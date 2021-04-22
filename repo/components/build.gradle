@@ -13,7 +13,6 @@ buildscript {
 apply plugin: "com.gradle.plugin-publish"
 apply plugin: "groovy"
 
-
 group = "com.dimaslanjaka.gradle.offline_dependencies"
 version = projectVersion(project)
 description = "Store project dependencies alongside your code for reproducible offline builds"
@@ -49,6 +48,13 @@ dependencies {
     // thirdparty dependencies and repackaging
     jarjar "org.gradle.jarjar:jarjar:$jarjarVersion"
     thirdparty "org.apache.maven:maven-model-builder:$mavenVersion"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    withJavadocJar()
+    withSourcesJar()
 }
 
 task repackageDependencies(type: Jar) {

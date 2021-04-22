@@ -5,10 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d3d0180-597d-4382-8ea0-78f6e61916fe" name="Default Changelist" comment="Fix configuration">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.idea/kotlinScripting.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Legacy.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lib/offline.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../repo/components/lib/repackaged-all-1.0.9.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../../build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lib/repackaged-all-1.0.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../repo/components/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../../settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/groovy/jar/Repack.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../version.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../version.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,44 +52,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Test Legacy Method" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Test Legacy Method" type="f1a62948:ProjectNode" />
-                <item name="gradle-plugin" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Test Legacy Method" type="f1a62948:ProjectNode" />
-                <item name="gradle-plugin" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Test Legacy Method" type="f1a62948:ProjectNode" />
-                <item name="gradle-plugin" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="plugin development" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Test Legacy Method" type="f1a62948:ProjectNode" />
-                <item name="gradle-plugin" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="plugin portal" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Test Legacy Method" type="f1a62948:ProjectNode" />
-                <item name="gradle-plugin" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="publications" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>

@@ -1,5 +1,7 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import com.dimaslanjaka.gradle.offline_dependencies.OfflineDependenciesPlugin;
+import jar.Repack;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -9,6 +11,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.dimaslanjaka.gradle.plugin.Utils.println;
 
@@ -24,7 +28,7 @@ public class Core implements Plugin<Project> {
         this.project = target;
         @SuppressWarnings({"unused"})
         Repository repository = new Repository(target);
-        //Repack jar = new Repack(target);
+        Repack jar = new Repack(target);
 
         // TODO: clear gradle big log files
         Gradle gradle = target.getGradle();
@@ -42,6 +46,9 @@ public class Core implements Plugin<Project> {
 
         // TODO: Configuring Rules
         extension = project.getExtensions().create("offlineConfig", CoreExtension.class);
+        project.getExtensions().create("offlineRepositoryRoot", File.class, CoreExtension.getLocalRepository());
+        project.getPlugins().apply(OfflineDependenciesPlugin.class);
+        new Offline3(project);
 
         target.afterEvaluate(new Action<Project>() {
             @Override

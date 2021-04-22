@@ -5,41 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="Optimize">
-      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.10.0-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.10.0-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.10.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.18.1-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.18.1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/assertj-core-3.18.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/jna-5.6.0-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/jna-5.6.0-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/jna-5.6.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/jna-platform-5.6.0-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/jna-platform-5.6.0-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backup/jna-platform-5.6.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/repackaged-all-1.0.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.groovy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/groovy/jar/Repack.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/kotlinScripting.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/.idea/Legacy.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/offline.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.9.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/File.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.10.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/assertj-core-3.18.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-5.6.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0-javadoc.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0-sources.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/repackaged-all-1.0.8.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/jar/Repack.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/jar/Repack.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/groovy/jar/Repack.groovy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/version.properties" beforeDir="false" afterPath="$PROJECT_DIR$/version.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +45,9 @@
         <task path="$PROJECT_DIR$">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/repo/components">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -64,12 +55,37 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
+                <item name="Gradle To Maven Plugin" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
+                <item name="Gradle To Maven Plugin" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
+                <item name="Gradle To Maven Plugin" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,8 +110,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/repo/components" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Test/Legacy" />
+    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin.scripting" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -109,6 +125,69 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.plugin [jar]">
+    <configuration name="components [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/repo/components" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="components [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/repo/components" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="components [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/repo/components" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="javadocJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="plugin [clean jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -152,68 +231,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="plugin [publishPlugins]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="publishPlugins" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="plugin [updateVersion]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="updateVersion" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="Offline2" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="Gradle_To_Maven_Plugin.main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.gradle.plugin.Offline2" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.plugin [jar]" />
+        <item itemvalue="Gradle.components [jar]" />
+        <item itemvalue="Gradle.components [javadocJar]" />
+        <item itemvalue="Gradle.components [clean]" />
         <item itemvalue="Gradle.plugin [clean jar]" />
-        <item itemvalue="Gradle.plugin [updateVersion]" />
-        <item itemvalue="Gradle.plugin [publishPlugins]" />
-        <item itemvalue="Application.Offline2" />
       </list>
     </recent_temporary>
   </component>
@@ -233,7 +257,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619074258330</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Optimize">
+      <created>1619076055952</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619076055952</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Optimize">
+      <created>1619076081022</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619076081022</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -253,15 +291,8 @@
     <MESSAGE value="Optimize" />
     <option name="LAST_COMMIT_MESSAGE" value="Optimize" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -101,19 +101,19 @@ configurations.all {
     testImplementation(gradleTestKit())
     testImplementation("junit:junit:4.13")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.7.1")
+    //testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.7.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.1")
+    //testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.1")
     //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
     //kotlin deps
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
+    //implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
+    //implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
     //implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
     //implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
 
     compileOnly("org.jetbrains:annotations:16.0.2")
-    compileOnly("com.android.tools.build:gradle:7.0.0-alpha03")
+    //compileOnly("com.android.tools.build:gradle:7.0.0-alpha03")
     implementation("com.google.code.gson:gson:2.8.5")
     //implementation("com.squareup:javapoet:1.10.0")
     //implementation("com.squareup:kotlinpoet:1.0.0-RC1")
@@ -126,19 +126,21 @@ configurations.all {
     //implementation("org.apache.maven:maven-model-builder:3.6.3")
 
     // Apache
+    implementation("org.apache.commons:commons-lang3:3.11")
+    implementation("commons-validator:commons-validator:1.7")
+    /*
+    implementation("commons-io:commons-io:2.8.0")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
     implementation("org.apache.commons:commons-collections4:4.3")
-    implementation("org.apache.commons:commons-lang3:3.11")
     implementation("org.apache.commons:commons-compress:1.20")
     implementation("org.apache.commons:commons-exec:1.3")
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("commons-codec:commons-codec:1.9")
     implementation("commons-net:commons-net:3.6")
-    implementation("commons-validator:commons-validator:1.7")
-    implementation("commons-io:commons-io:2.8.0")
     implementation("commons-cli:commons-cli:1.4")
     implementation("xerces:xercesImpl:2.12.0")
     implementation("org.apache.cxf:cxf-common-utilities:2.5.11")
+     */
 }
 
 tasks.withType<Test>().configureEach {
@@ -190,11 +192,42 @@ val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
     jvmTarget = "1.8"
 }
-val jar: Jar by tasks
-// compile jar with dependencies
-jar.from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
-jar.isZip64 = true
 
+val comp = File(projectDir, "repo/components/build/libs/").absoluteFile
+val tjar = File(projectDir, "lib/offline.jar").absoluteFile
+if (comp.exists()) {
+    comp.listFiles()?.forEach { compjar ->
+        compjar?.let { cjar ->
+            if (!tjar.exists() || (cjar.name.startsWith("offline-dependencies-plugin") && !cjar.name.contains("doc"))) {
+                if (!isSameFileSize(cjar, tjar)) {
+                    cjar.copyTo(tjar, true)
+                }
+            }
+        }
+    }
+}
+
+val jar: Jar by tasks
+jar.archiveBaseName.set("gradle-plugin")
+val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
+if (!isSameFileSize(jar.archivePath, jarnoversion)) {
+    jar.archivePath.copyTo(jarnoversion, true)
+}
+// compile jar with dependencies
+jar.from(zipTree(tjar)) {
+    include("**")
+}
+jar.manifest {
+    val attr = mutableMapOf<String, String>()
+    attr["Implementation-Title"] = project.description as String
+    attr["Implementation-Version"] = project.version as String
+    attr["Implementation-Vendor"] = "Dimas Lanjaka"
+    attr["Created-By"] =
+        "${System.getProperty("java.version")} (${System.getProperty("java.vendor")} ${System.getProperty("java.vm.version")})"
+    attributes(attr)
+}
+
+/*
 val rootLibs = File("${project.rootProject.rootDir}/../lib/").absolutePath
 val libtarget = File(rootLibs, "gradle-plugin.jar")
 jar.doLast {
@@ -212,20 +245,21 @@ jar.doLast {
         }
     }
 }
+ */
 
 tasks.findByName("publishPlugins")?.doLast {
     updateVersionPref(project)
 }
 
 tasks {
+    @Suppress("unused")
     val fatJar by creating(Jar::class) {
-        val jarname = "gradle-plugin-with-dependencies.jar"
         description = "create jar with dependencies"
         isZip64 = true
         group = "build"
 
         // set output file
-        archiveFileName.set(jarname)
+        archiveFileName.set("gradle-plugin.jar")
         //destinationDirectory.set(File(project.rootDir, "../javafx/libs").absoluteFile)
 
         // set manifest jar
@@ -249,6 +283,8 @@ tasks {
         }
         with(jar.get())
     }
+
+    @Suppress("unused")
     val updateVersion by creating {
         group = "build"
         description = "Increase Version Manual"
@@ -257,7 +293,6 @@ tasks {
         }
     }
 }
-
 //jar.dependsOn("fatJar")
 
 fun updateVersionPref(project: Project) {
@@ -311,3 +346,10 @@ fun getVersionPref(project: Project, newVersion: String? = null): Properties {
     return properties
 }
 
+fun isSameFileSize(file1: File, file2: File): Boolean {
+    return if (!file1.exists() || !file2.exists()) {
+        false
+    } else {
+        file1.length().compareTo(file2.length()) == 0
+    }
+}

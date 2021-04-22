@@ -18,5 +18,4 @@ pluginManagement {
 rootProject.name = "Gradle To Maven Plugin"
 
 //include(":idea")
-//includeBuild("repo/components")
-//include(":repo:components", ":repo:versions", ":repo:apron")
+includeBuild("repo/components")
