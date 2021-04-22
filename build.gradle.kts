@@ -21,7 +21,7 @@ plugins {
     id("java-gradle-plugin")
     id("maven-publish")
     id("com.gradle.plugin-publish") version "0.12.0"
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.32"
 }
 
 apply {
@@ -31,6 +31,7 @@ apply {
 
 group = "com.dimaslanjaka.android"
 version = "1.0.0"
+description = "Useful android plugin:\n - Resource Management API Generator for Android"
 
 allprojects {
     tasks.withType<JavaCompile> {
@@ -72,10 +73,10 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
 
     //kotlin deps
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
 
     // Additional
     compileOnly("org.jetbrains:annotations:20.1.0")

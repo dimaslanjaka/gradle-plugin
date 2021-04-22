@@ -16,4 +16,4 @@ maven("https://jitpack.io")
     }
 }
 
-rootProject.name = "gradle-android-plugin"
+rootProject.name = "Gradle Android Plugin"
