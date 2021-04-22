@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Date;
 
-import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
 import static com.dimaslanjaka.gradle.plugin.Utils.println;
 
 public class Core implements Plugin<Project> {
@@ -47,9 +46,7 @@ public class Core implements Plugin<Project> {
         target.afterEvaluate(new Action<Project>() {
             @Override
             public void execute(@NotNull Project project) {
-                new Offline2(project, CoreExtension.getLimit());
-                //OfflineMethods(project);
-                //startCache(project);
+                startCache(project);
                 /*
                 Threading.Once once = new Threading.Once();
                 once.run(new Runnable() {
@@ -98,7 +95,8 @@ public class Core implements Plugin<Project> {
             tmp.write(new Date());
             Runnable r = new Runnable() {
                 public void run() {
-                    OfflineMethods(targetProject);
+                    //OfflineMethods(targetProject);
+                    new Offline2(targetProject, CoreExtension.getLimit());
                 }
             };
 

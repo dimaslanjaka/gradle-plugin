@@ -1,0 +1,12 @@
+configurations {
+    taglibs { transitive = false }
+}
+
+task copytaglibs(type: Copy) {
+    from configurations.taglibs
+    into 'src/main/webapp/WEB-INF/lib'
+}
+
+compileTestJava {
+    dependsOn copytaglibs
+}

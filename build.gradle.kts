@@ -28,12 +28,11 @@ plugins {
     //`java-gradle-plugin`
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish") version "0.12.0"
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.32"
 }
 
 apply {
-    //plugin(org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin::class)
-    //from("build.test.gradle")
+     from("build.test.gradle")
 }
 
 group = "com.dimaslanjaka"
@@ -99,7 +98,7 @@ configurations.all {
     }
 }
 
-dependencies {
+@Suppress("GradleDependency") dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
     //implementation(project(":repo:components"))
@@ -116,12 +115,12 @@ dependencies {
     //testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
     //kotlin deps
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
 
-    compileOnly("org.jetbrains:annotations:20.1.0")
+    compileOnly("org.jetbrains:annotations:16.0.2")
     compileOnly("com.android.tools.build:gradle:7.0.0-alpha03")
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("com.squareup:javapoet:1.10.0")
@@ -154,12 +153,6 @@ tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
-/*
-configure<KotlinDslPluginOptions> {
-    experimentalWarning.set(false)
-}
- */
-
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -190,7 +183,7 @@ pluginBundle {
             version = project.version as String
         }
     }
-    
+
     mavenCoordinates {
         groupId = "com.dimaslanjaka"
         artifactId = "gradle-plugin"
@@ -270,7 +263,7 @@ tasks {
     }
 }
 
-jar.dependsOn("fatJar")
+//jar.dependsOn("fatJar")
 
 fun updateVersionPref(project: Project) {
     println("Updating version")
