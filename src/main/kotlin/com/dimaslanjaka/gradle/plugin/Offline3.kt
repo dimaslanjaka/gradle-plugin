@@ -1,12 +1,16 @@
 package com.dimaslanjaka.gradle.plugin
 
 import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPlugin
 
-class Offline3(project: Project) {
+class Offline3(p: Project) {
     init {
-        project.afterEvaluate {
+        p.afterEvaluate { project ->
             //it.configurations.collectionSchema.
-            val classpath = it.configurations.getByName("compileClasspath")
+            val configurations = project.configurations
+            configurations.collectionSchema.elements.forEach { schema ->
+                println(schema.name)
+            }
         }
     }
 }

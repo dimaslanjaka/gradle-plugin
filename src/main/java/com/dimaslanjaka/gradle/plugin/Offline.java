@@ -174,14 +174,14 @@ public class Offline {
         System.out.println(str);
     }
 
-    @SuppressWarnings("DefaultLocale")
+    @SuppressWarnings({"DefaultLocale", "ActualValue"})
     static void OfflineMethods(@Nullable Project p, @Nullable java.util.concurrent.Callable<Object> callback) {
         project = p;
         int resultCount = 0;
         int limitCount = 0;
-        String home = CoreExtension.Companion.getHome();
+        String home = Core.extension.home;
         File from = new File(new File(home), ".gradle/caches/modules-2/files-2.1");
-        File to = CoreExtension.Companion.getLocalRepository();
+        File to = Core.extension.localRepository;
         if (!to.exists()) if (!to.mkdirs()) print("fail create local repository");
         StringBuilder localMaven = new StringBuilder(fixPath(to.getAbsolutePath()));
         if (from.exists()) {

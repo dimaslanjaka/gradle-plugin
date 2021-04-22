@@ -4,7 +4,6 @@ import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.gradle.api.Project
-import java.io.File
 import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.file.Files
@@ -60,7 +59,7 @@ class Offline2 {
                 "plugin/com.dimaslanjaka/offline-${project.name}"
             )
             if (!logfile.parentFile.exists()) logfile.parentFile.mkdirs()
-            logfile.writeText("Cache Start On ${project.name} With Limit $limit")
+            logfile.writeText("Cache Start On ${project.name} With Limit $limit\n")
         }
         res.forEachIndexed { index, resultOffline2 ->
             if (limit != Integer.MAX_VALUE) {
@@ -114,7 +113,8 @@ class Offline2 {
                                                 File(versionPath, getFileName(artifact))
                                             if (isEmptyFile(targetMavenArtifact)) {
                                                 var copyConfirm = false
-                                                if (isValidArtifact(artifact)) {
+                                                if (isPom(artifact)) {
+                                                    // if artifact is pom, validate them
                                                     if (validateXML(artifact.toPath())) {
                                                         copyConfirm = true
                                                     } else {
@@ -149,6 +149,14 @@ class Offline2 {
                     }
                 }
             }
+        }
+    }
+
+    fun isPom(file: File): Boolean {
+        if (!file.exists()) {
+            return file.name.endsWith(".pom") || file.name.endsWith(".xml")
+        } else {
+            return false
         }
     }
 
@@ -296,7 +304,6 @@ class Offline2 {
         return artifact.exists() && validExtension
     }
 
-
     fun listJarModules(): MutableList<List1> {
         val result = mutableListOf<List1>()
         listGradleCaches()?.forEachIndexed { index, file ->
@@ -380,8 +387,8 @@ class Offline2 {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            val off = Offline2(5)
-            //off.fetchCaches()
+            val off = Offline2()
+            off.fetchCaches()
         }
 
         fun fetchAll() {

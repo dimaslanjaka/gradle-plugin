@@ -4,7 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="Optimize" />
+    <list default="true" id="08c78046-53eb-4b2f-b56f-963ce1ffc8d0" name="Default Changelist" comment="Optimize">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/modules/app/Composite_Build_Test.app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/assertj-core-3.10.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/assertj-core-3.10.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/assertj-core-3.10.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/assertj-core-3.18.1-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/assertj-core-3.18.1-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/assertj-core-3.18.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jna-5.6.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jna-5.6.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jna-5.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jna-platform-5.6.0-javadoc.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jna-platform-5.6.0-sources.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/jna-platform-5.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/jna/systemProp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/jna/systemProperties.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/assertj-core-3.10.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/assertj-core-3.10.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/assertj-core-3.10.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/assertj-core-3.18.1-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/assertj-core-3.18.1-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/assertj-core-3.18.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/jna-5.6.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/jna-5.6.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/jna-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/jna-platform-5.6.0-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/jna-platform-5.6.0-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup/jna-platform-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/offline.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/offline.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.8.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/lib/repackaged-all.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all-1.0.9.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Offline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Offline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/CoreExtension.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +98,13 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Gradle To Maven Plugin" type="f1a62948:ProjectNode" />
+                <item name="Gradle To Maven Plugin" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -60,6 +116,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -86,7 +143,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Test/Legacy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/repo/components" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin.scripting" />
   </component>
   <component name="RecentsManager">
@@ -100,69 +160,32 @@
       <command value="gradle clean jar" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.plugin [jar]">
-    <configuration name="components [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/repo/components" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+  <component name="RunManager" selected="Gradle.plugin [clean jar]">
+    <configuration name="PrintAppDataDir" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="jna.PrintAppDataDir" />
+      <module name="offline_dependencies.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="jna.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="components [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/repo/components" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="jar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="components [javadocJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/repo/components" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="javadocJar" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
+    <configuration name="systemProperties" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="jna.systemProperties" />
+      <module name="offline_dependencies.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="jna.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="plugin [clean jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -180,6 +203,27 @@
           </list>
         </option>
         <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="plugin [components]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="components" />
+          </list>
+        </option>
+        <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -209,11 +253,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.plugin [jar]" />
-        <item itemvalue="Gradle.components [jar]" />
-        <item itemvalue="Gradle.components [javadocJar]" />
-        <item itemvalue="Gradle.components [clean]" />
         <item itemvalue="Gradle.plugin [clean jar]" />
+        <item itemvalue="Application.systemProperties" />
+        <item itemvalue="Application.PrintAppDataDir" />
+        <item itemvalue="Gradle.plugin [jar]" />
+        <item itemvalue="Gradle.plugin [components]" />
       </list>
     </recent_temporary>
   </component>

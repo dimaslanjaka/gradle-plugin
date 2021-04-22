@@ -210,7 +210,7 @@ if (comp.exists()) {
 val jar: Jar by tasks
 jar.archiveBaseName.set("gradle-plugin")
 val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
-if (!isSameFileSize(jar.archivePath, jarnoversion)) {
+if (jar.archivePath.exists() && !isSameFileSize(jar.archivePath, jarnoversion)) {
     jar.archivePath.copyTo(jarnoversion, true)
 }
 // compile jar with dependencies

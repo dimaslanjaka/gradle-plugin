@@ -1,31 +1,71 @@
 package com.dimaslanjaka.gradle.plugin;
 
-import com.dimaslanjaka.gradle.offline_dependencies.OfflineDependenciesPlugin;
 import jar.Repack;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.invocation.Gradle;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.dimaslanjaka.gradle.plugin.Utils.println;
 
 public class Core implements Plugin<Project> {
     private final Threading thread = new Threading();
-    CoreExtension extension;
-    @Nullable
-    private Project project = null;
+    public static Ext extension;
+    private static Project project = null;
+
+    public interface CoreExtension {
+        String home = System.getProperty("user.home");
+        int limit = Integer.MAX_VALUE;
+        File localRepository = new File(home, ".m2/repository");
+        public boolean force = false;
+
+        void setLimit(int i);
+
+        int getLimit();
+
+        void setLocalRepository(File file);
+
+        File getLocalRepository();
+    }
+
+    public static class Ext implements CoreExtension {
+        public int limit = CoreExtension.limit;
+        public File localRepository = CoreExtension.localRepository;
+        public boolean force = CoreExtension.force;
+
+        public Ext(Project p) {
+            project = p;
+        }
+
+        @Override
+        public void setLimit(int i) {
+            limit = i;
+        }
+
+        @Override
+        public int getLimit() {
+            return limit;
+        }
+
+        @Override
+        public void setLocalRepository(File file) {
+            localRepository = file;
+        }
+
+        @Override
+        public File getLocalRepository() {
+            return localRepository;
+        }
+    }
 
     @Override
     public void apply(final @NotNull Project target) {
         thread.project = target;
-        this.project = target;
+        project = target;
         @SuppressWarnings({"unused"})
         Repository repository = new Repository(target);
         Repack jar = new Repack(target);
@@ -35,7 +75,7 @@ public class Core implements Plugin<Project> {
         java.io.File[] cacheFiles = new File(gradle.getGradleUserHomeDir().getAbsolutePath(), "/daemon/" + gradle.getGradleVersion()).listFiles();
         if (cacheFiles != null) {
             for (java.io.File cf : cacheFiles) {
-                if (cf.getName().endsWith(".out.log")) {
+                if (cf.getName().endsWith(".log")) { // .out.log
                     // println("Deleting gradle log file: $it") // Optional debug output
                     if (cf.delete()) {
                         println(cf + " deleted");
@@ -45,9 +85,9 @@ public class Core implements Plugin<Project> {
         }
 
         // TODO: Configuring Rules
-        extension = project.getExtensions().create("offlineConfig", CoreExtension.class);
-        project.getExtensions().create("offlineRepositoryRoot", File.class, CoreExtension.getLocalRepository());
-        project.getPlugins().apply(OfflineDependenciesPlugin.class);
+        extension = (Ext) createExtension(project, "offlineConfig", Ext.class, project);
+        project.getExtensions().create("offlineRepositoryRoot", File.class, extension.localRepository.getAbsolutePath());
+        //project.getPlugins().apply(OfflineDependenciesPlugin.class);
         new Offline3(project);
 
         target.afterEvaluate(new Action<Project>() {
@@ -63,6 +103,10 @@ public class Core implements Plugin<Project> {
                 });
             }
         });
+    }
+
+    public static Object createExtension(Project p, String name, Class clazz, Object... constructionArguments) {
+        return p.getExtensions().create(name, clazz, constructionArguments);
     }
 
     /**
@@ -94,16 +138,19 @@ public class Core implements Plugin<Project> {
      */
     public void startCache(Project targetProject) {
         File tmp = new File(targetProject.getBuildDir().getAbsolutePath(), "/plugin/com.dimaslanjaka/offline");
-        if (!tmp.exists() || tmp.isModifiedMoreThanHour(1)) {
-            resolveFile(tmp);
-            tmp.write(new Date());
-            Runnable r = new Runnable() {
-                public void run() {
-                    //OfflineMethods(targetProject);
-                    new Offline2(targetProject, CoreExtension.getLimit());
-                }
-            };
+        if (!tmp.getParentFile().exists()) tmp.getParentFile().mkdirs();
+        Runnable r = new Runnable() {
+            public void run() {
+                //OfflineMethods(targetProject);
+                new Offline2(targetProject, extension.limit);
+            }
+        };
 
+        if ((!tmp.exists() || tmp.isModifiedMoreThanHour(1)) && !extension.force) {
+            tmp.write(new Date());
+            new Thread(r).start();
+        } else if (extension.force) {
+            tmp.write(new Date());
             new Thread(r).start();
         }
     }

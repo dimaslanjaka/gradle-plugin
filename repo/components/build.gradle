@@ -43,11 +43,24 @@ dependencies {
     implementation fileTree(dir: "lib", include: ["*.jar"])
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains:annotations:20.1.0"
-    implementation "org.jetbrains:annotations:20.1.0"
+    implementation("net.java.dev.jna:jna-platform:5.8.0")
 
     // thirdparty dependencies and repackaging
     jarjar "org.gradle.jarjar:jarjar:$jarjarVersion"
     thirdparty "org.apache.maven:maven-model-builder:$mavenVersion"
+
+    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("org.apache.commons:commons-collections4:latest.release")
+    implementation("commons-collections:commons-collections:latest.release")
+
+    // Annotation 
+    implementation "javax.annotation:javax.annotation-api:1.3.2"
+    // Required if generating JSR-303 annotations
+    implementation "javax.validation:validation-api:1.1.0.CR2"
+    // Required if generating Jackson 2 annotations
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.12.1"
+    // Required if generating JodaTime data types
+    implementation "joda-time:joda-time:2.2"
 }
 
 java {
@@ -59,6 +72,7 @@ java {
 
 task repackageDependencies(type: Jar) {
     archivesBaseName = "repackaged-all"
+    archiveFileName = "repackaged-all.jar"
     version = project.version
     group = "build"
     destinationDirectory = new File(thirdpartyLibsDir as String)
