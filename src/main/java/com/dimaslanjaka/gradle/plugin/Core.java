@@ -88,7 +88,7 @@ public class Core implements Plugin<Project> {
      * @param targetProject project
      */
     public void startCache(Project targetProject) {
-        File tmp = new File(targetProject.getBuildDir().getAbsolutePath(), "com.dimaslanjaka/offline");
+        File tmp = new File(targetProject.getBuildDir().getAbsolutePath(), "/plugin/com.dimaslanjaka/offline");
         resolveFile(tmp);
         //println(tmp.getDate());
         if (tmp.isModifiedMoreThanHour(1)) {
