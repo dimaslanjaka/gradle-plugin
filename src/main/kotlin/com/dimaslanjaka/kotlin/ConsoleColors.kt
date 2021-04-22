@@ -138,7 +138,23 @@ enum class ConsoleColors(var code: String?) {
 
         @JvmStatic
         fun println(obj: Any) {
-            print(styler(random(), obj.toString()))
+            when (obj) {
+                is Boolean -> {
+                    printBoolean(obj)
+                }
+                else -> {
+                    print(styler(random(), obj.toString()))
+                }
+            }
+        }
+
+        @JvmStatic
+        fun printBoolean(boolean: Boolean) {
+            if (boolean) {
+                print(styler(GREEN, boolean.toString()))
+            } else {
+                print(styler(RED, boolean.toString()))
+            }
         }
     }
 }

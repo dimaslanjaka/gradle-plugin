@@ -38,6 +38,7 @@ apply {
 group = "com.dimaslanjaka"
 version = getVersionPref(project)["version"]!!
 description = "Transform gradle artifacts to maven local repository, for available offline with mavenLocal"
+println("${project.name} using version ${project.version}")
 
 allprojects {
     tasks.withType<JavaCompile> {
@@ -315,10 +316,10 @@ fun updateVersionPref(project: Project) {
     }
     // apply version
     getVersionPref(project)["version"] = token.joinToString(".")
-    project.version = getVersionPref(project)["version"]!!
+    project.version = token.joinToString(".")
 
     // save new version
-    getVersionPref(project, project.version.toString())
+    getVersionPref(project, token.joinToString("."))
 
     val map = mutableMapOf<String, Any>()
     map["main"] = token[0]
@@ -337,10 +338,12 @@ fun getVersionPref(project: Project, newVersion: String? = null): Properties {
     val reader = FileReader(fileVersion)
     val properties = Properties()
     properties.load(reader)
+
     if (!properties.containsKey("version") || (newVersion != null && newVersion.isNotEmpty())) {
         // TODO: if newVersion is not null or properties not have version property, set and save them
         properties["version"] = newVersion ?: "1.0.0"
         properties.store(FileWriter(fileVersion), "Gradle Plugin Version")
+        println("Version Updated Successfully")
     }
 
     return properties

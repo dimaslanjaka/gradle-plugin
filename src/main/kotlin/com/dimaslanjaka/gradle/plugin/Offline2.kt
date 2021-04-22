@@ -3,7 +3,9 @@ package com.dimaslanjaka.gradle.plugin
 import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import org.codehaus.groovy.runtime.EncodingGroovyMethods
 import org.gradle.api.Project
+import java.io.File
 import java.io.IOException
 import java.nio.charset.Charset
 import java.nio.file.Files
@@ -49,10 +51,10 @@ class Offline2 {
      * Start cache limited
      */
     fun startCache(limit: Int) {
-        fetchCaches()
+        fetchCaches("startCache")
         val res = result2.values.toMutableList()
         res.shuffle()
-        var logfile: File? = null
+        var logfile = File("build/.null")
         if (this::project.isInitialized) {
             logfile = File(
                 project.buildDir.absolutePath,
@@ -60,26 +62,82 @@ class Offline2 {
             )
             if (!logfile.parentFile.exists()) logfile.parentFile.mkdirs()
             logfile.writeText("Cache Start On ${project.name} With Limit $limit\n")
-        }
-        res.forEachIndexed { index, resultOffline2 ->
-            if (limit != Integer.MAX_VALUE) {
-                if (index <= limit - 1) {
-                    val indexLog = index + 1
-                    val log = copy(resultOffline2.from, resultOffline2.to, false)
-                    logfile?.appendText("$indexLog. $log\n", Charset.defaultCharset())
-                }
-            } else {
-                val indexLog = index + 1
-                val log = copy(resultOffline2.from, resultOffline2.to, false)
-                logfile?.appendText("$indexLog. $log\n", Charset.defaultCharset())
+        } else {
+            val temp = File("build").absoluteFile
+            if (temp.exists()) {
+                logfile = File(temp, "plugin/com.dimaslanjaka/offline-manual")
+                if (!logfile.parentFile.exists()) logfile.parentFile.mkdirs()
+                logfile.writeText("Cache Start Manual With Limit $limit\n")
             }
         }
-        logfile?.let {
-            println("Cache Result Saved To ${it.absolutePath}")
+        res.forEachIndexed { index, resultOffline2 ->
+            if (index <= limit - 1) {
+                val indexLog = index + 1
+                val log = copy(resultOffline2.from, resultOffline2.to, false)
+                logfile.appendText("$indexLog. $log\n", Charset.defaultCharset())
+                println("$indexLog. $log")
+            }
+        }
+        println("Cache Result Saved To ${logfile.absolutePath}")
+    }
+
+    fun fetchCaches(cacheFilename: String = "default", overwrite: Boolean = false) {
+        var cacheFile = cacheFilename.replace(Regex("[^A-Za-z0-9 ]"), "")
+        if (cacheFilename.length > 25) {
+            cacheFile = EncodingGroovyMethods.md5(cacheFilename) ?: "default"
+        }
+        val temp = File("build").absoluteFile
+        val cache1 = File(temp.absolutePath, "plugin/com.dimaslanjaka/${cacheFile}.json")
+        val cache2 = File(temp.absolutePath, "plugin/com.dimaslanjaka/${cacheFile}2.json")
+        var gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
+
+        if (cache1.exists()) {
+            val type = object : TypeToken<MutableList<ResultOffline2>>() {}.type
+            val res = gson.fromJson(cache1.readText(), type) as MutableList<ResultOffline2>
+            result.addAll(res)
+        }
+
+        if (cache2.exists()) {
+            val type = object : TypeToken<Map<String, ResultOffline2>>() {}.type
+            val res2 = gson.fromJson(cache2.readText(), type) as Map<String, ResultOffline2>
+            res2.forEach { (key, value) ->
+                if (!result2.containsKey(key)) {
+                    result2.putIfAbsent(key, value)
+                }
+            }
+        }
+
+        if (temp.exists()) {
+            if (overwrite) {
+                try {
+                    gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
+                    write(cache1, gson.toJson(result))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+                try {
+                    gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
+                    write(cache2, gson.toJson(result2))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else {
+                val run = Runnable {
+                    fetchCaches()
+                    fetchCaches(cacheFile, true)
+                }
+                Thread(run).start()
+            }
         }
     }
 
-    fun fetchCaches() {
+    fun write(file: File, content: Any) {
+        if (!file.parentFile.exists()) file.parentFile.mkdirs()
+        file.writeText(content.toString())
+    }
+
+    fun fetchCaches(): MutableList<ResultOffline2> {
         var resultCount = 0
         listJarModules().forEach { list1 ->
             list1.files.forEach { jarModules ->
@@ -89,7 +147,7 @@ class Offline2 {
                 modulePath.append("/").append(getFileName(jarModules)).append("/")
 
                 jarModules.listFiles()?.forEach { jarVersions ->
-                    if (jarVersions.isDirectory) {
+                    if (jarVersions != null && jarVersions.isDirectory) {
                         // copy jar directory for versioning variable
                         val jVersion = java.lang.StringBuilder(modulePath.toString())
                         jVersion.append("/").append(getFileName(jarVersions)).append("/")
@@ -133,10 +191,12 @@ class Offline2 {
                                                         )
                                                     )
 
-                                                    result2[artifact.absolutePath] = ResultOffline2(
-                                                        artifact,
-                                                        targetMavenArtifact,
-                                                        resultCount
+                                                    result2.putIfAbsent(
+                                                        artifact.absolutePath, ResultOffline2(
+                                                            artifact,
+                                                            targetMavenArtifact,
+                                                            resultCount
+                                                        )
                                                     )
                                                     resultCount++
                                                 }
@@ -150,13 +210,14 @@ class Offline2 {
                 }
             }
         }
+        return result
     }
 
-    fun isPom(file: File): Boolean {
-        if (!file.exists()) {
-            return file.name.endsWith(".pom") || file.name.endsWith(".xml")
+    private fun isPom(file: File): Boolean {
+        return if (!file.exists()) {
+            file.name.endsWith(".pom") || file.name.endsWith(".xml")
         } else {
-            return false
+            false
         }
     }
 
@@ -388,7 +449,8 @@ class Offline2 {
         @JvmStatic
         fun main(args: Array<String>) {
             val off = Offline2()
-            off.fetchCaches()
+            off.fetchCaches("Offline2.main")
+            off.startCache(1000)
         }
 
         fun fetchAll() {
