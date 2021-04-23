@@ -1,6 +1,6 @@
 package com.dimaslanjaka.gradle.plugin;
 
-import org.apache.commons.validator.routines.UrlValidator;
+import com.dimaslanjaka.kotlin.File;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,22 +9,11 @@ import java.util.Map;
 public class Utils {
     private final static String temp = System.getProperty("java.io.tmpdir");
     private final static File tempDir = new File(temp, "gradle");
-    static UrlValidator urlValidator = new UrlValidator();
 
     static {
         if (!tempDir.exists())
             if (!tempDir.mkdirs())
                 println("cannot create temporarily folder");
-    }
-
-    public static boolean webUrlValid(String url) {
-        urlValidator = new UrlValidator(new String[]{"http", "https"});
-        return urlValidator.isValid(url);
-    }
-
-    public static boolean ftpUrlValid(String url) {
-        urlValidator = new UrlValidator(new String[]{"ftp"});
-        return urlValidator.isValid(url);
     }
 
     @SuppressWarnings("all")
@@ -46,7 +35,7 @@ public class Utils {
     }
 
     public static File getTempFile(String filename, boolean autocreate) {
-        File directory = getTempDir();
+        com.dimaslanjaka.kotlin.File directory = getTempDir();
         return directory.file_in_dir(filename, autocreate);
     }
 

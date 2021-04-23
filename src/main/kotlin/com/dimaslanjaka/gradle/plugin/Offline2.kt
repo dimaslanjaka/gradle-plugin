@@ -1,8 +1,10 @@
 package com.dimaslanjaka.gradle.plugin
 
 import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import deserialize
 import org.codehaus.groovy.runtime.EncodingGroovyMethods
 import org.gradle.api.Project
 import java.io.File
@@ -51,7 +53,7 @@ class Offline2 {
      * Start cache limited
      */
     fun startCache(limit: Int) {
-        fetchCaches("startCache")
+        fetchCaches(cacheidentifier)
         val res = result2.values.toMutableList()
         res.shuffle()
         var logfile = File("build/.null")
@@ -75,7 +77,9 @@ class Offline2 {
                 val indexLog = index + 1
                 val log = copy(resultOffline2.from, resultOffline2.to, false)
                 logfile.appendText("$indexLog. $log\n", Charset.defaultCharset())
-                println("$indexLog. $log")
+                if (Core.Ext.debug) {
+                    println("$indexLog. $log")
+                }
             }
         }
         println("Cache Result Saved To ${logfile.absolutePath}")
@@ -89,40 +93,37 @@ class Offline2 {
         val temp = File("build").absoluteFile
         val cache1 = File(temp.absolutePath, "plugin/com.dimaslanjaka/${cacheFile}.json")
         val cache2 = File(temp.absolutePath, "plugin/com.dimaslanjaka/${cacheFile}2.json")
-        var gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
-
-        if (cache1.exists()) {
-            val type = object : TypeToken<MutableList<ResultOffline2>>() {}.type
-            val res = gson.fromJson(cache1.readText(), type) as MutableList<ResultOffline2>
-            result.addAll(res)
-        }
-
-        if (cache2.exists()) {
-            val type = object : TypeToken<Map<String, ResultOffline2>>() {}.type
-            val res2 = gson.fromJson(cache2.readText(), type) as Map<String, ResultOffline2>
-            res2.forEach { (key, value) ->
-                if (!result2.containsKey(key)) {
-                    result2.putIfAbsent(key, value)
-                }
-            }
-        }
+        var gson: Gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
 
         if (temp.exists()) {
             if (overwrite) {
                 try {
-                    gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
-                    write(cache1, gson.toJson(result))
+                    write(cache1, gson.toJson(result.toList().distinct()))
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
 
                 try {
-                    gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
+                    gson = Gson()
                     write(cache2, gson.toJson(result2))
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             } else {
+                if (cache1.exists()) {
+                    val res = cache1.readText().deserialize(gson, object : TypeToken<MutableList<ResultOffline2>>() {})
+                    result.addAll(res)
+                }
+
+                if (cache2.exists()) {
+                    val res2 = cache2.readText().deserialize(gson, object : TypeToken<Map<String, ResultOffline2>>() {})
+                    res2.forEach { (key, value) ->
+                        if (!result2.containsKey(key)) {
+                            result2.putIfAbsent(key, value)
+                        }
+                    }
+                }
+
                 val run = Runnable {
                     fetchCaches()
                     fetchCaches(cacheFile, true)
@@ -445,12 +446,13 @@ class Offline2 {
     companion object {
         private var result = mutableListOf<ResultOffline2>()
         private var result2 = mutableMapOf<String, ResultOffline2>()
+        var cacheidentifier = "Offline2"
 
         @JvmStatic
         fun main(args: Array<String>) {
             val off = Offline2()
-            off.fetchCaches("Offline2.main")
-            off.startCache(1000)
+            off.fetchCaches(cacheidentifier)
+            off.startCache(Integer.MAX_VALUE)
         }
 
         fun fetchAll() {

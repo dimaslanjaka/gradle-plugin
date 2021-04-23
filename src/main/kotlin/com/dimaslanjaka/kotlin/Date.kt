@@ -113,5 +113,5 @@ object Date {
 
 fun main() {
     val tmp = Utils.getTempFile("test", true)
-    println(tmp.creationTime, tmp.lastModified, tmp.isModifiedMoreThanHour(1))
+    //println(tmp.creationTime, tmp.lastModified, tmp.isModifiedMoreThanHour(1))
 }

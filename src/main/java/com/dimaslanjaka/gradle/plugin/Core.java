@@ -1,5 +1,6 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import com.dimaslanjaka.kotlin.File;
 import jar.Repack;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
@@ -36,6 +37,15 @@ public class Core implements Plugin<Project> {
         public int limit = CoreExtension.limit;
         public File localRepository = CoreExtension.localRepository;
         public boolean force = CoreExtension.force;
+        public static boolean debug = false;
+
+        public void setDebug(boolean debug) {
+            Ext.debug = debug;
+        }
+
+        public boolean getDebug() {
+            return debug;
+        }
 
         public Ext(Project p) {
             project = p;
@@ -72,14 +82,14 @@ public class Core implements Plugin<Project> {
 
         // TODO: clear gradle big log files
         Gradle gradle = target.getGradle();
-        java.io.File[] cacheFiles = new File(gradle.getGradleUserHomeDir().getAbsolutePath(), "/daemon/" + gradle.getGradleVersion()).listFiles();
-        if (cacheFiles != null) {
-            for (java.io.File cf : cacheFiles) {
-                if (cf.getName().endsWith(".log")) { // .out.log
-                    // println("Deleting gradle log file: $it") // Optional debug output
-                    if (cf.delete()) {
-                        println(cf + " deleted");
-                    }
+        String gradleHome = gradle.getGradleUserHomeDir().getAbsolutePath();
+        File daemon = new File(gradleHome, "/daemon/" + gradle.getGradleVersion());
+        File[] cacheFiles = daemon.listFiles();
+        for (File cf : cacheFiles) {
+            if (cf.getName().endsWith(".log")) { // .out.log
+                // println("Deleting gradle log file: $it") // Optional debug output
+                if (cf.delete()) {
+                    println(cf + " deleted");
                 }
             }
         }
@@ -105,7 +115,7 @@ public class Core implements Plugin<Project> {
         });
     }
 
-    public static Object createExtension(Project p, String name, Class clazz, Object... constructionArguments) {
+    public static <T> Object createExtension(Project p, String name, Class<T> clazz, Object... constructionArguments) {
         return p.getExtensions().create(name, clazz, constructionArguments);
     }
 
@@ -146,7 +156,8 @@ public class Core implements Plugin<Project> {
             }
         };
 
-        if ((!tmp.exists() || tmp.isModifiedMoreThanHour(1)) && !extension.force) {
+        boolean expiredOrNotCreated = !tmp.exists(); //|| tmp.isModifiedMoreThanHour(1);
+        if (expiredOrNotCreated && !extension.force) {
             tmp.write(new Date());
             new Thread(r).start();
         } else if (extension.force) {

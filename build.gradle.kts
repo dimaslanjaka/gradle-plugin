@@ -208,12 +208,15 @@ if (comp.exists()) {
     }
 }
 
+val javadocJar: Jar by tasks
+javadocJar.archiveBaseName.set("gradle-plugin")
 val jar: Jar by tasks
 jar.archiveBaseName.set("gradle-plugin")
 val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
 if (jar.archivePath.exists() && !isSameFileSize(jar.archivePath, jarnoversion)) {
     jar.archivePath.copyTo(jarnoversion, true)
 }
+
 // compile jar with dependencies
 jar.from(zipTree(tjar)) {
     include("**")
@@ -260,7 +263,8 @@ tasks {
         group = "build"
 
         // set output file
-        archiveFileName.set("gradle-plugin.jar")
+        archiveFileName.set("gradle-plugin-wd.jar")
+
         //destinationDirectory.set(File(project.rootDir, "../javafx/libs").absoluteFile)
 
         // set manifest jar
@@ -294,7 +298,7 @@ tasks {
         }
     }
 }
-//jar.dependsOn("fatJar")
+jar.dependsOn("fatJar")
 
 fun updateVersionPref(project: Project) {
     println("Updating version")
