@@ -148,6 +148,27 @@ tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
+tasks.withType<Jar>().configureEach {
+    archiveBaseName.set("gradle-plugin")
+
+    manifest {
+        attributes["Implementation-Title"] = project.description as String
+        attributes["Implementation-Version"] = project.version as String
+        attributes["Implementation-Vendor"] = "Dimas Lanjaka"
+        attributes["Created-By"] =
+            "${System.getProperty("java.version")} (${System.getProperty("java.vendor")} ${System.getProperty("java.vm.version")})"
+    }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+    targetCompatibility = JavaVersion.VERSION_1_8.toString()
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -185,15 +206,6 @@ pluginBundle {
     }
 }
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
-}
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
-}
-
 val comp = File(projectDir, "repo/components/build/libs/").absoluteFile
 val tjar = File(projectDir, "lib/offline.jar").absoluteFile
 if (comp.exists()) {
@@ -208,8 +220,6 @@ if (comp.exists()) {
     }
 }
 
-val javadocJar: Jar by tasks
-javadocJar.archiveBaseName.set("gradle-plugin")
 val jar: Jar by tasks
 jar.archiveBaseName.set("gradle-plugin")
 val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
@@ -221,35 +231,6 @@ if (jar.archivePath.exists() && !isSameFileSize(jar.archivePath, jarnoversion)) 
 jar.from(zipTree(tjar)) {
     include("**")
 }
-jar.manifest {
-    val attr = mutableMapOf<String, String>()
-    attr["Implementation-Title"] = project.description as String
-    attr["Implementation-Version"] = project.version as String
-    attr["Implementation-Vendor"] = "Dimas Lanjaka"
-    attr["Created-By"] =
-        "${System.getProperty("java.version")} (${System.getProperty("java.vendor")} ${System.getProperty("java.vm.version")})"
-    attributes(attr)
-}
-
-/*
-val rootLibs = File("${project.rootProject.rootDir}/../lib/").absolutePath
-val libtarget = File(rootLibs, "gradle-plugin.jar")
-jar.doLast {
-    copy {
-        val dari = jar.archivePath
-        // copy if source size is different from target
-        val compares = libtarget.exists() && dari.length().compareTo(libtarget.length()) != 0
-        if (compares || !libtarget.exists()) {
-            from(dari)
-            into(rootLibs)
-            rename { fileName ->
-                fileName.replace("gradle-plugin-${project.version}", "gradle-plugin")
-            }
-            println("Copy\n\tf: $dari \n\tt: $rootLibs")
-        }
-    }
-}
- */
 
 tasks.findByName("publishPlugins")?.doLast {
     updateVersionPref(project)

@@ -18,15 +18,11 @@ import java.io.File as javaFile
 /**
  * TODO: Extends default files
  */
-class File : javaFile, Serializable, Comparable<javaFile?> {
+open class File : javaFile, Serializable, Comparable<javaFile?> {
     private var file: javaFile
 
     constructor(pathname: String) : super(pathname) {
         this.file = javaFile(pathname)
-    }
-
-    constructor(file: javaFile) : super(file.absolutePath) {
-        this.file = file
     }
 
     constructor(parent: String, child: String) : super(parent, child) {
@@ -41,8 +37,6 @@ class File : javaFile, Serializable, Comparable<javaFile?> {
         this.file = javaFile(uri)
     }
 
-    constructor() : this("") {}
-
     fun resolveParent() {
         if (!this.file.parentFile.exists()) {
             this.file.parentFile.mkdirs()
@@ -52,7 +46,7 @@ class File : javaFile, Serializable, Comparable<javaFile?> {
     override fun listFiles(): Array<out File> {
         val mlist = mutableListOf<File>()
         this.file.listFiles()?.forEachIndexed { index, file ->
-            mlist.add(index, File(file))
+            mlist.add(index, File(file.absolutePath))
         }
         return mlist.toTypedArray()
     }
@@ -136,6 +130,9 @@ class File : javaFile, Serializable, Comparable<javaFile?> {
         .setPrettyPrinting()
         .create()
 
+    /**
+     * Create file in directory
+     */
     @JvmName("file_in_dir")
     fun fileInDir(filename: String, autocreate: Boolean): File? {
         val parent: javaFile = this.file
@@ -149,7 +146,7 @@ class File : javaFile, Serializable, Comparable<javaFile?> {
                     e.printStackTrace()
                 }
             }
-            return File(this.file)
+            return File(this.file.absolutePath)
         }
         return null
     }
