@@ -1,12 +1,11 @@
 package com.dimaslanjaka.kotlin
 
-import java.util.concurrent.TimeUnit
-import com.dimaslanjaka.kotlin.Helper.println
+import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import java.text.ParseException
 import java.time.Duration
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.concurrent.TimeUnit
 
 object TimeAgo {
     val times: List<Long> = listOf(
@@ -46,10 +45,9 @@ object TimeAgo {
         val ret = res.toString()
         res = StringBuffer()
 
-        return if("" == ret) {
+        return if ("" == ret) {
             "0 seconds ago"
-        }
-        else {
+        } else {
             ret
         }
     }

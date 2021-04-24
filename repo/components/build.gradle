@@ -126,7 +126,7 @@ task packageWithoutVersion(type: Jar) {
     dependsOn(jar)
 }
 
-jar.finalizedBy(packageWithoutVersion)
+//jar.finalizedBy(packageWithoutVersion)
 
 tasks.findByName("publishPlugins").doLast {
     updateVersion(project)

@@ -16,6 +16,9 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import javax.xml.parsers.DocumentBuilderFactory
 
+/**
+ * Copy all artifact from gradle caches to maven local
+ */
 class Offline2 {
     var home = System.getProperty("user.home")
     var from = File(File(home), ".gradle/caches/modules-2/files-2.1")
@@ -77,7 +80,7 @@ class Offline2 {
                 val indexLog = index + 1
                 val log = copy(resultOffline2.from, resultOffline2.to, false)
                 logfile.appendText("$indexLog. $log\n", Charset.defaultCharset())
-                if (Core.Ext.debug) {
+                if (Core.extension.debug) {
                     println("$indexLog. $log")
                 }
             }

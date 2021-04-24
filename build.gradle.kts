@@ -24,8 +24,7 @@ repositories {
 
 plugins {
     id("groovy")
-    //`kotlin-dsl`
-    //id("java")
+    id("java")
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish") version "0.12.0"
     kotlin("jvm") version "1.4.32"
@@ -202,10 +201,16 @@ pluginBundle {
 val jar: Jar by tasks
 jar.archiveBaseName.set("gradle-plugin")
 // compile jar with dependencies
-val tjar = File(projectDir, "repo/components/build/libs/offline-dependencies-plugin.jar").absoluteFile
-jar.from(zipTree(tjar)) {
-    include("**")
+
+File(projectDir, "repo/components/build/libs").absoluteFile.listFiles().forEach { offlinejar ->
+    offlinejar?.let {
+        jar.from(zipTree(it)) {
+            include("**")
+            exclude("META-INF", "META-INF/**")
+        }
+    }
 }
+
 jar.doLast {
     val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
     if (jar.archivePath.exists() && !isSameFileSize(jar.archivePath, jarnoversion)) {
@@ -249,6 +254,7 @@ tasks {
             exclude("META-INF", "META-INF/**")
         }
         with(jar.get())
+        dependsOn(jar)
     }
 
     @Suppress("unused")
@@ -260,7 +266,7 @@ tasks {
         }
     }
 }
-jar.dependsOn("fatJar")
+//jar.dependsOn("fatJar")
 
 fun updateVersionPref(project: Project) {
     println("Updating version")

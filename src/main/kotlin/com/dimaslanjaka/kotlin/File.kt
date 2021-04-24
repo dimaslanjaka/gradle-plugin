@@ -5,15 +5,21 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import deserialize
+import gson
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import toLongDateFormat
 import java.io.*
 import java.net.URI
 import java.nio.charset.Charset
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.StandardCopyOption
+import java.nio.file.attribute.BasicFileAttributes
 import java.util.Date
+import java.util.concurrent.TimeUnit
 import java.io.File as javaFile
+
 
 /**
  * TODO: Extends default files
@@ -35,6 +41,17 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
 
     constructor(uri: URI) : super(uri) {
         this.file = javaFile(uri)
+    }
+
+    /**
+     * Normalize path separator
+     */
+    fun normalize(): Path {
+        return this.file.toPath().normalize()
+    }
+
+    fun normalizeAsString(): String {
+        return normalize().toString()
     }
 
     fun resolveParent() {
@@ -170,6 +187,13 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
         return javaFile(this.file.absolutePath)
     }
 
+    /**
+     * File information about dates (creation, modify, access)
+     */
+    fun getDateAttributes(): DateAttributes {
+        return DateAttributes(this.file)
+    }
+
     companion object {
         @Suppress("unused")
         @JvmStatic
@@ -185,6 +209,32 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
         @JvmStatic
         fun isNotSameFileSize(file1: javaFile, file2: javaFile): Boolean {
             return !isSameFileSize(file1, file2)
+        }
+    }
+
+    class DateAttributes(file: javaFile) {
+        val attr: BasicFileAttributes = Files.readAttributes(
+            file.toPath(),
+            BasicFileAttributes::class.java
+        )
+
+        /**
+         * Created Date
+         */
+        val created = attr.creationTime().to(TimeUnit.MILLISECONDS).toLongDateFormat()
+
+        /**
+         * Last Modified Time
+         */
+        val modified = attr.lastModifiedTime().to(TimeUnit.MILLISECONDS).toLongDateFormat()
+
+        /**
+         * Last Access Time
+         */
+        val access = attr.lastAccessTime().to(TimeUnit.MILLISECONDS).toLongDateFormat()
+
+        override fun toString(): String {
+            return gson().toJson(this)
         }
     }
 }

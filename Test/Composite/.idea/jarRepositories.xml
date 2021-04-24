@@ -51,5 +51,25 @@
       <option name="name" value="maven3" />
       <option name="url" value="https://maven.restlet.com" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="19e05b9f410fffd754ef91fb70016e61" />
+      <option name="name" value="19e05b9f410fffd754ef91fb70016e61" />
+      <option name="url" value="https://repo.sovrin.org/service/rest/repository/browse/maven-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="a82b449e646f0b1a4a5162d3109f41d9" />
+      <option name="name" value="a82b449e646f0b1a4a5162d3109f41d9" />
+      <option name="url" value="https://www.aht-group.com/nexus/content/repositories/central/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="e8daf145b927120bdce640272567d075" />
+      <option name="name" value="e8daf145b927120bdce640272567d075" />
+      <option name="url" value="https://artifactory.elyxor.com/artifactory/libs-release/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
   </component>
 </project>

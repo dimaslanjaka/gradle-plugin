@@ -63,23 +63,33 @@ enum class ConsoleColors(var code: String?) {
         private val VALUES = Collections.unmodifiableList(Arrays.asList(*values()))
         private val SIZE = VALUES.size
         private val RANDOM: Random = Random()
-        fun bold(message: String?): String? {
-            return ONLY_BOLD.code + message + RESET.code
+        fun bold(message: String?): String {
+            return ONLY_BOLD.code + (message ?: "NULL") + RESET.code
         }
 
         @JvmStatic
-        fun underline(message: String?): String? {
-            return ONLY_UNDERLINED.code + message + RESET.code
+        fun printstr(o: String?) {
+            kotlin.io.println(green(o))
         }
 
         @JvmStatic
-        fun red(message: String): String {
-            return styler(RED, message)
+        fun printint(o: Int?) {
+            kotlin.io.println(red(o.toString()))
         }
 
         @JvmStatic
-        fun green(message: String): String {
-            return styler(GREEN, message)
+        fun underline(message: String?): String {
+            return ONLY_UNDERLINED.code + (message ?: "NULL") + RESET.code
+        }
+
+        @JvmStatic
+        fun red(message: String?): String {
+            return styler(RED, (message ?: "NULL"))
+        }
+
+        @JvmStatic
+        fun green(message: String?): String {
+            return styler(GREEN, (message ?: "NULL"))
         }
 
         @JvmStatic
@@ -127,6 +137,15 @@ enum class ConsoleColors(var code: String?) {
             return VALUES[RANDOM.nextInt(SIZE)]
         }
 
+        /**
+         * Return random color string
+         * usage <code>println(randomColor("hello"))</code>
+         */
+        @JvmStatic
+        fun randomColor(string: String): String {
+            return styler(random(), string)
+        }
+
         @JvmStatic
         fun println(vararg obj: Any) {
             val build = mutableListOf<Any>()
@@ -141,6 +160,12 @@ enum class ConsoleColors(var code: String?) {
             when (obj) {
                 is Boolean -> {
                     printBoolean(obj)
+                }
+                is String -> {
+                    printstr(obj)
+                }
+                is Int -> {
+                    printint(obj)
                 }
                 else -> {
                     print(styler(random(), obj.toString()))

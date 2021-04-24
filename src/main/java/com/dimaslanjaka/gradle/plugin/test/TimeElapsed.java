@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
 import static com.dimaslanjaka.kotlin.Date.isMoreThanHourAgo;
 import static com.dimaslanjaka.kotlin.Date.isMoreThanMinuteAgo;
 
@@ -32,8 +33,8 @@ public class TimeElapsed {
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             Date date = df.parse(completionDate1);
             String format = df.format(date);
-            Utils.println("Hour", isMoreThanHourAgo(getDate(), 1), isMoreThanHourAgo(date, 1));
-            Utils.println("Mins", isMoreThanMinuteAgo(date, 1));
+            println("Hour", isMoreThanHourAgo(getDate(), 1), isMoreThanHourAgo(date, 1));
+            println("Mins", isMoreThanMinuteAgo(date, 1));
         } catch (Exception e) {
             e.printStackTrace();
         }

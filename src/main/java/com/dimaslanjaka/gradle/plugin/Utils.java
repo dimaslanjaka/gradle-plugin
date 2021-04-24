@@ -1,5 +1,6 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import com.dimaslanjaka.kotlin.ConsoleColors;
 import com.dimaslanjaka.kotlin.File;
 
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class Utils {
 
     @SuppressWarnings("all")
     public static void println(Object str) {
-        com.dimaslanjaka.kotlin.Helper.println(str);
+        ConsoleColors.println(str);
     }
 
     public static void main(String[] args) {
@@ -99,9 +100,5 @@ public class Utils {
         } catch (Exception ignored) {
         }
         return false;
-    }
-
-    public static void println(Object... o) {
-        com.dimaslanjaka.kotlin.Helper.println(o);
     }
 }

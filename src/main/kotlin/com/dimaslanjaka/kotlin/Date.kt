@@ -2,7 +2,7 @@ package com.dimaslanjaka.kotlin
 
 import com.dimaslanjaka.gradle.plugin.Utils
 import com.dimaslanjaka.gradle.plugin.date.SimpleDateFormat
-import com.dimaslanjaka.kotlin.Helper.println
+import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
