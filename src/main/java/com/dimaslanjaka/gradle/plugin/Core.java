@@ -33,7 +33,51 @@ public class Core implements Plugin<Project> {
         File getLocalRepository();
     }
 
+    @Override
+    public void apply(final @NotNull Project target) {
+        thread.project = target;
+        project = target;
+        @SuppressWarnings({"unused"})
+        Repository repository = new Repository(target);
+        Repack jar = new Repack(target);
+
+        // TODO: clear gradle big log files
+        Gradle gradle = target.getGradle();
+        String gradleHome = gradle.getGradleUserHomeDir().getAbsolutePath();
+        File daemon = new File(gradleHome, "/daemon/" + gradle.getGradleVersion());
+        File[] cacheFiles = daemon.listFiles();
+        for (File cf : cacheFiles) {
+            if (cf.getName().endsWith(".log")) { // .out.log
+                // println("Deleting gradle log file: $it") // Optional debug output
+                if (cf.delete()) {
+                    println(cf + " deleted");
+                }
+            }
+        }
+
+        // TODO: Configuring Rules
+        extension = (Ext) createExtension(project, "offlineConfig", Ext.class, project);
+        //project.getExtensions().create("offlineRepositoryRoot", String.class, extension.localRepository.getAbsolutePath());
+        //project.getPlugins().apply(OfflineDependenciesPlugin.class);
+        new Offline3(project);
+
+        target.afterEvaluate(new Action<Project>() {
+            @Override
+            public void execute(@NotNull Project project) {
+                //startCache(project);
+                Threading.Once once = new Threading.Once();
+                once.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        startCache(project);
+                    }
+                });
+            }
+        });
+    }
+
     public static class Ext implements CoreExtension {
+        public String home = CoreExtension.home;
         public int limit = CoreExtension.limit;
         public File localRepository = CoreExtension.localRepository;
         public boolean force = CoreExtension.force;
@@ -41,6 +85,10 @@ public class Core implements Plugin<Project> {
 
         public void setDebug(boolean debug) {
             Ext.debug = debug;
+        }
+
+        public String getHome() {
+            return home;
         }
 
         public boolean getDebug() {
@@ -70,49 +118,6 @@ public class Core implements Plugin<Project> {
         public File getLocalRepository() {
             return localRepository;
         }
-    }
-
-    @Override
-    public void apply(final @NotNull Project target) {
-        thread.project = target;
-        project = target;
-        @SuppressWarnings({"unused"})
-        Repository repository = new Repository(target);
-        Repack jar = new Repack(target);
-
-        // TODO: clear gradle big log files
-        Gradle gradle = target.getGradle();
-        String gradleHome = gradle.getGradleUserHomeDir().getAbsolutePath();
-        File daemon = new File(gradleHome, "/daemon/" + gradle.getGradleVersion());
-        File[] cacheFiles = daemon.listFiles();
-        for (File cf : cacheFiles) {
-            if (cf.getName().endsWith(".log")) { // .out.log
-                // println("Deleting gradle log file: $it") // Optional debug output
-                if (cf.delete()) {
-                    println(cf + " deleted");
-                }
-            }
-        }
-
-        // TODO: Configuring Rules
-        extension = (Ext) createExtension(project, "offlineConfig", Ext.class, project);
-        project.getExtensions().create("offlineRepositoryRoot", File.class, extension.localRepository.getAbsolutePath());
-        //project.getPlugins().apply(OfflineDependenciesPlugin.class);
-        new Offline3(project);
-
-        target.afterEvaluate(new Action<Project>() {
-            @Override
-            public void execute(@NotNull Project project) {
-                //startCache(project);
-                Threading.Once once = new Threading.Once();
-                once.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        startCache(project);
-                    }
-                });
-            }
-        });
     }
 
     public static <T> Object createExtension(Project p, String name, Class<T> clazz, Object... constructionArguments) {

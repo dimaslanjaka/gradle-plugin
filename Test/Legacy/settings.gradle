@@ -1,3 +1,9 @@
 rootProject.name = 'Test Legacy Method'
-String plugin = new File(rootProject.projectDir, "/../../").getAbsolutePath()
-includeBuild(plugin)
+
+
+// Declare plugin relative path for direct test
+File plugin = new File(rootProject.projectDir, "/../../")
+
+// For direct change listen
+includeBuild(plugin.getAbsolutePath())
+

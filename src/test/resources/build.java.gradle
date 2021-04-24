@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'com.github.ev3dev-lang-java'
+version '2.0.0'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+jar {
+    manifest {
+        attributes("Implementation-Title": project.name,
+                "Implementation-Version": version)
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation group: 'com.jcraft', name: 'jsch', version: '0.1.55'
+    implementation group: 'com.github.jengelman.gradle.plugins', name: 'shadow', version: '4.0.3'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.github.ev3dev-lang-java'
+            artifactId = 'gradle-plugin'
+            version = "${version}"
+        }
+    }
+}

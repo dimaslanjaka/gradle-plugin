@@ -25,7 +25,7 @@ repositories {
 plugins {
     id("groovy")
     //`kotlin-dsl`
-    //`java-gradle-plugin`
+    //id("java")
     id("java-gradle-plugin")
     id("com.gradle.plugin-publish") version "0.12.0"
     kotlin("jvm") version "1.4.32"
@@ -40,46 +40,15 @@ version = getVersionPref(project)["version"]!!
 description = "Transform gradle artifacts to maven local repository, for available offline with mavenLocal"
 println("${project.name} using version ${project.version}")
 
-allprojects {
-    tasks.withType<JavaCompile> {
-        options.compilerArgs.addAll(arrayOf("-parameters", "-Xdoclint:none", "-Xlint:all"))
-        options.isIncremental = true
-        sourceCompatibility = JavaVersion.VERSION_1_8.toString()
-        targetCompatibility = JavaVersion.VERSION_1_8.toString()
-    }
-
-    tasks.withType<KotlinCompile>().all {
-        //println("Configuring $name in project ${project.name}...")
-        kotlinOptions {
-            suppressWarnings = true
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
-            javaParameters = true
-            allWarningsAsErrors = false
-        }
-        incremental = true
-    }
-
-    tasks.named<AbstractCompile>("compileGroovy") {
-        // Groovy only needs the declared dependencies
-        // (and not longer the output of compileJava)
-        classpath = sourceSets.main.get().compileClasspath
-    }
-    tasks.named<AbstractCompile>("compileKotlin") {
-        // Java also depends on the result of Groovy compilation
-        // (which automatically makes it depend of compileGroovy)
-        classpath += files(sourceSets.main.get().withConvention(GroovySourceSet::class) { groovy }.classesDirectory)
-    }
-}
-
 sourceSets {
     getByName("main") {
-        java.srcDir("src/main/groovy")
-        java.srcDir("src/main/java")
-        java.srcDir("src/main/kotlin")
+        java.srcDir("${project.projectDir}/src/main/groovy")
+        java.srcDir("${project.projectDir}/src/main/java")
+        java.srcDir("${project.projectDir}/src/main/kotlin")
     }
     getByName("test") {
-        java.srcDir("src/test/java")
-        java.srcDir("src/test/kotlin")
+        java.srcDir("${project.projectDir}/src/test/java")
+        java.srcDir("${project.projectDir}/src/test/kotlin")
     }
 }
 
@@ -96,7 +65,7 @@ configurations.all {
     implementation(localGroovy())
     val offlineLib = File(projectDir, "repo/components/build/libs")
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
-    //implementation(fileTree(mapOf("dir" to offlineLib, "include" to listOf("*.jar"))))
+    implementation(fileTree(mapOf("dir" to offlineLib, "include" to listOf("*.jar"))))
 
     //Test
     testImplementation(gradleTestKit())
@@ -122,9 +91,12 @@ configurations.all {
     //implementation("org.reflections:reflections:0.9.12")
     //implementation("org.jboss:jdk-misc:2.Final")
 
-    // package relocator
+    // package re-locator
     //implementation("com.googlecode.jarjar:jarjar:1.3")
     //implementation("org.apache.maven:maven-model-builder:3.6.3")
+
+    // Spring
+    implementation("org.springframework:spring-core:5.2.14.RELEASE")
 
     // Apache
     implementation("org.apache.commons:commons-lang3:3.11")
@@ -160,13 +132,34 @@ tasks.withType<Jar>().configureEach {
     }
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-
+tasks.withType<JavaCompile> {
+    options.compilerArgs.addAll(arrayOf("-parameters", "-Xdoclint:none", "-Xlint:all"))
+    options.isIncremental = true
     sourceCompatibility = JavaVersion.VERSION_1_8.toString()
     targetCompatibility = JavaVersion.VERSION_1_8.toString()
+}
+
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions {
+        suppressWarnings = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        javaParameters = true
+        allWarningsAsErrors = false
+    }
+    incremental = true
+    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+    targetCompatibility = JavaVersion.VERSION_1_8.toString()
+}
+
+tasks.named<AbstractCompile>("compileGroovy") {
+    // Groovy only needs the declared dependencies
+    // (and not longer the output of compileJava)
+    classpath = sourceSets.main.get().compileClasspath
+}
+tasks.named<AbstractCompile>("compileKotlin") {
+    // Java also depends on the result of Groovy compilation
+    // (which automatically makes it depend of compileGroovy)
+    classpath += files(sourceSets.main.get().withConvention(GroovySourceSet::class) { groovy }.classesDirectory)
 }
 
 java {
@@ -206,30 +199,18 @@ pluginBundle {
     }
 }
 
-val comp = File(projectDir, "repo/components/build/libs/").absoluteFile
-val tjar = File(projectDir, "lib/offline.jar").absoluteFile
-if (comp.exists()) {
-    comp.listFiles()?.forEach { compjar ->
-        compjar?.let { cjar ->
-            if (!tjar.exists() || (cjar.name.startsWith("offline-dependencies-plugin") && !cjar.name.contains("doc"))) {
-                if (!isSameFileSize(cjar, tjar)) {
-                    cjar.copyTo(tjar, true)
-                }
-            }
-        }
-    }
-}
-
 val jar: Jar by tasks
 jar.archiveBaseName.set("gradle-plugin")
-val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
-if (jar.archivePath.exists() && !isSameFileSize(jar.archivePath, jarnoversion)) {
-    jar.archivePath.copyTo(jarnoversion, true)
-}
-
 // compile jar with dependencies
+val tjar = File(projectDir, "repo/components/build/libs/offline-dependencies-plugin.jar").absoluteFile
 jar.from(zipTree(tjar)) {
     include("**")
+}
+jar.doLast {
+    val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
+    if (jar.archivePath.exists() && !isSameFileSize(jar.archivePath, jarnoversion)) {
+        jar.archivePath.copyTo(jarnoversion, true)
+    }
 }
 
 tasks.findByName("publishPlugins")?.doLast {

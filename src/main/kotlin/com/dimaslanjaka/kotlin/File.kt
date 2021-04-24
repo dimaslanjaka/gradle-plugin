@@ -156,6 +156,20 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
         return fileInDir(filename, false)
     }
 
+    /**
+     * Convert to com.dimaslanjaka.gradle.plugin.File
+     */
+    fun toDimaslanjakaGradlePluginFile(): com.dimaslanjaka.gradle.plugin.File {
+        return com.dimaslanjaka.gradle.plugin.File(this.file.absolutePath)
+    }
+
+    /**
+     * Convert to java.io.File
+     */
+    fun toJavaIoFile(): java.io.File {
+        return javaFile(this.file.absolutePath)
+    }
+
     companion object {
         @Suppress("unused")
         @JvmStatic

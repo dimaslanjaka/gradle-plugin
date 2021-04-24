@@ -5,9 +5,6 @@ buildscript {
     repositories {
         mavenLocal()
         flatDir {
-            dirs "../build/libs"
-        }
-        flatDir {
             dirs "../../build/libs"
         }
         mavenCentral()

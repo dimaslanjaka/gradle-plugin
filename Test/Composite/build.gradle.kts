@@ -17,7 +17,7 @@ plugins {
 // configure offline config
 if (project.hasProperty("offlineConfig")) {
     offlineConfig {
-        limit = Integer.MAX_VALUE
+        limit = Integer.MAX_VALUE // unlimited cache
     }
 }
 

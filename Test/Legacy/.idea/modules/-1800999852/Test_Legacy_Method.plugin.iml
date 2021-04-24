@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../../../build/classes/java/main" />
+    <output-test url="file://$MODULE_DIR$/../../../../../build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../..">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/main/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/main/kotlin" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/test/groovy" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/test/kotlin" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.4.32" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains:annotations:16.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
+    <orderEntry type="library" name="Gradle: joda-time:joda-time:2.10.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-core:5.2.14.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.11" level="project" />
+    <orderEntry type="library" name="Gradle: commons-validator:commons-validator:1.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework:spring-jcl:5.2.14.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: commons-beanutils:commons-beanutils:1.9.4" level="project" />
+    <orderEntry type="library" name="Gradle: commons-digester:commons-digester:2.1" level="project" />
+    <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: commons-collections:commons-collections:3.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.32" level="project" />
+    <orderEntry type="library" name="Gradle: gradle-api-6.8" level="project" />
+    <orderEntry type="library" name="Gradle: groovy-all-1.3-2.5.12" level="project" />
+    <orderEntry type="library" name="Gradle: kotlin-stdlib-1.4.20" level="project" />
+    <orderEntry type="library" name="Gradle: kotlin-stdlib-common-1.4.20" level="project" />
+    <orderEntry type="library" name="Gradle: kotlin-stdlib-jdk7-1.4.20" level="project" />
+    <orderEntry type="library" name="Gradle: kotlin-stdlib-jdk8-1.4.20" level="project" />
+    <orderEntry type="library" name="Gradle: kotlin-reflect-1.4.20" level="project" />
+    <orderEntry type="library" name="Gradle: gradle-installation-beacon-6.8" level="project" />
+    <orderEntry type="module-library">
+      <library name="Gradle: assertj-core-3.10.0-javadoc">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/assertj-core-3.10.0-javadoc.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: assertj-core-3.10.0-sources">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/assertj-core-3.10.0-sources.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: assertj-core-3.10.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/assertj-core-3.10.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: assertj-core-3.18.1-javadoc">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/assertj-core-3.18.1-javadoc.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: assertj-core-3.18.1-sources">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/assertj-core-3.18.1-sources.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: assertj-core-3.18.1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/assertj-core-3.18.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: jna-5.6.0-javadoc">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/jna-5.6.0-javadoc.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: jna-5.6.0-sources">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/jna-5.6.0-sources.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: jna-5.6.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/jna-5.6.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: jna-platform-5.6.0-javadoc">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/jna-platform-5.6.0-javadoc.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: jna-platform-5.6.0-sources">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/jna-platform-5.6.0-sources.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: jna-platform-5.6.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/jna-platform-5.6.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Gradle: offline">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../../lib/offline.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.13" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.platform:junit-platform-commons:1.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.opentest4j:opentest4j:1.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: gradle-test-kit-6.8" level="project" />
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../../../build/createClasspathManifest" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../../../build/pluginUnderTestMetadata" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

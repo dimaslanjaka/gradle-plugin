@@ -15,5 +15,8 @@ pluginManagement {
     }
 }
 rootProject.name = "Composite Build Test"
-includeBuild("../../")
+
+// Relative composite build
+val plugin = java.io.File(rootProject.projectDir, "/../../").getAbsolutePath()
+includeBuild(plugin)
 //include(":app")

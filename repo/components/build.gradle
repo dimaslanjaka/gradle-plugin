@@ -11,6 +11,7 @@ buildscript {
 }
 
 apply plugin: "com.gradle.plugin-publish"
+apply plugin: "java"
 apply plugin: "groovy"
 
 group = "com.dimaslanjaka.gradle.offline_dependencies"
@@ -94,15 +95,9 @@ task repackageDependencies(type: Jar) {
     }
 }
 
-compileJava.dependsOn "repackageDependencies"
+compileJava.dependsOn("repackageDependencies")
 
-jar {
-    from(zipTree(repackageDependencies.archivePath)) {
-        include "**"
-    }
-
-    baseName = "offline-dependencies-plugin"
-
+tasks.withType(Jar).all {
     manifest {
         attributes(
                 "Created-By": "${System.properties["java.version"]} (${System.properties["java.vendor"]} ${System.properties["java.vm.version"]})".toString(),
@@ -112,6 +107,26 @@ jar {
         )
     }
 }
+
+jar {
+    from(zipTree(repackageDependencies.archiveFile.get().getAsFile())) {
+        include "**"
+    }
+
+    archivesBaseName = "offline-dependencies-plugin"
+    archiveVersion.set(project.version.toString())
+}
+
+task packageWithoutVersion(type: Jar) {
+    archiveFileName = "offline-dependencies-plugin.jar"
+    from(zipTree(jar.archiveFile.get().getAsFile())) {
+        include "**"
+    }
+    archiveVersion.set(project.version.toString())
+    dependsOn(jar)
+}
+
+jar.finalizedBy(packageWithoutVersion)
 
 tasks.findByName("publishPlugins").doLast {
     updateVersion(project)

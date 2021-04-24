@@ -14,23 +14,18 @@ class OfflineDependenciesPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-
-        if (!project.hasProperty("offlineRepositoryRoot")) {
-            project.ext.offlineRepositoryRoot = "${project.projectDir}/offline-repository"
-        }
-
         RepositoryHandler repositoryHandler = new DefaultRepositoryHandler(
                 project.services.get(BaseRepositoryFactory.class) as BaseRepositoryFactory,
                 project.services.get(Instantiator.class) as Instantiator,
                 project.services.get(CollectionCallbackActionDecorator.class) as CollectionCallbackActionDecorator
         )
 
-        def extension = project.extensions.create(EXTENSION_NAME, OfflineDependenciesExtension, repositoryHandler)
+        def extension = project.extensions.create(EXTENSION_NAME, OfflineDependenciesExtension, project, repositoryHandler)
 
-        project.logger.info("Offline dependencies root configured at '${project.ext.offlineRepositoryRoot}'")
-        println("ROOT: ${project.ext.offlineRepositoryRoot}")
+        println("Configured Extension: $extension")
+
         project.task('updateOfflineRepository', type: UpdateOfflineRepositoryTask) {
-            conventionMapping.root = { "${project.offlineRepositoryRoot}" }
+            conventionMapping.root = { "${extension.root}" }
             conventionMapping.configurationNames = { extension.configurations }
             conventionMapping.buildscriptConfigurationNames = { extension.buildScriptConfigurations }
             conventionMapping.includeSources = { extension.includeSources }

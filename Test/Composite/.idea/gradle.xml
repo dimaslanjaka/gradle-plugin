@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -12,22 +11,15 @@
                   <project path="$PROJECT_DIR$/../.." />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/../../repo/components" name="offline_dependencies">
-                <projects>
-                  <project path="$PROJECT_DIR$/../../repo/components" />
-                </projects>
-              </build>
             </builds>
           </compositeBuild>
         </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="liberica-11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/../.." />
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/../../repo/components" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -179,9 +179,9 @@ public class Offline {
         project = p;
         int resultCount = 0;
         int limitCount = 0;
-        String home = Core.extension.home;
+        String home = Core.extension.getHome();
         File from = new File(new File(home), ".gradle/caches/modules-2/files-2.1");
-        File to = Core.extension.localRepository;
+        File to = Core.extension.getLocalRepository();
         if (!to.exists()) if (!to.mkdirs()) print("fail create local repository");
         StringBuilder localMaven = new StringBuilder(fixPath(to.getAbsolutePath()));
         if (from.exists()) {
