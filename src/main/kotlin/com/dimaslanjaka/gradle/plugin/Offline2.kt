@@ -35,6 +35,7 @@ class Offline2 {
     constructor(project: Project, limit: Int = 5) {
         this.project = project
         startCache(limit)
+        extensions = Core.extension.extensions
     }
 
     /**

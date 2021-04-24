@@ -22,6 +22,16 @@
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="BintrayJCenter" />
+      <option name="name" value="BintrayJCenter" />
+      <option name="url" value="https://jcenter.bintray.com/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="Google" />
       <option name="name" value="Google" />
       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
@@ -42,11 +52,6 @@
       <option name="url" value="https://dl.bintray.com/kotlin/kotlin-eap" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="BintrayJCenter" />
-      <option name="name" value="BintrayJCenter" />
-      <option name="url" value="https://jcenter.bintray.com/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="maven3" />
       <option name="name" value="maven3" />
       <option name="url" value="https://maven.restlet.com" />
@@ -65,11 +70,6 @@
       <option name="id" value="e8daf145b927120bdce640272567d075" />
       <option name="name" value="e8daf145b927120bdce640272567d075" />
       <option name="url" value="https://artifactory.elyxor.com/artifactory/libs-release/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://jitpack.io" />
     </remote-repository>
   </component>
 </project>

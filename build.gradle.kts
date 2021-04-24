@@ -89,6 +89,7 @@ configurations.all {
     implementation("joda-time:joda-time:2.10.9")
     //implementation("org.reflections:reflections:0.9.12")
     //implementation("org.jboss:jdk-misc:2.Final")
+    implementation("org.jsoup:jsoup:1.13.1")
 
     // package re-locator
     //implementation("com.googlecode.jarjar:jarjar:1.3")

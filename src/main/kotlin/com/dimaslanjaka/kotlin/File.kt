@@ -1,6 +1,7 @@
 package com.dimaslanjaka.kotlin
 
 import com.dimaslanjaka.gradle.plugin.Utils
+import com.dimaslanjaka.java.Thread
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -43,6 +44,59 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
         this.file = javaFile(uri)
     }
 
+    inner class WalkResult {
+        val dirs = mutableListOf<File>()
+        val files = mutableListOf<File>()
+    }
+
+    private var walkResult = WalkResult()
+    private fun walk(path: String): WalkResult {
+        val root = javaFile(path)
+        val list = root.listFiles()
+        list?.forEach { file ->
+            file?.let { f ->
+                if (f.isDirectory) {
+                    walk(f.absolutePath)
+                    //println("Dir:" + f.absoluteFile)
+                    walkResult.dirs.add(File(f.absolutePath))
+                } else {
+                    //println("File:" + f.absoluteFile)
+                    walkResult.files.add(File(f.absolutePath))
+                }
+            }
+        }
+        return walkResult
+    }
+
+    /**
+     * Check file locked by java.nio.FileLock
+     */
+    fun isFileLocked(): Boolean {
+        return Thread.isFileLocked(File(this.file.absolutePath))
+    }
+
+    /**
+     * Recursive iterator of directory
+     * <code>
+     *     File("directory/path").walk().forEach { f ->
+     *          if (f.isDirectory) {
+     *              println("Dir:" + f.absoluteFile)
+     *          } else if (f.isFile) {
+     *              println("File:" + f.absoluteFile)
+     *          }
+     *     }
+     * </code>
+     */
+    fun walk(): WalkResult? {
+        // re-initialize result class
+        walkResult = WalkResult()
+        // re-start iterator
+        if (this.file.isDirectory) {
+            return walk(this.file.absolutePath)
+        }
+        return null
+    }
+
     /**
      * Normalize path separator
      */
@@ -54,10 +108,24 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
         return normalize().toString()
     }
 
-    fun resolveParent() {
+    fun normalizeAsCanonicalFile(): File {
+        return File(normalize().toString())
+    }
+
+    /**
+     * Create new file
+     */
+    fun createFile(): File {
+        resolveParent()
+        this.file.createNewFile()
+        return this
+    }
+
+    fun resolveParent(): File {
         if (!this.file.parentFile.exists()) {
             this.file.parentFile.mkdirs()
         }
+        return this
     }
 
     override fun listFiles(): Array<out File> {
@@ -69,17 +137,22 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
     }
 
     /**
-     * Write date as Long format
+     * Write to file
      */
-    fun write(content: Date): com.dimaslanjaka.kotlin.File {
-        return write(content.time)
+    fun write(content: Any): File {
+        return write(content, Charset.defaultCharset())
     }
 
+    /**
+     * Write to file
+     */
     fun write(content: Any, charset: Charset = Charset.defaultCharset()): com.dimaslanjaka.kotlin.File {
         // resolve parent directory
         resolveParent()
         // begin write
-        if (content is String) {
+        if (content is Date) {
+            this.file.writeText(content.time.toString())
+        } else if (content is String) {
             this.file.writeText(content, charset)
         } else if (content is Class<*> || content is Collection<*>) {
             val json = gson().toJson(content)
@@ -88,6 +161,10 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
             this.file.writeText(content.toString())
         }
         return this
+    }
+
+    fun appendText(content: Any) {
+        this.file.appendText(content.toString())
     }
 
     /**

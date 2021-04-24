@@ -18,6 +18,8 @@ plugins {
 if (project.hasProperty("offlineConfig")) {
     offlineConfig {
         limit = Integer.MAX_VALUE // unlimited cache
+        force = true
+        extensions = listOf(".jar", ".aar").toTypedArray()
     }
 }
 

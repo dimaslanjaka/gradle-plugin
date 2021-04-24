@@ -1,13 +1,16 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import com.dimaslanjaka.java.Thread;
 import com.dimaslanjaka.kotlin.File;
 import jar.Repack;
+import org.gradle.BuildResult;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.invocation.Gradle;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.charset.Charset;
 import java.util.Date;
 
 import static com.dimaslanjaka.gradle.api.Extension.createExtension;
@@ -45,7 +48,6 @@ public class Core implements Plugin<Project> {
         // TODO: Configuring Rules
         extension = (CoreExtension) createExtension(project, CONFIG_NAME, CoreExtension.class, project);
         //project.getPlugins().apply(OfflineDependenciesPlugin.class);
-        new Offline3(project);
 
         target.afterEvaluate(new Action<Project>() {
             @Override
@@ -60,6 +62,18 @@ public class Core implements Plugin<Project> {
                 });
             }
         });
+
+        target.getGradle().buildFinished(new Action<BuildResult>() {
+            @Override
+            public void execute(@NotNull BuildResult buildResult) {
+                new Thread(buildResult.toString()).lock(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Cleaner(target);
+                    }
+                });
+            }
+        });
     }
 
     /**
@@ -68,26 +82,41 @@ public class Core implements Plugin<Project> {
      * @param targetProject project
      */
     public void startCache(Project targetProject) {
-        File tmp = new File(targetProject.getBuildDir().getAbsolutePath(), "/plugin/com.dimaslanjaka/offline");
+        final File tmp = new File(targetProject.getBuildDir().getAbsolutePath(), "/plugin/com.dimaslanjaka/offline");
         tmp.resolveParent();
-        Runnable r = new Runnable() {
+        final Runnable start = new Runnable() {
             public void run() {
+                // Cache all gradle dependency caches
                 if (extension.limit == Integer.MAX_VALUE) {
                     OfflineMethods(targetProject);
                 } else {
                     new Offline2(targetProject, extension.limit);
                 }
+
+                // Cache Configured Classpath in project
+                new Offline3(targetProject);
+
+                new Thread("startCache").lock(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Cleaner(targetProject);
+                    }
+                });
+            }
+        };
+        final Runnable launch = new Runnable() {
+            @Override
+            public void run() {
+                tmp.write(new Date(), Charset.defaultCharset());
+                new Thread(start).start();
             }
         };
 
-        println(tmp.getDateAttributes());
-        boolean expiredOrNotCreated = !tmp.exists(); //|| tmp.isModifiedMoreThanHour(1);
-        if (expiredOrNotCreated && !extension.force) {
-            tmp.write(new Date());
-            new Thread(r).start();
-        } else if (extension.force) {
-            tmp.write(new Date());
-            new Thread(r).start();
+        boolean expiredOrNotCreated = !tmp.exists() || tmp.getDateAttributes().getModified().getMinutes() >= extension.expire;
+        if (extension.force) { // force cached
+            new Thread(launch).start();
+        } else if (expiredOrNotCreated) {
+            new Thread(launch).start();
         }
     }
 }

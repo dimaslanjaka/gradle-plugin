@@ -1,11 +1,19 @@
+import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import org.gradle.api.Project
+import java.io.BufferedReader
 import java.io.File
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URI
+import java.net.URL
 import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 /**
@@ -26,6 +34,15 @@ fun <T> String.deserialize(gson: Gson, typeToken: TypeToken<T>): T {
             throw e
         }
     }
+}
+
+/**
+ * Appends all elements that are not `null` to the given [destination].
+ * <a href="https://stackoverflow.com/a/38535537">https://stackoverflow.com/a/38535537</a>
+ */
+public fun <C : MutableCollection<in T>, T : Any> Iterable<T?>.filterNotNullTo(destination: C): C {
+    for (element in this) if (element != null) destination.add(element)
+    return destination
 }
 
 /**
@@ -57,10 +74,6 @@ fun Long.toLongDateFormat(): LongDateFormat {
     return LongDateFormat(this)
 }
 
-fun main() {
-    println(File("build").modifiedSecondAgo())
-}
-
 /**
  * Google gson instance
  */
@@ -76,6 +89,21 @@ fun List<*>.println() {
     this.forEach {
         kotlin.io.println(it ?: "NULL")
     }
+}
+
+fun List<*>.getElementFromLast(i: Int): Any? {
+    return this[this.size - i];
+}
+
+fun URL.fixPath(): URL {
+    val ori = this.path
+    val pattern: Pattern = Pattern.compile("/{2,}", Pattern.MULTILINE)
+    val matcher: Matcher = pattern.matcher(ori)
+    val newPath = matcher.replaceAll("/")
+    val auth = null
+    val fragment = null
+    val uri = URI(protocol, auth, host, port, newPath, query, fragment)
+    return uri.toURL()
 }
 
 /**
@@ -99,13 +127,31 @@ fun Project.isAndroid(): Boolean {
             this.plugins.hasPlugin("com.android.library")
 }
 
-object Fun {
-    @JvmStatic
-    fun println(vararg Obj: Any) {
-        Obj.forEach {
-            kotlin.io.println(it)
-        }
+fun URL.getHtml(): UrlGetHtmlResult {
+    val connection = this.fixPath().openConnection() as HttpURLConnection
+    connection.requestMethod = "GET"
+    connection.connect()
+// open the stream and put it into BufferedReader
+    // open the stream and put it into BufferedReader
+    val br = BufferedReader(
+        InputStreamReader(connection.inputStream)
+    )
+    val html = StringBuilder()
+    var inputLine: String?
+    while (br.readLine().also { inputLine = it } != null) {
+        html.append(inputLine)
     }
+    br.close()
+    val code: Int = connection.responseCode
+    return UrlGetHtmlResult().apply {
+        this.code = code
+        this.html = html.toString()
+    }
+}
+
+class UrlGetHtmlResult {
+    var code: Int = 0
+    lateinit var html: String
 }
 
 class LongDateFormat(l: Long) {
@@ -129,4 +175,10 @@ class LongDateFormat(l: Long) {
     override fun toString(): String {
         return gson().toJson(this)
     }
+}
+
+fun main() {
+    println(File("build").modifiedSecondAgo())
+    val url = URL("http://google.com/dsd/sds///sds//ds/dt?hellow=Hax&sgtu#hashx=ert").fixPath()
+    println(url)
 }
