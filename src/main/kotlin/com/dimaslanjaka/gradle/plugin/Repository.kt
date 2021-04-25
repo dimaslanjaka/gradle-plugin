@@ -1,6 +1,7 @@
 package com.dimaslanjaka.gradle.plugin
 
 import com.dimaslanjaka.kotlin.File
+import gson
 import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.ArtifactRepository
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
@@ -16,21 +17,25 @@ class Repository(p: Project) {
     init {
         if (p.subprojects.isNotEmpty()) {
             for (sp in p.subprojects) {
-                initialize()
+                initialize(sp)
             }
         }
-        initialize()
+        initialize(project)
     }
 
-    private fun initialize() {
-        project.beforeEvaluate { project1 ->
-            for (repo in listRepos) {
-                if (Utils.isURL(repo, true)) {
-                    addRepo(project1, repo)
-                }
+    private fun initialize(project: Project) {
+        println("initialize repository ${project.name}")
+
+        // add default repositories
+        addDefault(project)
+
+        // add repositories from resource
+        for (repo in listRepos) {
+            if (repo.startsWith("http")) {
+                addRepo(project, repo.trim())
             }
-            addDefault(project1)
         }
+
         project.gradle.buildFinished {
             val repositories = LinkedHashMap<String, String>()
             project
@@ -43,12 +48,12 @@ class Repository(p: Project) {
                     val url = mavenRepository.url.toString()
                     repositories[name] = url
 
-                    println("$name=$url")
+                    //println("$name=$url")
                 }
             val logfile = File(
                 project.buildDir.absolutePath, "plugin/com.dimaslanjaka/repositories-${project.name}"
             )
-            logfile.write(repositories)
+            logfile.write(gson().toJson(repositories))
         }
     }
 

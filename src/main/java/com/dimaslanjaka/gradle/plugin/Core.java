@@ -3,19 +3,22 @@ package com.dimaslanjaka.gradle.plugin;
 import com.dimaslanjaka.java.Thread;
 import com.dimaslanjaka.kotlin.File;
 import jar.Repack;
-import org.gradle.BuildResult;
 import org.gradle.api.Action;
+import org.gradle.api.NamedDomainObjectCollectionSchema;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.Configuration;
+import org.gradle.api.artifacts.ConfigurationContainer;
 import org.gradle.api.invocation.Gradle;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.function.Consumer;
 
 import static com.dimaslanjaka.gradle.api.Extension.createExtension;
 import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
-import static com.dimaslanjaka.gradle.plugin.Utils.println;
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
 
 public class Core implements Plugin<Project> {
     private final Threading thread = new Threading();
@@ -27,7 +30,15 @@ public class Core implements Plugin<Project> {
     public void apply(final @NotNull Project target) {
         thread.project = target;
         project = target;
-        @SuppressWarnings({"unused"})
+
+        project.getAllprojects().forEach(new Consumer<Project>() {
+            @Override
+            public void accept(Project project) {
+                setupProjectConfiguration(project);
+            }
+        });
+
+
         Repository repository = new Repository(target);
         Repack jar = new Repack(target);
 
@@ -52,28 +63,23 @@ public class Core implements Plugin<Project> {
         target.afterEvaluate(new Action<Project>() {
             @Override
             public void execute(@NotNull Project project) {
-                //startCache(project);
-                Threading.Once once = new Threading.Once();
-                once.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        startCache(project);
-                    }
-                });
+                startCache(project);
+                if (com.dimaslanjaka.gradle.api.Utils.isAndroid(project)) {
+                    new Android(project);
+                }
             }
         });
+    }
 
-        target.getGradle().buildFinished(new Action<BuildResult>() {
-            @Override
-            public void execute(@NotNull BuildResult buildResult) {
-                new Thread(buildResult.toString()).lock(new Runnable() {
-                    @Override
-                    public void run() {
-                        new Cleaner(target);
-                    }
-                });
-            }
-        });
+    private void setupProjectConfiguration(Project project) {
+        ConfigurationContainer configurationContainer = project.getConfigurations();
+        NamedDomainObjectCollectionSchema collectionSchema = configurationContainer.getCollectionSchema();
+        for (Configuration conf : configurationContainer) {
+            println(project.getName(), conf.getName());
+            conf.setTransitive(true);
+            conf.setCanBeConsumed(true);
+            conf.setCanBeResolved(true);
+        }
     }
 
     /**
@@ -96,6 +102,7 @@ public class Core implements Plugin<Project> {
                 // Cache Configured Classpath in project
                 new Offline3(targetProject);
 
+                // Clean folder pom without jar
                 new Thread("startCache").lock(new Runnable() {
                     @Override
                     public void run() {

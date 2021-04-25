@@ -71,5 +71,35 @@
       <option name="name" value="e8daf145b927120bdce640272567d075" />
       <option name="url" value="https://artifactory.elyxor.com/artifactory/libs-release/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="9c9b1e5e5ebd74e0ba36826cfc8f4657" />
+      <option name="name" value="9c9b1e5e5ebd74e0ba36826cfc8f4657" />
+      <option name="url" value="http://nexus.bsdn.org/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="7aac3c69b1016898c557a5bb4ff2645f2" />
+      <option name="name" value="7aac3c69b1016898c557a5bb4ff2645f2" />
+      <option name="url" value="https://nexus.xebialabs.com/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="1bb59919200089d78bb9e2b06b875ead2" />
+      <option name="name" value="1bb59919200089d78bb9e2b06b875ead2" />
+      <option name="url" value="http://archiva.temasys.com.sg/repository/internal/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="e45e5db9e75500cb158d60ac5b62661a" />
+      <option name="name" value="e45e5db9e75500cb158d60ac5b62661a" />
+      <option name="url" value="https://archiva.interlocsolutions.com/archiva/repository/internal/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="efa2096fc561de20764778fb7fce970a" />
+      <option name="name" value="efa2096fc561de20764778fb7fce970a" />
+      <option name="url" value="https://storage.googleapis.com/download.flutter.com" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="358d31511d1454d2d3e0459f7322f759" />
+      <option name="name" value="358d31511d1454d2d3e0459f7322f759" />
+      <option name="url" value="https://repo.jenkins-ci.org/public/" />
+    </remote-repository>
   </component>
 </project>

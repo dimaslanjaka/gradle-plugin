@@ -16,7 +16,7 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 
-import static com.dimaslanjaka.gradle.plugin.Utils.println;
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
 import static com.dimaslanjaka.kotlin.Date.*;
 
 @SuppressWarnings("serial")

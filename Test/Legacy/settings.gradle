@@ -7,4 +7,4 @@ File plugin = new File(rootProject.projectDir, "/../../")
 // For direct change listen
 includeBuild(plugin.getAbsolutePath())
 
-include(new File(rootProject.projectDir, "java-groovy-kotlin").getAbsolutePath())
+include(":java-groovy-kotlin")

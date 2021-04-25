@@ -33,8 +33,6 @@ if (project.hasProperty("offlineConfig")) {
     }
 }
 
-//println(offlineConfig)
-
 repositories {
     mavenLocal()
     mavenCentral()

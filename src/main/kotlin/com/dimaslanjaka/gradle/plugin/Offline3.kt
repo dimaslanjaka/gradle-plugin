@@ -55,14 +55,11 @@ class Offline3(p: Project) {
             val configurations = projectAE.configurations
             configurations.collectionSchema.elements.forEach { schema ->
                 val cname = configurations.getByName(schema.name)
-                cname.isCanBeConsumed = true
-                cname.isCanBeResolved = true
-                cname.isTransitive = true
                 if (cname.isCanBeResolved) { // only process resolved configuration
                     if (debug) {
                         println("Resolved Configuration Schema Of ${schema.name}")
                     }
-                    logfile.appendText("Resolved Configuration Schema Of ${schema.name}\n")
+                    logfile.appendText("\n+Resolved Configuration Schema Of ${schema.name}\n")
                     cname.map { configurationSchema ->
                         configurationSchema?.let { artifact ->
                             val logtxt = StringBuilder("\t")
@@ -81,7 +78,7 @@ class Offline3(p: Project) {
                         }
                     }
                 } else {
-                    logfile.appendText("Couldn't Resolve Configuration Schema Of ${schema.name}\n")
+                    logfile.appendText("\n-Couldn't Resolve Configuration Schema Of ${schema.name}\n")
                 }
             }
 

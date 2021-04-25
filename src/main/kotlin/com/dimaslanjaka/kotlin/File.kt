@@ -1,7 +1,7 @@
 package com.dimaslanjaka.kotlin
 
-import com.dimaslanjaka.gradle.plugin.Utils
 import com.dimaslanjaka.java.Thread
+import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -233,9 +233,9 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
         this.file = File(this.file, filename)
         if (parent.isDirectory) {
             if (autocreate) {
-                if (!parent.exists()) if (!parent.mkdirs()) Utils.println("Cannot create parent dir $parent")
+                if (!parent.exists()) if (!parent.mkdirs()) println("Cannot create parent dir $parent")
                 try {
-                    if (!this.file.exists()) if (!this.file.createNewFile()) Utils.println("cannot create file $filename")
+                    if (!this.file.exists()) if (!this.file.createNewFile()) println("cannot create file $filename")
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }

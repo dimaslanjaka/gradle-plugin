@@ -8,7 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-import static com.dimaslanjaka.gradle.plugin.Utils.println;
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
+
 
 public class Resources {
     /**

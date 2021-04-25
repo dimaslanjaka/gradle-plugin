@@ -9,7 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static com.dimaslanjaka.gradle.plugin.Utils.println;
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
+
 
 public class Threading {
     public static final Object singleThreadLock = new Object();

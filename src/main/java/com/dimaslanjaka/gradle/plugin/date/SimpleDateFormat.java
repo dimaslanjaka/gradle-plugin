@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Contract;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.dimaslanjaka.gradle.plugin.Utils.println;
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
 
 public class SimpleDateFormat extends java.text.SimpleDateFormat {
     static final long serialVersionUID = 4774881970558854345L;

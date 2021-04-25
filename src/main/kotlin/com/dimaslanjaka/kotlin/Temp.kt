@@ -1,7 +1,7 @@
 package com.dimaslanjaka.kotlin
 
 //import com.dimaslanjaka.gradle.plugin.File
-import com.dimaslanjaka.gradle.plugin.Utils
+import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import java.io.File
 
 @Suppress("unused", "redundant")
@@ -32,7 +32,7 @@ class Temp {
         if (this.tempDir.isFile) {
             if (this.tempDir.delete()) {
                 if (!this.tempDir.mkdirs()) {
-                    Utils.println("cannot create temp folder")
+                    println("cannot create temp folder")
                 }
             }
         }

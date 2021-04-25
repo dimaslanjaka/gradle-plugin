@@ -1,10 +1,11 @@
 package com.dimaslanjaka.gradle.plugin;
 
-import com.dimaslanjaka.kotlin.ConsoleColors;
 import com.dimaslanjaka.kotlin.File;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
 
 @SuppressWarnings("unused")
 public class Utils {
@@ -42,11 +43,6 @@ public class Utils {
 
     private static File getTempDir() {
         return tempDir;
-    }
-
-    @SuppressWarnings("all")
-    public static void println(Object str) {
-        ConsoleColors.println(str);
     }
 
     public static void main(String[] args) {
