@@ -80,6 +80,8 @@ class Offline3(p: Project) {
                             logfile.appendText(logtxt.toString())
                         }
                     }
+                } else {
+                    logfile.appendText("Couldn't Resolve Configuration Schema Of ${schema.name}\n")
                 }
             }
 

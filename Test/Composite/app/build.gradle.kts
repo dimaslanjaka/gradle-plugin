@@ -24,6 +24,12 @@ android {
     }
 }
 
+repositories {
+    google()
+    mavenCentral()
+    mavenLocal()
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
@@ -32,4 +38,5 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("com.android.support.test:runner:1.0.2")
     androidTestImplementation("com.android.support.test.espresso:espresso-core:3.0.2")
+    //implementation("com.android.tools.build:gradle:2.3.0")
 }

@@ -22,9 +22,11 @@ class Repack {
         project.dependencies.add("jarjar", "org.gradle.jarjar:jarjar:$jarjarVersion")
         project.dependencies.add("thirdparty", "org.apache.maven:maven-model-builder:$mavenVersion")
 
-        project.tasks.create("repack-${project.name}", Jar) { Jar jar ->
+        String cleanProjectName = project.name.replaceAll("[^A-Za-z0-9]","");
+
+        project.tasks.create("repack-${cleanProjectName}", Jar) { Jar jar ->
             jar.group = "build"
-            jar.setArchiveName("repack-${project.name}-all")
+            jar.setArchiveName("repack-${cleanProjectName}-all")
             jar.setVersion(project.version as String)
             jar.setDestinationDir(new File("${project.buildDir}/libs"))
 

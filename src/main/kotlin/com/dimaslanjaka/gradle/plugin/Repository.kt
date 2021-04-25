@@ -1,94 +1,99 @@
-package com.dimaslanjaka.gradle.plugin;
+package com.dimaslanjaka.gradle.plugin
 
-import org.gradle.api.Action;
-import org.gradle.api.Project;
-import org.gradle.api.artifacts.repositories.MavenArtifactRepository;
-import org.jetbrains.annotations.NotNull;
+import com.dimaslanjaka.kotlin.File
+import org.gradle.api.Project
+import org.gradle.api.artifacts.repositories.ArtifactRepository
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository
+import java.io.InputStream
+import java.util.*
 
-import java.io.InputStream;
-import java.util.LinkedHashMap;
-import java.util.List;
+class Repository(p: Project) {
+    var project: Project = p
+    var app = FileResourcesUtils()
+    var `is`: InputStream = app.getFileFromResourceAsStream("repo.md")
+    var listRepos: MutableList<String> = FileResourcesUtils.getInputStream(`is`)
 
-public class Repository {
-    Project project;
-    FileResourcesUtils app = new FileResourcesUtils();
-    InputStream is = app.getFileFromResourceAsStream("repo.md");
-    List<String> listRepos = FileResourcesUtils.getInputStream(is);
-
-    public Repository(Project p) {
-        project = p;
-        if (!p.getSubprojects().isEmpty()) {
-            for (Project sp : p.getSubprojects()) {
-                initialize(sp);
+    init {
+        if (p.subprojects.isNotEmpty()) {
+            for (sp in p.subprojects) {
+                initialize()
             }
         }
-        initialize(p);
+        initialize()
     }
 
-    public static void addRepositories(Project project, LinkedHashMap<String, String> repositories) {
-        project
-                .getRepositories()
-                .stream()
-                .filter(repository -> repository instanceof MavenArtifactRepository)
-                .forEach(
-                        repository -> {
-                            MavenArtifactRepository mavenRepository = (MavenArtifactRepository) repository;
-                            String name = mavenRepository.getName().toLowerCase();
-                            String url = String.valueOf(mavenRepository.getUrl());
-
-                            repositories.put(name, url);
-                        });
-    }
-
-    public static MavenArtifactRepository addMavenRepo(Project proj, final String name, final String url) {
-        return proj.getRepositories().maven(new Action<MavenArtifactRepository>() {
-            @Override
-            public void execute(@NotNull MavenArtifactRepository repo) {
-                repo.setName(name);
-                repo.setUrl(url);
-            }
-        });
-    }
-
-    public static void addRepoUrl(Project p, String url) {
-        p.getRepositories().maven(new Action<MavenArtifactRepository>() {
-            @Override
-            public void execute(MavenArtifactRepository mavenArtifactRepository) {
-                mavenArtifactRepository.setName(MD5.get(url));
-                mavenArtifactRepository.setUrl(url);
-            }
-        });
-    }
-
-    private void initialize(Project p) {
-        p.beforeEvaluate(project1 -> {
-            for (String repo : listRepos) {
+    private fun initialize() {
+        project.beforeEvaluate { project1 ->
+            for (repo in listRepos) {
                 if (Utils.isURL(repo, true)) {
-                    addRepo(p, repo);
+                    addRepo(project1, repo)
                 }
             }
-            addDefault(p);
-        });
+            addDefault(project1)
+        }
+        project.gradle.buildFinished {
+            val repositories = LinkedHashMap<String, String>()
+            project
+                .repositories
+                .stream()
+                .filter { repository: ArtifactRepository? -> repository is MavenArtifactRepository }
+                .forEach { repository: ArtifactRepository ->
+                    val mavenRepository = repository as MavenArtifactRepository
+                    val name = mavenRepository.name.toLowerCase(Locale.ROOT)
+                    val url = mavenRepository.url.toString()
+                    repositories[name] = url
+
+                    println("$name=$url")
+                }
+            val logfile = File(
+                project.buildDir.absolutePath, "plugin/com.dimaslanjaka/repositories-${project.name}"
+            )
+            logfile.write(repositories)
+        }
     }
 
-    private void addDefault() {
-        addDefault(this.project);
+    private fun addRepo(project1: Project, repo: String) {
+        addRepoUrl(project1, repo)
     }
 
-    private void addRepo(Project project1, String repo) {
-        addRepoUrl(project1, repo);
-    }
-
-    public void addRepo(String url) {
-        if (project != null) addRepoUrl(project, url);
-    }
-
-    public void addDefault(Project project) {
+    private fun addDefault(project: Project?) {
         if (project != null) {
-            project.getRepositories().add(project.getRepositories().mavenLocal());
-            project.getRepositories().add(project.getRepositories().google());
-            project.getRepositories().add(project.getRepositories().jcenter());
-            project.getRepositories().add(project.getRepositories().mavenCentral());
+            project.repositories.add(project.repositories.mavenLocal())
+            project.repositories.add(project.repositories.google())
+            project.repositories.add(project.repositories.jcenter())
+            project.repositories.add(project.repositories.mavenCentral())
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun addRepositories(project: Project, repositories: LinkedHashMap<String, String>) {
+            project
+                .repositories
+                .stream()
+                .filter { repository: ArtifactRepository? -> repository is MavenArtifactRepository }
+                .forEach { repository: ArtifactRepository ->
+                    val mavenRepository = repository as MavenArtifactRepository
+                    val name = mavenRepository.name.toLowerCase(Locale.ROOT)
+                    val url = mavenRepository.url.toString()
+                    repositories[name] = url
+                }
+        }
+
+        @JvmStatic
+        fun addMavenRepo(proj: Project, name: String, url: String): MavenArtifactRepository {
+            return proj.repositories.maven { repo ->
+                repo.name = name
+                repo.setUrl(url)
+            }
+        }
+
+        @JvmStatic
+        fun addRepoUrl(p: Project, url: String) {
+            p.repositories.maven { mavenArtifactRepository ->
+                mavenArtifactRepository.name = MD5.get(url)
+                mavenArtifactRepository.setUrl(url)
+            }
         }
     }
 }
