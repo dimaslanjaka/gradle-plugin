@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-
 /**
  * <a href="https://stackoverflow.com/a/56388957">https://stackoverflow.com/a/56388957</a>
  * <code>
