@@ -3,10 +3,7 @@
 build/
 
 # But not these files...
-!.gitignore
-!build/libs
-!build/libs/*
-# etc...
-
-# ...even if they are in subdirectories
-!*/*jar
+!build/libs/
+!build/classes/
+!build/docs/
+.gradle/
