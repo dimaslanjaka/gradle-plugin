@@ -1,0 +1,28 @@
+//Local publishing for development purposes
+publishing {
+    publications {
+        pluginPublication(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId "android"
+            version project.version
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/Comcast/resourceprovider2"
+    vcsUrl = "https://github.com/Comcast/resourceprovider2"
+    tags = ["android", "gradle", "resources", "kotlin", "mvp"]
+}
+
+gradlePlugin {
+    plugins {
+        resourceProviderPlugin {
+            id = "com.dimaslanjaka.android"
+            displayName = project.name
+            description = project.description
+            implementationClass = "com.dimaslanjaka.android.Core"
+        }
+    }
+}
