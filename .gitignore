@@ -1,3 +1,12 @@
+# ignore lists
 .gradle
+build
 
-!build/libs/*.jar
+# But not these files...
+!.gitignore
+!build/libs
+!build/libs/*
+# etc...
+
+# ...even if they are in subdirectories
+!*/
