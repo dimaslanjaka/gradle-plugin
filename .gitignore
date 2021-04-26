@@ -1,9 +1,0 @@
-# ignore lists
-.gradle/
-build/
-
-# But not these files...
-!build/libs/
-!build/classes/
-!build/docs/
-.gradle/
