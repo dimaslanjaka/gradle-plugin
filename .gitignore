@@ -4,8 +4,6 @@
 # ignore except
 !.gitignore
 
-!build/
-
 build/*
 !build/libs/
 !build/libs/*.jar
