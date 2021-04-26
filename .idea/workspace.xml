@@ -99,7 +99,7 @@
       <command value="gradle clean assemble" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.plugin-android [assemble]">
+  <component name="RunManager" selected="Gradle.plugin-android [clean]">
     <configuration name="plugin-android [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -142,22 +142,21 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="plugin-android [clean assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="plugin-android [classes]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="clean" />
-            <option value="assemble" />
+            <option value="classes" />
           </list>
         </option>
-        <option name="vmOptions" value="" />
+        <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -208,11 +207,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.plugin-android [assemble]" />
         <item itemvalue="Gradle.plugin-android [clean]" />
+        <item itemvalue="Gradle.plugin-android [assemble]" />
+        <item itemvalue="Gradle.plugin-android [classes]" />
         <item itemvalue="Gradle.plugin-android [build]" />
         <item itemvalue="Gradle.plugin-android [jar]" />
-        <item itemvalue="Gradle.plugin-android [clean assemble]" />
       </list>
     </recent_temporary>
   </component>
