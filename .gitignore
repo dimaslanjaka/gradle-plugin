@@ -1,0 +1,11 @@
+# ignore
+.gradle/
+
+# ignore except
+!.gitignore
+!build/
+
+build/*
+!build/libs/**
+#!build/docs/**
+#!build/classes/**
