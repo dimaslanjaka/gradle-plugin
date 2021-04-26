@@ -213,10 +213,9 @@ File(projectDir, "repo/components/build/libs").absoluteFile.listFiles().forEach 
 }
 
 jar.doLast {
-    val jarnoversion = File(jar.archivePath.parent, "gradle-plugin.jar")
-    if (jar.archivePath.exists() && !isSameFileSize(jar.archivePath, jarnoversion)) {
-        jar.archivePath.copyTo(jarnoversion, true)
-    }
+    // TODO: create jar without version
+    val jarnoversion = File(jar.archiveFile.get().asFile.parent, "gradle-plugin.jar")
+    jar.archiveFile.get().asFile.copyTo(jarnoversion, true)
 }
 
 tasks.findByName("publishPlugins")?.doLast {

@@ -5,25 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42627ce3-0c5f-4360-987f-8521e9b6b8ad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/modules/Composite.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Cleaner.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/StringUtils.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/modules/app/Composite_Build_Test.app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/settings.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Offline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Offline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Fun.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/collections/Fun.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/OfflineRemote.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/OfflineRemote.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/File.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/File.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +70,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -207,5 +191,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
