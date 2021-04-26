@@ -1,5 +1,20 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        flatDir { dirs("../plugin/build/libs") }
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:3.2.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32")
+        classpath("com.dimaslanjaka:gradle-plugin")
+    }
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -21,11 +36,10 @@ plugins {
     id("java-gradle-plugin")
     id("maven-publish")
     id("com.gradle.plugin-publish") version "0.12.0"
-    kotlin("jvm") version "1.4.32"
 }
 
+apply(plugin = "org.jetbrains.kotlin.android.extensions")
 apply {
-    //plugin(org.jetbrains.kotlin.gradle.plugin.KotlinPlatformJvmPlugin::class)
     from("publish.gradle")
 }
 
@@ -33,29 +47,34 @@ group = "com.dimaslanjaka.android"
 version = "1.0.0"
 description = "Useful android plugin:\n - Resource Management API Generator for Android"
 
-allprojects {
-    tasks.withType<JavaCompile> {
-        options.compilerArgs.addAll(arrayOf("-parameters", "-Xdoclint:none", "-Xlint:all"))
-        options.isIncremental = true
-        sourceCompatibility = JavaVersion.VERSION_1_8.toString()
-        targetCompatibility = JavaVersion.VERSION_1_8.toString()
-    }
-
-    tasks.withType<KotlinCompile>().all {
-        //println("Configuring $name in project ${project.name}...")
-        kotlinOptions {
-            suppressWarnings = true
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
-            javaParameters = true
-            allWarningsAsErrors = false
-        }
-        incremental = true
-    }
+tasks.withType<JavaCompile>().all {
+    options.compilerArgs.addAll(arrayOf("-parameters", "-Xdoclint:none", "-Xlint:all"))
+    options.isIncremental = true
+    sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+    targetCompatibility = JavaVersion.VERSION_1_8.toString()
 }
 
 tasks.withType<KotlinCompile>().all {
+    //println("Configuring $name in project ${project.name}...")
     kotlinOptions {
         suppressWarnings = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        javaParameters = true
+        allWarningsAsErrors = false
+    }
+    incremental = true
+}
+
+tasks.withType<Jar>().all {
+    archiveBaseName.set("gradle-plugin-android")
+    doLast {
+        copy {
+            from(archiveFile.get().asFile)
+            into(archiveFile.get().asFile.parentFile)
+            rename { fileName ->
+                fileName.replace("-${archiveVersion.get()}", "")
+            }
+        }
     }
 }
 
@@ -75,8 +94,6 @@ dependencies {
     //kotlin deps
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.32")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.32")
 
     // Additional
     compileOnly("org.jetbrains:annotations:20.1.0")
@@ -106,8 +123,10 @@ dependencies {
     implementation("commons-cli:commons-cli:1.4")
     implementation("xerces:xercesImpl:2.12.0")
     implementation("org.apache.cxf:cxf-common-utilities:2.5.11")
-}
 
+    // android
+    compileOnly("com.android.tools.build:gradle:3.2.1")
+}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

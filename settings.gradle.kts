@@ -12,7 +12,7 @@ pluginManagement {
         maven("https://repo.gradle.org/gradle/enterprise-libs-release-candidates-local")
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
         maven("https://plugins.gradle.org/m2/")
-maven("https://jitpack.io")
+        maven("https://jitpack.io")
     }
 }
 

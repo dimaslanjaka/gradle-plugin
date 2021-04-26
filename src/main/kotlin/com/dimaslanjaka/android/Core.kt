@@ -11,6 +11,7 @@ class Core : Plugin<Project> {
                 if (sp is Project) {
                     val android =
                         sp.plugins.hasPlugin("com.android.application") || sp.plugins.hasPlugin("com.android.library")
+                    println("(Project=${sp.name}) (Android=$android)")
                     if (android) {
                         val extension = sp.extensions.create("androidConfig", CoreExtension::class.java, project)
                         sp.afterEvaluate {
