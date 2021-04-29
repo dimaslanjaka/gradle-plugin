@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42627ce3-0c5f-4360-987f-8521e9b6b8ad" name="Default Changelist" comment="">
+    <list default="true" id="42627ce3-0c5f-4360-987f-8521e9b6b8ad" name="Default Changelist" comment="Fix">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/java/Cmd.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,11 +54,18 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Dimas Lanjaka &lt;dimaslanjaka@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="ProjectId" id="1rbQeQCly8KwZ8FRfKBUVm9CfXI" />
   <component name="ProjectLevelVcsManager">
@@ -70,7 +78,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../plugin-android" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -122,40 +130,22 @@
       <method v="2" />
     </configuration>
     <configuration name="CleanerKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="Gradle_To_Maven_Plugin.main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.gradle.plugin.CleanerKt" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="Gradle_To_Maven_Plugin.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="FunKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="Gradle_To_Maven_Plugin.main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="FunKt" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="Gradle_To_Maven_Plugin.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="OfflineRemote" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <module name="Gradle_To_Maven_Plugin.main" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.gradle.plugin.OfflineRemote" />
-      <option name="WORKING_DIRECTORY" />
+      <module name="Gradle_To_Maven_Plugin.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -163,10 +153,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.plugin [assemble]" />
-        <item itemvalue="Application.CleanerKt" />
         <item itemvalue="Gradle.plugin [clean assemble]" />
-        <item itemvalue="Application.OfflineRemote" />
-        <item itemvalue="Application.FunKt" />
       </list>
     </recent_temporary>
   </component>
@@ -179,7 +166,25 @@
       <option name="presentableId" value="Default" />
       <updated>1619242405526</updated>
     </task>
+    <task id="LOCAL-00001" summary="Fix">
+      <created>1619417323293</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619417323294</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fix">
+      <created>1619417333467</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619417333467</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -192,5 +197,14 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

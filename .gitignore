@@ -1,5 +1,14 @@
-!build/libs/
-!build/classes/
-!build/docs/
-.gradle/
-build/
+# ignore default list
+**/.gradle/
+**/build/*
+
+# ignore except
+!**/.gitignore
+!**/build/artifactory/
+!**/build/libs/
+!**/build/libs/*.jar
+!**/build/libs/*.aar
+!**/build/docs/
+!**/build/docs/*
+!**/build/classes/
+!**/build/classes/*
