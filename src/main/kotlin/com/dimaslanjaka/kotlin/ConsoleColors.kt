@@ -1,5 +1,6 @@
 package com.dimaslanjaka.kotlin
 
+import gson
 import java.util.*
 
 enum class ConsoleColors(var code: String?) {
@@ -149,10 +150,20 @@ enum class ConsoleColors(var code: String?) {
         @JvmStatic
         fun println(vararg obj: Any) {
             val build = mutableListOf<Any>()
-            obj.forEach {
-                build.add(styler(random(), it.toString()))
+            obj.forEach { o ->
+                var oo = o
+                if (o is java.io.File) {
+                    oo = o.absolutePath
+                } else if (isIterable(o)) {
+                    oo = gson().toJson(o)
+                }
+                build.add(styler(random(), oo as String))
             }
             print(build)
+        }
+
+        fun isIterable(o: Any): Boolean {
+            return o is Collection<*>
         }
 
         @JvmStatic
@@ -166,6 +177,9 @@ enum class ConsoleColors(var code: String?) {
                 }
                 is Int -> {
                     printint(obj)
+                }
+                is Collection<*> -> {
+                    print(styler(random(), gson().toJson(obj)))
                 }
                 else -> {
                     print(styler(random(), obj.toString()))

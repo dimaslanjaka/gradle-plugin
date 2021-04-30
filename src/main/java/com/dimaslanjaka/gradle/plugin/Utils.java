@@ -1,6 +1,8 @@
 package com.dimaslanjaka.gradle.plugin;
 
 import com.dimaslanjaka.kotlin.File;
+import org.gradle.api.Project;
+import org.gradle.api.invocation.Gradle;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,34 @@ public class Utils {
         if (!tempDir.exists())
             if (!tempDir.mkdirs())
                 println("cannot create temporarily folder");
+    }
+
+    public static void main(String[] args) {
+        cleanGradleDaemonLog(new File("build/test-results/Utils").createGradleProject());
+    }
+
+    public static void cleanGradleDaemonLog(Project target) {
+        // TODO: clear gradle big log files
+        Gradle gradle = target.getGradle();
+        String gradleVersion = gradle.getGradleVersion();
+        String gradleHome = gradle.getGradleUserHomeDir().getAbsolutePath();
+        File daemon = new File(gradleHome, "/daemon");
+        java.io.File[] daemonFolders = daemon.listFiles();
+        for (java.io.File cf : daemonFolders) {
+            java.io.File[] cacheFiles = cf.listFiles();
+            assert cacheFiles != null;
+            for (java.io.File cx : cacheFiles) {
+                if (cx.getName().endsWith(".log")) { // .out.log
+                    if (cx.delete()) {
+                        if (gradleVersion != cf.getName()) {
+                            println(cx + " deleted");
+                        } else {
+                            println("[current_project] " + cx + " deleted");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @SuppressWarnings("all")
@@ -45,15 +75,6 @@ public class Utils {
         return tempDir;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Object() {
-        }.getClass().getEnclosingMethod().getName());
-    }
-
-    private static String getMethodName() {
-        return getMethodName(0);
-    }
-
     static Map<String, Boolean> isURLs = new HashMap<>();
 
     @SuppressWarnings("unused")
@@ -67,21 +88,6 @@ public class Utils {
         boolean isURL = verifyUrl(url);
         isURLs.put(url, isURL);
         return isURL;
-    }
-
-    /**
-     * Get the method name for a depth in call stack. <br>
-     * Utility function
-     *
-     * @param depth depth in the call stack (0 means current method, 1 means call method, ...)
-     * @return method name
-     */
-    public static String getMethodName(final int depth) {
-        final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
-
-        //System. out.println(ste[ste.length-depth].getClassName()+"#"+ste[ste.length-depth].getMethodName());
-        // return ste[ste.length - depth].getMethodName();  //Wrong, fails for depth = 0
-        return ste[ste.length - 1 - depth].getMethodName(); //Thank you Tom Tresansky
     }
 
     @SuppressWarnings("unused")

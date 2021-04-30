@@ -1,7 +1,6 @@
 package com.dimaslanjaka.gradle.offline_dependencies
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 
@@ -10,26 +9,44 @@ class OfflineDependenciesExtension {
      * Root offline repository
      */
     File root
-    Project project
+    private Project project
+    private GString rootGString
 
     // deps
-    private RepositoryHandler repositoryHandler;
+    RepositoryHandler repositoryHandler;
 
     // config properties
-    def configurations = [] as Set<String>
-    def buildScriptConfigurations = [] as Set<String>
+    Set<String> configurations = [] as Set<String>
+    Set<String> buildScriptConfigurations = [] as Set<String>
 
-    def includeSources = true
-    def includeJavadocs = true
-    def includePoms = true
-    def includeIvyXmls = true
-    def includeBuildscriptDependencies = true
+    boolean includeSources = true
+    boolean includeJavadocs = true
+    boolean includePoms = true
+    boolean includeIvyXmls = true
+    boolean includeBuildscriptDependencies = true
 
     // init
     OfflineDependenciesExtension(Project project, RepositoryHandler repositoryHandler) {
         this.repositoryHandler = repositoryHandler
         this.project = project
         this.root = new File(project.projectDir, "build/offline-repository").absoluteFile
+        this.rootGString = "${this.root}"
+    }
+
+    /**
+     * Set root from string
+     * @param newRoot
+     */
+    public void setRoot(String newRoot) {
+        this.root = new File(newRoot)
+    }
+
+    /**
+     * Set root from java.io.File
+     * @param newRoot
+     */
+    public void setRoot(File newRoot) {
+        this.root = newRoot
     }
 
     // expose 'repositories' closure to build script, just like the default 'repositories' closure
@@ -52,9 +69,11 @@ class OfflineDependenciesExtension {
         return this.repositoryHandler
     }
 
-    @Override
-    String toString() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
-        return gson.toJson(this)
+    @SuppressWarnings('unused')
+    public Map asMap() {
+        this.class.declaredFields.findAll { !it.synthetic }.collectEntries {
+            [(it.name): this."$it.name"]
+        }
     }
 }
+

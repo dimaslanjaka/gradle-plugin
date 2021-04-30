@@ -14,6 +14,7 @@ import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.UnknownConfigurationException
 import org.gradle.api.artifacts.component.ComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.artifacts.repositories.ArtifactRepository
 import org.gradle.api.artifacts.result.UnresolvedArtifactResult
 import org.gradle.api.internal.artifacts.DefaultModuleIdentifier
 import org.gradle.api.tasks.Input
@@ -28,11 +29,12 @@ import org.gradle.maven.MavenModule
 import org.gradle.maven.MavenPomArtifact
 import org.gradle.util.GFileUtils
 
+import java.util.function.Function
+
 import static com.dimaslanjaka.gradle.offline_dependencies.Utils.addToMultimap
 
 class UpdateOfflineRepositoryTask extends DefaultTask {
-
-    def EMPTY_DEPENDENCIES_ARRAY = new Dependency[0]
+    private def EMPTY_DEPENDENCIES_ARRAY = new Dependency[0]
 
     @Input
     GString root
@@ -53,7 +55,21 @@ class UpdateOfflineRepositoryTask extends DefaultTask {
 
     @TaskAction
     void run() {
+        println("Copy dependencies start, root: ${getRoot()}")
+        withRepositoryFiles2(new Function<Map<ModuleComponentIdentifier, Set<File>>, Object>() {
+            @Override
+            Object apply(Map<ModuleComponentIdentifier, Set<File>> repositoryFiles) {
+                repositoryFiles.each { id, files ->
+                    File directory = moduleDirectory(id)
+                    GFileUtils.mkdirs(directory)
+                    files.each { File file -> GFileUtils.copyFile(file, new File(directory, file.name)) }
+                }
+                return null
+            }
+        })
+        /*
         withRepositoryFiles { repositoryFiles ->
+            println repositoryFiles.toString()
             // copy collected files to destination directory
             repositoryFiles.each { id, files ->
                 def directory = moduleDirectory(id)
@@ -61,6 +77,7 @@ class UpdateOfflineRepositoryTask extends DefaultTask {
                 files.each { File file -> GFileUtils.copyFile(file, new File(directory, file.name)) }
             }
         }
+         */
     }
 
     // configurations
@@ -289,6 +306,12 @@ class UpdateOfflineRepositoryTask extends DefaultTask {
         }
     }
 
+    private void withRepositoryFiles2(Function<Map<ModuleComponentIdentifier, Set<File>>, ?> callback) {
+        List<ArtifactRepository> originalRepositories = project.repositories.collect()
+        Map<ModuleComponentIdentifier, Set<File>> files = collectRepositoryFiles(getConfigurations())
+        callback.apply(files)
+    }
+
     // Activate online repositories and collect dependencies.
     // Switch back to local repository afterwards.
     private def withRepositoryFiles(Closure<Map<ModuleComponentIdentifier, Set<File>>> callback) {
@@ -301,7 +324,7 @@ class UpdateOfflineRepositoryTask extends DefaultTask {
 
         project.repositories.addAll(extension.repositoryHandler)
 
-        def files = collectRepositoryFiles(getConfigurations())
+        Map<ModuleComponentIdentifier, Set<File>> files = collectRepositoryFiles(getConfigurations())
 
         project.repositories.clear()
         project.repositories.addAll(originalRepositories)

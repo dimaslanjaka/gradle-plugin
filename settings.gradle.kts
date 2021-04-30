@@ -17,7 +17,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Gradle To Maven Plugin"
+rootProject.name = "Powerful Gradle Plugin"
 
 //include(":idea")
 //includeBuild("repo/components")

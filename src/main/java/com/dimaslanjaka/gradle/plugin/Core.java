@@ -1,20 +1,18 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import com.dimaslanjaka.gradle.offline_dependencies.OfflineDependenciesPlugin;
 import com.dimaslanjaka.java.Thread;
+import com.dimaslanjaka.java.cmd;
 import com.dimaslanjaka.kotlin.File;
-import jar.Repack;
-import org.gradle.api.Action;
 import org.gradle.api.NamedDomainObjectCollectionSchema;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
-import org.gradle.api.invocation.Gradle;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.Charset;
 import java.util.Date;
-import java.util.function.Consumer;
 
 import static com.dimaslanjaka.gradle.api.Extension.createExtension;
 import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
@@ -30,43 +28,30 @@ public class Core implements Plugin<Project> {
     public void apply(final @NotNull Project target) {
         thread.project = target;
         project = target;
+        cmd.Companion.setProject(target);
 
+        // TODO: Configuring Rules
+        extension = (CoreExtension) createExtension(project, CONFIG_NAME, CoreExtension.class, project);
+
+        /*
         project.getAllprojects().forEach(new Consumer<Project>() {
             @Override
             public void accept(Project project) {
                 setupProjectConfiguration(project);
             }
         });
-
+         */
 
         Repository repository = new Repository(target);
-        Repack jar = new Repack(target);
+        //Repack jar = new Repack(target);
+        Utils.cleanGradleDaemonLog(target);
+        OfflineDependenciesPlugin off = new OfflineDependenciesPlugin();
+        off.setup(project);
 
-        // TODO: clear gradle big log files
-        Gradle gradle = target.getGradle();
-        String gradleHome = gradle.getGradleUserHomeDir().getAbsolutePath();
-        File daemon = new File(gradleHome, "/daemon/" + gradle.getGradleVersion());
-        File[] cacheFiles = daemon.listFiles();
-        for (File cf : cacheFiles) {
-            if (cf.getName().endsWith(".log")) { // .out.log
-                // println("Deleting gradle log file: $it") // Optional debug output
-                if (cf.delete()) {
-                    println(cf + " deleted");
-                }
-            }
-        }
-
-        // TODO: Configuring Rules
-        extension = (CoreExtension) createExtension(project, CONFIG_NAME, CoreExtension.class, project);
-        //project.getPlugins().apply(OfflineDependenciesPlugin.class);
-
-        target.afterEvaluate(new Action<Project>() {
-            @Override
-            public void execute(@NotNull Project project) {
-                startCache(project);
-                if (com.dimaslanjaka.gradle.api.Utils.isAndroid(project)) {
-                    new Android(project);
-                }
+        target.afterEvaluate(project -> {
+            startCache(project);
+            if (com.dimaslanjaka.gradle.api.Utils.isAndroid(project)) {
+                new Android(project);
             }
         });
     }
@@ -93,17 +78,27 @@ public class Core implements Plugin<Project> {
         final Runnable start = new Runnable() {
             public void run() {
                 // Cache all gradle dependency caches
-                if (extension.limit == Integer.MAX_VALUE) {
-                    OfflineMethods(targetProject);
-                } else {
-                    new Offline2(targetProject, extension.limit);
-                }
+                new Thread(targetProject, "Offline1-2").lock(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (extension.limit == Integer.MAX_VALUE) {
+                            OfflineMethods(targetProject);
+                        } else {
+                            new Offline2(targetProject, extension.limit);
+                        }
+                    }
+                });
 
                 // Cache Configured Classpath in project
-                new Offline3(targetProject);
+                new Thread(targetProject, "Offline3").lock(new Runnable() {
+                    @Override
+                    public void run() {
+                        new Offline3(targetProject);
+                    }
+                });
 
                 // Clean folder pom without jar
-                new Thread("startCache").lock(new Runnable() {
+                new Thread(targetProject, "Cleaner").lock(new Runnable() {
                     @Override
                     public void run() {
                         new Cleaner(targetProject);

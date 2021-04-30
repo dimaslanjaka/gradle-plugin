@@ -4,10 +4,95 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42627ce3-0c5f-4360-987f-8521e9b6b8ad" name="Default Changelist" comment="Fix">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/java/Cmd.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="42627ce3-0c5f-4360-987f-8521e9b6b8ad" name="Default Changelist" comment="Add Java Shell Commander">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/androidTest/java/org/gradle/kotlin/dsl/samples/androidstudio/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/java/org/gradle/kotlin/dsl/samples/androidstudio/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/main/res/values/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/androidApp/src/test/java/org/gradle/kotlin/dsl/samples/androidstudio/ExampleUnitTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/com/dimaslanjaka/gradle/helper/Extension.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/jar/Repack.groovy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/jna/SystemProp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/groovy/jna/systemProperties.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/java-groovy-kotlin/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/java-groovy-kotlin/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/idea.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/resources/META-INF/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/kotlin/cn/renyuzhuo/easygradle/killer/KillGradleAction.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/kotlin/cn/renyuzhuo/easygradle/updater/GradleItem.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/kotlin/cn/renyuzhuo/easygradle/updater/UpdateGradleAction.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/META-INF/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/META-INF/pluginIcon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/META-INF/pluginIcon_dark.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/icons/killer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/idea/src/main/resources/icons/update.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/native/src/nativeMain/kotlin/hello.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/lib/repackaged-all.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Utils.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/java/UnknownInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/resources/META-INF/gradle-plugins/com.dimaslanjaka.gradle.offline_dependencies.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/version.properties" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/version.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/OfflineRemote.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/OfflineRemote.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Repository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Repository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/java/Thread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/java/Thread.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/ConsoleColors.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/ConsoleColors.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/File.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/kotlin/File.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/java/Cmd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/java/cmd.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +152,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
+  <component name="GroovyConsoleState">
+    <option name="list">
+      <list>
+        <Entry>
+          <option name="moduleName" value="Gradle_To_Maven_Plugin.main" />
+          <option name="url" value="file://$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console.groovy" />
+        </Entry>
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1rbQeQCly8KwZ8FRfKBUVm9CfXI" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -75,10 +170,16 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../plugin-android" />
+    <property name="last.edited.regexp" value="Sample Text.jpg " />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin.scripting" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -86,6 +187,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Gradle.plugin [assemble]">
+    <configuration name="Utils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.gradle.plugin.Utils" />
+      <module name="Gradle_To_Maven_Plugin.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dimaslanjaka.gradle.plugin.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="plugin [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -129,22 +243,15 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CleanerKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.gradle.plugin.CleanerKt" />
+    <configuration name="cmd$adb" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.java.cmd$adb" />
       <module name="Gradle_To_Maven_Plugin.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FunKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="FunKt" />
-      <module name="Gradle_To_Maven_Plugin.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OfflineRemote" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.gradle.plugin.OfflineRemote" />
+    <configuration name="cmd" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.dimaslanjaka.java.cmd" />
       <module name="Gradle_To_Maven_Plugin.main" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -153,6 +260,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.plugin [assemble]" />
+        <item itemvalue="Application.Utils" />
+        <item itemvalue="Kotlin.cmd" />
+        <item itemvalue="Kotlin.cmd$adb" />
         <item itemvalue="Gradle.plugin [clean assemble]" />
       </list>
     </recent_temporary>
@@ -180,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619417333467</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add Java Shell Commander">
+      <created>1619679112763</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619679112763</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -201,10 +318,16 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix" />
+    <MESSAGE value="Add Java Shell Commander" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Java Shell Commander" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

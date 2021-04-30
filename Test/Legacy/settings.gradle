@@ -8,3 +8,4 @@ File plugin = new File(rootProject.projectDir, "/../../")
 includeBuild(plugin.getAbsolutePath())
 
 include(":java-groovy-kotlin")
+include(":androidApp")

@@ -128,10 +128,10 @@ open class File : javaFile, Serializable, Comparable<javaFile?> {
         return this
     }
 
-    override fun listFiles(): Array<out File> {
-        val mlist = mutableListOf<File>()
+    override fun listFiles(): Array<out java.io.File> {
+        val mlist = mutableListOf<java.io.File>()
         this.file.listFiles()?.forEachIndexed { index, file ->
-            mlist.add(index, File(file.absolutePath))
+            mlist.add(index, java.io.File(file.absolutePath))
         }
         return mlist.toTypedArray()
     }

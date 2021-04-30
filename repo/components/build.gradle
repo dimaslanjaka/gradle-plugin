@@ -13,6 +13,8 @@ buildscript {
 apply plugin: "com.gradle.plugin-publish"
 apply plugin: "java"
 apply plugin: "groovy"
+apply plugin: "maven"
+apply plugin: "java-gradle-plugin"
 
 group = "com.dimaslanjaka.gradle.offline_dependencies"
 version = projectVersion(project)
@@ -125,23 +127,36 @@ task packageWithoutVersion(type: Jar) {
     archiveVersion.set(project.version.toString())
     dependsOn(jar)
 }
-
-//jar.finalizedBy(packageWithoutVersion)
+jar.finalizedBy(packageWithoutVersion)
 
 tasks.findByName("publishPlugins").doLast {
     updateVersion(project)
 }
 
+// Set Metadata Plugin Portal
+//noinspection GroovyAssignabilityCheck
 pluginBundle {
     website = "https://github.com/dimaslanjaka/gradle-plugin/tree/composite-build/repo/components"
     vcsUrl = "https://github.com/dimaslanjaka/gradle-plugin/tree/composite-build/repo/components"
     description = project.description
     tags = ["offline", "buildscript-dependency", "buildscript-configurations", "jar", "pom", "reproducible", "offline-dependencies"]
-
     plugins {
         offlineDependenciesPlugin {
-            id = project.group
             displayName = "Gradle Offline Dependencies Plugin"
+        }
+    }
+}
+
+// Activate Composite Build by java-gradle-plugin
+// Set plugin resolution metadata plugin portal
+//noinspection GroovyAssignabilityCheck
+gradlePlugin {
+    plugins {
+        offlineDependenciesPlugin {
+            //noinspection GroovyAssignabilityCheck
+            id = project.group
+            //noinspection GroovyAssignabilityCheck
+            implementationClass = "com.dimaslanjaka.gradle.offline_dependencies.OfflineDependenciesPlugin"
         }
     }
 }

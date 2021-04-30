@@ -17,13 +17,13 @@ import java.io.File as javaFile
  * Cache artifact based on project configurations
  */
 class Offline3(p: Project) {
-    val configuration = Extension.getExtension<CoreExtension>(
+    private val configuration = Extension.getExtension<CoreExtension>(
         p, Core.CONFIG_NAME
     ) as CoreExtension
     var debug: Boolean = configuration.debug
-    val allArtifacts = mutableListOf<javaFile>()
-    val cachedArtifacts = mutableListOf<javaFile>()
-    val nonCachedArtifacts = mutableListOf<javaFile>()
+    private val allArtifacts = mutableListOf<javaFile>()
+    private val cachedArtifacts = mutableListOf<javaFile>()
+    private val nonCachedArtifacts = mutableListOf<javaFile>()
 
     init {
         if (debug) {
@@ -90,7 +90,11 @@ class Offline3(p: Project) {
                     println("${artifact.normalize()} \n\t-> $maven")
                 }
 
-                artifact.copyTo(maven.toFile(), true)
+                try {
+                    artifact.copyTo(maven.toFile(), true)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
                 logfile.appendText("Copy:\n\t${artifact.normalize()} \n\t-> ${maven}\n")
             }
 

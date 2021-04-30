@@ -24,7 +24,9 @@ class Repository(p: Project) {
     }
 
     private fun initialize(project: Project) {
-        println("initialize repository ${project.name}")
+        if (Core.extension.debug) {
+            println("initialize repository ${project.name}")
+        }
 
         // add default repositories
         addDefault(project)

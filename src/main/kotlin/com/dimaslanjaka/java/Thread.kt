@@ -7,11 +7,11 @@ import java.nio.channels.FileChannel
 import java.nio.channels.FileLock
 import java.nio.file.StandardOpenOption
 import java.util.*
-import java.util.concurrent.locks.ReentrantLock
 import java.lang.Thread as javaThread
 
+@Suppress("MemberVisibilityCanBePrivate")
 open class Thread : java.lang.Thread, Runnable {
-    private val rlock: ReentrantLock = ReentrantLock()
+    lateinit var name_thread: String
     lateinit var path: File
     lateinit var project: Project
     lateinit var lock: FileLock
@@ -22,8 +22,8 @@ open class Thread : java.lang.Thread, Runnable {
     }
 
     constructor(p: Project, identifier: String) {
-        setIdentifier(identifier)
         project = p
+        setIdentifier(identifier)
     }
 
     constructor(r: Runnable) : super(r) {}
@@ -54,8 +54,10 @@ open class Thread : java.lang.Thread, Runnable {
     private fun release() {
         lock.release()
         fileChannel.close()
+        println("Lock thread $name_thread released")
     }
 
+    @Throws(java.io.IOException::class)
     private fun lock() {
         fileChannel = FileChannel.open(
             path.toPath(), StandardOpenOption.READ,
@@ -63,12 +65,18 @@ open class Thread : java.lang.Thread, Runnable {
         )
 
         lock = fileChannel.lock(0, Long.MAX_VALUE, true)
-        println("Lock acquired: " + lock.isValid)
-        println("Lock is shared: " + lock.isShared)
+        println("Lock thread $name_thread is acquired: " + lock.isValid)
+        println("Lock thread $name_thread is shared: " + lock.isShared)
     }
 
     fun setIdentifier(identifier: String) {
-        path = File("build", "thread/$identifier")
+        name_thread = identifier
+        val buildir = if (this::project.isInitialized) {
+            project.buildDir.absolutePath
+        } else {
+            "build"
+        }
+        path = File(buildir, "thread/${identifier}.txt")
         path.resolveParent()
     }
 

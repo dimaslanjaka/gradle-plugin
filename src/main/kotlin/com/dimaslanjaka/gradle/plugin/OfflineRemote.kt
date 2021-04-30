@@ -12,6 +12,7 @@ import java.util.regex.Pattern
 import java.io.File as javaFile
 
 
+@Suppress("MemberVisibilityCanBePrivate")
 class OfflineRemote {
     val remotes = mutableListOf(
         "http://archiva.temasys.com.sg/repository/internal/",
@@ -45,10 +46,10 @@ class OfflineRemote {
             if (f.isDirectory) {
                 walk(f.absolutePath)
                 //println("Dir:" + f.absoluteFile)
-                walkResult.dirs.add(f)
+                walkResult.dirs.add(File(f.absolutePath))
             } else {
                 //println("File:" + f.absoluteFile)
-                walkResult.files.add(f)
+                walkResult.files.add(File(f.absolutePath))
             }
         }
         return walkResult

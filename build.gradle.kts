@@ -98,9 +98,21 @@ configurations.all {
     // Spring
     implementation("org.springframework:spring-core:5.2.14.RELEASE")
 
+    // jsonschema2pojo
+    // Annotation
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
+    // Required if generating JSR-303 annotations
+    implementation("javax.validation:validation-api:1.1.0.CR2")
+    // Required if generating Jackson 2 annotations
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.1")
+    // Required if generating JodaTime data types
+    implementation("joda-time:joda-time:2.2")
+
     // Apache
     implementation("org.apache.commons:commons-lang3:3.11")
     implementation("commons-validator:commons-validator:1.7")
+    implementation("org.apache.commons:commons-collections4:latest.release")
+    implementation("commons-collections:commons-collections:latest.release")
     /*
     implementation("commons-io:commons-io:2.8.0")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
@@ -122,6 +134,16 @@ tasks.withType<Test>().configureEach {
 
 tasks.withType<Jar>().configureEach {
     archiveBaseName.set("gradle-plugin")
+
+    // compile jar with dependencies
+    File(projectDir, "repo/components/build/libs").absoluteFile.listFiles()?.forEach { offlinejar ->
+        offlinejar?.let {
+            from(zipTree(it)) {
+                include("**")
+                exclude("META-INF", "META-INF/**")
+            }
+        }
+    }
 
     manifest {
         attributes["Implementation-Title"] = project.description as String
@@ -163,8 +185,8 @@ tasks.named<AbstractCompile>("compileKotlin") {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_9
+    targetCompatibility = JavaVersion.VERSION_1_9
     withJavadocJar()
     withSourcesJar()
 }
@@ -200,18 +222,6 @@ pluginBundle {
 }
 
 val jar: Jar by tasks
-jar.archiveBaseName.set("gradle-plugin")
-// compile jar with dependencies
-
-File(projectDir, "repo/components/build/libs").absoluteFile.listFiles().forEach { offlinejar ->
-    offlinejar?.let {
-        jar.from(zipTree(it)) {
-            include("**")
-            exclude("META-INF", "META-INF/**")
-        }
-    }
-}
-
 jar.doLast {
     // TODO: create jar without version
     val jarnoversion = File(jar.archiveFile.get().asFile.parent, "gradle-plugin.jar")
