@@ -10,6 +10,8 @@ import org.gradle.api.internal.artifacts.dsl.DefaultRepositoryHandler
 import org.gradle.internal.reflect.Instantiator
 import org.slf4j.LoggerFactory
 
+import static com.dimaslanjaka.gradle.helper.Extension.create
+
 class Plugin implements org.gradle.api.Plugin<Project> {
     public static final String EXTENSION_NAME = 'offlineDependencies'
 
@@ -38,7 +40,7 @@ class Plugin implements org.gradle.api.Plugin<Project> {
     }
 
     public Extension createExtension(Project project) {
-        return com.dimaslanjaka.gradle.helper.Extension.create(
+        return create(
                 project,
                 EXTENSION_NAME, Extension.class, project, createRepositoryHandler(project)
         ) as Extension

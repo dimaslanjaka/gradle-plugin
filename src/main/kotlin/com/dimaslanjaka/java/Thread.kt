@@ -29,7 +29,7 @@ open class Thread : java.lang.Thread, Runnable {
     constructor(p: Project, identifier: String) {
         project = p
         setIdentifier(identifier)
-        configuration = Extension.getExtension<CoreExtension>(
+        configuration = Extension.get<CoreExtension>(
             project, Core.CONFIG_NAME
         ) as CoreExtension
         debug = configuration.debug

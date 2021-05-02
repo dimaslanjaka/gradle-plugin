@@ -1,5 +1,6 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import com.dimaslanjaka.gradle.api.Extension;
 import com.dimaslanjaka.java.Thread;
 import com.dimaslanjaka.java.cmd;
 import com.dimaslanjaka.kotlin.File;
@@ -11,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.charset.Charset;
 import java.util.Date;
 
-import static com.dimaslanjaka.gradle.api.Extension.createExtension;
 import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
 
 public class Core implements Plugin<Project> {
@@ -25,7 +25,7 @@ public class Core implements Plugin<Project> {
         cmd.Companion.setProject(target);
 
         // TODO: Configuring Rules
-        extension = (CoreExtension) com.dimaslanjaka.gradle.api.Extension.createExtension(target, CONFIG_NAME, CoreExtension.class, target);
+        extension = (CoreExtension) Extension.create(target, CONFIG_NAME, CoreExtension.class, target);
 
         Repository repository = new Repository(target);
         Repack jar = new Repack(target);

@@ -32,6 +32,7 @@ import org.gradle.util.GFileUtils
 
 import java.util.function.Function
 
+import static com.dimaslanjaka.gradle.helper.Extension.get
 import static com.dimaslanjaka.gradle.offline_dependencies.Utils.addToMultimap
 
 class UpdateTask extends DefaultTask {
@@ -112,7 +113,7 @@ class UpdateTask extends DefaultTask {
 
     @SuppressWarnings('GrMethodMayBeStatic')
     private Extension getExtension() {
-        return com.dimaslanjaka.gradle.helper.Extension.get(Extension.class) as Extension
+        return get(Extension.class) as Extension
     }
 
     // configurations

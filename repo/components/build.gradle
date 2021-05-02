@@ -66,6 +66,14 @@ dependencies {
     implementation "joda-time:joda-time:2.2"
 }
 
+//https://medium.com/@jonashavers/how-to-use-groovy-sources-from-java-in-gradle-projects-9c722876846e
+sourceSets {
+    main {
+        java { srcDirs = [] }
+        groovy { srcDirs += ["src/main/java"] }
+    }
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -148,7 +156,7 @@ pluginBundle {
     }
 
     mavenCoordinates {
-        groupId = "com.dimaslanjaka"
+        groupId = "com.dimaslanjaka.gradle"
         artifactId = "offline_dependencies"
         version = project.version as String
     }
@@ -161,7 +169,7 @@ gradlePlugin {
     plugins {
         offlineDependenciesPlugin {
             //noinspection GroovyAssignabilityCheck
-            id = "com.dimaslanjaka.offline_dependencies"
+            id = "com.dimaslanjaka.gradle.offline_dependencies"
             //noinspection GroovyAssignabilityCheck
             implementationClass = "com.dimaslanjaka.gradle.offline_dependencies.Plugin"
         }

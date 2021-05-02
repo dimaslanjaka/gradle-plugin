@@ -19,7 +19,7 @@ import java.io.File as javaFile
  * Cache artifact based on project configurations
  */
 class Offline3(p: Project) {
-    private val configuration = Extension.getExtension<CoreExtension>(
+    private val configuration = Extension.get<CoreExtension>(
         p, Core.CONFIG_NAME
     ) as CoreExtension
     var debug: Boolean = configuration.debug
@@ -36,18 +36,23 @@ class Offline3(p: Project) {
         }
 
         p.allprojects.forEach { subproject ->
-            subproject?.let {
+            subproject?.let { sp ->
                 val off = OfflineDependenciesPlugin()
-                val handler = off.createRepositoryHandler(it)
-                val ext = OfflineDependenciesExtension(it, handler)
+                val handler = off.createRepositoryHandler(sp)
+                val ext = OfflineDependenciesExtension(sp, handler)
                 ext.root = configuration.root
                 ext.buildScriptConfigurations = configuration.buildScriptConfigurations
                 ext.configurations = configuration.configurations
+                ext.debug = configuration.debug
+                ext.project = sp
+
                 ext.includeBuildscriptDependencies = configuration.includeBuildscriptDependencies
                 ext.includeIvyXmls = configuration.includeIvyXmls
                 ext.includeJavadocs = configuration.includeJavadocs
                 ext.includePoms = configuration.includePoms
-                off.apply(it, ext)
+                ext.includeSources = configuration.includeSources
+
+                off.apply(sp, ext)
             }
         }
     }
