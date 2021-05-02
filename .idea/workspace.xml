@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/logging-java" beforeDir="false" afterPath="$PROJECT_DIR$/repo/logging-java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
