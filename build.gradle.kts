@@ -59,10 +59,11 @@ configurations.all {
     }
 }
 
-@Suppress("GradleDependency") dependencies {
+val offlineLib = File(projectDir, "repo/components/build/libs")
+@Suppress("GradleDependency")
+dependencies {
     implementation(gradleApi())
     implementation(localGroovy())
-    val offlineLib = File(projectDir, "repo/components/build/libs")
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
     implementation(fileTree(mapOf("dir" to offlineLib, "include" to listOf("*.jar"))))
 
@@ -111,8 +112,8 @@ configurations.all {
     // Apache
     implementation("org.apache.commons:commons-lang3:3.11")
     implementation("commons-validator:commons-validator:1.7")
-    implementation("org.apache.commons:commons-collections4:latest.release")
-    implementation("commons-collections:commons-collections:latest.release")
+    implementation("org.apache.commons:commons-collections4:4.4")
+    implementation("commons-collections:commons-collections:3.2.2")
     /*
     implementation("commons-io:commons-io:2.8.0")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
@@ -134,16 +135,6 @@ tasks.withType<Test>().configureEach {
 
 tasks.withType<Jar>().configureEach {
     archiveBaseName.set("gradle-plugin")
-
-    // compile jar with dependencies
-    File(projectDir, "repo/components/build/libs/").absoluteFile.listFiles()?.forEach { offlinejar ->
-        offlinejar?.let {
-            from(zipTree(it)) {
-                include("**")
-                exclude("META-INF", "META-INF/**")
-            }
-        }
-    }
 
     manifest {
         attributes["Implementation-Title"] = project.description as String
@@ -221,11 +212,46 @@ pluginBundle {
     }
 }
 
+val groovydoc: Groovydoc by tasks
+val javadoc: Javadoc by tasks
 val jar: Jar by tasks
 jar.doLast {
     // TODO: create jar without version
     val jarnoversion = File(jar.archiveFile.get().asFile.parent, "gradle-plugin.jar")
     jar.archiveFile.get().asFile.copyTo(jarnoversion, true)
+}
+
+// compile jar with dependencies
+offlineLib.listFiles()?.forEach { offlineJar ->
+    offlineJar?.let { fileJar ->
+        if (fileJar.name.contains("sources")) {
+            // TODO: aggregating documentation groovy
+            groovydoc.apply {
+                source(zipTree(fileJar))
+                include("**/*.groovy")
+            }
+            // TODO: aggregating documentation java
+            javadoc.apply {
+                source(zipTree(fileJar))
+                include("**/*.java")
+                (options as StandardJavadocDocletOptions).apply {
+                    if (JavaVersion.current().isJava9Compatible) {
+                        addBooleanOption("html5", true)
+                    } else {
+                        addBooleanOption("html4", true)
+                    }
+                    if (JavaVersion.current().isJava8Compatible) {
+                        addStringOption("Xdoclint:none", "-quiet")
+                    }
+                }
+            }
+        }
+        // TODO: aggregating jar source
+        jar.from(zipTree(fileJar)) {
+            include("**")
+            exclude("META-INF", "META-INF/**")
+        }
+    }
 }
 
 tasks.findByName("publishPlugins")?.doLast {

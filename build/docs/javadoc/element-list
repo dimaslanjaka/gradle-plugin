@@ -1,4 +1,6 @@
 com.dimaslanjaka.gradle.api
+com.dimaslanjaka.gradle.helper
+com.dimaslanjaka.gradle.offline_dependencies
 com.dimaslanjaka.gradle.plugin
 com.dimaslanjaka.gradle.plugin.date
 com.dimaslanjaka.gradle.plugin.interfaces

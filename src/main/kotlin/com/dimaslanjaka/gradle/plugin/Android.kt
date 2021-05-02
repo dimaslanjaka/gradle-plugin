@@ -60,7 +60,7 @@ class Android(project: Project) {
             }
         } catch (e: IOException) {
             // handles IO exceptions
-            if (Core.extension.debug) {
+            if (Core.extension.getDebug()) {
                 e.printStackTrace()
             }
         }

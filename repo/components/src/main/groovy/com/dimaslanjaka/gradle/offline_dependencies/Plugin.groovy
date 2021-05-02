@@ -12,7 +12,11 @@ import org.gradle.internal.reflect.Instantiator
 import static com.dimaslanjaka.gradle.helper.Extension.create
 
 class Plugin implements org.gradle.api.Plugin<Project> {
-    public static final String EXTENSION_NAME = 'offlineDependencies'
+    /**
+     * Config extension name
+     * @todo: make it available on core plugin
+     */
+    public static String EXTENSION_NAME = 'offlineDependencies'
 
     public void apply(Project project, Extension extension) {
         createTask(project, extension)

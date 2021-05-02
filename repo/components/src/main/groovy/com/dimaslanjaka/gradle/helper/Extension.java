@@ -12,7 +12,10 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class Extension {
     private static final Map<Object, Object> registered = new LinkedHashMap<>();
-    public Project project;
+    /**
+     * Project of extension {@link Project}
+     */
+    private Project project;
 
     public Extension(Project project) {
         this.project = project;
@@ -34,6 +37,7 @@ public class Extension {
      * @param name                  name of extension
      * @param clazz                 class to registered
      * @param constructionArguments parameters for extension
+     * @param <T>                   This is the type parameter
      * @return class of extension
      */
     public static <T> Object create(Project p, String name, Class<T> clazz, Object... constructionArguments) {
@@ -57,6 +61,7 @@ public class Extension {
      *
      * @param p    Project Instance
      * @param name Extension Name
+     * @param <T>  This is the type parameter
      * @return Extension Instance
      */
     public static <T> Object get(Project p, String name) {
@@ -67,7 +72,9 @@ public class Extension {
      * Get extension by extension name
      *
      * @param name Extension Name
+     * @param <T>  This is the type parameter
      * @return Extension Instance
+     * @throws Exception Extension not found
      */
     public static <T> Object get(String name) throws Exception {
         if (registered.containsKey(name)) {
@@ -80,7 +87,9 @@ public class Extension {
      * Get extension by registered class
      *
      * @param clazz registered extension class
+     * @param <T>   This is the type parameter
      * @return Extension Instance
+     * @throws Exception Extension not found
      */
     public static <T> Object get(Class<T> clazz) throws Exception {
         String named = clazz.getName();
@@ -90,6 +99,34 @@ public class Extension {
         throw new Exception("Extension with Class " + named + " not registered");
     }
 
+    /**
+     * Set extension project
+     *
+     * @return {@link Extension#project}
+     */
+    public Project getProject() {
+        return this.project;
+    }
+
+    /**
+     * Get extension project
+     *
+     * @param project {@link Project}
+     */
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    /**
+     * create extension
+     *
+     * @param name                  name of the extension
+     * @param clazz                 class of the extension
+     * @param constructionArguments argument for extension
+     * @param <T>                   This is the type parameter
+     * @return {@link T}
+     * @throws Exception extension not found
+     */
     public <T> Object create(String name, Class<T> clazz, Object... constructionArguments) throws Exception {
         if (project == null) throw new Exception("Project not initialized");
         return create(project, name, clazz, constructionArguments);

@@ -1,0 +1,19 @@
+// list all the subprojects
+def projectList = new ArrayList()
+subprojects.each {subproject ->
+    projectList.add(subproject.path)
+}
+
+// define a task for aggregating the javadoc of all subprojects in the root project javadoc
+task alljavadoc(type: Javadoc) {
+
+    // note : javadoc for sub projects is configured in the java.gradle file
+    project.configure(options) {
+        encoding = "ISO-8859-1"
+        footer = docFooter
+    }
+
+    source projectList.collect { project(it).sourceSets.main.allJava }
+    classpath = files(projectList.collect { project(it).sourceSets.main.compileClasspath })
+    destinationDir = file("$docsDir/javadoc")
+}

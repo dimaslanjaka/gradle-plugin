@@ -19,13 +19,21 @@ public class Core implements Plugin<Project> {
     public static String CONFIG_NAME = "offlineConfig";
     private final Threading thread = new Threading();
 
+    static {
+        com.dimaslanjaka.gradle.offline_dependencies.Plugin.EXTENSION_NAME = CONFIG_NAME;
+    }
+
     @Override
     public void apply(final @NotNull Project target) {
         thread.project = target;
         cmd.Companion.setProject(target);
 
         // TODO: Configuring Rules
-        extension = (CoreExtension) Extension.create(target, CONFIG_NAME, CoreExtension.class, target);
+        try {
+            extension = (CoreExtension) Extension.create(target, CONFIG_NAME, CoreExtension.class, target);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // TODO: Applying to root project
         Repository repository = new Repository(target);

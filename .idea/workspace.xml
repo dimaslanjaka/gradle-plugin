@@ -4,9 +4,201 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="Fix extension components">
+    <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="Test CI">
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/androidTest/java/org/gradle/kotlin/dsl/samples/androidstudio/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/java/org/gradle/kotlin/dsl/samples/androidstudio/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-hdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-mdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-xhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/main/res/values/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Composite/android/src/test/java/org/gradle/kotlin/dsl/samples/androidstudio/ExampleUnitTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Legacy/.idea/modules/-1800999852/Gradle_To_Maven_Plugin.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Module/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/Module/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/groovydoc-aggregate.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/javadoc-aggregate.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/modules/app/Composite_Build_Test.app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/androidTest/java/org/gradle/kotlin/dsl/samples/androidstudio/ExampleInstrumentedTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/java/org/gradle/kotlin/dsl/samples/androidstudio/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/app/src/test/java/org/gradle/kotlin/dsl/samples/androidstudio/ExampleUnitTest.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Composite/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Legacy/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/api/Extension.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/api/Extension.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/CoreExtension.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/CoreExtension.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Android.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Android.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3$ArtifactCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3$ArtifactCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3$startCache_old$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3$startCache_old$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addMavenRepo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addMavenRepo$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addRepoUrl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addRepoUrl$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addRepositories$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addRepositories$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addRepositories$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion$addRepositories$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$initialize$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$initialize$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$initialize$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$initialize$1$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$initialize$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository$initialize$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/allclasses-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/index-all.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/jna/SystemProp.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/jna/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/jna/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/jna/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/jna/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/jna/systemProperties.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/jna/systemProperties.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/overview-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/overview-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/groovydoc/package-list" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/groovydoc/package-list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/allclasses.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/allclasses.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/api/Extension.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/api/Extension.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/api/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/api/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/CoreExtension.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/CoreExtension.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/element-list" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/element-list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/index-all.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/jna/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/jna/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-groovydoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-groovydoc.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-javadoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-javadoc.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-sources.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/helper/Extension.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/helper/Extension.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/Plugin$_createTask_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/Plugin$_createTask_closure1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/Plugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/Plugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/allclasses-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/allclasses-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/Extension.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/Extension.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/Gson.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/Gson.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/Logger.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/Logger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/helper/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/Extension.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/Extension.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/Plugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/Plugin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/Utils.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/Utils.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/maven/PomDependencyModelResolver.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/maven/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/maven/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/maven/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/maven/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/com/dimaslanjaka/gradle/offline_dependencies/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/index-all.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jar/Repack.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jar/Repack.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jar/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jar/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jar/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jar/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/SystemProp.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/SystemProp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/package-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/package-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/systemProperties.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/jna/systemProperties.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/overview-frame.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/overview-frame.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/groovydoc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/allclasses.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/allclasses.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/Extension.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/Extension.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/Gson.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/Gson.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/Logger.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/Logger.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/helper/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/offline_dependencies/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/offline_dependencies/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/offline_dependencies/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/com/dimaslanjaka/gradle/offline_dependencies/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/index-all.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/jna/SystemProp.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/jna/SystemProp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/jna/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/jna/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/jna/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/jna/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/member-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/package-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/docs/javadoc/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/docs/javadoc/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16-groovydoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16-groovydoc.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16-javadoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16-javadoc.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16-sources.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/libs/offline-dependencies-plugin-1.0.16.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/lib/repackaged-all.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/helper/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/helper/Extension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Plugin.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Plugin.groovy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repo/logging-java" beforeDir="false" afterPath="$PROJECT_DIR$/repo/logging-java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/api/Extension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/api/Extension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/CoreExtension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/CoreExtension.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Android.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Android.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline2.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline2.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Repository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Repository.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,11 +223,6 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Powerful Gradle Plugin" type="f1a62948:ProjectNode" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="Powerful Gradle Plugin" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -53,27 +240,51 @@
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="ProjectId" id="1rxwUFbVvB3w6pAl6zdTf8mB9x8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Test/Composite" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
-      <command value="gradle assemble" />
       <command value="gradle clean assemble" />
+      <command value="gradle assemble" />
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.plugin [clean assemble]">
+  <component name="RunManager" selected="Gradle.plugin [assemble]">
+    <configuration name="Tests in 'Powerful_Gradle_Plugin.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests *" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="plugin [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
+        <option name="scriptParameters" value="--stacktrace" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -114,6 +325,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.plugin [clean assemble]" />
+        <item itemvalue="Gradle.Tests in 'Powerful_Gradle_Plugin.test'" />
         <item itemvalue="Gradle.plugin [assemble]" />
       </list>
     </recent_temporary>
@@ -197,7 +409,28 @@
       <option name="project" value="LOCAL" />
       <updated>1619961467630</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fix extension components">
+      <created>1619961505328</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961505328</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Test CI">
+      <created>1619961626444</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961626444</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Test CI">
+      <created>1619961757505</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961757505</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -221,7 +454,8 @@
     <MESSAGE value="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies" />
     <MESSAGE value="Fix documentation" />
     <MESSAGE value="Fix extension components" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix extension components" />
+    <MESSAGE value="Test CI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test CI" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

@@ -81,7 +81,7 @@ class Offline2 {
                 val indexLog = index + 1
                 val log = copy(resultOffline2.from, resultOffline2.to, false)
                 logfile.appendText("$indexLog. $log\n", Charset.defaultCharset())
-                if (Core.extension.debug) {
+                if (Core.extension.getDebug()) {
                     println("$indexLog. $log")
                 }
             }

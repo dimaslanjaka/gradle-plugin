@@ -19,4 +19,4 @@ rootProject.name = "Composite Build Test"
 // Relative composite build
 val plugin = File(rootProject.projectDir, "/../../").absolutePath
 includeBuild(plugin)
-include(":app")
+include(":android")

@@ -3,23 +3,16 @@ package com.dimaslanjaka.gradle.plugin;
 import com.dimaslanjaka.gradle.offline_dependencies.Extension;
 import groovy.lang.MetaClass;
 import org.gradle.api.Project;
-import org.gradle.api.artifacts.dsl.RepositoryHandler;
 
 import javax.annotation.Nullable;
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.Set;
 
-public class CoreExtension extends Extension implements CoreExtensionInterface /*, com.dimaslanjaka.gradle.offline_dependencies.ExtensionInterface */ {
-    /**
-     * Debug while processing
-     */
-    public static boolean debug = false;
+public class CoreExtension extends Extension implements CoreExtensionInterface {
     /**
      * User Home
      */
-    public String home = CoreExtensionInterface.home;
+    private final String home = CoreExtensionInterface.home;
     /**
      * Limit artifacts to cached
      */
@@ -30,7 +23,7 @@ public class CoreExtension extends Extension implements CoreExtensionInterface /
      */
     public String[] extensions = {".module", ".jar", ".pom", ".aar", ".sha1", ".xml"};
     /**
-     * Root oflline repository (default mavenLocal)
+     * Root offline repository (default mavenLocal)
      */
     public File localRepository = CoreExtensionInterface.localRepository;
     /**
@@ -41,41 +34,16 @@ public class CoreExtension extends Extension implements CoreExtensionInterface /
      * Repeat cache when last caching is more than (n) minutes
      */
     public int expire = 60;
-    RepositoryHandler repositoryHandler;
-    /**
-     * Dependency configuration names
-     * implementation, compile, etc
-     */
-    Set<String> configurations = new HashSet<>();
-    /**
-     * project runtime configurations
-     * classpath, etc
-     */
-    Set<String> buildScriptConfigurations = new HashSet<>();
-    boolean includeSources = true;
-    boolean includeJavadocs = true;
-    boolean includePoms = true;
-    boolean includeIvyXmls = true;
-    boolean includeBuildscriptDependencies = true;
-    @SuppressWarnings("FieldMayBeFinal")
-    private Project project;
+    public boolean offline3 = false;
 
     public CoreExtension(Project p) {
         super(p, p.getRepositories());
-        project = p;
+        setProject(p);
         repositoryHandler = p.getRepositories();
     }
 
     public File getRoot() {
         return localRepository;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project p) {
-        this.project = p;
     }
 
     @Override
@@ -100,7 +68,7 @@ public class CoreExtension extends Extension implements CoreExtensionInterface /
 
     @Override
     public void setDebug(boolean debug) {
-        CoreExtension.debug = debug;
+        this.debug = debug;
     }
 
     @Override
@@ -121,6 +89,7 @@ public class CoreExtension extends Extension implements CoreExtensionInterface /
     @Override
     public void setLocalRepository(File file) {
         localRepository = file;
+        setRoot(file);
     }
 
     @Override

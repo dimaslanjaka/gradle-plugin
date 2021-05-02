@@ -35,26 +35,32 @@ class Offline3(p: Project) {
             println(map)
         }
 
-        p.allprojects.forEach { subproject ->
-            subproject?.let { sp ->
-                val off = OfflineDependenciesPlugin()
-                val handler = off.createRepositoryHandler(sp)
-                val ext = OfflineDependenciesExtension(sp, handler)
-                ext.root = configuration.root
-                ext.buildScriptConfigurations = configuration.buildScriptConfigurations
-                ext.configurations = configuration.configurations
-                ext.debug = configuration.debug
-                ext.project = sp
-
-                ext.includeBuildscriptDependencies = configuration.includeBuildscriptDependencies
-                ext.includeIvyXmls = configuration.includeIvyXmls
-                ext.includeJavadocs = configuration.includeJavadocs
-                ext.includePoms = configuration.includePoms
-                ext.includeSources = configuration.includeSources
-
-                off.apply(sp, ext)
+        if (configuration.offline3) {
+            p.allprojects.forEach { subproject ->
+                subproject?.let { sp ->
+                    activate(sp)
+                }
             }
         }
+    }
+
+    fun activate(sp: Project) {
+        val off = OfflineDependenciesPlugin()
+        val handler = off.createRepositoryHandler(sp)
+        val ext = OfflineDependenciesExtension(sp, handler)
+        ext.root = configuration.root
+        ext.buildScriptConfigurations = configuration.buildScriptConfigurations
+        ext.configurations = configuration.configurations
+        ext.debug = configuration.debug
+        ext.project = sp
+
+        ext.includeBuildscriptDependencies = configuration.includeBuildscriptDependencies
+        ext.includeIvyXmls = configuration.includeIvyXmls
+        ext.includeJavadocs = configuration.includeJavadocs
+        ext.includePoms = configuration.includePoms
+        ext.includeSources = configuration.includeSources
+
+        off.apply(sp, ext)
     }
 
     @Suppress("FunctionName")

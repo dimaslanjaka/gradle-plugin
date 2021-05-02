@@ -1,5 +1,6 @@
 package com.dimaslanjaka.gradle.plugin
 
+import com.dimaslanjaka.gradle.api.Extension
 import com.dimaslanjaka.kotlin.File
 import gson
 import org.gradle.api.Project
@@ -24,7 +25,7 @@ class Repository(p: Project) {
     }
 
     private fun initialize(project: Project) {
-        if (Core.extension.debug) {
+        if (Core.extension.getDebug()) {
             println("initialize repository ${project.name}")
         }
 

@@ -1,0 +1,17 @@
+
+// list all the subprojects
+def projectList = new ArrayList()
+subprojects.each {subproject ->
+    projectList.add(subproject.path)
+}
+
+// define a task for aggregating the groovydoc of all subprojects in the root project groovydoc
+task allgroovydoc(type: Groovydoc) {
+    source projectList.collect { project(it).sourceSets.main.allGroovy }
+    classpath = files(projectList.collect { project(it).sourceSets.main.compileClasspath })
+    groovyClasspath = files(projectList.collect { project(it).sourceSets.main.compileClasspath })
+    destinationDir = file("$docsDir/groovydoc")
+    footer = docFooter
+    docTitle = "$project.name $project.version API"
+    windowTitle = "$project.name $project.version API"
+}

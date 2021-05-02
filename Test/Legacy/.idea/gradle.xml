@@ -7,7 +7,7 @@
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT">
             <builds>
-              <build path="$PROJECT_DIR$/../.." name="Gradle To Maven Plugin">
+              <build path="$PROJECT_DIR$/../.." name="Powerful Gradle Plugin">
                 <projects>
                   <project path="$PROJECT_DIR$/../.." />
                 </projects>

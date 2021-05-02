@@ -26,6 +26,12 @@
     catch(err) {
     }
 //-->
+var data = {"i0":10,"i1":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 var pathtoroot = "../../../../";
 var useModuleDirectories = true;
 loadScripts(document, 'script');</script>
@@ -82,7 +88,7 @@ loadScripts(document, 'script');</script>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
@@ -90,7 +96,7 @@ loadScripts(document, 'script');</script>
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a id="skip.navbar.top">
@@ -116,7 +122,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>com.dimaslanjaka.gradle.helper.Extension</li>
+<li><a href="../helper/Extension.html" title="class in com.dimaslanjaka.gradle.helper">com.dimaslanjaka.gradle.helper.Extension</a></li>
 <li>
 <ul class="inheritance">
 <li>com.dimaslanjaka.gradle.api.Extension</li>
@@ -130,30 +136,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <hr>
 <pre>public class <span class="typeNameLabel">Extension</span>
-extends com.dimaslanjaka.gradle.helper.Extension</pre>
+extends <a href="../helper/Extension.html" title="class in com.dimaslanjaka.gradle.helper">Extension</a></pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- =========== FIELD SUMMARY =========== -->
-<section role="region">
-<ul class="blockList">
-<li class="blockList"><a id="field.summary">
-<!--   -->
-</a>
-<h3>Field Summary</h3>
-<ul class="blockList">
-<li class="blockList"><a id="fields.inherited.from.class.com.dimaslanjaka.gradle.helper.Extension">
-<!--   -->
-</a>
-<h3>Fields inherited from class&nbsp;com.dimaslanjaka.gradle.helper.Extension</h3>
-<code>project</code></li>
-</ul>
-</li>
-</ul>
-</section>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <section role="region">
 <ul class="blockList">
@@ -182,12 +171,34 @@ extends com.dimaslanjaka.gradle.helper.Extension</pre>
 <!--   -->
 </a>
 <h3>Method Summary</h3>
+<table class="memberSummary">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colSecond" scope="col">Method</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;java.lang.Object</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#create(java.lang.String,java.lang.Class,java.lang.Object...)">create</a></span>&#8203;(java.lang.String&nbsp;name,
+      java.lang.Class&lt;T&gt;&nbsp;clazz,
+      java.lang.Object...&nbsp;args)</code></th>
+<td class="colLast">
+<div class="block">create extension</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;java.lang.Object</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#get(java.lang.Object)">get</a></span>&#8203;(java.lang.Object&nbsp;identifier)</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.com.dimaslanjaka.gradle.helper.Extension">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;com.dimaslanjaka.gradle.helper.Extension</h3>
-<code>create, create, get, get, get, getAll</code></li>
+<h3>Methods inherited from class&nbsp;com.dimaslanjaka.gradle.helper.<a href="../helper/Extension.html" title="class in com.dimaslanjaka.gradle.helper">Extension</a></h3>
+<code><a href="../helper/Extension.html#create(org.gradle.api.Project,java.lang.String,java.lang.Class,java.lang.Object...)">create</a>, <a href="../helper/Extension.html#get(java.lang.Class)">get</a>, <a href="../helper/Extension.html#get(java.lang.String)">get</a>, <a href="../helper/Extension.html#get(org.gradle.api.Project,java.lang.String)">get</a>, <a href="../helper/Extension.html#getAll()">getAll</a>, <a href="../helper/Extension.html#getProject()">getProject</a>, <a href="../helper/Extension.html#setProject(org.gradle.api.Project)">setProject</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -219,6 +230,51 @@ extends com.dimaslanjaka.gradle.helper.Extension</pre>
 <li class="blockList">
 <h4>Extension</h4>
 <pre>public&nbsp;Extension&#8203;(org.gradle.api.Project&nbsp;project)</pre>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<!-- ============ METHOD DETAIL ========== -->
+<section role="region">
+<ul class="blockList">
+<li class="blockList"><a id="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a id="create(java.lang.String,java.lang.Class,java.lang.Object...)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>create</h4>
+<pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;java.lang.Object&nbsp;create&#8203;(java.lang.String&nbsp;name,
+                                   java.lang.Class&lt;T&gt;&nbsp;clazz,
+                                   java.lang.Object...&nbsp;args)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../helper/Extension.html#create(java.lang.String,java.lang.Class,java.lang.Object...)">Extension</a></code></span></div>
+<div class="block">create extension</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../helper/Extension.html#create(java.lang.String,java.lang.Class,java.lang.Object...)">create</a></code>&nbsp;in class&nbsp;<code><a href="../helper/Extension.html" title="class in com.dimaslanjaka.gradle.helper">Extension</a></code></dd>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - This is the type parameter</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>name</code> - name of the extension</dd>
+<dd><code>clazz</code> - class of the extension</dd>
+<dd><code>args</code> - argument for extension</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="../helper/Extension.html" title="class in com.dimaslanjaka.gradle.helper"><code>Extension</code></a></dd>
+</dl>
+</li>
+</ul>
+<a id="get(java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>get</h4>
+<pre class="methodSignature">@Nullable
+public&nbsp;&lt;T&gt;&nbsp;java.lang.Object&nbsp;get&#8203;(java.lang.Object&nbsp;identifier)</pre>
 </li>
 </ul>
 </li>
@@ -273,7 +329,7 @@ extends com.dimaslanjaka.gradle.helper.Extension</pre>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
@@ -281,7 +337,7 @@ extends com.dimaslanjaka.gradle.helper.Extension</pre>
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a id="skip.navbar.bottom">
