@@ -13,7 +13,7 @@ offlineDependencies {
     includePoms = true
     includeIvyXmls = true
     includeBuildscriptDependencies = false
-
+    debug = false
     configurations = ["compile", "implementation"] // dependencies to copy by configuration name
     buildScriptConfigurations = ["classpath"] // dependencies from classpath, runtime, etc
 }
@@ -29,13 +29,19 @@ offlineDependencies {
     includePoms = true
     includeIvyXmls = true
     includeBuildscriptDependencies = false
-
+    debug = false
     configurations = setOf("compile", "implementation") // dependencies to copy by configuration name
     buildScriptConfigurations = setOf("classpath") // dependencies from classpath, runtime, etc
 }
 ```
+
 ### Full Example
-```kotlin 
+
+```kotlin
+plugins {
+    id("java")
+}
+
 repositories {
     mavenLocal()
     google()
@@ -52,7 +58,7 @@ offlineDependencies {
     includePoms = true
     includeIvyXmls = true
     includeBuildscriptDependencies = false
-
+    debug = false
     configurations = setOf("compile", "implementation") // dependencies to copy by configuration name
     buildScriptConfigurations = setOf("classpath") // dependencies from classpath, runtime, etc
 }
@@ -67,4 +73,3 @@ dependencies {
     implementation("org.xmlunit:xmlunit-matchers:2.5.1")
 }
 ```
- 
