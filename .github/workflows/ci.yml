@@ -15,4 +15,6 @@ jobs:
           java-version: 11
       - name: Build
         run: |
+          # cd gradle-plugin
+          ls
           ./gradlew build
