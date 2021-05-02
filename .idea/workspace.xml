@@ -6,16 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="Fix extension components">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Android.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Android.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/java/Thread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/java/Thread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/BuildLogicFunctionalTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/CoreTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/META-INF/Powerful Gradle Plugin.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/com/dimaslanjaka/java/ResourcesTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-groovydoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-groovydoc.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repo/logging-java" beforeDir="false" afterPath="$PROJECT_DIR$/repo/logging-java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +183,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619961170970</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fix extension components">
+      <created>1619961450740</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961450740</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Fix extension components">
+      <created>1619961467630</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961467630</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
