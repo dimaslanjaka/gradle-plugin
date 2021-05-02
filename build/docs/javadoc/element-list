@@ -1,0 +1,7 @@
+com.dimaslanjaka.gradle.api
+com.dimaslanjaka.gradle.plugin
+com.dimaslanjaka.gradle.plugin.date
+com.dimaslanjaka.gradle.plugin.interfaces
+com.dimaslanjaka.gradle.plugin.test
+com.dimaslanjaka.java
+jna
