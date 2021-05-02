@@ -29,7 +29,7 @@ plugins {
     id("com.gradle.plugin-publish") version "0.12.0"
     kotlin("jvm") version "1.4.32"
 }
-
+//println("fix sync intellij idea not showing")
 apply {
     from("build.test.gradle")
 }

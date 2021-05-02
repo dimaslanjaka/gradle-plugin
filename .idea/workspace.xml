@@ -4,50 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="Fix documentation">
-      <change afterPath="$PROJECT_DIR$/Test/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Composite/.gitignore" afterDir="false" />
+    <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="Fix extension components">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Legacy/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Legacy/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/Core.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/CoreExtension.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/dimaslanjaka/gradle/plugin/CoreExtension.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/CoreExtension.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/CoreExtension.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/com/dimaslanjaka/gradle/plugin/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/index-all.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/index-all.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/member-search-index.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/package-search-index.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/docs/javadoc/type-search-index.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-javadoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-javadoc.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-sources.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/Extension.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/Extension.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$1$_apply_closure1$_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$1$_apply_closure1$_closure2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$1$_apply_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$1$_apply_closure1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectPoms_closure6.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectPoms_closure6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectRepositoryFiles_closure3.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectRepositoryFiles_closure3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectRepositoryFiles_closure4.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectRepositoryFiles_closure4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectRepositoryFiles_closure5.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_collectRepositoryFiles_closure5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_getConfigurations_closure1.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_getConfigurations_closure1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_getConfigurations_closure2.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_getConfigurations_closure2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_resolvePom_closure7.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask$_resolvePom_closure7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build/classes/groovy/main/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Extension.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/Extension.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateTask.groovy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Android.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Android.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline2.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Offline3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/gradle/plugin/Repository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/java/Thread.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/kotlin/main/com/dimaslanjaka/java/Thread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/BuildLogicFunctionalTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/CoreTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/META-INF/Powerful Gradle Plugin.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/kotlin/test/com/dimaslanjaka/java/ResourcesTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-groovydoc.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/gradle-plugin-1.0.11-groovydoc.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repo/logging-java" beforeDir="false" afterPath="$PROJECT_DIR$/repo/logging-java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/CoreExtension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/CoreExtension.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,9 +74,10 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="gradle assemble" />
+      <command value="gradle clean assemble" />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.plugin [clean assemble]">
     <configuration name="plugin [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -129,8 +99,31 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="plugin [clean assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="assemble" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.plugin [clean assemble]" />
         <item itemvalue="Gradle.plugin [assemble]" />
       </list>
     </recent_temporary>
@@ -186,7 +179,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619954300099</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fix extension components">
+      <created>1619961133063</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961133063</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fix extension components">
+      <created>1619961170970</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1619961170970</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -209,7 +216,8 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies" />
     <MESSAGE value="Fix documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix documentation" />
+    <MESSAGE value="Fix extension components" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix extension components" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
