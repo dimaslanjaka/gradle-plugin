@@ -4,43 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/modules/-1800999852/Gradle_To_Maven_Plugin.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/modules/-1800999852/Gradle_To_Maven_Plugin.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Composite/.idea/modules/-1800999852/Gradle_To_Maven_Plugin.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repo/components/.idea/modules/offline_dependencies.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repo/components/.idea/modules/offline_dependencies.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/repo/components/.idea/modules/offline_dependencies.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinScripting.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Gradle_To_Maven_Plugin.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Gradle_To_Maven_Plugin.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/Gradle_To_Maven_Plugin.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+    <list default="true" id="a0c9b0de-95d1-4f3b-bff7-f7cc4b9f18f7" name="Default Changelist" comment="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Composite/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Composite/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/lib/repackaged-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/lib/repackaged-all.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/helper/Extension.groovy" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/helper/Extension.groovy" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesExtension.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/OfflineDependenciesPlugin.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/src/main/groovy/com/dimaslanjaka/gradle/offline_dependencies/UpdateOfflineRepositoryTask.groovy" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/repo/components/version.properties" beforeDir="false" afterPath="$PROJECT_DIR$/repo/components/version.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/Core.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/CoreExtension.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/dimaslanjaka/gradle/plugin/CoreExtension.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/gradle/plugin/Offline3.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/java/Thread.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/java/Thread.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/java/cmd.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/dimaslanjaka/java/cmd.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +18,13 @@
     </projectState>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Dimas Lanjaka &lt;dimaslanjaka@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
   <component name="ProjectId" id="1rxwUFbVvB3w6pAl6zdTf8mB9x8" />
   <component name="ProjectViewState">
@@ -72,6 +43,37 @@
       <option name="presentableId" value="Default" />
       <updated>1619931063684</updated>
     </task>
+    <task id="LOCAL-00001" summary="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies">
+      <created>1619949930629</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619949930629</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
