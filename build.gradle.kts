@@ -136,7 +136,7 @@ tasks.withType<Jar>().configureEach {
     archiveBaseName.set("gradle-plugin")
 
     // compile jar with dependencies
-    File(projectDir, "repo/components/build/libs").absoluteFile.listFiles()?.forEach { offlinejar ->
+    File(projectDir, "repo/components/build/libs/").absoluteFile.listFiles()?.forEach { offlinejar ->
         offlinejar?.let {
             from(zipTree(it)) {
                 include("**")

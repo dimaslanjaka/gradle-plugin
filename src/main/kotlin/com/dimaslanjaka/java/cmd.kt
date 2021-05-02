@@ -9,8 +9,9 @@ import java.util.*
 
 
 @Suppress("unused", "ClassName", "LocalVariableName", "FunctionName", "MemberVisibilityCanBePrivate")
-open class cmd(project: Project) {
-    init {
+open class cmd {
+    constructor() {}
+    constructor(project: Project) {
         cmd.project = project
     }
 

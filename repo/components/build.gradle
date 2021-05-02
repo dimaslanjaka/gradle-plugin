@@ -100,6 +100,7 @@ task repackageDependencies(type: Jar) {
 compileJava.dependsOn("repackageDependencies")
 
 tasks.withType(Jar).all {
+    archivesBaseName = "offline-dependencies-plugin"
     manifest {
         attributes(
                 "Created-By": "${System.properties["java.version"]} (${System.properties["java.vendor"]} ${System.properties["java.vm.version"]})".toString(),
@@ -127,7 +128,7 @@ task packageWithoutVersion(type: Jar) {
     archiveVersion.set(project.version.toString())
     dependsOn(jar)
 }
-jar.finalizedBy(packageWithoutVersion)
+//jar.finalizedBy(packageWithoutVersion)
 
 tasks.findByName("publishPlugins").doLast {
     updateVersion(project)
@@ -145,6 +146,12 @@ pluginBundle {
             displayName = "Gradle Offline Dependencies Plugin"
         }
     }
+
+    mavenCoordinates {
+        groupId = "com.dimaslanjaka"
+        artifactId = "offline_dependencies"
+        version = project.version as String
+    }
 }
 
 // Activate Composite Build by java-gradle-plugin
@@ -154,9 +161,9 @@ gradlePlugin {
     plugins {
         offlineDependenciesPlugin {
             //noinspection GroovyAssignabilityCheck
-            id = project.group
+            id = "com.dimaslanjaka.offline_dependencies"
             //noinspection GroovyAssignabilityCheck
-            implementationClass = "com.dimaslanjaka.gradle.offline_dependencies.OfflineDependenciesPlugin"
+            implementationClass = "com.dimaslanjaka.gradle.offline_dependencies.Plugin"
         }
     }
 }

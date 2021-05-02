@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.9">
-      <module name="Gradle_To_Maven_Plugin.main" target="1.8" />
-      <module name="Gradle_To_Maven_Plugin.test" target="1.8" />
-      <module name="Powerful_Gradle_Plugin.main" target="1.8" />
-      <module name="Powerful_Gradle_Plugin.test" target="1.8" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.9" />
   </component>
 </project>

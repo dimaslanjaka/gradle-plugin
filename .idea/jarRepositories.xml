@@ -19,7 +19,7 @@
     <remote-repository>
       <option name="id" value="MavenLocal" />
       <option name="name" value="MavenLocal" />
-      <option name="url" value="file:/$MAVEN_REPOSITORY$/" />
+      <option name="url" value="file:/$MAVEN_REPO$/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="maven" />

@@ -11,6 +11,8 @@ import java.nio.file.Path
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+import com.dimaslanjaka.gradle.offline_dependencies.Extension as OfflineDependenciesExtension
+import com.dimaslanjaka.gradle.offline_dependencies.Plugin as OfflineDependenciesPlugin
 import java.io.File as javaFile
 
 /**
@@ -34,15 +36,24 @@ class Offline3(p: Project) {
         }
 
         p.allprojects.forEach { subproject ->
-            subproject?.let { it ->
-                it.afterEvaluate { subprojectAE ->
-                    startCache(subprojectAE)
-                }
+            subproject?.let {
+                val off = OfflineDependenciesPlugin()
+                val handler = off.createRepositoryHandler(it)
+                val ext = OfflineDependenciesExtension(it, handler)
+                ext.root = configuration.root
+                ext.buildScriptConfigurations = configuration.buildScriptConfigurations
+                ext.configurations = configuration.configurations
+                ext.includeBuildscriptDependencies = configuration.includeBuildscriptDependencies
+                ext.includeIvyXmls = configuration.includeIvyXmls
+                ext.includeJavadocs = configuration.includeJavadocs
+                ext.includePoms = configuration.includePoms
+                off.apply(it, ext)
             }
         }
     }
 
-    fun startCache(project: Project) {
+    @Suppress("FunctionName")
+    fun startCache_old(project: Project) {
         val logfile = File(
             project.buildDir.absolutePath,
             "plugin/com.dimaslanjaka/offline3-${project.name}"
@@ -159,7 +170,7 @@ class Offline3(p: Project) {
         lateinit var from: File
         lateinit var to: File
 
-        constructor() {}
+        constructor()
         constructor(gradleCache: File, mavenCache: File) {
             from = gradleCache
             to = mavenCache

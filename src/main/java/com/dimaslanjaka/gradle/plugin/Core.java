@@ -1,14 +1,11 @@
 package com.dimaslanjaka.gradle.plugin;
 
-import com.dimaslanjaka.gradle.offline_dependencies.OfflineDependenciesPlugin;
 import com.dimaslanjaka.java.Thread;
 import com.dimaslanjaka.java.cmd;
 import com.dimaslanjaka.kotlin.File;
-import org.gradle.api.NamedDomainObjectCollectionSchema;
+import jar.Repack;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.artifacts.Configuration;
-import org.gradle.api.artifacts.ConfigurationContainer;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.Charset;
@@ -16,37 +13,24 @@ import java.util.Date;
 
 import static com.dimaslanjaka.gradle.api.Extension.createExtension;
 import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
-import static com.dimaslanjaka.kotlin.ConsoleColors.println;
 
 public class Core implements Plugin<Project> {
-    private final Threading thread = new Threading();
     public static CoreExtension extension;
-    private static Project project = null;
     public static String CONFIG_NAME = "offlineConfig";
+    private final Threading thread = new Threading();
 
     @Override
     public void apply(final @NotNull Project target) {
         thread.project = target;
-        project = target;
         cmd.Companion.setProject(target);
 
         // TODO: Configuring Rules
-        extension = (CoreExtension) createExtension(project, CONFIG_NAME, CoreExtension.class, project);
-
-        /*
-        project.getAllprojects().forEach(new Consumer<Project>() {
-            @Override
-            public void accept(Project project) {
-                setupProjectConfiguration(project);
-            }
-        });
-         */
+        extension = (CoreExtension) com.dimaslanjaka.gradle.api.Extension.createExtension(target, CONFIG_NAME, CoreExtension.class, target);
 
         Repository repository = new Repository(target);
-        //Repack jar = new Repack(target);
+        Repack jar = new Repack(target);
         Utils.cleanGradleDaemonLog(target);
-        OfflineDependenciesPlugin off = new OfflineDependenciesPlugin();
-        off.setup(project);
+        new Offline3(target);
 
         target.afterEvaluate(project -> {
             startCache(project);
@@ -54,17 +38,6 @@ public class Core implements Plugin<Project> {
                 new Android(project);
             }
         });
-    }
-
-    private void setupProjectConfiguration(Project project) {
-        ConfigurationContainer configurationContainer = project.getConfigurations();
-        NamedDomainObjectCollectionSchema collectionSchema = configurationContainer.getCollectionSchema();
-        for (Configuration conf : configurationContainer) {
-            println(project.getName(), conf.getName());
-            conf.setTransitive(true);
-            conf.setCanBeConsumed(true);
-            conf.setCanBeResolved(true);
-        }
     }
 
     /**
@@ -86,14 +59,6 @@ public class Core implements Plugin<Project> {
                         } else {
                             new Offline2(targetProject, extension.limit);
                         }
-                    }
-                });
-
-                // Cache Configured Classpath in project
-                new Thread(targetProject, "Offline3").lock(new Runnable() {
-                    @Override
-                    public void run() {
-                        new Offline3(targetProject);
                     }
                 });
 

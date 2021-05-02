@@ -1,5 +1,8 @@
 package com.dimaslanjaka.java
 
+import com.dimaslanjaka.gradle.api.Extension
+import com.dimaslanjaka.gradle.plugin.Core
+import com.dimaslanjaka.gradle.plugin.CoreExtension
 import com.dimaslanjaka.kotlin.File
 import org.gradle.api.Project
 import java.io.RandomAccessFile
@@ -16,6 +19,8 @@ open class Thread : java.lang.Thread, Runnable {
     lateinit var project: Project
     lateinit var lock: FileLock
     lateinit var fileChannel: FileChannel
+    lateinit var configuration: CoreExtension
+    var debug = false
 
     constructor(identifier: String) {
         setIdentifier(identifier)
@@ -24,6 +29,10 @@ open class Thread : java.lang.Thread, Runnable {
     constructor(p: Project, identifier: String) {
         project = p
         setIdentifier(identifier)
+        configuration = Extension.getExtension<CoreExtension>(
+            project, Core.CONFIG_NAME
+        ) as CoreExtension
+        debug = configuration.debug
     }
 
     constructor(r: Runnable) : super(r) {}
@@ -54,7 +63,7 @@ open class Thread : java.lang.Thread, Runnable {
     private fun release() {
         lock.release()
         fileChannel.close()
-        println("Lock thread $name_thread released")
+        if (debug) println("Lock thread $name_thread released")
     }
 
     @Throws(java.io.IOException::class)
@@ -65,22 +74,30 @@ open class Thread : java.lang.Thread, Runnable {
         )
 
         lock = fileChannel.lock(0, Long.MAX_VALUE, true)
-        println("Lock thread $name_thread is acquired: " + lock.isValid)
-        println("Lock thread $name_thread is shared: " + lock.isShared)
+        if (debug) {
+            println("Lock thread $name_thread is acquired: " + lock.isValid)
+            println("Lock thread $name_thread is shared: " + lock.isShared)
+        }
     }
 
+    /**
+     * Set thread identifier for lock filename,
+     * each thread only run once when lockfile available(unlocked)
+     */
     fun setIdentifier(identifier: String) {
         name_thread = identifier
-        val buildir = if (this::project.isInitialized) {
-            project.buildDir.absolutePath
+        path = if (this::project.isInitialized) {
+            File(project.buildDir.absolutePath, "thread/${identifier}.txt")
         } else {
-            "build"
+            File("build", "thread/${identifier}.txt")
         }
-        path = File(buildir, "thread/${identifier}.txt")
         path.resolveParent()
     }
 
     companion object {
+        /**
+         * Check file is locked
+         */
         @JvmStatic
         fun isFileLocked(p_fi: File): Boolean {
             var bLocked = false
