@@ -16,5 +16,5 @@ jobs:
       - name: Build
         run: |
           # cd gradle-plugin
-          ls
+          chmod +x ./gradlew
           ./gradlew build
