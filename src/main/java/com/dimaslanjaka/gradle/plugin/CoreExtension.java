@@ -1,13 +1,17 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import com.dimaslanjaka.gradle.offline_dependencies.Extension;
+import groovy.lang.MetaClass;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.dsl.RepositoryHandler;
 
+import javax.annotation.Nullable;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CoreExtension implements CoreExtensionInterface /*, com.dimaslanjaka.gradle.offline_dependencies.ExtensionInterface */ {
+public class CoreExtension extends Extension implements CoreExtensionInterface /*, com.dimaslanjaka.gradle.offline_dependencies.ExtensionInterface */ {
     /**
      * Debug while processing
      */
@@ -57,6 +61,7 @@ public class CoreExtension implements CoreExtensionInterface /*, com.dimaslanjak
     private Project project;
 
     public CoreExtension(Project p) {
+        super(p, p.getRepositories());
         project = p;
         repositoryHandler = p.getRepositories();
     }
@@ -116,5 +121,47 @@ public class CoreExtension implements CoreExtensionInterface /*, com.dimaslanjak
     @Override
     public void setLocalRepository(File file) {
         localRepository = file;
+    }
+
+    @Override
+    public Object invokeMethod(String s, Object o) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Object getProperty(String s) {
+        try {
+            return getClass().getMethod(s);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void setProperty(String fieldName, Object fieldValue) {
+        Class<?> clazz = getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                field.set(this, fieldValue);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+    }
+
+    @Nullable
+    @Override
+    public MetaClass getMetaClass() {
+        return null;
+    }
+
+    @Override
+    public void setMetaClass(MetaClass metaClass) {
     }
 }

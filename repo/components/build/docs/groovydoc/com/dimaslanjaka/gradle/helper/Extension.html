@@ -129,7 +129,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         </tr>
                         
                         <tr class="altColor">
-                            <td class="colFirst"><code><strong><a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a></strong></code>&nbsp;</td>
+                            <td class="colFirst"><code><strong>org.gradle.api.Project</strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#project">project</a></code></td>
                             <td class="colLast"></td>
                         </tr>
@@ -161,8 +161,8 @@ if (location.href.indexOf('is-external=true') == -1) {
                         
                         <tr class="altColor">
                             <td class="colFirst">
-                                <code><a href="#Extension(com.dimaslanjaka.gradle.helper.Project)">Extension</a>
-                                (<a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a> project)</code><br></td>
+                                <code><a href="#Extension(org.gradle.api.Project)">Extension</a>
+                                (org.gradle.api.Project project)</code><br></td>
                         </tr>
                         
                     </table>
@@ -188,20 +188,20 @@ if (location.href.indexOf('is-external=true') == -1) {
                         
                         <tr class="altColor">
                             <td class="colFirst"><code>&lt;T&gt;</code></td>
-                            <td class="colLast"><code>java.lang.Object</code></td>
-                            <td class="colLast"><code><strong><a href="#create(java.lang.String, Class<T>, java.lang.Object)">create</a></strong>(java.lang.String name, java.lang.Class&lt;T&gt; clazz, java.lang.Object... constructionArguments)</code><br></td>
+                            <td class="colLast"><code>static&nbsp;java.lang.Object</code></td>
+                            <td class="colLast"><code><strong><a href="#create(org.gradle.api.Project, java.lang.String, Class<T>, java.lang.Object)">create</a></strong>(org.gradle.api.Project p, java.lang.String name, java.lang.Class&lt;T&gt; clazz, java.lang.Object... constructionArguments)</code><br>Create extension</td>
                         </tr>
                         
                         <tr class="rowColor">
                             <td class="colFirst"><code>&lt;T&gt;</code></td>
-                            <td class="colLast"><code>static&nbsp;java.lang.Object</code></td>
-                            <td class="colLast"><code><strong><a href="#create(com.dimaslanjaka.gradle.helper.Project, java.lang.String, Class<T>, java.lang.Object)">create</a></strong>(<a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a> p, java.lang.String name, java.lang.Class&lt;T&gt; clazz, java.lang.Object... constructionArguments)</code><br>Create extension</td>
+                            <td class="colLast"><code>java.lang.Object</code></td>
+                            <td class="colLast"><code><strong><a href="#create(java.lang.String, Class<T>, java.lang.Object)">create</a></strong>(java.lang.String name, java.lang.Class&lt;T&gt; clazz, java.lang.Object... constructionArguments)</code><br></td>
                         </tr>
                         
                         <tr class="altColor">
                             <td class="colFirst"><code>&lt;T&gt;</code></td>
                             <td class="colLast"><code>static&nbsp;java.lang.Object</code></td>
-                            <td class="colLast"><code><strong><a href="#get(com.dimaslanjaka.gradle.helper.Project, java.lang.String)">get</a></strong>(<a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a> p, java.lang.String name)</code><br>Get extension by project and extension name</td>
+                            <td class="colLast"><code><strong><a href="#get(org.gradle.api.Project, java.lang.String)">get</a></strong>(org.gradle.api.Project p, java.lang.String name)</code><br>Get extension by project and extension name</td>
                         </tr>
                         
                         <tr class="rowColor">
@@ -266,7 +266,7 @@ if (location.href.indexOf('is-external=true') == -1) {
                         <a name="project"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4>public&nbsp;<a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a> <strong>project</strong></h4>
+                                <h4>public&nbsp;org.gradle.api.Project <strong>project</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -287,10 +287,10 @@ if (location.href.indexOf('is-external=true') == -1) {
                 </a>
                     <h3>Constructor Detail</h3>
                     
-                        <a name="Extension(com.dimaslanjaka.gradle.helper.Project)"><!-- --></a>
+                        <a name="Extension(org.gradle.api.Project)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4>public&nbsp;<strong>Extension</strong>(<a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a> project)</h4>
+                                <h4>public&nbsp;<strong>Extension</strong>(org.gradle.api.Project project)</h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -308,6 +308,15 @@ if (location.href.indexOf('is-external=true') == -1) {
                 </a>
                     <h3>Method Detail</h3>
                     
+                        <a name="create(org.gradle.api.Project, java.lang.String, Class<T>, java.lang.Object)"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>&lt;T&gt; public&nbsp;static&nbsp;java.lang.Object <strong>create</strong>(org.gradle.api.Project p, java.lang.String name, java.lang.Class&lt;T&gt; clazz, java.lang.Object... constructionArguments)</h4>
+                                <p> Create extension
+     <DL><DT><B>Parameters:</B></DT><DD><code>p</code> -                      Project instance</DD><DD><code>name</code> -                   name of extension</DD><DD><code>clazz</code> -                  class to registered</DD><DD><code>constructionArguments</code> -  parameters for extension</DD></DL><DL><DT><B>Returns:</B></DT><DD>class of extension</DD></DL></p>
+                            </li>
+                        </ul>
+                    
                         <a name="create(java.lang.String, Class<T>, java.lang.Object)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
@@ -316,19 +325,10 @@ if (location.href.indexOf('is-external=true') == -1) {
                             </li>
                         </ul>
                     
-                        <a name="create(com.dimaslanjaka.gradle.helper.Project, java.lang.String, Class<T>, java.lang.Object)"><!-- --></a>
+                        <a name="get(org.gradle.api.Project, java.lang.String)"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
-                                <h4>&lt;T&gt; public&nbsp;static&nbsp;java.lang.Object <strong>create</strong>(<a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a> p, java.lang.String name, java.lang.Class&lt;T&gt; clazz, java.lang.Object... constructionArguments)</h4>
-                                <p> Create extension
-     <DL><DT><B>Parameters:</B></DT><DD><code>p</code> -                      Project instance</DD><DD><code>name</code> -                   name of extension</DD><DD><code>clazz</code> -                  class to registered</DD><DD><code>constructionArguments</code> -  parameters for extension</DD></DL><DL><DT><B>Returns:</B></DT><DD>class of extension</DD></DL></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="get(com.dimaslanjaka.gradle.helper.Project, java.lang.String)"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>&lt;T&gt; public&nbsp;static&nbsp;java.lang.Object <strong>get</strong>(<a href='../../../../com/dimaslanjaka/gradle/helper/Project.html'>Project</a> p, java.lang.String name)</h4>
+                                <h4>&lt;T&gt; public&nbsp;static&nbsp;java.lang.Object <strong>get</strong>(org.gradle.api.Project p, java.lang.String name)</h4>
                                 <p> Get extension by project and extension name
      <DL><DT><B>Parameters:</B></DT><DD><code>p</code> -     Project Instance</DD><DD><code>name</code> -  Extension Name</DD></DL><DL><DT><B>Returns:</B></DT><DD>Extension Instance</DD></DL></p>
                             </li>

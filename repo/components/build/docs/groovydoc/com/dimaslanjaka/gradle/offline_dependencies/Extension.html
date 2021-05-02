@@ -70,11 +70,11 @@ if (location.href.indexOf('is-external=true') == -1) {
     <div>
         <ul class="subNavList">
             <li>Summary:&nbsp;</li>
-            Nested&nbsp;&nbsp;&nbsp;Field&nbsp;&nbsp;&nbsp;<li><a href="#property_summary">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_summary">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_summary">Method</a></li>&nbsp;&nbsp;&nbsp;
+            Nested&nbsp;&nbsp;&nbsp;<li><a href="#field_summary">Field</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#property_summary">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_summary">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_summary">Method</a></li>&nbsp;&nbsp;&nbsp;
         </ul>
         <ul class="subNavList">
             <li>&nbsp;|&nbsp;Detail:&nbsp;</li>
-            Field&nbsp;&nbsp;&nbsp;<li><a href="#prop_detail">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_detail">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_detail">Method</a></li>&nbsp;&nbsp;&nbsp;
+            <li><a href="#field_detail">Field</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#prop_detail">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_detail">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_detail">Method</a></li>&nbsp;&nbsp;&nbsp;
         </ul>
     </div>
     <a name="skip-navbar_top">
@@ -125,6 +125,84 @@ extends java.lang.Object
         
         <!-- =========== FIELD SUMMARY =========== -->
         
+            <ul class="blockList">
+                <li class="blockList"><a name="field_summary"><!--   --></a>
+                    <h3>Field Summary</h3>
+                    <ul class="blockList">
+                    <table border="0" cellpadding="3" cellspacing="0" class="overviewSummary" summary="Enum constants summary table">
+                        <caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+                        <tr>
+                            <th class="colFirst" scope="col">Modifiers</th>
+                            <th class="colLast" scope="col">Name</th>
+                            <th class="colLast" scope="col">Description</th>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code><strong>java.util.Set&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#buildScriptConfigurations">buildScriptConfigurations</a></code></td>
+                            <td class="colLast"></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code><strong>java.util.Set&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#configurations">configurations</a></code></td>
+                            <td class="colLast"></td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#debug">debug</a></code></td>
+                            <td class="colLast">Show debug while processing</td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#includeBuildscriptDependencies">includeBuildscriptDependencies</a></code></td>
+                            <td class="colLast">Cache build script dependencies?</td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#includeIvyXmls">includeIvyXmls</a></code></td>
+                            <td class="colLast">Cache ivy xmls?</td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#includeJavadocs">includeJavadocs</a></code></td>
+                            <td class="colLast">Cache -javadoc.jar?</td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#includePoms">includePoms</a></code></td>
+                            <td class="colLast">Cache -pom.xml?</td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#includeSources">includeSources</a></code></td>
+                            <td class="colLast">Cache -sources.jar?</td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code><strong>org.gradle.api.artifacts.dsl.RepositoryHandler</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#repositoryHandler">repositoryHandler</a></code></td>
+                            <td class="colLast"></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code><strong>java.io.File</strong></code>&nbsp;</td>
+                            <td class="colLast"><code><a href="#root">root</a></code></td>
+                            <td class="colLast"></td>
+                        </tr>
+                        
+                    </table>
+                   </ul>
+                </li>
+                
+            </ul>
+        
 
         <!-- =========== PROPERTY SUMMARY =========== -->
         
@@ -140,58 +218,8 @@ extends java.lang.Object
                         </tr>
                         
                         <tr class="altColor">
-                            <td class="colFirst"><code><strong>java.util.Set&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#buildScriptConfigurations">buildScriptConfigurations</a></code><br></td>
-                        </tr>
-                        
-                        <tr class="rowColor">
-                            <td class="colFirst"><code><strong>java.util.Set&lt;java.lang.String&gt;</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#configurations">configurations</a></code><br></td>
-                        </tr>
-                        
-                        <tr class="altColor">
-                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#debug">debug</a></code><br>Show debug while processing</td>
-                        </tr>
-                        
-                        <tr class="rowColor">
-                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#includeBuildscriptDependencies">includeBuildscriptDependencies</a></code><br>Cache build script dependencies?</td>
-                        </tr>
-                        
-                        <tr class="altColor">
-                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#includeIvyXmls">includeIvyXmls</a></code><br>Cache ivy xmls?</td>
-                        </tr>
-                        
-                        <tr class="rowColor">
-                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#includeJavadocs">includeJavadocs</a></code><br>Cache -javadoc.jar?</td>
-                        </tr>
-                        
-                        <tr class="altColor">
-                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#includePoms">includePoms</a></code><br>Cache -pom.xml?</td>
-                        </tr>
-                        
-                        <tr class="rowColor">
-                            <td class="colFirst"><code><strong>boolean</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#includeSources">includeSources</a></code><br>Cache -sources.jar?</td>
-                        </tr>
-                        
-                        <tr class="altColor">
                             <td class="colFirst"><code><strong>org.gradle.api.Project</strong></code>&nbsp;</td>
                             <td class="colLast"><code><a href="#project">project</a></code><br></td>
-                        </tr>
-                        
-                        <tr class="rowColor">
-                            <td class="colFirst"><code><strong>org.gradle.api.artifacts.dsl.RepositoryHandler</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#repositoryHandler">repositoryHandler</a></code><br></td>
-                        </tr>
-                        
-                        <tr class="altColor">
-                            <td class="colFirst"><code><strong>java.io.File</strong></code>&nbsp;</td>
-                            <td class="colLast"><code><a href="#root">root</a></code><br></td>
                         </tr>
                         
                     </table>
@@ -269,44 +297,56 @@ extends java.lang.Object
                         
                         <tr class="altColor">
                             <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code>java.util.Map&lt;java.lang.String, java.lang.Object&gt;</code></td>
+                            <td class="colLast"><code><strong><a href="#dump()">dump</a></strong>()</code><br></td>
+                        </tr>
+                        
+                        <tr class="rowColor">
+                            <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>org.gradle.api.Project</code></td>
                             <td class="colLast"><code><strong><a href="#getProject()">getProject</a></strong>()</code><br></td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>protected&nbsp;org.gradle.api.artifacts.dsl.RepositoryHandler</code></td>
                             <td class="colLast"><code><strong><a href="#getRepositoryHandler()">getRepositoryHandler</a></strong>()</code><br></td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
                             <td class="colLast"><code><strong><a href="#repositories(groovy.lang.Closure)">repositories</a></strong>(groovy.lang.Closure repoConfigurator)</code><br></td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
                             <td class="colLast"><code><strong><a href="#setProject(org.gradle.api.Project)">setProject</a></strong>(org.gradle.api.Project project1)</code><br></td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
                             <td class="colLast"><code><strong><a href="#setRepositoryHandler(org.gradle.api.artifacts.dsl.RepositoryHandler)">setRepositoryHandler</a></strong>(org.gradle.api.artifacts.dsl.RepositoryHandler RH)</code><br></td>
                         </tr>
                         
-                        <tr class="rowColor">
+                        <tr class="altColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
                             <td class="colLast"><code><strong><a href="#setRoot(java.lang.String)">setRoot</a></strong>(java.lang.String newRoot)</code><br>Set root from string</td>
                         </tr>
                         
-                        <tr class="altColor">
+                        <tr class="rowColor">
                             <td class="colFirst"><code></code></td>
                             <td class="colLast"><code>void</code></td>
                             <td class="colLast"><code><strong><a href="#setRoot(java.io.File)">setRoot</a></strong>(java.io.File newRoot)</code><br>Set root from java.io.File</td>
+                        </tr>
+                        
+                        <tr class="altColor">
+                            <td class="colFirst"><code></code></td>
+                            <td class="colLast"><code>java.lang.String</code></td>
+                            <td class="colLast"><code><strong><a href="#toString()">toString</a></strong>()</code><br></td>
                         </tr>
                         
                     </table>
@@ -343,6 +383,102 @@ extends java.lang.Object
            
 
             
+            <!-- =========== FIELD DETAIL =========== -->
+            <ul class="blockList">
+                <li class="blockList"><a name="field_detail">
+                    <!--   -->
+                </a>
+                    <h3>Field Detail</h3>
+                    
+                        <a name="buildScriptConfigurations"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;java.util.Set&lt;java.lang.String&gt; <strong>buildScriptConfigurations</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="configurations"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;java.util.Set&lt;java.lang.String&gt; <strong>configurations</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="debug"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;boolean <strong>debug</strong></h4>
+                                <p> Show debug while processing
+     </p>
+                            </li>
+                        </ul>
+                    
+                        <a name="includeBuildscriptDependencies"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;boolean <strong>includeBuildscriptDependencies</strong></h4>
+                                <p> Cache build script dependencies?
+     </p>
+                            </li>
+                        </ul>
+                    
+                        <a name="includeIvyXmls"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;boolean <strong>includeIvyXmls</strong></h4>
+                                <p> Cache ivy xmls?
+     </p>
+                            </li>
+                        </ul>
+                    
+                        <a name="includeJavadocs"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;boolean <strong>includeJavadocs</strong></h4>
+                                <p> Cache -javadoc.jar?
+     </p>
+                            </li>
+                        </ul>
+                    
+                        <a name="includePoms"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;boolean <strong>includePoms</strong></h4>
+                                <p> Cache -pom.xml?
+     </p>
+                            </li>
+                        </ul>
+                    
+                        <a name="includeSources"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;boolean <strong>includeSources</strong></h4>
+                                <p> Cache -sources.jar?
+     </p>
+                            </li>
+                        </ul>
+                    
+                        <a name="repositoryHandler"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;org.gradle.api.artifacts.dsl.RepositoryHandler <strong>repositoryHandler</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                        <a name="root"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>public&nbsp;java.io.File <strong>root</strong></h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
+                </li>
+            </ul>
+            
 
             
             <!-- =========== PROPERTY DETAIL =========== -->
@@ -352,96 +488,10 @@ extends java.lang.Object
                 </a>
                     <h3>Property Detail</h3>
                     
-                        <a name="buildScriptConfigurations"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>java.util.Set&lt;java.lang.String&gt; <strong>buildScriptConfigurations</strong></h4>
-                                <p></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="configurations"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>java.util.Set&lt;java.lang.String&gt; <strong>configurations</strong></h4>
-                                <p></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="debug"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>boolean <strong>debug</strong></h4>
-                                <p> Show debug while processing
-     </p>
-                            </li>
-                        </ul>
-                    
-                        <a name="includeBuildscriptDependencies"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>boolean <strong>includeBuildscriptDependencies</strong></h4>
-                                <p> Cache build script dependencies?
-     </p>
-                            </li>
-                        </ul>
-                    
-                        <a name="includeIvyXmls"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>boolean <strong>includeIvyXmls</strong></h4>
-                                <p> Cache ivy xmls?
-     </p>
-                            </li>
-                        </ul>
-                    
-                        <a name="includeJavadocs"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>boolean <strong>includeJavadocs</strong></h4>
-                                <p> Cache -javadoc.jar?
-     </p>
-                            </li>
-                        </ul>
-                    
-                        <a name="includePoms"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>boolean <strong>includePoms</strong></h4>
-                                <p> Cache -pom.xml?
-     </p>
-                            </li>
-                        </ul>
-                    
-                        <a name="includeSources"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>boolean <strong>includeSources</strong></h4>
-                                <p> Cache -sources.jar?
-     </p>
-                            </li>
-                        </ul>
-                    
                         <a name="project"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>org.gradle.api.Project <strong>project</strong></h4>
-                                <p></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="repositoryHandler"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>org.gradle.api.artifacts.dsl.RepositoryHandler <strong>repositoryHandler</strong></h4>
-                                <p></p>
-                            </li>
-                        </ul>
-                    
-                        <a name="root"><!-- --></a>
-                        <ul class="blockListLast">
-                            <li class="blockList">
-                                <h4>java.io.File <strong>root</strong></h4>
                                 <p></p>
                             </li>
                         </ul>
@@ -514,6 +564,14 @@ java.util.Map <strong>asMap</strong>()</h4>
                             </li>
                         </ul>
                     
+                        <a name="dump()"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>java.util.Map&lt;java.lang.String, java.lang.Object&gt; <strong>dump</strong>()</h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
                         <a name="getProject()"><!-- --></a>
                         <ul class="blockListLast">
                             <li class="blockList">
@@ -572,6 +630,15 @@ java.util.Map <strong>asMap</strong>()</h4>
                             </li>
                         </ul>
                     
+                        <a name="toString()"><!-- --></a>
+                        <ul class="blockListLast">
+                            <li class="blockList">
+                                <h4>@java.lang.Override
+java.lang.String <strong>toString</strong>()</h4>
+                                <p></p>
+                            </li>
+                        </ul>
+                    
                 </li>
             </ul>
             
@@ -606,11 +673,11 @@ java.util.Map <strong>asMap</strong>()</h4>
     <div>
         <ul class="subNavList">
             <li>Summary:&nbsp;</li>
-            Nested&nbsp;&nbsp;&nbsp;Field&nbsp;&nbsp;&nbsp;<li><a href="#property_summary">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_summary">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_summary">Method</a></li>&nbsp;&nbsp;&nbsp;
+            Nested&nbsp;&nbsp;&nbsp;<li><a href="#field_summary">Field</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#property_summary">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_summary">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_summary">Method</a></li>&nbsp;&nbsp;&nbsp;
         </ul>
         <ul class="subNavList">
             <li>&nbsp;|&nbsp;Detail:&nbsp;</li>
-            Field&nbsp;&nbsp;&nbsp;<li><a href="#prop_detail">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_detail">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_detail">Method</a></li>&nbsp;&nbsp;&nbsp;
+            <li><a href="#field_detail">Field</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#prop_detail">Property</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#constructor_detail">Constructor</a></li>&nbsp;&nbsp;&nbsp;<li><a href="#method_detail">Method</a></li>&nbsp;&nbsp;&nbsp;
         </ul>
     </div>
     <p>Groovy Documentation</p>

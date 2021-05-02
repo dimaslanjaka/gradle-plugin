@@ -8,7 +8,6 @@ import org.gradle.api.internal.CollectionCallbackActionDecorator
 import org.gradle.api.internal.artifacts.BaseRepositoryFactory
 import org.gradle.api.internal.artifacts.dsl.DefaultRepositoryHandler
 import org.gradle.internal.reflect.Instantiator
-import org.slf4j.LoggerFactory
 
 import static com.dimaslanjaka.gradle.helper.Extension.create
 
@@ -79,6 +78,7 @@ class Plugin implements org.gradle.api.Plugin<Project> {
 
         project.tasks.create(taskName, UpdateTask.class) {
             group = "offline"
+            ProjectIdentifier = project
             root = "${extension.root}"
             configurationNames = extension.configurations
             buildscriptConfigurationNames = extension.buildScriptConfigurations

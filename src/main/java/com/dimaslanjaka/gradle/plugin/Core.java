@@ -27,6 +27,7 @@ public class Core implements Plugin<Project> {
         // TODO: Configuring Rules
         extension = (CoreExtension) Extension.create(target, CONFIG_NAME, CoreExtension.class, target);
 
+        // TODO: Applying to root project
         Repository repository = new Repository(target);
         Repack jar = new Repack(target);
         Utils.cleanGradleDaemonLog(target);

@@ -2,45 +2,46 @@
 //file:noinspection GrUnnecessaryPublicModifier
 package com.dimaslanjaka.gradle.offline_dependencies
 
-
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 
-class Extension implements ExtensionInterface {
-    File root
+public class Extension implements ExtensionInterface {
+    public File root
     private Project project
 
     // deps
-    RepositoryHandler repositoryHandler;
+    public RepositoryHandler repositoryHandler;
 
     // config properties
-    Set<String> configurations = [] as Set<String>
-    Set<String> buildScriptConfigurations = [] as Set<String>
+    public Set<String> configurations = [] as Set<String>
+    public Set<String> buildScriptConfigurations = [] as Set<String>
 
     /**
      * Cache -sources.jar?
      */
-    boolean includeSources = true
+    public boolean includeSources = true
     /**
      * Cache -javadoc.jar?
      */
-    boolean includeJavadocs = true
+    public boolean includeJavadocs = true
     /**
      * Cache -pom.xml?
      */
-    boolean includePoms = true
+    public boolean includePoms = true
     /**
      * Cache ivy xmls?
      */
-    boolean includeIvyXmls = true
+    public boolean includeIvyXmls = true
     /**
      * Cache build script dependencies?
      */
-    boolean includeBuildscriptDependencies = true
+    public boolean includeBuildscriptDependencies = true
     /**
      * Show debug while processing
      */
-    boolean debug = false
+    public boolean debug = false
 
     // init
     Extension(Project project, RepositoryHandler repositoryHandler) {
@@ -49,7 +50,7 @@ class Extension implements ExtensionInterface {
         this.root = new File(project.projectDir, "build/offline-repository").absoluteFile
     }
 
-    void setProject(Project project1) {
+    public void setProject(Project project1) {
         this.project = project1
     }
 
@@ -59,7 +60,7 @@ class Extension implements ExtensionInterface {
      * Set root from string
      * @param newRoot
      */
-    void setRoot(String newRoot) {
+    public void setRoot(String newRoot) {
         this.root = new File(newRoot)
     }
 
@@ -108,6 +109,31 @@ class Extension implements ExtensionInterface {
         this.class.declaredFields.findAll { !it.synthetic }.collectEntries {
             [(it.name): this."$it.name"]
         }
+    }
+
+    private Map<String, Object> mapPrint = new TreeMap<>();
+
+    public Map<String, Object> dump() {
+        mapPrint.with {
+            put("root-dir", this.root.canonicalPath);
+            put("project-name", this.project.name)
+            put("project-dir", this.project.projectDir.canonicalPath)
+            put("configurations", this.configurations);
+            put("configurations-build", this.buildScriptConfigurations);
+            put("i-Pom", this.includePoms);
+            put("i-Ivy", this.includeIvyXmls);
+            put("i-Javadoc", this.includeJavadocs);
+            put("i-Sources", this.includeSources);
+            put("i-BuildDeps", this.includeBuildscriptDependencies);
+        }
+        return mapPrint
+    }
+
+    @Override
+    public String toString() {
+        dump()
+        Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
+        return gson.toJson(mapPrint)
     }
 }
 

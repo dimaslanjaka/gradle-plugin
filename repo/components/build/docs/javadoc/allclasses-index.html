@@ -26,6 +26,12 @@
     catch(err) {
     }
 //-->
+var data = {"i0":2,"i1":1,"i2":2,"i3":2,"i4":2};
+var tabs = {65535:["t0","All Classes"],1:["t1","Interface Summary"],2:["t2","Class Summary"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 var pathtoroot = "./";
 var useModuleDirectories = true;
 loadScripts(document, 'script');</script>
@@ -98,7 +104,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <table class="typeSummary">
-<caption><span>Class Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<caption><span class="activeTableTab" id="t0"><span>All Classes</span><span class="tabEnd">&nbsp;</span></span><span class="tableTab" id="t1"><span><a href="javascript:show(1);">Interface Summary</a></span><span class="tabEnd">&nbsp;</span></span><span class="tableTab" id="t2"><span><a href="javascript:show(2);">Class Summary</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Class</th>
 <th class="colLast" scope="col">Description</th>
@@ -110,14 +116,18 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </th>
 </tr>
 <tr class="rowColor" id="i1">
-<td class="colFirst"><a href="com/dimaslanjaka/gradle/helper/Gson.html" title="class in com.dimaslanjaka.gradle.helper">Gson</a></td>
+<td class="colFirst"><a href="com/dimaslanjaka/gradle/offline_dependencies/ExtensionInterface.html" title="interface in com.dimaslanjaka.gradle.offline_dependencies">ExtensionInterface</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr class="altColor" id="i2">
-<td class="colFirst"><a href="com/dimaslanjaka/gradle/helper/Logger.html" title="class in com.dimaslanjaka.gradle.helper">Logger</a></td>
+<td class="colFirst"><a href="com/dimaslanjaka/gradle/helper/Gson.html" title="class in com.dimaslanjaka.gradle.helper">Gson</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr class="rowColor" id="i3">
+<td class="colFirst"><a href="com/dimaslanjaka/gradle/helper/Logger.html" title="class in com.dimaslanjaka.gradle.helper">Logger</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr class="altColor" id="i4">
 <td class="colFirst"><a href="jna/SystemProp.html" title="class in jna">SystemProp</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>

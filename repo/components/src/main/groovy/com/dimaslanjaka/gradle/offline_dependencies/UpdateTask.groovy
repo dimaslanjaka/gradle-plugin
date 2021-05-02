@@ -9,13 +9,13 @@ import dimas.org.apache.maven.model.path.DefaultPathTranslator
 import dimas.org.apache.maven.model.path.DefaultUrlNormalizer
 import dimas.org.apache.maven.model.validation.DefaultModelValidator
 import org.gradle.api.DefaultTask
+import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.UnknownConfigurationException
 import org.gradle.api.artifacts.component.ComponentIdentifier
 import org.gradle.api.artifacts.component.ModuleComponentIdentifier
-import org.gradle.api.artifacts.repositories.ArtifactRepository
 import org.gradle.api.artifacts.result.UnresolvedArtifactResult
 import org.gradle.api.internal.artifacts.DefaultModuleIdentifier
 import org.gradle.api.tasks.Input
@@ -32,11 +32,11 @@ import org.gradle.util.GFileUtils
 
 import java.util.function.Function
 
-import static com.dimaslanjaka.gradle.helper.Extension.get
 import static com.dimaslanjaka.gradle.offline_dependencies.Utils.addToMultimap
 
 class UpdateTask extends DefaultTask {
     private def EMPTY_DEPENDENCIES_ARRAY = new Dependency[0]
+    public static Project ProjectIdentifier
 
     @Input
     GString root
@@ -61,6 +61,7 @@ class UpdateTask extends DefaultTask {
     void run() {
         GFileUtils.mkdirs(getRoot() as File)
         getLogFile().write("Copy dependencies start ${new Date()},\n\troot: ${getRoot()}\n")
+        getLogFile().append("configuration = ${getExtension().toString()}\n")
         withRepositoryFiles2(new Function<Map<ModuleComponentIdentifier, Set<File>>, Object>() {
             @Override
             Object apply(Map<ModuleComponentIdentifier, Set<File>> repositoryFiles) {
@@ -107,13 +108,22 @@ class UpdateTask extends DefaultTask {
          */
     }
 
-    private File getLogFile() {
-        return new File("${getRoot()}", "index.txt")
+    private static File getLogFile() {
+        File logfile = new File("${ProjectIdentifier.buildDir}", "${Plugin.EXTENSION_NAME}/index.txt")
+        if (!logfile.exists()) {
+            try {
+                logfile.parentFile.mkdirs()
+                logfile.createNewFile()
+            } catch (Exception e) {
+                e.printStackTrace()
+            }
+        }
+        return logfile
     }
 
     @SuppressWarnings('GrMethodMayBeStatic')
-    private Extension getExtension() {
-        return get(Extension.class) as Extension
+    private static Extension getExtension() {
+        return com.dimaslanjaka.gradle.helper.Extension.get(ProjectIdentifier, Plugin.EXTENSION_NAME) as Extension
     }
 
     // configurations
@@ -354,7 +364,6 @@ class UpdateTask extends DefaultTask {
     }
 
     private void withRepositoryFiles2(Function<Map<ModuleComponentIdentifier, Set<File>>, ?> callback) {
-        List<ArtifactRepository> originalRepositories = project.repositories.collect()
         Map<ModuleComponentIdentifier, Set<File>> files = collectRepositoryFiles(getConfigurations())
         callback.apply(files)
     }
