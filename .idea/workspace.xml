@@ -51,7 +51,28 @@
       <option name="project" value="LOCAL" />
       <updated>1619949930629</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies">
+      <created>1619950588325</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619950588325</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies">
+      <created>1619950613711</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619950613712</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Changing component classpath from gradle.plugin.com.dimaslanjaka.gradle.offline_dependencies:offline_dependencies to com.dimaslanjaka.gradle.offline_dependencies">
+      <created>1619950649736</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1619950649736</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -67,6 +88,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />

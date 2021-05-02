@@ -38,6 +38,10 @@ offlineDependencies {
 ### Full Example
 
 ```kotlin
+plugins {
+    id("java")
+}
+
 repositories {
     mavenLocal()
     google()
