@@ -28,13 +28,6 @@ class Offline3(p: Project) {
     private val nonCachedArtifacts = mutableListOf<javaFile>()
 
     init {
-        if (debug) {
-            val map = mutableMapOf<Any, Any>()
-            map["Project name"] = p.name
-            map["Project Dir"] = p.projectDir
-            println(map)
-        }
-
         if (configuration.offline3) {
             p.allprojects.forEach { subproject ->
                 subproject?.let { sp ->
@@ -44,7 +37,7 @@ class Offline3(p: Project) {
         }
     }
 
-    fun activate(sp: Project) {
+    private fun activate(sp: Project) {
         val off = OfflineDependenciesPlugin()
         val handler = off.createRepositoryHandler(sp)
         val ext = OfflineDependenciesExtension(sp, handler)

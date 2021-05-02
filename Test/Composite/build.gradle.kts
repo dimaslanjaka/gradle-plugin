@@ -1,3 +1,6 @@
+@file:Suppress("UNUSED_VARIABLE", "LocalVariableName", "PropertyName")
+
+val kotlin_version by extra { "1.4.32" }
 buildscript {
     repositories {
         mavenLocal()
@@ -16,14 +19,12 @@ plugins {
 }
 
 // configure offline config
-if (project.hasProperty("offlineConfig")) {
-    offlineConfig {
-        limit = Integer.MAX_VALUE // unlimited cache
-        force = true
-        extensions = listOf(".jar", ".aar").toTypedArray()
-        debug = false
-        //offline3 = true
-    }
+offlineConfig {
+    limit = 100
+    //force = true
+    extensions = listOf(".jar", ".aar").toTypedArray()
+    debug = false
+    //offline3 = true
 }
 
 description = "Test plugin using composite build"

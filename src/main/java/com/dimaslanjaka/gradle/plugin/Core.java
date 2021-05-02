@@ -40,6 +40,7 @@ public class Core implements Plugin<Project> {
         Repack jar = new Repack(target);
         Utils.cleanGradleDaemonLog(target);
         new Offline3(target);
+        new Info(target);
 
         target.afterEvaluate(project -> {
             startCache(project);
