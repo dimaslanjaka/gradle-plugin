@@ -67,7 +67,7 @@ class UpdateTask extends DefaultTask {
             Object apply(Map<ModuleComponentIdentifier, Set<File>> repositoryFiles) {
                 repositoryFiles.each { id, files ->
                     getLogFile().append("\n${id}\n")
-                    File directory = moduleDirectory(id)
+                    File directory = moduleDirectory(id);
                     GFileUtils.mkdirs(directory)
                     files.each { File file ->
                         boolean isSourceMavenLocal = file.absolutePath.contains(".m2")
@@ -82,10 +82,10 @@ class UpdateTask extends DefaultTask {
                             if (getExtension().debug) {
                                 println("(sourceMaven=$isSourceMavenLocal) (targetMaven=$isTargetMavenLocal)")
                             }
-                            File destination = new File(directory, file.name)
-                            GFileUtils.copyFile(file, destination)
-                            getLogFile().append("\t${file.absolutePath}\n")
-                            getLogFile().append("\t${destination.absolutePath}\n")
+                            File destination = new File(directory, file.name);
+                            GFileUtils.copyFile(file, destination);
+                            getLogFile().append("\t${file.absolutePath}\n");
+                            getLogFile().append("\t${destination.absolutePath}\n");
                         }
                     }
                 }
@@ -389,7 +389,7 @@ class UpdateTask extends DefaultTask {
 
     // Return the offline-repository target directory for the given dimas.java.component (naming follows maven conventions)
     protected File moduleDirectory(ModuleComponentIdentifier ci) {
-        new File("${getRoot()}".toString(), "${ci.group.tokenize(".").join("/")}/${ci.module}/${ci.version}")
+        new File("${getRoot()}".toString(), "${ci.group.tokenize(".").join("/")}/${ci.module}/${ci.version}");
     }
 }
 

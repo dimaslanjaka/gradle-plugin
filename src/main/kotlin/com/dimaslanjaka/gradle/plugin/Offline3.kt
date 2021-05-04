@@ -3,57 +3,128 @@ package com.dimaslanjaka.gradle.plugin
 import com.dimaslanjaka.gradle.api.Extension
 import com.dimaslanjaka.kotlin.ConsoleColors
 import com.dimaslanjaka.kotlin.File
-import com.google.gson.GsonBuilder
 import isAndroid
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Configuration
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.internal.artifacts.DefaultModuleIdentifier
+import org.gradle.internal.component.external.model.DefaultModuleComponentIdentifier
+import org.gradle.util.GFileUtils
 import println
 import java.nio.file.Path
+import java.nio.file.Paths
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import com.dimaslanjaka.gradle.offline_dependencies.Extension as OfflineDependenciesExtension
-import com.dimaslanjaka.gradle.offline_dependencies.Plugin as OfflineDependenciesPlugin
 import java.io.File as javaFile
+
 
 /**
  * Cache artifact based on project configurations
  */
-class Offline3(p: Project) {
+open class Offline3(p: Project) {
     private val configuration = Extension.get<CoreExtension>(
         p, Core.CONFIG_NAME
     ) as CoreExtension
     var debug: Boolean = configuration.debug
+    val logger = Logger(p)
     private val allArtifacts = mutableListOf<javaFile>()
     private val cachedArtifacts = mutableListOf<javaFile>()
     private val nonCachedArtifacts = mutableListOf<javaFile>()
 
     init {
-        if (configuration.offline3) {
-            p.allprojects.forEach { subproject ->
-                subproject?.let { sp ->
-                    activate(sp)
+        p.allprojects.forEach { subproject ->
+            subproject?.let { sp ->
+                //sp.pluginManager.apply(OfflineDependenciesPlugin::class.java)
+                val configurationNames = getConfigurations(sp)
+                val collectRepository = collectRepositoryFiles(sp, configurationNames) { repositoryFiles ->
+                    repositoryFiles.forEach { (id, files) ->
+                        val directory = moduleDirectory(id)
+                        GFileUtils.mkdirs(directory)
+                        //logger.d(directory)
+                        files.forEach { file ->
+                            //logger.i("-> $file")
+                            val destination = com.dimaslanjaka.gradle.plugin.File(directory, file.name)
+                            GFileUtils.copyFile(file, destination)
+                        }
+                    }
                 }
             }
         }
     }
 
-    private fun activate(sp: Project) {
-        val off = OfflineDependenciesPlugin()
-        val handler = off.createRepositoryHandler(sp)
-        val ext = OfflineDependenciesExtension(sp, handler)
-        ext.root = configuration.root
-        ext.buildScriptConfigurations = configuration.buildScriptConfigurations
-        ext.configurations = configuration.configurations
-        ext.debug = configuration.debug
-        ext.project = sp
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun getConfigurations(project: Project): List<Configuration> {
+        val configurations = mutableSetOf<Configuration>()
+        setOf("compile", "testCompile", "implementation", "testImplementation").forEach { confName ->
+            val find = project.configurations.findByName(confName)
+            if (find != null) {
+                configurations.add(find)
+            } else {
+                if (Core.extension.debug) {
+                    println("Project with configuration name $confName not found")
+                }
+            }
+        }
 
-        ext.includeBuildscriptDependencies = configuration.includeBuildscriptDependencies
-        ext.includeIvyXmls = configuration.includeIvyXmls
-        ext.includeJavadocs = configuration.includeJavadocs
-        ext.includePoms = configuration.includePoms
-        ext.includeSources = configuration.includeSources
+        setOf("classpath", "runtime").forEach { confName ->
+            val find = project.buildscript.configurations.findByName(confName)
+            if (find != null) {
+                configurations.add(find)
+            } else {
+                if (Core.extension.debug) {
+                    println("Project buildscript with configuration name $confName not found")
+                }
+            }
+        }
 
-        off.apply(sp, ext)
+        configurations.addAll(project.buildscript.configurations)
+        configurations.addAll(project.configurations)
+        return configurations.distinct()
+    }
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun collectRepositoryFiles(
+        project: Project,
+        configurations: List<Configuration>,
+        callback: (MutableMap<ModuleComponentIdentifier, MutableSet<java.io.File>>) -> Unit
+    ) {
+        val componentIds = mutableSetOf<ModuleComponentIdentifier>()
+        val repositoryFiles = mutableMapOf<ModuleComponentIdentifier, MutableSet<java.io.File>>()
+        configurations.forEach { configuration ->
+            configuration.allDependencies.forEach { dependency ->
+                if (dependency != null) {
+                    val cfg = project.configurations.detachedConfiguration(dependency)
+                    cfg.resolvedConfiguration.resolvedArtifacts.forEach { artifact ->
+                        val targetLocal =
+                            Paths.get(this.configuration.localRepository.absolutePath).normalize().toString()
+                        val artifactLocation = Paths.get(artifact.file.absolutePath).normalize().toString()
+                        if (!artifactLocation.startsWith(targetLocal)) {
+                            // TODO: add artifact even not from local
+                            val componentId = DefaultModuleComponentIdentifier.newId(
+                                DefaultModuleIdentifier.newId(
+                                    artifact.moduleVersion.id.group,
+                                    artifact.moduleVersion.id.name
+                                ), artifact.moduleVersion.id.version
+                            )
+
+                            componentIds.add(componentId)
+                            if (repositoryFiles.containsKey(componentId)) {
+                                if (!repositoryFiles[componentId]?.contains(artifact.file)!!) {
+                                    repositoryFiles[componentId]?.add(artifact.file)
+                                }
+                            } else {
+                                repositoryFiles.putIfAbsent(componentId, mutableSetOf(artifact.file))
+                            }
+
+                            if (this.configuration.debug) println("Adding artifact for id'{${componentId}}' (location '{${artifact.file}}')")
+                        }
+                    }
+                }
+            }
+        }
+
+        callback(repositoryFiles)
     }
 
     @Suppress("FunctionName")
@@ -117,7 +188,7 @@ class Offline3(p: Project) {
         }
     }
 
-    fun convert2MavenLocal(artifactStr: String): Path {
+    private fun convert2MavenLocal(artifactStr: String): Path {
         val home = System.getProperty("user.home")
         val localRepository = Core.extension.getLocalRepository().absolutePath
         val gradleCache = File(home, ".gradle/caches/modules-2/files-2.1")
@@ -146,7 +217,7 @@ class Offline3(p: Project) {
         return File(builder.toString()).normalize()
     }
 
-    fun isDomain(string: String): Boolean {
+    private fun isDomain(string: String): Boolean {
         val regex =
             "^(((?!-))(xn--|_{1,1})?[a-z0-9-]{0,61}[a-z0-9]{1,1}\\.)*(xn--)?([a-z0-9][a-z0-9\\-]{0,60}|[a-z0-9-]{1,30}\\.[a-z]{2,})$"
         val pattern: Pattern = Pattern.compile(regex, Pattern.MULTILINE)
@@ -158,7 +229,7 @@ class Offline3(p: Project) {
         return match
     }
 
-    fun isVersion(string: String): Boolean {
+    private fun isVersion(string: String): Boolean {
         val regex =
             "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)\$|^(\\d+\\.)?(\\d+\\.)?([a-zA-Z\\d-]+)\$|^(\\d+\\.)?(\\d+\\.)?(\\d+\\.)?([a-zA-Z]+)\$"
         val pattern: Pattern = Pattern.compile(regex, Pattern.MULTILINE)
@@ -170,26 +241,11 @@ class Offline3(p: Project) {
         return match
     }
 
-    class ArtifactCache {
-        lateinit var from: File
-        lateinit var to: File
-
-        constructor()
-        constructor(gradleCache: File, mavenCache: File) {
-            from = gradleCache
-            to = mavenCache
-        }
-
-        override fun toString(): String {
-            return GsonBuilder().setPrettyPrinting()
-                .disableHtmlEscaping().create().toJson(this)
-        }
-    }
-
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-
-        }
+    @Suppress("MemberVisibilityCanBePrivate")
+    protected fun moduleDirectory(ci: ModuleComponentIdentifier): java.io.File {
+        return java.io.File(
+            configuration.localRepository.absolutePath,
+            "${ci.group.split(".").joinToString("/")}/${ci.module}/${ci.version}"
+        );
     }
 }

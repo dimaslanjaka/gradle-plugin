@@ -7,6 +7,7 @@ public interface CoreExtensionInterface {
     int limit = Integer.MAX_VALUE;
     File localRepository = new com.dimaslanjaka.kotlin.File(home, ".m2/repository");
     public boolean force = false;
+    public boolean debug = false;
 
     boolean validExtension(String s);
 

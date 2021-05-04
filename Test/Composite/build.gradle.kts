@@ -1,6 +1,5 @@
 @file:Suppress("UNUSED_VARIABLE", "LocalVariableName", "PropertyName")
 
-val kotlin_version by extra { "1.4.32" }
 buildscript {
     repositories {
         mavenLocal()

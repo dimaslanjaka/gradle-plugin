@@ -3,13 +3,12 @@
 package com.dimaslanjaka.gradle.offline_dependencies
 
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.api.internal.CollectionCallbackActionDecorator
 import org.gradle.api.internal.artifacts.BaseRepositoryFactory
 import org.gradle.api.internal.artifacts.dsl.DefaultRepositoryHandler
 import org.gradle.internal.reflect.Instantiator
-
-import static com.dimaslanjaka.gradle.helper.Extension.create
 
 class Plugin implements org.gradle.api.Plugin<Project> {
     /**
@@ -43,7 +42,7 @@ class Plugin implements org.gradle.api.Plugin<Project> {
     }
 
     public Extension createExtension(Project project) {
-        return create(
+        return com.dimaslanjaka.gradle.helper.Extension.create(
                 project,
                 EXTENSION_NAME, Extension.class, project, createRepositoryHandler(project)
         ) as Extension
@@ -92,6 +91,15 @@ class Plugin implements org.gradle.api.Plugin<Project> {
             includeIvyXmls = extension.includeIvyXmls
             includeBuildscriptDependencies = extension.includeBuildscriptDependencies
             debug = extension.debug
+        }
+
+        taskName = sanitizeFilename("View Configuration Offline Repository-${sanitizeName}")
+        project.tasks.create(taskName, Task.class) {
+            group = "offline"
+            doLast {
+                def configured = com.dimaslanjaka.gradle.helper.Extension.get(Extension.class)
+                println configured.toString()
+            }
         }
     }
 

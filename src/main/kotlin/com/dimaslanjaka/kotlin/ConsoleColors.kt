@@ -154,16 +154,16 @@ enum class ConsoleColors(var code: String?) {
                 var oo = o
                 if (o is java.io.File) {
                     oo = o.absolutePath
-                } else if (isIterable(o)) {
-                    oo = gson().toJson(o)
+                } else if (o is Collection<*>) {
+                    oo = try {
+                        gson().toJson(o)
+                    } catch (e: Exception) {
+                        o
+                    }
                 }
                 build.add(styler(random(), oo as String))
             }
             print(build)
-        }
-
-        fun isIterable(o: Any): Boolean {
-            return o is Collection<*>
         }
 
         @JvmStatic
@@ -179,7 +179,11 @@ enum class ConsoleColors(var code: String?) {
                     printint(obj)
                 }
                 is Collection<*> -> {
-                    print(styler(random(), gson().toJson(obj)))
+                    try {
+                        print(styler(random(), gson().toJson(obj)))
+                    } catch (e: Exception) {
+                        kotlin.io.println(obj)
+                    }
                 }
                 else -> {
                     print(styler(random(), obj.toString()))

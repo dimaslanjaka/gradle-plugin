@@ -245,11 +245,12 @@ offlineLib.listFiles()?.forEach { offlineJar ->
                     }
                 }
             }
-        }
-        // TODO: aggregating jar source
-        jar.from(zipTree(fileJar)) {
-            include("**")
-            exclude("META-INF", "META-INF/**")
+        } else if (!fileJar.name.contains("doc")) {
+            // TODO: aggregating jar source, skip documentation and sources
+            jar.from(zipTree(fileJar)) {
+                include("**")
+                exclude("META-INF", "META-INF/**")
+            }
         }
     }
 }
@@ -258,8 +259,8 @@ tasks.findByName("publishPlugins")?.doLast {
     updateVersionPref(project)
 }
 
+@Suppress("UNUSED_VARIABLE", "unused")
 tasks {
-    @Suppress("unused")
     val fatJar by creating(Jar::class) {
         description = "create jar with dependencies"
         isZip64 = true
@@ -292,13 +293,37 @@ tasks {
         with(jar.get())
         dependsOn(jar)
     }
-
-    @Suppress("unused")
-    val updateVersion by creating {
-        group = "build"
+    val updateVersion by creating(Task::class) {
+        group = "project"
         description = "Increase Version Manual"
         doLast {
             updateVersionPref(project)
+        }
+    }
+    val clearCacheTest by creating(Task::class) {
+        group = "project"
+        description = "clear all IDE configuration and Gradle Cache from tests project folders"
+        doLast {
+            listOf(
+                File(project.rootDir.absolutePath, "Test"),
+                File(project.rootDir.absolutePath, "repo/components/Test")
+            ).forEach { testFolder ->
+                testFolder.listFiles()?.forEach { file ->
+                    if (file.isDirectory) {
+                        file.listFiles()?.forEach { testUnit ->
+                            if (testUnit.isDirectory) {
+                                listOf(".gradle", ".idea").map {
+                                    if (testUnit.name == it) {
+                                        if (testUnit.deleteRecursively()) {
+                                            println(testUnit.absolutePath + " Deleted Successfully")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.dimaslanjaka.gradle.plugin
 
+import com.dimaslanjaka.kotlin.ConsoleColors.Companion.println
 import org.gradle.api.Project
 
 @Suppress("MemberVisibilityCanBePrivate")
@@ -16,7 +17,7 @@ class Info {
             it.doLast {
                 println("Configured Extension:")
                 project.extensions.extensionsSchema.forEach { schema ->
-                    println("\t-> ${schema.name}")
+                    println("\t-> ${schema.name}\t: Class<${schema.publicType}>")
                 }
             }
         }
@@ -28,7 +29,7 @@ class Info {
             it.doLast {
                 println("Configuration List:")
                 project.configurations.forEach { conf ->
-                    println(conf.all)
+                    kotlin.io.println(conf.all)
                 }
             }
         }

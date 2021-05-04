@@ -67,10 +67,19 @@ dependencies {
 }
 
 //https://medium.com/@jonashavers/how-to-use-groovy-sources-from-java-in-gradle-projects-9c722876846e
+/*
 sourceSets {
     main {
         java { srcDirs = [] }
         groovy { srcDirs += ["src/main/java"] }
+    }
+}
+ */
+
+sourceSets {
+    main {
+        java { srcDirs = [] }    // no source dirs for the java compiler
+        groovy { srcDirs = ["src/main/java", "src/main/groovy"] }  // compile   everything in src/ with groovy
     }
 }
 
@@ -82,7 +91,6 @@ java {
 }
 
 task repackageDependencies(type: Jar) {
-    archivesBaseName = "repackaged-all"
     archiveFileName = "repackaged-all.jar"
     version = project.version
     group = "build"
@@ -91,7 +99,7 @@ task repackageDependencies(type: Jar) {
     doLast {
         project.ant {
             taskdef name: "jarjar", classname: "com.tonicsystems.jarjar.JarJarTask", classpath: configurations.jarjar.asPath
-            jarjar(destfile: archivePath) {
+            jarjar(destfile: archiveFile.get().asFile) {
                 configurations.thirdparty.each { originalJar ->
                     zipfileset(src: originalJar)
                 }
@@ -108,7 +116,7 @@ task repackageDependencies(type: Jar) {
 compileJava.dependsOn(repackageDependencies)
 
 tasks.withType(Jar).all {
-    archivesBaseName = "offline-dependencies-plugin"
+    archivesBaseName = "offline_dependencies"
     manifest {
         attributes(
                 "Created-By": "${System.properties["java.version"]} (${System.properties["java.vendor"]} ${System.properties["java.vm.version"]})".toString(),
@@ -128,15 +136,16 @@ tasks.withType(Jar) {
     archiveVersion.set(project.version.toString())
 }
 
-task packageWithoutVersion(type: Jar) {
-    archiveFileName = "offline-dependencies-plugin.jar"
-    from(zipTree(jar.archiveFile.get().getAsFile())) {
-        include "**"
+task buildNoVersion(type: Copy) {
+    from(jar.archiveFile.get().asFile)
+    into(jar.archiveFile.get().asFile.parent)
+    rename { String fileName ->
+        // a simple way is to remove the "-$version" from the jar filename
+        // but you can customize the filename replacement rule as you wish.
+        fileName.replace("-$project.version", "")
     }
-    archiveVersion.set(project.version.toString())
-    dependsOn(jar)
 }
-//jar.finalizedBy(packageWithoutVersion)
+jar.finalizedBy(buildNoVersion)
 
 tasks.findByName("publishPlugins").doLast {
     updateVersion(project)
