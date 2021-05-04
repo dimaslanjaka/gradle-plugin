@@ -19,5 +19,13 @@ plugins {
 offlineConfig {
     // Unlimited Cached Artifacts
     limit = Integer.MAX_VALUE
+    // local folder location
+    localRepository = new File("build/repository")
+    // debug while processing (dump)
+    debug = false
+    // forget expire time, do copy each project sync
+    force = false
+    // extension of artifacts went to save locally
+    extensions = {".module", ".jar", ".pom", ".aar", ".sha1", ".xml"}
 }
 ```
