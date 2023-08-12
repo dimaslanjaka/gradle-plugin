@@ -1,5 +1,7 @@
 package com.dimaslanjaka.java;
 
+import static com.dimaslanjaka.kotlin.ConsoleColors.println;
+
 import com.dimaslanjaka.gradle.plugin.File;
 
 import java.io.BufferedReader;
@@ -7,8 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
-
-import static com.dimaslanjaka.kotlin.ConsoleColors.println;
 
 
 public class Resources {
@@ -30,9 +30,16 @@ public class Resources {
         }
     }
 
-    public static void copy(String fileName, File destination) throws IOException {
-        String read = getResourceFileAsString(fileName);
-        destination.write(read);
-        println(fileName + " Copied to " + destination);
+    /**
+     * Copy file
+     *
+     * @param src  source file
+     * @param dest destination file
+     * @throws IOException IO throwable
+     */
+    public static void copy(String src, File dest) throws IOException {
+        String read = getResourceFileAsString(src);
+        dest.write(read);
+        println(src + " Copied to " + dest);
     }
 }
