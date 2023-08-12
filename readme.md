@@ -1,19 +1,38 @@
 # Offline gradle plugin
 
-Plugin Portal [https://plugins.gradle.org/plugin/com.dimaslanjaka](https://plugins.gradle.org/plugin/com.dimaslanjaka)
+Plugin
+Portal [https://plugins.gradle.org/plugin/com.dimaslanjaka](https://plugins.gradle.org/plugin/com.dimaslanjaka)
+
+## Requirements
+
+- Java 11
+
+Environment Variable
+
+```properties
+# specify maven local repository (windows sample)
+MAVEN_REPO="%userprofile%\.m2"
+# specify java home
+JAVA_HOME="path/to/folder/java"
+```
 
 ## How to manual import
+
 - copy this project inside your project
 - then import like bellow
 
 ### settings.gradle
+
 ```gradle
 includeBuild("plugin") //name folder of this project
 ```
 
 ## Usage Sample
+
 how to apply this plugin to your root project
+
 ### build.gradle root project
+
 ```gradle
 // repository
 repositories {
@@ -47,6 +66,7 @@ offlineConfig {
 ```
 
 ### Optional in settings.gradle
+
 ```kotlin
 pluginManagement {
     repositories {
@@ -68,13 +88,4 @@ pluginManagement {
 }
 
 rootProject.name = "your project name"
-```
-
-## Develop
-
-Environment Variable
-
-```properties
-# maven local repository
-MAVEN_REPO="%userprofile%\.m2"
-```
+``` 
