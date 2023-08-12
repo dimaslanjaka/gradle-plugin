@@ -11,23 +11,32 @@ class CoreTest {
     var testProjectDir = File("build/test-results", javaClass.name)
     lateinit var project: Project
 
+    /**
+     * preparation each test
+     */
     @BeforeEach
     fun setup() {
         val createProject = testProjectDir.createGradleProject()
         val apiProject = ApiProject(createProject)
         Resources.copy(
-            "settings.gradle", File(apiProject.DEFAULT_SETTINGS_BUILD_FILE).toDimaslanjakaGradlePluginFile()
+                "settings.gradle", File(apiProject.DEFAULT_SETTINGS_BUILD_FILE).toDimaslanjakaGradlePluginFile()
         )
         Resources.copy("build.java.gradle", File(apiProject.DEFAULT_BUILD_FILE).toDimaslanjakaGradlePluginFile())
 
         project = apiProject.getProject()
     }
 
+    /**
+     * Activate core plugin
+     */
     @Test
     fun activate() {
         project.plugins.apply(Core::class.java)
     }
 
+    /**
+     * Test using direct sample project folder
+     */
     @Test
     fun runner() {
         GradleRunner.create().withProjectDir(testProjectDir).build()

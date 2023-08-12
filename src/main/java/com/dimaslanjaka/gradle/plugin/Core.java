@@ -1,10 +1,12 @@
 package com.dimaslanjaka.gradle.plugin;
 
+import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
+
 import com.dimaslanjaka.gradle.api.Extension;
 import com.dimaslanjaka.java.Thread;
 import com.dimaslanjaka.java.cmd;
 import com.dimaslanjaka.kotlin.File;
-import jar.Repack;
+
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +14,11 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.charset.Charset;
 import java.util.Date;
 
-import static com.dimaslanjaka.gradle.plugin.Offline.OfflineMethods;
+import jar.Repack;
 
+/**
+ * plugin core
+ */
 public class Core implements Plugin<Project> {
     public static CoreExtension extension;
     public static String CONFIG_NAME = "offlineConfig";
