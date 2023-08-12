@@ -69,3 +69,12 @@ pluginManagement {
 
 rootProject.name = "your project name"
 ```
+
+## Develop
+
+Environment Variable
+
+```properties
+# maven local repository
+MAVEN_REPO="%userprofile%\.m2"
+```
