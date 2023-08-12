@@ -23,7 +23,7 @@ import java.io.File as javaFile
 
 
 /**
- * TODO: Extends default files
+ * TODO: Extends default java.io.File
  */
 open class File : javaFile, Serializable, Comparable<javaFile?> {
     private var file: javaFile
