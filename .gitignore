@@ -1,11 +1,11 @@
 # ignore default list
 **/.gradle/
 **/build/*
-**/.idea/*
+.idea/*
 
 # ignore except
-!**/.idea/runConfigurations
-!**/.idea/compiler.xml
+!.idea/runConfigurations/*
+!.idea/compiler.xml
 !**/.gitignore
 !**/build/artifactory/
 !**/build/libs/
