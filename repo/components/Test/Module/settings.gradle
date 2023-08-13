@@ -1,0 +1,24 @@
+rootProject.name = capitalize("composite build dependency substitution")
+
+// Declare plugin relative path as substitution module for direct test
+// tag::composite_substitution[]
+includeBuild("/../../") {
+    dependencySubstitution {
+        substitute(module("com.dimaslanjaka:gradle-plugin")).with(project(":"))
+    }
+}
+// end::composite_substitution[]
+
+public static String capitalize(String string) {
+    char[] chars = string.toLowerCase().toCharArray();
+    boolean found = false;
+    for (int i = 0; i < chars.length; i++) {
+        if (!found && Character.isLetter(chars[i])) {
+            chars[i] = Character.toUpperCase(chars[i]);
+            found = true;
+        } else if (Character.isWhitespace(chars[i]) || chars[i]=='.' || chars[i]=='\'') { // You can add other chars here
+            found = false;
+        }
+    }
+    return String.valueOf(chars);
+}

@@ -1,0 +1,17 @@
+# ignore default list
+**/.gradle/
+**/build/*
+**/.idea/*
+
+# ignore except
+!**/.idea/runConfigurations
+!**/.idea/compiler.xml
+!**/.gitignore
+!**/build/artifactory/
+!**/build/libs/
+!**/build/libs/*.jar
+!**/build/libs/*.aar
+!**/build/docs/
+!**/build/docs/*
+#!**/build/classes/
+#!**/build/classes/*
