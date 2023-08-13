@@ -66,6 +66,7 @@ import java.util.Map;
         "sun.io.unicode.encoding",
         "java.class.version"
 })
+
 @Generated("jsonschema2pojo")
 public class SystemProp {
     @JsonProperty("sun.desktop")
