@@ -48,7 +48,7 @@ dependencies {
     implementation "org.jetbrains:annotations:20.1.0"
     implementation("net.java.dev.jna:jna-platform:5.8.0")
 
-    // thirdparty dependencies and repackaging
+    // third party dependencies and repackaging
     jarjar "org.gradle.jarjar:jarjar:$jarjarVersion"
     thirdparty "org.apache.maven:maven-model-builder:$mavenVersion"
 
