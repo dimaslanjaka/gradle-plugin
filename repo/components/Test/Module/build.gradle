@@ -11,7 +11,7 @@ buildscript {
         }
         mavenCentral()
         google()
-        jcenter()
+        
         maven { url = uri("https://plugins.gradle.org/m2/") }
         maven { url = uri("https://maven.springframework.org/release") }
         maven { url = uri("https://maven.restlet.com") }
@@ -49,7 +49,7 @@ allprojects {
         mavenLocal()
         mavenCentral()
         google()
-        jcenter()
+        
         maven { url = uri("https://plugins.gradle.org/m2/") }
         maven { url = uri("https://maven.springframework.org/release") }
         maven { url = uri("https://maven.restlet.com") }

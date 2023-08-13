@@ -47,7 +47,7 @@ repositories {
     google()
     mavenCentral()
     maven(url = "https://repo.gradle.org/gradle/libs")
-    jcenter()
+    
 }
 
 offlineDependencies {
