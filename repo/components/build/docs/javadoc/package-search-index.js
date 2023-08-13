@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.dimaslanjaka.gradle.helper"},{"l":"com.dimaslanjaka.gradle.offline_dependencies"},{"l":"jna"}]
